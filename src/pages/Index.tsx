@@ -8,6 +8,7 @@ import Footer from "@/components/layout/Footer";
 import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
 import { ArrowRight, Sparkles, ShieldCheck, Ruler, Truck, Star } from "lucide-react";
+import { useSiteContent, getContent } from "@/hooks/useSiteContent";
 import { Skeleton } from "@/components/ui/skeleton";
 import heroImg from "@/assets/hero.jpg";
 import product1 from "@/assets/product-1.jpg";
@@ -70,6 +71,7 @@ const testimonials = [
 
 const Index = () => {
   const { data: products = [], isLoading } = useProducts();
+  const { data: content } = useSiteContent();
   useSEO({
     title: "Style Saplings — Handcrafted Ethnic Wear for Little Ones",
     description:
@@ -133,16 +135,14 @@ const Index = () => {
               variants={reveal}
               className="font-serif text-[36px] sm:text-[58px] md:text-[72px] lg:text-[84px] font-semibold text-white leading-[1.04] tracking-[-0.02em] [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]"
             >
-              Childhood, woven
-              <br />
-              with <em className="italic font-normal text-white/80">tradition.</em>
+              {getContent(content, "hero_headline", "Childhood, woven with tradition.")}
             </motion.h1>
 
             <motion.p
               variants={reveal}
               className="text-white/80 text-[18px] md:text-[22px] mt-7 mb-10 max-w-md mx-auto leading-[1.7] [text-shadow:_0_1px_15px_rgba(0,0,0,0.2)]"
             >
-              Regional artistry, reimagined for modern childhood.
+              {getContent(content, "hero_subtitle", "Regional artistry, reimagined for modern childhood.")}
             </motion.p>
 
             <motion.div
@@ -153,13 +153,13 @@ const Index = () => {
                 to="/shop"
                 className="bg-white/12 backdrop-blur-sm border border-white/30 rounded-full px-8 py-3.5 text-white text-[14px] font-medium tracking-wide hover:bg-white/22 transition-all min-h-[44px]"
               >
-                Shop Collection
+                {getContent(content, "hero_cta_primary", "Shop Collection")}
               </Link>
               <Link
                 to="/about"
                 className="text-white/70 text-[14px] font-medium hover:text-white transition-colors min-h-[44px] flex items-center"
               >
-                Our Story
+                {getContent(content, "hero_cta_secondary", "Our Story")}
               </Link>
             </motion.div>
           </motion.div>
@@ -198,15 +198,13 @@ const Index = () => {
               variants={reveal}
               className="font-serif text-[36px] md:text-[54px] font-semibold leading-[1.04] tracking-[-0.025em]"
             >
-              Explore India
-              <br />
-              through <em className="italic font-normal">clothing.</em>
+              {getContent(content, "explore_heading", "Explore India through clothing.")}
             </motion.h2>
             <motion.p
               variants={reveal}
               className="text-muted-foreground text-[16px] mt-5 leading-relaxed"
             >
-              Centuries of tradition, one collection.
+              {getContent(content, "explore_subtitle", "Centuries of tradition, one collection.")}
             </motion.p>
           </motion.div>
 
@@ -272,24 +270,19 @@ const Index = () => {
                 variants={reveal}
                 className="text-[13px] uppercase tracking-[0.2em] text-[#C4785A] font-medium block mb-5"
               >
-                The Craft
+                {getContent(content, "craft_label", "The Craft")}
               </motion.span>
               <motion.h2
                 variants={reveal}
                 className="font-serif text-[32px] md:text-[42px] font-medium leading-[1.12] tracking-[-0.01em] mb-7"
               >
-                Every stitch tells
-                <br />
-                a story of
-                <br />
-                <em className="italic">generations.</em>
+                {getContent(content, "craft_heading", "Every stitch tells a story of generations.")}
               </motion.h2>
               <motion.p
                 variants={reveal}
                 className="text-[16px] text-muted-foreground leading-[1.8] max-w-[360px] mb-8"
               >
-                Pure cotton mulmul, hand-embroidered over 400 years
-                of tradition. No machines — just patience and pride.
+                {getContent(content, "craft_body", "Pure cotton mulmul, hand-embroidered over 400 years of tradition. No machines — just patience and pride.")}
               </motion.p>
               <motion.div variants={reveal}>
                 <Link
@@ -297,7 +290,7 @@ const Index = () => {
                   className="inline-flex items-center gap-2 text-[14px] font-medium text-foreground group"
                 >
                   <span className="relative after:absolute after:bottom-[-3px] after:left-0 after:w-full after:h-px after:bg-foreground/30 after:origin-left after:scale-x-100 group-hover:after:bg-foreground after:transition-colors after:duration-300">
-                    Meet the artisans
+                    {getContent(content, "craft_link_text", "Meet the artisans")}
                   </span>
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </Link>
@@ -352,7 +345,7 @@ const Index = () => {
               variants={reveal}
               className="font-serif text-[28px] md:text-[40px] font-semibold tracking-[-0.01em]"
             >
-              Crafted for celebrations
+              {getContent(content, "featured_heading", "Crafted for celebrations")}
             </motion.h2>
             <Link
               to="/shop"
@@ -455,24 +448,20 @@ const Index = () => {
               variants={reveal}
               className="font-serif text-[34px] md:text-[52px] lg:text-[60px] text-white font-semibold leading-[1.08] tracking-[-0.01em]"
             >
-              Childhood deserves
-              <br />
-              stories woven into
-              <br />
-              <em className="italic font-normal text-white/70">every thread.</em>
+              {getContent(content, "cta_heading", "Childhood deserves stories woven into every thread.")}
             </motion.h2>
             <motion.p
               variants={reveal}
               className="text-white/70 text-[16px] mt-6 max-w-sm mx-auto leading-relaxed"
             >
-              Handcrafted in India. Made for little ones.
+              {getContent(content, "cta_subtitle", "Handcrafted in India. Made for little ones.")}
             </motion.p>
             <motion.div variants={reveal}>
               <Link
                 to="/shop"
                 className="inline-flex items-center gap-2.5 mt-10 bg-white/10 backdrop-blur-sm border border-white/25 rounded-full px-9 py-4 text-white text-[14px] font-medium tracking-wide hover:bg-white/18 transition-all group min-h-[44px]"
               >
-                Explore the Collection
+                {getContent(content, "cta_button_text", "Explore the Collection")}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </motion.div>

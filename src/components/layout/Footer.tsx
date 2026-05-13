@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Instagram, MessageCircle } from "lucide-react";
+import { useSiteContent, getContent } from "@/hooks/useSiteContent";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const { data: content } = useSiteContent();
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,13 +24,13 @@ const Footer = () => {
         <div className="container px-6 md:px-8 py-20 md:py-28">
           <div className="max-w-md mx-auto text-center">
             <p className="font-serif italic text-[17px] md:text-[20px] text-muted-foreground mb-6 leading-relaxed">
-              Inspired by India's regional artistry,<br />designed for little celebrations.
+              {getContent(content, "footer_newsletter_tagline", "Inspired by India's regional artistry, designed for little celebrations.")}
             </p>
             <h3 className="font-serif text-[28px] md:text-[34px] font-medium leading-[1.12] mb-3">
-              Stay close to the craft.
+              {getContent(content, "footer_newsletter_heading", "Stay close to the craft.")}
             </h3>
             <p className="text-[15px] text-muted-foreground mb-8">
-              New collections and artisan journeys, in your inbox.
+              {getContent(content, "footer_newsletter_subtitle", "New collections and artisan journeys, in your inbox.")}
             </p>
 
             {subscribed ? (
@@ -74,8 +76,7 @@ const Footer = () => {
               />
             </Link>
             <p className="font-serif italic text-[16px] md:text-[18px] text-white/60 max-w-sm mx-auto leading-[1.7]">
-              Inspired by India's regional artistry
-              and crafted for little celebrations.
+              {getContent(content, "footer_tagline", "Inspired by India's regional artistry and crafted for little celebrations.")}
             </p>
           </div>
 

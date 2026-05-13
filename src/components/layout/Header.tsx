@@ -6,6 +6,7 @@ import { useWishlist } from "@/context/WishlistContext";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { useProductSearch } from "@/hooks/useProductSearch";
 import { Marquee } from "@/components/ui/marquee";
+import { useSiteContent, getContent } from "@/hooks/useSiteContent";
 
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
@@ -25,6 +26,7 @@ const navLinks = [
 ];
 
 const Header = () => {
+  const { data: content } = useSiteContent();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
@@ -137,19 +139,19 @@ const Header = () => {
       <div className="bg-[#F0EBE1] border-b border-border/30 overflow-hidden">
         <Marquee speed="slow" pauseOnHover className="py-2">
           <span className="text-[12px] md:text-[12px] tracking-[0.2em] uppercase text-foreground/60 mx-8">
-            Free shipping on orders above ₹999
+            {getContent(content, "announcement_1", "Free shipping on orders above ₹999")}
           </span>
           <span className="text-[12px] md:text-[12px] tracking-[0.2em] uppercase text-foreground/60 mx-8">
             ·
           </span>
           <span className="text-[12px] md:text-[12px] tracking-[0.2em] uppercase text-foreground/60 mx-8">
-            Pan India Delivery
+            {getContent(content, "announcement_2", "Pan India Delivery")}
           </span>
           <span className="text-[12px] md:text-[12px] tracking-[0.2em] uppercase text-foreground/60 mx-8">
             ·
           </span>
           <span className="text-[12px] md:text-[12px] tracking-[0.2em] uppercase text-foreground/60 mx-8">
-            Handcrafted with Love
+            {getContent(content, "announcement_3", "Handcrafted with Love")}
           </span>
         </Marquee>
       </div>

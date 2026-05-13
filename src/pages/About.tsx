@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { ArrowRight } from "lucide-react";
+import { useSiteContent, getContent } from "@/hooks/useSiteContent";
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
@@ -66,6 +67,8 @@ const stats = [
 ];
 
 const About = () => {
+  const { data: content } = useSiteContent();
+
   useSEO({
     title: "Our Story | Style Saplings",
     description:
@@ -92,15 +95,13 @@ const About = () => {
             variants={reveal}
             className="text-white/70 text-[13px] uppercase tracking-[0.25em] font-medium block mb-5"
           >
-            Our Story
+            {getContent(content, "about_hero_label", "Our Story")}
           </motion.span>
           <motion.h1
             variants={reveal}
             className="font-serif text-3xl md:text-5xl font-semibold text-white leading-[1.12] tracking-[-0.01em] max-w-xl mx-auto [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]"
           >
-            We looked everywhere.
-            <br />
-            So we built it ourselves.
+            {getContent(content, "about_hero_heading", "We looked everywhere. So we built it ourselves.")}
           </motion.h1>
           <motion.div
             variants={reveal}
@@ -145,36 +146,25 @@ const About = () => {
                 variants={reveal}
                 className="text-[13px] uppercase tracking-[0.2em] text-[#C4785A] font-medium block mb-5"
               >
-                How Style Saplings Began
+                {getContent(content, "about_origin_label", "How Style Saplings Began")}
               </motion.span>
               <motion.h2
                 variants={reveal}
                 className="font-serif text-[28px] md:text-[36px] font-medium leading-[1.15] tracking-[-0.01em] mb-7"
               >
-                The Search That Started Everything
+                {getContent(content, "about_origin_heading", "The Search That Started Everything")}
               </motion.h2>
               <motion.p
                 variants={reveal}
                 className="text-[16px] text-muted-foreground leading-[1.8] mb-5"
               >
-                When our daughter was two, we wanted to dress her in something
-                that felt truly Indian — not a costume, but real. Something
-                handcrafted, something that carried the warmth of our culture.
-                What we found was either low-quality fast fashion with Indian
-                prints slapped on, or formal occasion wear too stiff for a
-                toddler to move in.
+                {getContent(content, "about_origin_para1", "When our daughter was two, we wanted to dress her in something that felt truly Indian — not a costume, but real. Something handcrafted, something that carried the warmth of our culture. What we found was either low-quality fast fashion with Indian prints slapped on, or formal occasion wear too stiff for a toddler to move in.")}
               </motion.p>
               <motion.p
                 variants={reveal}
                 className="text-[16px] text-muted-foreground leading-[1.8]"
               >
-                So we went directly to the artisans. We visited workshops in
-                Lucknow, spent time in Rajasthan understanding Bandhani, and
-                sourced from craftspeople who've passed their skills down
-                through generations. Style Saplings was born from that search
-                — a brand built on the belief that Indian children deserve to
-                wear their heritage, comfortably and beautifully, every single
-                day.
+                {getContent(content, "about_origin_para2", "So we went directly to the artisans. We visited workshops in Lucknow, spent time in Rajasthan understanding Bandhani, and sourced from craftspeople who've passed their skills down through generations. Style Saplings was born from that search — a brand built on the belief that Indian children deserve to wear their heritage, comfortably and beautifully, every single day.")}
               </motion.p>
             </motion.div>
           </div>
@@ -197,7 +187,7 @@ const About = () => {
               variants={reveal}
               className="font-serif text-[30px] md:text-[42px] font-semibold leading-[1.1] tracking-[-0.01em]"
             >
-              The Crafts We Celebrate
+              {getContent(content, "about_crafts_heading", "The Crafts We Celebrate")}
             </motion.h2>
           </motion.div>
 
@@ -292,9 +282,7 @@ const About = () => {
               variants={reveal}
               className="font-serif italic text-[18px] md:text-[20px] leading-relaxed text-foreground mb-6 -mt-2"
             >
-              Style Saplings began with a simple wish — to dress our children
-              in the same beautiful handcrafted traditions that have defined
-              Indian culture for generations.
+              {getContent(content, "about_founder_quote", "Style Saplings began with a simple wish — to dress our children in the same beautiful handcrafted traditions that have defined Indian culture for generations.")}
             </motion.p>
             <motion.div variants={reveal}>
               <div className="w-10 h-px bg-border mx-auto mb-4" />
@@ -327,26 +315,20 @@ const About = () => {
               variants={reveal}
               className="font-serif text-3xl md:text-5xl font-semibold text-white leading-[1.1] tracking-[-0.01em]"
             >
-              Dress Your Little One in
-              <br className="hidden md:block" />
-              India's{" "}
-              <em className="italic font-normal text-[#C4785A]">
-                Finest Craft
-              </em>
+              {getContent(content, "about_cta_heading", "Dress Your Little One in India's Finest Craft")}
             </motion.h2>
             <motion.p
               variants={reveal}
               className="text-white/70 text-[16px] mt-6 mb-10 max-w-lg mx-auto leading-relaxed"
             >
-              Explore our collection of handcrafted ethnic wear for children
-              aged 2-5 years. Made by skilled artisans across India.
+              {getContent(content, "about_cta_subtitle", "Explore our collection of handcrafted ethnic wear for children aged 2-5 years. Made by skilled artisans across India.")}
             </motion.p>
             <motion.div variants={reveal}>
               <Link
                 to="/shop"
                 className="group inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-sm border border-white/25 rounded-full px-9 py-4 text-white text-[14px] font-medium tracking-wide hover:bg-white/18 transition-all min-h-[44px]"
               >
-                Explore Collection
+                {getContent(content, "about_cta_button", "Explore Collection")}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </motion.div>

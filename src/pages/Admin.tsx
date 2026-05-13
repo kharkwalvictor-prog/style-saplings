@@ -3,7 +3,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useAdminRealtime } from "@/hooks/useAdminRealtime";
 import { useAllReviews } from "@/hooks/useReviews";
 import { Button } from "@/components/ui/button";
-import { Loader2, LogOut, LayoutDashboard, ShoppingCart, Users, Package, RotateCcw, Megaphone, CircleDot, Receipt, Settings } from "lucide-react";
+import { Loader2, LogOut, LayoutDashboard, ShoppingCart, Users, Package, RotateCcw, Megaphone, CircleDot, Receipt, Settings, FileText } from "lucide-react";
 import AdminLogin from "./AdminLogin";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import AdminOrders from "@/components/admin/AdminOrders";
@@ -14,8 +14,9 @@ import AdminRefunds from "@/components/admin/AdminRefunds";
 import AdminMarketing from "@/components/admin/AdminMarketing";
 import AdminGSTReport from "@/components/admin/AdminGSTReport";
 import AdminSettings from "@/components/admin/AdminSettings";
+import AdminContent from "@/components/admin/AdminContent";
 
-type Tab = "dashboard" | "orders" | "customers" | "inventory" | "refunds" | "marketing" | "gst" | "blog" | "settings";
+type Tab = "dashboard" | "orders" | "customers" | "inventory" | "refunds" | "marketing" | "gst" | "blog" | "content" | "settings";
 
 const sidebarTabs = [
   { key: "dashboard" as Tab, label: "Dashboard", icon: LayoutDashboard, mobileIcon: "📊" },
@@ -35,6 +36,7 @@ const mobileTabs = [
   { key: "refunds" as Tab, label: "Refunds", mobileIcon: "🔄" },
   { key: "gst" as Tab, label: "GST", mobileIcon: "🧾" },
   { key: "blog" as Tab, label: "Blog", mobileIcon: "📝" },
+  { key: "content" as Tab, label: "Content", mobileIcon: "📄" },
   { key: "marketing" as Tab, label: "Marketing", mobileIcon: "📣" },
 ];
 
@@ -88,6 +90,12 @@ const Admin = () => {
                 }`}>
                 <span className="text-base">📝</span> Blog
               </button>
+              <button onClick={() => setTab("content")}
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm rounded-lg transition-colors ${
+                  tab === "content" ? "bg-primary text-primary-foreground" : "hover:bg-accent text-muted-foreground hover:text-foreground"
+                }`}>
+                <FileText className="h-4 w-4 shrink-0" /> Content
+              </button>
               <button onClick={() => setTab("settings")}
                 className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm rounded-lg transition-colors ${
                   tab === "settings" ? "bg-primary text-primary-foreground" : "hover:bg-accent text-muted-foreground hover:text-foreground"
@@ -108,6 +116,7 @@ const Admin = () => {
           {tab === "gst" && <AdminGSTReport />}
           {tab === "marketing" && <AdminMarketing />}
           {tab === "blog" && <AdminBlog />}
+          {tab === "content" && <AdminContent />}
           {tab === "settings" && <AdminSettings />}
         </main>
       </div>
