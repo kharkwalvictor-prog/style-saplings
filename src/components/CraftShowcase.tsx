@@ -69,7 +69,7 @@ const SectionHeading = ({ label, title }: { label: string; title: string }) => {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
         className="text-[10px] md:text-xs tracking-[0.35em] uppercase font-bold block mb-3"
-        style={{ color: '#C4622D' }}
+        style={{ color: '#C47A6E' }}
       >
         {label}
       </motion.span>
@@ -86,7 +86,7 @@ const SectionHeading = ({ label, title }: { label: string; title: string }) => {
         animate={inView ? { scaleX: 1 } : {}}
         transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="w-16 h-[2px] mx-auto origin-center"
-        style={{ backgroundColor: '#C4622D' }}
+        style={{ backgroundColor: '#C47A6E' }}
       />
     </div>
   );
@@ -97,7 +97,7 @@ const CraftShowcase = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-32" style={{ backgroundColor: '#F7F4EF' }}>
+    <section ref={sectionRef} className="py-20 md:py-32" style={{ backgroundColor: '#F8F8F6' }}>
       <div className="container px-4 md:px-8">
         <SectionHeading label="Heritage Textiles" title="Our Craft" />
 
@@ -128,7 +128,7 @@ const CraftShowcase = () => {
                 {/* Content */}
                 <div className="p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-3">
-                    <h3 className="font-serif text-2xl font-semibold group-hover:text-[#4A6741] transition-colors duration-300">
+                    <h3 className="font-serif text-2xl font-semibold group-hover:text-[#7B8F72] transition-colors duration-300">
                       {craft.name}
                     </h3>
                   </div>
@@ -142,7 +142,7 @@ const CraftShowcase = () => {
                   {/* CTA — slides in */}
                   <motion.div
                     className="flex items-center gap-2 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0"
-                    style={{ color: '#C4622D' }}
+                    style={{ color: '#C47A6E' }}
                   >
                     Explore Collection
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />

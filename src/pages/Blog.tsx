@@ -48,12 +48,12 @@ const Blog = () => {
       {activeCategory === "All" && featured && (
         <section className="py-0 bg-background">
           <div className="container px-4 md:px-8 py-10 md:py-14">
-            <motion.div {...fade} transition={{ duration: 0.5 }} className="rounded-2xl overflow-hidden grid md:grid-cols-5" style={{ backgroundColor: "#3A5139" }}>
+            <motion.div {...fade} transition={{ duration: 0.5 }} className="rounded-2xl overflow-hidden grid md:grid-cols-5" style={{ backgroundColor: "#2A3A26" }}>
               <div className="md:col-span-3 p-8 md:p-10 flex flex-col justify-end text-white">
-                <span className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#C4622D" }}>{featured.category}</span>
+                <span className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#C47A6E" }}>{featured.category}</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-semibold leading-snug mb-4">{featured.title}</h2>
                 <p className="text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.7)" }}>{featured.excerpt}</p>
-                <Link to={`/blog/${featured.slug}`} className="text-sm font-medium hover:underline underline-offset-4" style={{ color: "#C4622D" }}>Read More →</Link>
+                <Link to={`/blog/${featured.slug}`} className="text-sm font-medium hover:underline underline-offset-4" style={{ color: "#C47A6E" }}>Read More →</Link>
               </div>
               <div className="md:col-span-2 min-h-[200px] md:min-h-[300px]">
                 <img src={featured.cover_image || product1} alt={featured.title} className="w-full h-full object-cover" />
@@ -76,7 +76,7 @@ const Blog = () => {
                     ? "text-white border-transparent"
                     : "bg-white border-primary text-primary hover:bg-primary/5"
                 }`}
-                style={activeCategory === c ? { backgroundColor: "#4A6741", borderColor: "#4A6741" } : undefined}
+                style={activeCategory === c ? { backgroundColor: "#7B8F72", borderColor: "#7B8F72" } : undefined}
               >
                 {c}
               </button>
@@ -94,7 +94,7 @@ const Blog = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08, duration: 0.4 }}
                   className="rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow"
-                  style={{ borderTop: "3px solid #C4622D" }}
+                  style={{ borderTop: "3px solid #C47A6E" }}
                 >
                   <div className="h-[180px] overflow-hidden bg-muted">
                     <img src={post.cover_image || fallbackImages[i % fallbackImages.length]} alt={post.title} className="w-full h-full object-cover" />
@@ -107,7 +107,7 @@ const Blog = () => {
                       <span className="text-xs text-muted-foreground">
                         {post.published_at ? new Date(post.published_at).toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "numeric" }) : ""}
                       </span>
-                      <Link to={`/blog/${post.slug}`} className="text-sm font-medium hover:underline underline-offset-4" style={{ color: "#C4622D" }}>Read More →</Link>
+                      <Link to={`/blog/${post.slug}`} className="text-sm font-medium hover:underline underline-offset-4" style={{ color: "#C47A6E" }}>Read More →</Link>
                     </div>
                   </div>
                 </motion.article>

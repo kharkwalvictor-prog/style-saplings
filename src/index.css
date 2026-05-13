@@ -4,95 +4,95 @@
 
 @layer base {
   :root {
-    /* ── Royal Boutique Palette ──
-       Warm cream + gold + sage — inspired by Manyavar/Sabyasachi
+    /* ── Soft Sage & Blush Palette ──
+       White + warm rose + soft sage — fresh, elegant, natural
     */
 
-    /* Background: Warm cream #FBF8F3 */
-    --background: 38 40% 97%;
-    /* Foreground: Rich espresso #2A2220 */
-    --foreground: 12 12% 15%;
+    /* Background: Pure white #FFFFFF */
+    --background: 0 0% 100%;
+    /* Foreground: Charcoal #1A1A1A */
+    --foreground: 0 0% 10%;
 
-    --card: 36 35% 96%;
-    --card-foreground: 12 12% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 12 12% 15%;
+    --popover-foreground: 0 0% 10%;
 
-    /* Primary: Burnt orange #C4622D */
-    --primary: 18 63% 47%;
+    /* Primary: Warm rose #C47A6E */
+    --primary: 7 40% 60%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Sage green #5B7C5B */
-    --secondary: 120 15% 42%;
+    /* Secondary: Soft sage #7B8F72 */
+    --secondary: 110 12% 51%;
     --secondary-foreground: 0 0% 100%;
 
     /* Sage accent token */
-    --sage: 120 15% 42%;
+    --sage: 110 12% 51%;
 
-    --muted: 36 18% 91%;
-    --muted-foreground: 20 8% 46%;
+    --muted: 60 8% 97%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 36 22% 93%;
-    --accent-foreground: 12 12% 15%;
+    --accent: 100 11% 95%;
+    --accent-foreground: 0 0% 10%;
 
-    /* Destructive/Sale: Warm terracotta #B85C38 */
-    --destructive: 18 52% 47%;
+    /* Destructive/Sale: Warm rose #C47A6E */
+    --destructive: 7 40% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 36 14% 87%;
-    --input: 36 14% 87%;
-    --ring: 18 63% 47%;
+    --border: 60 3% 91%;
+    --input: 60 3% 91%;
+    --ring: 7 40% 60%;
 
     --radius: 0.5rem;
 
-    --sale: 18 52% 47%;
+    --sale: 7 40% 60%;
 
-    --footer: 15 10% 13%;
-    --footer-foreground: 38 40% 97%;
+    --footer: 130 26% 14%;
+    --footer-foreground: 0 0% 100%;
 
-    --sidebar-background: 36 20% 94%;
-    --sidebar-foreground: 12 12% 15%;
-    --sidebar-primary: 18 63% 47%;
+    --sidebar-background: 100 11% 95%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 7 40% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 36 18% 91%;
-    --sidebar-accent-foreground: 12 12% 15%;
-    --sidebar-border: 36 14% 87%;
-    --sidebar-ring: 18 63% 47%;
+    --sidebar-accent: 60 8% 97%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 60 3% 91%;
+    --sidebar-ring: 7 40% 60%;
   }
 
   .dark {
-    --background: 15 10% 8%;
-    --foreground: 38 20% 92%;
-    --card: 15 10% 10%;
-    --card-foreground: 38 20% 92%;
-    --popover: 15 10% 10%;
-    --popover-foreground: 38 20% 92%;
-    --primary: 18 63% 50%;
+    --background: 130 20% 6%;
+    --foreground: 60 8% 92%;
+    --card: 130 20% 8%;
+    --card-foreground: 60 8% 92%;
+    --popover: 130 20% 8%;
+    --popover-foreground: 60 8% 92%;
+    --primary: 7 40% 62%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 120 15% 45%;
+    --secondary: 110 12% 48%;
     --secondary-foreground: 0 0% 100%;
-    --sage: 120 15% 45%;
-    --muted: 15 8% 18%;
-    --muted-foreground: 36 10% 60%;
-    --accent: 15 8% 18%;
-    --accent-foreground: 38 20% 92%;
-    --destructive: 18 52% 50%;
+    --sage: 110 12% 48%;
+    --muted: 130 10% 16%;
+    --muted-foreground: 60 5% 58%;
+    --accent: 130 10% 16%;
+    --accent-foreground: 60 8% 92%;
+    --destructive: 7 40% 62%;
     --destructive-foreground: 0 0% 100%;
-    --border: 15 8% 20%;
-    --input: 15 8% 20%;
-    --ring: 18 63% 50%;
-    --sale: 18 52% 50%;
-    --footer: 15 10% 12%;
-    --footer-foreground: 38 20% 92%;
-    --sidebar-background: 15 10% 8%;
-    --sidebar-foreground: 38 20% 92%;
-    --sidebar-primary: 18 63% 50%;
+    --border: 130 10% 18%;
+    --input: 130 10% 18%;
+    --ring: 7 40% 62%;
+    --sale: 7 40% 62%;
+    --footer: 130 26% 10%;
+    --footer-foreground: 60 8% 92%;
+    --sidebar-background: 130 20% 6%;
+    --sidebar-foreground: 60 8% 92%;
+    --sidebar-primary: 7 40% 62%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 15 8% 18%;
-    --sidebar-accent-foreground: 38 20% 92%;
-    --sidebar-border: 15 8% 20%;
-    --sidebar-ring: 18 63% 50%;
+    --sidebar-accent: 130 10% 16%;
+    --sidebar-accent-foreground: 60 8% 92%;
+    --sidebar-border: 130 10% 18%;
+    --sidebar-ring: 7 40% 62%;
   }
 }
 
@@ -139,5 +139,5 @@ html {
 }
 
 ::selection {
-  background-color: hsl(18 63% 47% / 0.15);
+  background-color: hsl(7 40% 60% / 0.15);
 }

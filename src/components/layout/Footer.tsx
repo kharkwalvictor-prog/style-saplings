@@ -16,7 +16,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#2A2220] text-white/80">
+    <footer className="bg-[#1C2B1A] text-white/80">
       {/* Newsletter */}
       <div className="border-b border-white/10">
         <div className="container px-6 md:px-8 py-12 md:py-14">
@@ -28,7 +28,7 @@ const Footer = () => {
               New arrivals, festive drops & artisan stories — straight to your inbox.
             </p>
             {subscribed ? (
-              <p className="text-sm text-[#C4622D] font-medium">Thank you for subscribing!</p>
+              <p className="text-sm text-[#C47A6E] font-medium">Thank you for subscribing!</p>
             ) : (
               <form onSubmit={handleSubscribe} className="flex gap-2 max-w-md mx-auto">
                 <input
@@ -37,11 +37,11 @@ const Footer = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
                   required
-                  className="flex-1 px-4 py-3 text-sm bg-white/10 border border-white/15 rounded-full text-white placeholder:text-white/30 focus:outline-none focus:border-[#C4622D]/50 transition-colors"
+                  className="flex-1 px-4 py-3 text-sm bg-white/10 border border-white/15 rounded-full text-white placeholder:text-white/30 focus:outline-none focus:border-[#C47A6E]/50 transition-colors"
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 text-sm font-semibold bg-[#C4622D] hover:bg-[#B5561F] text-white rounded-full transition-colors"
+                  className="px-6 py-3 text-sm font-semibold bg-[#C47A6E] hover:bg-[#B06A5E] text-white rounded-full transition-colors"
                 >
                   Subscribe
                 </button>

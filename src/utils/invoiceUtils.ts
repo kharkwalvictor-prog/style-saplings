@@ -94,20 +94,20 @@ export const generateInvoiceHTML = (order: DbOrder, invoiceNumber?: string, gstC
 @media print { body { margin:0; } .no-print { display:none!important; } }
 body { font-family:'Inter',Arial,sans-serif; color:#333; max-width:800px; margin:0 auto; padding:30px; font-size:13px; }
 table { border-collapse:collapse; width:100%; }
-.header { display:flex; justify-content:space-between; margin-bottom:20px; padding-bottom:15px; border-bottom:2px solid #2D4A27; }
-.print-btn { display:block; margin:15px auto; padding:10px 30px; background:#4A6741; color:white; border:none; border-radius:6px; font-size:14px; cursor:pointer; }
+.header { display:flex; justify-content:space-between; margin-bottom:20px; padding-bottom:15px; border-bottom:2px solid #2A3A26; }
+.print-btn { display:block; margin:15px auto; padding:10px 30px; background:#7B8F72; color:white; border:none; border-radius:6px; font-size:14px; cursor:pointer; }
 </style></head><body>
 <button class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
 
 <div class="header">
   <div>
-    <h1 style="font-size:22px;color:#C4622D;margin:0;letter-spacing:2px">TAX INVOICE</h1>
+    <h1 style="font-size:22px;color:#C47A6E;margin:0;letter-spacing:2px">TAX INVOICE</h1>
     <p style="margin:4px 0;font-size:12px">Invoice No: <strong>${invNo}</strong></p>
     <p style="margin:2px 0;font-size:12px">Invoice Date: ${format(new Date(order.created_at), "dd/MM/yyyy")}</p>
     <p style="margin:2px 0;font-size:12px">Order No: ${order.order_number}</p>
   </div>
   <div style="text-align:right">
-    <h2 style="font-size:18px;color:#2D4A27;margin:0">${BUSINESS.trade_name}</h2>
+    <h2 style="font-size:18px;color:#2A3A26;margin:0">${BUSINESS.trade_name}</h2>
     <p style="margin:2px 0;font-size:12px"><strong>${BUSINESS.legal_name}</strong></p>
     <p style="margin:2px 0;font-size:12px">${BUSINESS.address}</p>
     <p style="margin:2px 0;font-size:12px">GSTIN: ${BUSINESS.gstin}</p>
@@ -138,7 +138,7 @@ table { border-collapse:collapse; width:100%; }
 <!-- Items Table -->
 <table style="margin-bottom:15px">
   <thead>
-    <tr style="background:#f5f2ec">
+    <tr style="background:#F8F8F6">
       <th style="padding:8px;border:1px solid #ddd;text-align:center;width:35px;font-size:11px">Sr#</th>
       <th style="padding:8px;border:1px solid #ddd;text-align:left;font-size:11px">Description</th>
       <th style="padding:8px;border:1px solid #ddd;text-align:center;font-size:11px;width:80px">HSN</th>
@@ -159,9 +159,9 @@ table { border-collapse:collapse; width:100%; }
     ${taxSummaryRows}
     <tr><td style="padding:4px 8px;text-align:right">Shipping:</td><td style="padding:4px 8px;text-align:right">${shipping === 0 ? "FREE" : fmt(shipping)}</td></tr>
     ${roundOff !== 0 ? `<tr><td style="padding:4px 8px;text-align:right">Round Off:</td><td style="padding:4px 8px;text-align:right">${roundOff > 0 ? "+" : ""}${fmt(roundOff)}</td></tr>` : ""}
-    <tr style="border-top:2px solid #2D4A27;font-weight:bold;font-size:16px">
+    <tr style="border-top:2px solid #2A3A26;font-weight:bold;font-size:16px">
       <td style="padding:8px;text-align:right">GRAND TOTAL:</td>
-      <td style="padding:8px;text-align:right;color:#2D4A27">${fmt(grandTotal)}</td>
+      <td style="padding:8px;text-align:right;color:#2A3A26">${fmt(grandTotal)}</td>
     </tr>
   </table>
 </div>

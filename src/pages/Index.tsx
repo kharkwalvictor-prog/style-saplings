@@ -155,7 +155,7 @@ const Index = () => {
           >
             <Link
               to="/shop"
-              className="inline-flex items-center gap-2 bg-[#C4622D] hover:bg-[#B5561F] text-white text-sm font-semibold tracking-wide px-8 py-3.5 rounded-full transition-colors active:scale-[0.97]"
+              className="inline-flex items-center gap-2 bg-[#C47A6E] hover:bg-[#B06A5E] text-white text-sm font-semibold tracking-wide px-8 py-3.5 rounded-full transition-colors active:scale-[0.97]"
             >
               Shop Everyday Ethnic Wear
             </Link>
@@ -188,10 +188,10 @@ const Index = () => {
       {/* ────────────────────────────────────────────
           3. OUR CRAFT SECTION
       ──────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-[#EDE8DF]">
+      <section className="py-20 md:py-28 bg-[#F8F8F6]">
         <div className="container px-6 md:px-8">
           <motion.div {...revealUp()} className="text-center mb-14 md:mb-18">
-            <p className="text-[11px] tracking-[0.25em] uppercase text-[#C4622D] font-semibold mb-3">
+            <p className="text-[11px] tracking-[0.25em] uppercase text-[#C47A6E] font-semibold mb-3">
               Our Heritage
             </p>
             <h2 className="font-serif text-3xl md:text-[2.75rem] font-semibold leading-tight">
@@ -208,8 +208,8 @@ const Index = () => {
                   {...revealUp(i * 0.12)}
                   className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/80 transition-colors"
                 >
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#C4622D]/10 mb-5">
-                    <Icon className="h-6 w-6 text-[#C4622D]" strokeWidth={1.5} />
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#C47A6E]/10 mb-5">
+                    <Icon className="h-6 w-6 text-[#C47A6E]" strokeWidth={1.5} />
                   </div>
                   <h3 className="font-serif text-xl font-semibold mb-2">
                     {craft.name}
@@ -227,11 +227,11 @@ const Index = () => {
       {/* ────────────────────────────────────────────
           4. FEATURED PRODUCTS
       ──────────────────────────────────────────── */}
-      <section className="py-16 md:py-24 bg-[#FAF7F2]">
+      <section className="py-16 md:py-24 bg-[#FFFFFF]">
         <div className="container px-6 md:px-8">
           <div className="flex items-end justify-between mb-10 md:mb-14">
             <motion.div {...revealUp()}>
-              <p className="text-[11px] tracking-[0.25em] uppercase text-[#C4622D] font-semibold mb-2">
+              <p className="text-[11px] tracking-[0.25em] uppercase text-[#C47A6E] font-semibold mb-2">
                 Curated Selection
               </p>
               <h2 className="font-serif text-2xl md:text-4xl font-semibold">
@@ -272,7 +272,7 @@ const Index = () => {
       {/* ────────────────────────────────────────────
           5. BRAND STORY SECTION — dark
       ──────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-[#2D4A27]">
+      <section className="py-24 md:py-32 bg-[#2A3A26]">
         <div className="container px-6 md:px-8">
           <motion.div
             {...revealUp()}
@@ -280,7 +280,7 @@ const Index = () => {
           >
             <h2 className="font-serif text-3xl md:text-[2.75rem] font-semibold leading-tight text-white mb-6">
               Crafted With Love, Rooted In{" "}
-              <em className="italic font-normal text-[#C4622D]">Tradition</em>
+              <em className="italic font-normal text-[#C47A6E]">Tradition</em>
             </h2>
             <p className="text-sm md:text-base text-white/65 leading-relaxed max-w-lg mx-auto mb-8">
               Each garment is born from the hands of skilled artisans who carry
@@ -303,7 +303,7 @@ const Index = () => {
       {/* ────────────────────────────────────────────
           6. TRUST POINTS / WHY STYLE SAPLINGS
       ──────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-[#EDE8DF]">
+      <section className="py-20 md:py-28 bg-[#F8F8F6]">
         <div className="container px-6 md:px-8">
           <motion.div {...revealUp()} className="text-center mb-14">
             <h2 className="font-serif text-2xl md:text-4xl font-semibold">
@@ -320,9 +320,9 @@ const Index = () => {
                   {...revealUp(i * 0.1)}
                   className="text-center"
                 >
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#2D4A27]/10 mb-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#2A3A26]/10 mb-4">
                     <Icon
-                      className="h-5 w-5 text-[#2D4A27]"
+                      className="h-5 w-5 text-[#2A3A26]"
                       strokeWidth={1.5}
                     />
                   </div>
@@ -342,10 +342,10 @@ const Index = () => {
       {/* ────────────────────────────────────────────
           7. INSTAGRAM / UGC STRIP
       ──────────────────────────────────────────── */}
-      <section className="py-16 md:py-24 bg-[#FAF7F2]">
+      <section className="py-16 md:py-24 bg-[#FFFFFF]">
         <div className="container px-6 md:px-8">
           <motion.div {...revealUp()} className="text-center mb-10">
-            <p className="text-[11px] tracking-[0.25em] uppercase text-[#C4622D] font-semibold mb-2">
+            <p className="text-[11px] tracking-[0.25em] uppercase text-[#C47A6E] font-semibold mb-2">
               Follow Along
             </p>
             <h2 className="font-serif text-2xl md:text-4xl font-semibold">

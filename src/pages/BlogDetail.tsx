@@ -38,7 +38,7 @@ const BlogDetail = () => {
         <div className="flex flex-col items-center justify-center py-32 text-center px-4">
           <h1 className="font-serif text-3xl font-semibold mb-3">Article not found</h1>
           <p className="text-muted-foreground text-sm mb-6">This article may have been removed or is not yet published.</p>
-          <Link to="/blog" className="text-sm font-medium hover:underline" style={{ color: "#C4622D" }}>← Back to Blog</Link>
+          <Link to="/blog" className="text-sm font-medium hover:underline" style={{ color: "#C47A6E" }}>← Back to Blog</Link>
         </div>
         <Footer />
       </div>
@@ -62,7 +62,7 @@ const BlogDetail = () => {
 
       <article className="py-16 md:py-24 bg-background">
         <div className="max-w-[720px] mx-auto px-4 md:px-8">
-          <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-medium mb-6 px-4 py-2 rounded-full border border-border hover:bg-muted transition-colors" style={{ color: "#C4622D" }}>
+          <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-medium mb-6 px-4 py-2 rounded-full border border-border hover:bg-muted transition-colors" style={{ color: "#C47A6E" }}>
             ← Back to Blog
           </Link>
 
@@ -71,7 +71,7 @@ const BlogDetail = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="block text-[10px] uppercase tracking-[0.2em] font-medium mb-3"
-              style={{ color: "#C4622D" }}
+              style={{ color: "#C47A6E" }}
             >
               {post.category}
             </motion.span>
@@ -103,7 +103,7 @@ const BlogDetail = () => {
           </div>
 
           <div className="mt-12 pt-8 border-t">
-            <Link to="/blog" className="text-sm font-medium hover:underline" style={{ color: "#C4622D" }}>
+            <Link to="/blog" className="text-sm font-medium hover:underline" style={{ color: "#C47A6E" }}>
               ← Back to Blog
             </Link>
           </div>

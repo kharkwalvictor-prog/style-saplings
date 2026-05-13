@@ -30,11 +30,11 @@ const Contact = () => {
       <PageBanner label="Get In Touch" title="Contact Us" />
 
       {/* Body */}
-      <section className="py-16 md:py-24" style={{ backgroundColor: "#F7F4EF" }}>
+      <section className="py-16 md:py-24" style={{ backgroundColor: "#F8F8F6" }}>
         <div className="max-w-[1100px] mx-auto px-4 md:px-8">
           <div className="grid md:grid-cols-5 gap-8">
             {/* Left — info card */}
-            <motion.div {...fade} transition={{ duration: 0.5 }} className="md:col-span-2 rounded-2xl p-8 text-white" style={{ backgroundColor: '#3A5139' }}>
+            <motion.div {...fade} transition={{ duration: 0.5 }} className="md:col-span-2 rounded-2xl p-8 text-white" style={{ backgroundColor: '#2A3A26' }}>
               <h2 className="font-serif text-xl font-semibold mb-8">Contact Details</h2>
 
               <div className="space-y-6">

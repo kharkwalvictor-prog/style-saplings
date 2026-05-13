@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palette A: Soft Sage & Blush</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; color: #1A1A1A; background: #FFFFFF; }
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+
+  /* Announcement bar */
+  .announce { background: #F1F3EF; padding: 10px; text-align: center; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #1A1A1A80; }
+
+  /* Header */
+  .header { display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; border-bottom: 1px solid #E8E8E6; background: #FFFFFF; }
+  .header .logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: #1A1A1A; }
+  .header nav a { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; text-decoration: none; margin-left: 32px; }
+  .header nav a:hover { color: #1A1A1A; }
+
+  /* Hero */
+  .hero { position: relative; height: 85vh; min-height: 500px; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, #7B8F72 0%, #5A6E52 100%); overflow: hidden; }
+  .hero::after { content: ''; position: absolute; inset: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="1" fill="white" opacity="0.1"/><circle cx="60" cy="70" r="1.5" fill="white" opacity="0.08"/><circle cx="80" cy="20" r="1" fill="white" opacity="0.12"/></svg>') repeat; }
+  .hero-content { position: relative; z-index: 1; max-width: 680px; padding: 0 24px; }
+  .hero .eyebrow { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+  .hero h1 { font-size: 56px; color: white; line-height: 1.1; margin-bottom: 20px; font-weight: 600; }
+  .hero h1 em { font-style: italic; font-weight: 400; }
+  .hero .subtitle { font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 36px; }
+  .btn-primary { display: inline-block; padding: 14px 36px; background: #C47A6E; color: white; border-radius: 50px; font-size: 14px; font-weight: 600; text-decoration: none; margin: 0 8px; }
+  .btn-outline { display: inline-block; padding: 14px 36px; border: 1.5px solid rgba(255,255,255,0.4); color: white; border-radius: 50px; font-size: 14px; font-weight: 600; text-decoration: none; margin: 0 8px; }
+
+  /* Craft section */
+  .craft { padding: 80px 40px; background: #F8F8F6; }
+  .craft .heading { text-align: center; margin-bottom: 48px; }
+  .craft .eyebrow-sm { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #7B8F72; font-weight: 600; margin-bottom: 8px; }
+  .craft h2 { font-size: 36px; font-weight: 600; }
+  .craft-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 900px; margin: 0 auto; }
+  .craft-card { background: white; border-radius: 16px; padding: 36px 28px; text-align: center; border: 1px solid #E8E8E6; }
+  .craft-icon { width: 56px; height: 56px; border-radius: 50%; background: #7B8F7215; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px; }
+  .craft-card h3 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+  .craft-card p { font-size: 14px; color: #666; line-height: 1.6; }
+
+  /* Products */
+  .products { padding: 80px 40px; background: #FFFFFF; }
+  .products .top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+  .products .eyebrow-sm { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #C47A6E; font-weight: 600; margin-bottom: 6px; }
+  .products h2 { font-size: 36px; font-weight: 600; }
+  .products .view-all { font-size: 14px; color: #666; text-decoration: none; }
+  .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .product-card { border-radius: 12px; overflow: hidden; }
+  .product-img { aspect-ratio: 3/4; background: #F0EDE8; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #AAA; font-size: 13px; }
+  .product-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; margin-top: 12px; }
+  .product-craft { font-size: 12px; color: #7B8F72; margin-top: 4px; }
+  .product-price { font-size: 14px; font-weight: 600; margin-top: 6px; }
+
+  /* Brand story */
+  .story { padding: 100px 40px; background: #2A3A26; text-align: center; }
+  .story h2 { font-size: 40px; color: white; font-weight: 600; margin-bottom: 20px; }
+  .story h2 em { color: #C47A6E; font-weight: 400; }
+  .story p { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
+
+  /* Trust */
+  .trust { padding: 80px 40px; background: #F8F8F6; }
+  .trust h2 { text-align: center; font-size: 36px; font-weight: 600; margin-bottom: 48px; }
+  .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 1000px; margin: 0 auto; text-align: center; }
+  .trust-icon { width: 48px; height: 48px; border-radius: 50%; background: #7B8F7215; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 20px; }
+  .trust-grid h3 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+  .trust-grid p { font-size: 13px; color: #666; line-height: 1.5; }
+
+  /* Footer */
+  .footer { background: #1C2B1A; color: rgba(255,255,255,0.5); padding: 60px 40px 30px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .footer h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
+  .footer .brand { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: white; font-weight: 700; margin-bottom: 12px; }
+  .footer p, .footer a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; line-height: 1.8; display: block; }
+  .footer a:hover { color: rgba(255,255,255,0.7); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; font-size: 11px; color: rgba(255,255,255,0.2); display: flex; justify-content: space-between; }
+
+  /* Color swatches */
+  .swatches { display: flex; gap: 16px; padding: 24px 40px; background: #FFF; border-bottom: 1px solid #EEE; }
+  .swatch { width: 48px; height: 48px; border-radius: 8px; border: 1px solid #DDD; }
+  .swatch-label { font-size: 10px; text-align: center; margin-top: 4px; color: #999; }
+
+  @media (max-width: 768px) {
+    .craft-grid, .product-grid, .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Palette Swatches -->
+<div class="swatches">
+  <div><div class="swatch" style="background:#FFFFFF"></div><div class="swatch-label">White</div></div>
+  <div><div class="swatch" style="background:#F8F8F6"></div><div class="swatch-label">Off-white</div></div>
+  <div><div class="swatch" style="background:#7B8F72"></div><div class="swatch-label">Sage</div></div>
+  <div><div class="swatch" style="background:#C47A6E"></div><div class="swatch-label">Rose</div></div>
+  <div><div class="swatch" style="background:#1A1A1A"></div><div class="swatch-label">Charcoal</div></div>
+  <div><div class="swatch" style="background:#1C2B1A"></div><div class="swatch-label">Forest</div></div>
+  <div style="margin-left: auto; font-size: 18px; font-family: 'Cormorant Garamond', serif; font-weight: 700; align-self: center;">Option A: Soft Sage & Blush</div>
+</div>
+
+<div class="announce">Free shipping on orders above Rs. 999 &nbsp;&middot;&nbsp; Pan India Delivery &nbsp;&middot;&nbsp; Handcrafted with Love</div>
+
+<div class="header">
+  <div class="logo">Style Saplings</div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">About</a>
+    <a href="#">Blog</a>
+    <a href="#">Contact</a>
+  </nav>
+</div>
+
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Authentic Indian Craftsmanship for Little Ones</p>
+    <h1>Rooted in Tradition, <em>Styled for Today</em></h1>
+    <p class="subtitle">Celebrate Heritage in Every Stitch — Naturally Beautiful, Comfortably Worn</p>
+    <div>
+      <a href="#" class="btn-primary">Shop Everyday Ethnic Wear</a>
+      <a href="#" class="btn-outline">Discover Our Story</a>
+    </div>
+  </div>
+</section>
+
+<section class="craft">
+  <div class="heading">
+    <p class="eyebrow-sm">Our Heritage</p>
+    <h2>The Art Behind Every Garment</h2>
+  </div>
+  <div class="craft-grid">
+    <div class="craft-card">
+      <div class="craft-icon">&#9986;</div>
+      <h3>Chikankari</h3>
+      <p>Delicate hand-embroidered motifs from Lucknow, passed down through generations.</p>
+    </div>
+    <div class="craft-card">
+      <div class="craft-icon">&#127912;</div>
+      <h3>Bandhani</h3>
+      <p>Vibrant tie-dye patterns from Rajasthan, each knot tied by hand.</p>
+    </div>
+    <div class="craft-card">
+      <div class="craft-icon">&#10024;</div>
+      <h3>Firan</h3>
+      <p>Fine Kashmiri embroidery featuring intricate floral and paisley patterns.</p>
+    </div>
+  </div>
+</section>
+
+<section class="products">
+  <div class="top">
+    <div>
+      <p class="eyebrow-sm">Curated Selection</p>
+      <h2>Featured</h2>
+    </div>
+    <a href="#" class="view-all">View All &rarr;</a>
+  </div>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="product-img">Product Image</div>
+      <div class="product-craft">Chikankari</div>
+      <div class="product-name">Azure Blossom Set</div>
+      <div class="product-price">&#8377;1,299</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">Product Image</div>
+      <div class="product-craft">Chikankari</div>
+      <div class="product-name">Verdure Ensemble</div>
+      <div class="product-price">&#8377;1,399</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">Product Image</div>
+      <div class="product-craft">Bandhani</div>
+      <div class="product-name">Olive Grove Tunic</div>
+      <div class="product-price">&#8377;899</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">Product Image</div>
+      <div class="product-craft">Firan</div>
+      <div class="product-name">Marigold Firan</div>
+      <div class="product-price">&#8377;1,199</div>
+    </div>
+  </div>
+</section>
+
+<section class="story">
+  <h2>Crafted With Love, Rooted In <em>Tradition</em></h2>
+  <p>Each garment is born from the hands of skilled artisans who carry forward techniques perfected over generations in Lucknow, Jaipur, and Kashmir.</p>
+  <a href="#" class="btn-outline">Read Our Story &rarr;</a>
+</section>
+
+<section class="trust">
+  <h2>Why Style Saplings</h2>
+  <div class="trust-grid">
+    <div><div class="trust-icon">&#9995;</div><h3>Handcrafted</h3><p>Lovingly crafted by skilled artisans</p></div>
+    <div><div class="trust-icon">&#128737;</div><h3>Skin-Safe</h3><p>Pure cotton & natural dyes</p></div>
+    <div><div class="trust-icon">&#128207;</div><h3>Sizes 2-5 Yrs</h3><p>Thoughtfully sized for toddlers</p></div>
+    <div><div class="trust-icon">&#128666;</div><h3>Pan-India</h3><p>Free shipping above Rs. 999</p></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="brand">Style Saplings</div>
+      <p>Handcrafted Indian ethnic wear for little ones.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="#">All Products</a><a href="#">Our Story</a><a href="#">Journal</a>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <a href="#">Shipping</a><a href="#">Returns</a><a href="#">Track Order</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <a href="#">support@stylesaplings.com</a>
+      <a href="#">+91 98109 01031</a>
+      <p>New Delhi, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Style Saplings</span>
+    <span>Privacy &middot; Terms</span>
+  </div>
+</footer>
+
+</body>
+</html>
