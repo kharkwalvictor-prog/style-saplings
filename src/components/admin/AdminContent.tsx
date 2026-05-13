@@ -31,7 +31,7 @@ const AdminContent = () => {
 
   const loadContent = async () => {
     setLoading(true);
-    const { data, error } = await (supabase as any)
+    const { data, error } = await supabase
       .from("site_content")
       .select("*")
       .order("sort_order");
@@ -62,7 +62,7 @@ const AdminContent = () => {
     setSaving(true);
     try {
       const updates = Object.entries(changes).map(([key, value]) =>
-        (supabase as any)
+        supabase
           .from("site_content")
           .update({ value, updated_at: new Date().toISOString() })
           .eq("key", key)

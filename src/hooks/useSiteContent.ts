@@ -8,7 +8,7 @@ export const useSiteContent = () => {
     queryKey: ["site-content"],
     queryFn: async (): Promise<SiteContent> => {
       // Note: site_content table isn't in the generated types, so use .from() with type assertion
-      const { data, error } = await (supabase as any)
+      const { data, error } = await supabase
         .from("site_content")
         .select("key, value");
 
