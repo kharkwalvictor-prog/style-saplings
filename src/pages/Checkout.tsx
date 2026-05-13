@@ -376,6 +376,37 @@ const Checkout = () => {
 
   const fmt = (n: number) => `₹${n.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
+  // ── STORE NOT LIVE YET — disable checkout ──
+  const STORE_LIVE = false;
+
+  if (!STORE_LIVE) {
+    return (
+      <div className="min-h-screen">
+        <Header />
+        <PageBanner label="Coming Soon" title="Almost There!" />
+        <div className="container px-5 md:px-8 py-20 md:py-32 text-center max-w-lg mx-auto">
+          <div className="text-5xl mb-6">🪡</div>
+          <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-4">
+            We're stitching the final details.
+          </h2>
+          <p className="text-muted-foreground text-[15px] leading-relaxed mb-8">
+            Our collection is being handcrafted and will be available for purchase very soon.
+            Follow us on Instagram for launch updates.
+          </p>
+          <a
+            href="https://instagram.com/stylesaplings"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#4A6B45] text-white rounded-full px-8 py-3.5 text-[14px] font-medium hover:bg-[#3D5C39] transition-colors"
+          >
+            Follow @stylesaplings
+          </a>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen">
       <Header />
