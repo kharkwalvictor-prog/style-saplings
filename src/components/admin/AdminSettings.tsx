@@ -68,30 +68,37 @@ const AdminSettings = () => {
     setSaving(true);
     try {
       // Build the GST row payload
-      const gstPayload: Record<string, any> = {
-        gstin: gst.gstin,
-        legal_name: gst.legal_name,
-        address: gst.address,
-        state: gst.state,
-        state_code: gst.state_code,
-        trade_name: gst.trade_name,
+      const gstPayload = {
+        gstin: gst.gstin || "",
+        legal_name: gst.legal_name || "",
+        trade_name: gst.trade_name || "",
+        address: gst.address || "",
+        state: gst.state || "Delhi",
+        state_code: gst.state_code || "07",
+        updated_at: new Date().toISOString(),
       };
 
-      // If we loaded an existing row, update it; otherwise insert a new one
+      let saveError: any = null;
+
       if (gstRowId.current) {
-        const { error } = await supabase
+        const { error } = await (supabase as any)
           .from("gst_config")
           .update(gstPayload)
           .eq("id", gstRowId.current);
-        if (error) throw error;
+        saveError = error;
       } else {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("gst_config")
-          .insert(gstPayload)
+          .insert({ ...gstPayload, effective_from: new Date().toISOString().split("T")[0] })
           .select("id")
           .single();
-        if (error) throw error;
-        if (data) gstRowId.current = (data as any).id;
+        saveError = error;
+        if (data) gstRowId.current = data.id;
+      }
+
+      if (saveError) {
+        console.error("GST save error:", saveError);
+        throw saveError;
       }
 
       // Save shipping & contact to localStorage (until a dedicated DB table is added)
