@@ -1,193 +1,355 @@
 import { Link } from "react-router-dom";
 import { useSEO } from "@/hooks/useSEO";
 import JsonLd, { ORGANIZATION_JSONLD } from "@/components/JsonLd";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { ArrowRight } from "lucide-react";
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
+import product4 from "@/assets/product-4.jpg";
 
+/* ── Animation variants (matching homepage patterns) ── */
+const reveal = {
+  hidden: { opacity: 0, y: 30, filter: "blur(6px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { type: "spring", damping: 30, stiffness: 120 },
+  },
+};
+
+const imageReveal = {
+  hidden: { opacity: 0, scale: 1.04, filter: "blur(3px)" },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 1.4, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } },
+};
+
+/* ── Data ── */
 const crafts = [
-  { name: "Chikankari", origin: "Lucknow, Uttar Pradesh", desc: "Delicate hand embroidery passed down through generations of Lucknowi artisans, known for its intricate threadwork on fine fabric.", image: product1 },
-  { name: "Bandhani", origin: "Rajasthan", desc: "Vibrant tie-dye art from the heart of Rajasthan, creating mesmerising patterns through thousands of tiny hand-tied knots.", image: product2 },
-  { name: "Firan", origin: "Kashmir", desc: "Traditional Kashmiri tunic silhouette with artisan detailing, reimagined in miniature for the littlest wearers.", image: product3 },
+  {
+    name: "Chikankari",
+    origin: "Lucknow, Uttar Pradesh",
+    desc: "A 400-year-old hand embroidery tradition on fine muslin. Cotton thread, no machines — just generations of skill passed from master to apprentice.",
+    image: product1,
+  },
+  {
+    name: "Bandhani",
+    origin: "Rajasthan & Gujarat",
+    desc: "An ancient tie-dye art where thousands of tiny knots are tied by hand before dyeing, creating mesmerising patterns unique to each piece.",
+    image: product2,
+  },
+  {
+    name: "Firan",
+    origin: "Kashmir",
+    desc: "A traditional full-length tunic with hand-embroidered detailing on soft cotton. Kashmiri heritage, reimagined in miniature for little ones.",
+    image: product3,
+  },
 ];
 
 const stats = [
-  { number: "13+", label: "Handcrafted Styles" },
-  { number: "2–5", label: "Age Range (Years)" },
-  { number: "100%", label: "Natural Fabrics" },
-  { number: "Pan India", label: "Delivery" },
+  { value: "13+", label: "Handcrafted Styles" },
+  { value: "2\u20135 Years", label: "Age Range" },
+  { value: "100%", label: "Natural Fabrics" },
+  { value: "Pan India", label: "Delivery" },
 ];
 
-const fadeUp = {
-  initial: { opacity: 0, y: 40 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
-};
-
 const About = () => {
-  useSEO({ title: "Our Story | Style Saplings", description: "Discover the story behind Style Saplings — handcrafted Indian ethnic wear for toddlers. Celebrating heritage crafts like Chikankari, Bandhani & Firan.", canonicalPath: "/about" });
-
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const parallaxY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  useSEO({
+    title: "Our Story | Style Saplings",
+    description:
+      "Discover the story behind Style Saplings — handcrafted Indian ethnic wear for toddlers. Celebrating heritage crafts like Chikankari, Bandhani & Firan.",
+    canonicalPath: "/about",
+  });
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <JsonLd data={ORGANIZATION_JSONLD} />
       <Header />
 
-      {/* Hero Banner */}
-      <section ref={heroRef} className="relative overflow-hidden grain-overlay" style={{ backgroundColor: '#3A5139' }}>
-        <div className="relative z-10 flex items-center justify-center py-16 md:py-24 px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
+      {/* ═══════════════════════════════════════════════════
+          1. HERO — Dark sage, text-focused, editorial
+      ═══════════════════════════════════════════════════ */}
+      <section className="relative h-[50vh] min-h-[350px] bg-[#1A2B22] flex items-center justify-center overflow-hidden">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={stagger}
+          className="relative z-10 text-center px-6"
+        >
+          <motion.span
+            variants={reveal}
+            className="text-white/40 text-xs uppercase tracking-[0.25em] font-medium block mb-5"
           >
-            <span className="text-white/50 font-sans text-[10px] md:text-xs tracking-[0.3em] uppercase font-medium mb-3 block">
-              Our Story
-            </span>
-            <h1 className="font-serif text-3xl md:text-5xl font-semibold text-white">
-              Crafted with Love. <br className="hidden md:block" />
-              <span className="italic" style={{ color: '#E8C9A0' }}>Rooted in Tradition.</span>
-            </h1>
-            <div className="w-12 h-[2px] mx-auto mt-5" style={{ backgroundColor: '#C4622D' }} />
-          </motion.div>
-        </div>
+            Our Story
+          </motion.span>
+          <motion.h1
+            variants={reveal}
+            className="font-serif text-3xl md:text-5xl font-semibold text-white leading-[1.12] tracking-[-0.01em] max-w-xl mx-auto"
+          >
+            We looked everywhere.
+            <br />
+            So we built it ourselves.
+          </motion.h1>
+          <motion.div
+            variants={reveal}
+            className="w-12 h-px bg-[#C4785A] mx-auto mt-6"
+          />
+        </motion.div>
       </section>
 
-      {/* Brand Story */}
-      <section className="py-20 md:py-32 bg-background">
-        <div className="container px-4 md:px-8">
-          <div className="grid md:grid-cols-5 gap-10 md:gap-16 items-center">
-            <motion.div {...fadeUp} className="md:col-span-2">
-              <div className="aspect-[3/4] rounded-xl overflow-hidden bg-muted shadow-lg img-zoom">
-                <img src={product1} alt="Flat lay of handcrafted ethnic garments" className="w-full h-full object-cover" />
+      {/* ═══════════════════════════════════════════════════
+          2. THE SEARCH — Origin story, asymmetric layout
+      ═══════════════════════════════════════════════════ */}
+      <section className="py-28 md:py-36 bg-background">
+        <div className="container px-6 md:px-8">
+          <div className="grid md:grid-cols-12 gap-12 md:gap-0 items-center">
+            {/* Left — Image */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={imageReveal}
+              className="md:col-span-5"
+            >
+              <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl shadow-black/10">
+                <img
+                  src={product1}
+                  alt="Handcrafted Chikankari garment flat lay"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
             </motion.div>
+
+            {/* Right — Text */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-              className="md:col-span-3 space-y-6"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={stagger}
+              className="md:col-span-6 md:col-start-7"
             >
-              <span className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-sale font-semibold">Who We Are</span>
-              <h2 className="font-serif text-3xl md:text-4xl font-semibold">Clothing that carries a story</h2>
-              <div className="w-12 h-[2px] bg-sale" />
-              <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-                At Style Saplings, we believe kids should dress in outfits that are more than just clothing—they should tell a story. Our philosophy is simple: bring India's rich textile heritage to modern families through beautifully crafted, comfortable ethnic wear for toddlers.
-              </p>
-              <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-                Every piece is thoughtfully designed to celebrate heritage in every stitch—naturally beautiful, comfortably worn. We work with skilled artisans who have mastered traditional techniques like Chikankari, ensuring each garment carries the authenticity of Indian craftsmanship.
-              </p>
+              <motion.span
+                variants={reveal}
+                className="text-[12px] uppercase tracking-[0.2em] text-[#C4785A] font-medium block mb-5"
+              >
+                How Style Saplings Began
+              </motion.span>
+              <motion.h2
+                variants={reveal}
+                className="font-serif text-[28px] md:text-[36px] font-medium leading-[1.15] tracking-[-0.01em] mb-7"
+              >
+                The Search That Started Everything
+              </motion.h2>
+              <motion.p
+                variants={reveal}
+                className="text-[15px] text-muted-foreground leading-[1.8] mb-5"
+              >
+                When our daughter was two, we wanted to dress her in something
+                that felt truly Indian — not a costume, but real. Something
+                handcrafted, something that carried the warmth of our culture.
+                What we found was either low-quality fast fashion with Indian
+                prints slapped on, or formal occasion wear too stiff for a
+                toddler to move in.
+              </motion.p>
+              <motion.p
+                variants={reveal}
+                className="text-[15px] text-muted-foreground leading-[1.8]"
+              >
+                So we went directly to the artisans. We visited workshops in
+                Lucknow, spent time in Rajasthan understanding Bandhani, and
+                sourced from craftspeople who've passed their skills down
+                through generations. Style Saplings was born from that search
+                — a brand built on the belief that Indian children deserve to
+                wear their heritage, comfortably and beautifully, every single
+                day.
+              </motion.p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Craft Origins — Card Style */}
-      <section className="py-20 md:py-32" style={{ backgroundColor: '#F7F4EF' }}>
-        <div className="container px-4 md:px-8">
-          <motion.div {...fadeUp} className="text-center mb-16">
-            <span className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-sale font-semibold">Heritage Textiles</span>
-            <h2 className="font-serif text-3xl md:text-5xl font-semibold mt-3 mb-4">
+      {/* ═══════════════════════════════════════════════════
+          3. THE CRAFTS — Editorial cards on warm background
+      ═══════════════════════════════════════════════════ */}
+      <section className="py-24 md:py-32 bg-[#EDE8DF]">
+        <div className="container px-6 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+            className="text-center mb-14 md:mb-20"
+          >
+            <motion.h2
+              variants={reveal}
+              className="font-serif text-[30px] md:text-[42px] font-semibold leading-[1.1] tracking-[-0.01em]"
+            >
               The Crafts We Celebrate
-            </h2>
-            <div className="w-16 h-[2px] bg-sale mx-auto" />
+            </motion.h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            {crafts.map((c, i) => (
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+            variants={stagger}
+            className="grid md:grid-cols-3 gap-6 md:gap-8"
+          >
+            {crafts.map((craft) => (
               <motion.div
-                key={c.name}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.12 }}
-                className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500 group"
+                key={craft.name}
+                variants={reveal}
+                className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500 group"
               >
                 <div className="aspect-[16/10] overflow-hidden">
-                  <img src={c.image} alt={c.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <img
+                    src={craft.image}
+                    alt={craft.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    loading="lazy"
+                  />
                 </div>
-                <div className="p-6 md:p-8 text-center">
-                  <h3 className="font-serif text-2xl font-medium mb-1">{c.name}</h3>
-                  <div className="w-8 mx-auto mt-2 mb-3" style={{ borderBottom: "2px solid hsl(21, 63%, 47%)" }} />
-                  <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">{c.origin}</p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+                <div className="p-8">
+                  <h3 className="font-serif text-2xl font-medium">
+                    {craft.name}
+                  </h3>
+                  <div className="w-8 border-b-2 border-[#C4785A] mt-3 mb-3" />
+                  <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
+                    {craft.origin}
+                  </p>
+                  <p className="text-[14px] text-muted-foreground leading-relaxed">
+                    {craft.desc}
+                  </p>
                 </div>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container px-4 md:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-            {stats.map((s, i) => (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center"
-              >
-                <p className="font-serif text-4xl md:text-5xl font-semibold text-foreground">{s.number}</p>
-                <div className="w-6 h-[2px] bg-sale mx-auto mt-3 mb-2" />
-                <p className="text-xs md:text-sm text-muted-foreground tracking-wide">{s.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Founder Note */}
-      <section className="py-20 md:py-28" style={{ backgroundColor: '#F7F4EF' }}>
-        <div className="container px-4 md:px-8 flex justify-center">
-          <motion.div
-            {...fadeUp}
-            className="max-w-[700px] w-full rounded-2xl p-10 md:p-14 text-center bg-white shadow-sm"
-          >
-            <div className="text-4xl mb-6 opacity-20 font-serif">"</div>
-            <p className="font-serif italic text-lg md:text-xl leading-relaxed text-foreground mb-6 -mt-4">
-              Style Saplings began with a simple wish — to dress our children in the same beautiful handcrafted traditions that have defined Indian culture for generations. Each piece we create is a small celebration of that heritage.
-            </p>
-            <div className="w-10 h-[1px] bg-border mx-auto mb-4" />
-            <p className="text-sm text-muted-foreground tracking-wide font-medium">Victor Kharkwal</p>
-            <p className="text-xs text-muted-foreground/70 mt-1">Founder, Style Saplings</p>
           </motion.div>
         </div>
       </section>
 
-      {/* CTA Banner */}
-      <section className="py-20 md:py-28 relative grain-overlay" style={{ backgroundColor: '#3A5139' }}>
-        <div className="relative z-10 container px-4 md:px-8 text-center">
-          <motion.div {...fadeUp}>
-            <h2 className="font-serif text-3xl md:text-5xl font-semibold mb-4 text-white leading-tight">
-              Dress Your Little One in <br className="hidden md:block" />
-              India's <span className="italic" style={{ color: '#E8C9A0' }}>Finest Craft</span>
-            </h2>
-            <p className="text-white/60 text-sm md:text-base mb-10 max-w-lg mx-auto">
-              Explore our collection of handcrafted ethnic wear for children aged 2–5 years.
-            </p>
-            <Link
-              to="/shop"
-              className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-medium tracking-wide text-foreground transition-all hover:shadow-lg"
-              style={{ backgroundColor: '#E8C9A0' }}
+      {/* ═══════════════════════════════════════════════════
+          4. STATS ROW — Centered with dividers
+      ═══════════════════════════════════════════════════ */}
+      <section className="py-16 md:py-20 bg-background">
+        <div className="container px-6 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={stagger}
+            className="flex flex-wrap items-center justify-center md:divide-x divide-border"
+          >
+            {stats.map((stat) => (
+              <motion.div
+                key={stat.label}
+                variants={reveal}
+                className="text-center px-8 md:px-12 py-4 md:py-0 w-1/2 md:w-auto"
+              >
+                <p className="font-serif text-3xl md:text-4xl font-semibold text-foreground leading-none">
+                  {stat.value}
+                </p>
+                <p className="text-xs text-muted-foreground tracking-wide mt-2">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════
+          5. FOUNDER QUOTE — Centered card
+      ═══════════════════════════════════════════════════ */}
+      <section className="py-20 md:py-28 bg-[#EDE8DF]">
+        <div className="container px-6 md:px-8 flex justify-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+            className="max-w-[700px] w-full bg-white rounded-3xl p-10 md:p-14 text-center shadow-sm"
+          >
+            <motion.div
+              variants={reveal}
+              className="font-serif text-5xl text-muted-foreground/20 leading-none mb-4"
             >
-              Explore Collection
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
+              &ldquo;
+            </motion.div>
+            <motion.p
+              variants={reveal}
+              className="font-serif italic text-lg md:text-xl leading-relaxed text-foreground mb-6 -mt-2"
+            >
+              Style Saplings began with a simple wish — to dress our children
+              in the same beautiful handcrafted traditions that have defined
+              Indian culture for generations.
+            </motion.p>
+            <motion.div variants={reveal}>
+              <div className="w-10 h-px bg-border mx-auto mb-4" />
+              <p className="text-sm font-medium text-foreground">
+                Victor Kharkwal
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Founder, Style Saplings
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════
+          6. CTA BANNER — Dark sage, cinematic close
+      ═══════════════════════════════════════════════════ */}
+      <section className="py-20 md:py-28 bg-[#1A2B22] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0id2hpdGUiLz48L3N2Zz4=')] pointer-events-none" />
+
+        <div className="container px-6 md:px-8 text-center relative">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="max-w-2xl mx-auto"
+          >
+            <motion.h2
+              variants={reveal}
+              className="font-serif text-3xl md:text-5xl font-semibold text-white leading-[1.1] tracking-[-0.01em]"
+            >
+              Dress Your Little One in
+              <br className="hidden md:block" />
+              India's{" "}
+              <em className="italic font-normal text-[#C4785A]">
+                Finest Craft
+              </em>
+            </motion.h2>
+            <motion.p
+              variants={reveal}
+              className="text-white/50 text-[15px] mt-6 mb-10 max-w-lg mx-auto leading-relaxed"
+            >
+              Explore our collection of handcrafted ethnic wear for children
+              aged 2-5 years. Made by skilled artisans across India.
+            </motion.p>
+            <motion.div variants={reveal}>
+              <Link
+                to="/shop"
+                className="group inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-9 py-4 text-white text-[13px] font-medium tracking-wide hover:bg-white/18 transition-all"
+              >
+                Explore Collection
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
