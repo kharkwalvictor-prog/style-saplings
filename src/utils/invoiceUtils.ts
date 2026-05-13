@@ -12,9 +12,9 @@ export interface GSTConfig {
 }
 
 const DEFAULT_BUSINESS: GSTConfig = {
-  trade_name: "STYLE SAPLINGS",
-  legal_name: "Shivaya Enterprises",
-  address: "6488, C6, Vasant Kunj, New Delhi - 110070",
+  trade_name: "Shivaya Enterprises",
+  legal_name: "Victor Arun Kharkwal",
+  address: "Floor 1, 6488, Vatika Apartment Pocket 6 & 7, Vatika Marg, Vasant Kunj, New Delhi - 110070",
   gstin: "07BEGPK0002P1ZN",
   state: "Delhi",
   state_code: "07",

@@ -55,9 +55,10 @@ const PrivacyPolicy = () => {
 
       <h2 className="font-serif">7. Contact</h2>
       <p>For privacy-related queries, contact:</p>
-      <p><strong>Victor Kharkwal</strong><br />
-      Shivaya Enterprises<br />
-      6488, C6, Vasant Kunj, New Delhi 110070<br />
+      <p><strong>Victor Arun Kharkwal</strong><br />
+      Shivaya Enterprises (Proprietorship)<br />
+      6488, Vatika Apartment Pocket 6 & 7, Vasant Kunj, New Delhi 110070<br />
+      GSTIN: 07BEGPK0002P1ZN<br />
       <a href="mailto:support@stylesaplings.com" className="text-primary">support@stylesaplings.com</a></p>
     </motion.div>
     <Footer />

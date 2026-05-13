@@ -57,7 +57,7 @@ const Contact = () => {
                   <MapPin className="h-5 w-5 mt-0.5 shrink-0 opacity-80" />
                   <div>
                     <p className="text-[14px] font-medium mb-0.5">Address</p>
-                    <p className="text-[14px] text-white/70">6488, C6, Vasant Kunj,<br/>New Delhi 110070</p>
+                    <p className="text-[14px] text-white/70">6488, Vatika Apartment Pocket 6 & 7,<br/>Vasant Kunj, New Delhi 110070</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">

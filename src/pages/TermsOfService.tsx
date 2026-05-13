@@ -48,9 +48,10 @@ const TermsOfService = () => {
 
       <h2 className="font-serif">10. Grievance Officer</h2>
       <p>In accordance with the Information Technology Act 2000 and rules made thereunder:</p>
-      <p><strong>Victor Kharkwal</strong><br />
-      Shivaya Enterprises<br />
-      6488, C6, Vasant Kunj, New Delhi 110070<br />
+      <p><strong>Victor Arun Kharkwal</strong><br />
+      Shivaya Enterprises (Proprietorship)<br />
+      6488, Vatika Apartment Pocket 6 & 7, Vasant Kunj, New Delhi 110070<br />
+      GSTIN: 07BEGPK0002P1ZN<br />
       <a href="mailto:support@stylesaplings.com" className="text-primary">support@stylesaplings.com</a><br />
       Response within 30 days of receipt of complaint.</p>
     </motion.div>
