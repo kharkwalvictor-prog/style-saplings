@@ -118,7 +118,7 @@ const Index = () => {
           <img
             src={heroImg}
             alt=""
-            className="w-full h-[120%] object-cover"
+            className="w-full h-[120%] object-cover object-[center_20%] md:object-center"
             loading="eager"
             fetchPriority="high"
           />
