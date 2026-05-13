@@ -1,339 +1,61 @@
 import { Link } from "react-router-dom";
 import { useSEO } from "@/hooks/useSEO";
 import JsonLd, { ORGANIZATION_JSONLD } from "@/components/JsonLd";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-} from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import ProductCard from "@/components/ProductCard";
+import HeroBanner from "@/components/HeroBanner";
+import CollectionGrid from "@/components/CollectionGrid";
+import FeaturedGrid from "@/components/FeaturedGrid";
 import { useProducts } from "@/hooks/useProducts";
-import { ArrowRight, Hand, ShieldCheck, Ruler, Truck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import heroImg from "@/assets/hero.jpg";
-import product1 from "@/assets/product-1.jpg";
-import product2 from "@/assets/product-2.jpg";
-import product3 from "@/assets/product-3.jpg";
-import product4 from "@/assets/product-4.jpg";
-
-/* ─── Apple-style spring config ─── */
-const smooth = { type: "spring" as const, damping: 30, stiffness: 120 };
-const snappy = { type: "spring" as const, damping: 25, stiffness: 200 };
-
-/* ─── Reveal variants with blur + y + opacity ─── */
-const revealVariants = {
-  hidden: { opacity: 0, y: 40, filter: "blur(6px)" },
-  visible: (delay: number) => ({
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { ...smooth, delay },
-  }),
-};
-
-const imageRevealVariants = {
-  hidden: { opacity: 0, scale: 1.08, filter: "blur(4px)" },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    filter: "blur(0px)",
-    transition: { duration: 1.4, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
-/* ─── data ─── */
-const collections = [
-  { name: "Chikankari", image: product1, href: "/shop?craft=Chikankari" },
-  { name: "Bandhani", image: product2, href: "/shop?craft=Bandhani" },
-  { name: "Firan", image: product4, href: "/shop?craft=Firan" },
-];
-
-const trustItems = [
-  { icon: Hand, label: "Handcrafted" },
-  { icon: ShieldCheck, label: "Pure Cotton" },
-  { icon: Ruler, label: "Sizes 2\u20135 Years" },
-  { icon: Truck, label: "Free Shipping above \u20B9999" },
-];
 
 const Index = () => {
   const { data: products = [], isLoading } = useProducts();
   useSEO({
-    title: "Style Saplings \u2014 Handcrafted Ethnic Wear for Little Ones",
-    description:
-      "Authentic Chikankari, Bandhani and Kashmiri ethnic wear for children aged 2\u20135. Made by skilled artisans. Pan India delivery.",
+    title: "Style Saplings — Handcrafted Ethnic Wear for Little Ones",
+    description: "Authentic Chikankari, Bandhani and Kashmiri ethnic wear for children aged 2–5. Made by skilled artisans. Pan India delivery.",
     canonicalPath: "/",
   });
 
   const featuredProducts = (() => {
-    const featured = products.filter((p) => p.is_featured);
+    const featured = products.filter(p => p.is_featured);
     return featured.length > 0 ? featured.slice(0, 4) : products.slice(0, 4);
   })();
-
-  /* ─── Parallax for hero image ─── */
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroY = useSpring(useTransform(heroProgress, [0, 1], [0, 150]), {
-    damping: 40,
-    stiffness: 90,
-  });
-  const heroScale = useTransform(heroProgress, [0, 1], [1, 1.1]);
-  const heroOpacity = useTransform(heroProgress, [0, 0.8], [1, 0]);
-
-  /* ─── Parallax for craft banner ─── */
-  const craftRef = useRef<HTMLElement>(null);
-  const { scrollYProgress: craftProgress } = useScroll({
-    target: craftRef,
-    offset: ["start end", "end start"],
-  });
-  const craftY = useTransform(craftProgress, [0, 1], [-40, 40]);
 
   return (
     <div className="min-h-screen bg-background">
       <JsonLd data={ORGANIZATION_JSONLD} />
       <Header />
 
-      {/* ────────────────────────────────────────────
-          1. HERO — Parallax image, text fades with blur
-      ──────────────────────────────────────────── */}
-      <section
-        ref={heroRef}
-        className="relative h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden"
-      >
-        {/* Parallax background */}
-        <motion.div
-          className="absolute inset-0"
-          style={{ y: heroY, scale: heroScale }}
-        >
-          <img
-            src={heroImg}
-            alt=""
-            className="w-full h-full object-cover"
-            loading="eager"
-            fetchPriority="high"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/55" />
-        </motion.div>
+      {/* 1. HERO BANNER — Embla Carousel */}
+      <HeroBanner />
 
-        {/* Content — fades out on scroll */}
-        <motion.div
-          className="relative z-10 text-center px-6 max-w-3xl mx-auto"
-          style={{ opacity: heroOpacity }}
-        >
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[11px] md:text-[12px] uppercase tracking-[0.3em] text-white/50 font-medium mb-6"
-          >
-            Authentic Indian Craftsmanship
-          </motion.p>
+      {/* 2. COLLECTION GRID — 3 category cards */}
+      <CollectionGrid />
 
-          <motion.h1
-            initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="font-serif text-[38px] sm:text-[50px] md:text-[60px] lg:text-[72px] font-semibold text-white leading-[1.06]"
-          >
-            Rooted in Tradition,
-            <br />
-            <motion.em
-              initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{
-                duration: 1,
-                delay: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="italic font-normal"
-            >
-              Styled for Today
-            </motion.em>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[14px] md:text-[16px] text-white/55 max-w-md mx-auto leading-relaxed mt-6 mb-10"
-          >
-            Handcrafted Chikankari, Bandhani & Kashmiri ethnic wear
-            for children aged 2–5. Made by artisans, worn with love.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Link
-              to="/shop"
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-[13px] uppercase tracking-[0.15em] font-medium text-white hover:bg-white/20 transition-all group"
-            >
-              Shop the Collection
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.15em] font-medium text-white/60 hover:text-white transition-all group"
-            >
-              <span className="relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-white/60 after:transition-all after:duration-300 group-hover:after:w-full">
-                Our Story
-              </span>
-            </Link>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll indicator — gentle pulse */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          style={{ opacity: heroOpacity }}
-        >
-          <div className="w-[22px] h-[34px] border border-white/25 rounded-full flex items-start justify-center p-[5px]">
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="w-[3px] h-[6px] bg-white/50 rounded-full"
-            />
-          </div>
-        </motion.div>
-      </section>
-
-      {/* ────────────────────────────────────────────
-          2. EDITORIAL STORY — Image reveals with scale, text with blur
-      ──────────────────────────────────────────── */}
-      <section className="py-28 md:py-36 bg-white">
+      {/* 3. FEATURED PRODUCTS */}
+      <section className="py-16 md:py-24 bg-[#F5F0E8]">
         <div className="container px-6 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-20 items-center">
-            {/* Image — cinematic reveal */}
-            <motion.div
-              className="md:col-span-7"
-              variants={imageRevealVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl shadow-black/10">
-                <img
-                  src={product1}
-                  alt="Handcrafted Indian children's clothing"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </motion.div>
-
-            {/* Text — staggered blur reveal */}
-            <div className="md:col-span-5 space-y-0">
-              <motion.span
-                custom={0}
-                variants={revealVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-80px" }}
-                className="text-xs uppercase tracking-[0.2em] text-muted-foreground block"
-              >
-                Our Story
-              </motion.span>
-
-              <motion.h2
-                custom={0.1}
-                variants={revealVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-80px" }}
-                className="font-serif text-[26px] md:text-[32px] font-medium leading-[1.25] mt-5 mb-6"
-              >
-                When our daughter was two, we searched everywhere.
-              </motion.h2>
-
-              <motion.p
-                custom={0.2}
-                variants={revealVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-80px" }}
-                className="text-[15px] text-muted-foreground leading-[1.7] max-w-[380px] mb-7"
-              >
-                We wanted something handcrafted, something that carried the
-                warmth of our culture. What we found was either low quality fast
-                fashion or formal occasion wear too stiff for a toddler. So we
-                went directly to the artisans.
-              </motion.p>
-
-              <motion.div
-                custom={0.3}
-                variants={revealVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-80px" }}
-              >
-                <Link
-                  to="/about"
-                  className="inline-flex items-center gap-2 text-sm font-medium group transition-colors"
-                >
-                  <span className="relative after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-px after:bg-foreground after:origin-left after:scale-x-0 after:transition-transform after:duration-300 group-hover:after:scale-x-100">
-                    Read our story
-                  </span>
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ────────────────────────────────────────────
-          3. PRODUCTS — Cards reveal with stagger
-      ──────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-[#F8F8F6]">
-        <div className="container px-6 md:px-8">
-          <div className="flex items-end justify-between mb-12 md:mb-16">
+          <div className="flex items-end justify-between mb-10 md:mb-14">
             <motion.h2
-              custom={0}
-              variants={revealVariants}
-              initial="hidden"
-              whileInView="visible"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="font-serif text-2xl md:text-[2rem] font-semibold"
+              className="font-serif text-2xl md:text-4xl font-semibold"
             >
               New Arrivals
             </motion.h2>
-            <motion.div
-              custom={0.1}
-              variants={revealVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <Link
-                to="/shop"
-                className="group flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                View all
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </motion.div>
+            <Link to="/shop" className="group flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              View All <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
 
           {isLoading ? (
-            <div className="grid grid-cols-2 gap-6 md:gap-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-7">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="space-y-4">
+                <div key={i} className="space-y-3">
                   <Skeleton className="aspect-[3/4] rounded-xl" />
                   <Skeleton className="h-4 w-2/3" />
                   <Skeleton className="h-3 w-1/3" />
@@ -341,211 +63,62 @@ const Index = () => {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-6 md:gap-10">
-              {featuredProducts.map((product, i) => (
-                <motion.div
-                  key={product.id}
-                  custom={i * 0.12}
-                  variants={revealVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-60px" }}
-                >
-                  <ProductCard product={product} index={i} />
-                </motion.div>
-              ))}
-            </div>
+            <FeaturedGrid products={featuredProducts} />
           )}
         </div>
       </section>
 
-      {/* ────────────────────────────────────────────
-          4. CRAFT BANNER — Parallax image, bottom-pinned text
-      ──────────────────────────────────────────── */}
-      <section
-        ref={craftRef}
-        className="relative h-[55vh] md:h-[65vh] min-h-[400px] flex items-end overflow-hidden"
-      >
-        <motion.div className="absolute inset-[-40px]" style={{ y: craftY }}>
-          <img
-            src={product3}
-            alt="Chikankari embroidery detail"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
-
-        <div className="relative z-10 container px-6 md:px-8 pb-14 md:pb-20">
-          <motion.span
-            custom={0}
-            variants={revealVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-[11px] uppercase tracking-[0.25em] text-white/40 block mb-4"
-          >
-            The Tradition
-          </motion.span>
-          <motion.h2
-            custom={0.1}
-            variants={revealVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="font-serif text-[32px] md:text-[48px] font-semibold text-white leading-[1.1]"
-          >
-            400 Years of Chikankari
-          </motion.h2>
-          <motion.p
-            custom={0.2}
-            variants={revealVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-[15px] text-white/55 max-w-md mt-4 leading-relaxed"
-          >
-            Each stitch placed by hand — no machines, no shortcuts.
-          </motion.p>
+      {/* 4. STORY BANNER — Warm background, centered text */}
+      <section className="py-20 md:py-28 bg-[#FBF8F3]">
+        <div className="container px-6 md:px-8">
           <motion.div
-            custom={0.35}
-            variants={revealVariants}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="max-w-2xl mx-auto text-center"
           >
+            <h2 className="font-serif text-3xl md:text-[2.75rem] font-semibold leading-tight mb-5">
+              Heritage in Every Stitch
+            </h2>
+            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8 max-w-lg mx-auto">
+              Each garment is crafted from 100% pure cotton mulmul with natural, skin-safe dyes. Our artisans carry forward techniques perfected over generations in Lucknow, Jaipur, and Kashmir.
+            </p>
             <Link
-              to="/about"
-              className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white mt-5 transition-colors group"
+              to="/shop"
+              className="inline-flex items-center gap-2 bg-[#C4622D] hover:bg-[#B5561F] text-white text-sm font-semibold tracking-wide px-8 py-3.5 rounded-full transition-colors active:scale-[0.97]"
             >
-              <span className="relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 group-hover:after:w-full">
-                Discover the craft
-              </span>
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+              Shop Now
             </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* ────────────────────────────────────────────
-          5. COLLECTION CARDS — Staggered with hover lift
-      ──────────────────────────────────────────── */}
-      <section className="py-28 md:py-36 bg-white">
+      {/* 5. WHY STYLE SAPLINGS — Trust strip */}
+      <section className="py-14 md:py-16 border-t border-border/50">
         <div className="container px-6 md:px-8">
-          <motion.h2
-            custom={0}
-            variants={revealVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="font-serif text-2xl md:text-[2rem] font-semibold text-center mb-14 md:mb-16"
-          >
-            The Collection
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-7">
-            {collections.map((craft, i) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0">
+            {[
+              { title: "100% Cotton", desc: "Pure mulmul fabric" },
+              { title: "Artisan Made", desc: "Handcrafted traditions" },
+              { title: "Ages 2–5", desc: "Sized for little ones" },
+              { title: "Free Shipping", desc: "On orders ₹999+" },
+            ].map((item, i) => (
               <motion.div
-                key={craft.name}
-                custom={i * 0.15}
-                variants={revealVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
-                whileHover={{ y: -6 }}
-                transition={snappy}
+                key={item.title}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className={`text-center ${i < 3 ? "md:border-r md:border-border/40" : ""}`}
               >
-                <Link
-                  to={craft.href}
-                  className="group block relative aspect-[3/4] rounded-2xl overflow-hidden shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-black/10 transition-shadow duration-500"
-                >
-                  <img
-                    src={craft.image}
-                    alt={craft.name}
-                    className="w-full h-full object-cover transition-transform duration-[800ms] ease-out group-hover:scale-[1.04]"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
-                  <div className="absolute bottom-0 left-0 p-7">
-                    <h3 className="font-serif text-2xl md:text-[1.6rem] font-semibold text-white">
-                      {craft.name}
-                    </h3>
-                    <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.15em] text-white/60 mt-2 group-hover:text-white/90 transition-colors">
-                      Explore
-                      <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </div>
-                </Link>
+                <p className="text-sm md:text-base font-semibold text-foreground">{item.title}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* ────────────────────────────────────────────
-          6. FOUNDER QUOTE — Personal touch
-      ──────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-[#F8F8F6]">
-        <div className="container px-6 md:px-8">
-          <motion.div
-            custom={0}
-            variants={revealVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="max-w-2xl mx-auto text-center"
-          >
-            <div className="font-serif text-5xl text-muted-foreground/20 mb-4" aria-hidden="true">&ldquo;</div>
-            <p className="font-serif text-xl md:text-2xl italic leading-[1.6] text-foreground/80 -mt-2 mb-6">
-              Style Saplings began with a simple wish — to dress our children
-              in the same beautiful handcrafted traditions that have defined
-              Indian culture for generations.
-            </p>
-            <div className="w-8 h-px bg-border mx-auto mb-4" />
-            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-medium">
-              Victor & Family, Founders
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ────────────────────────────────────────────
-          7. TRUST STRIP — Minimal, elegant
-      ──────────────────────────────────────────── */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="border-t border-border py-10 md:py-12"
-      >
-        <div className="container px-6 md:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0">
-            {trustItems.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.label}
-                  className="flex items-center justify-center gap-2.5 text-muted-foreground"
-                >
-                  {i > 0 && (
-                    <span
-                      className="hidden md:inline text-border/60 mr-5"
-                      aria-hidden="true"
-                    >
-                      |
-                    </span>
-                  )}
-                  <Icon className="h-[15px] w-[15px] flex-shrink-0" strokeWidth={1.5} />
-                  <span className="text-[11px] uppercase tracking-[0.12em]">
-                    {item.label}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </motion.section>
 
       <Footer />
     </div>

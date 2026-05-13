@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowRight, Instagram, MessageCircle, Mail, Phone, MapPin } from "lucide-react";
-
-const logoUrl = "/assets/logo-header.png";
+import logoLight from "@/assets/logo-light.jpeg";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -19,212 +16,92 @@ const Footer = () => {
   };
 
   return (
-    <footer>
-      {/* ─── Newsletter CTA — warm section, separate from dark footer ─── */}
-      <section className="bg-[#F8F8F6] py-20 md:py-28">
-        <div className="container px-6 md:px-8">
+    <footer className="bg-[#2A2220] text-white/80">
+      {/* Newsletter */}
+      <div className="border-b border-white/10">
+        <div className="container px-6 md:px-8 py-12 md:py-14">
           <div className="max-w-xl mx-auto text-center">
-            <h3 className="font-serif text-[28px] md:text-[36px] font-medium leading-[1.2] mb-3">
-              Join the family.
+            <h3 className="font-serif text-xl md:text-2xl font-semibold text-white mb-2">
+              Stay in the Loop
             </h3>
-            <p className="text-[14px] text-muted-foreground mb-8 max-w-sm mx-auto">
-              New collections, artisan stories, and exclusive offers —
-              delivered to your inbox.
+            <p className="text-sm text-white/40 mb-6">
+              New arrivals, festive drops & artisan stories — straight to your inbox.
             </p>
-
             {subscribed ? (
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-[15px] text-[#7B8F72] font-medium"
-              >
-                Welcome — you're in.
-              </motion.p>
+              <p className="text-sm text-[#C4622D] font-medium">Thank you for subscribing!</p>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex gap-3 max-w-md mx-auto">
+              <form onSubmit={handleSubscribe} className="flex gap-2 max-w-md mx-auto">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
                   required
-                  className="flex-1 px-5 py-3.5 text-[14px] bg-white border border-border rounded-full placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-[#7B8F72]/20 focus:border-[#7B8F72]/40 transition-all"
+                  className="flex-1 px-4 py-3 text-sm bg-white/10 border border-white/15 rounded-full text-white placeholder:text-white/30 focus:outline-none focus:border-[#C4622D]/50 transition-colors"
                 />
                 <button
                   type="submit"
-                  className="group flex items-center gap-2 px-7 py-3.5 rounded-full bg-foreground text-background text-[13px] font-medium hover:bg-foreground/90 transition-colors"
+                  className="px-6 py-3 text-sm font-semibold bg-[#C4622D] hover:bg-[#B5561F] text-white rounded-full transition-colors"
                 >
                   Subscribe
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </button>
               </form>
             )}
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* ─── Main footer — dark ─── */}
-      <div className="bg-[#1C2B1A]">
-        <div className="container px-6 md:px-8">
-          {/* Top section — logo + tagline centered */}
-          <div className="pt-16 md:pt-20 pb-12 md:pb-14 text-center border-b border-white/10">
-            <Link to="/" className="inline-block mb-4">
-              <img
-                src={logoUrl}
-                alt="Style Saplings"
-                className="h-16 md:h-20 object-contain mx-auto"
-              />
-            </Link>
-            <p className="font-serif text-[15px] md:text-[17px] text-white/60 italic max-w-sm mx-auto leading-relaxed">
-              Authentic Indian craftsmanship for little ones
+      {/* Links */}
+      <div className="container px-6 md:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-14 md:py-16">
+          <div className="col-span-2 md:col-span-1">
+            <div className="inline-block bg-white rounded-md p-1.5 mb-5">
+              <img alt="Style Saplings" src={logoLight} className="h-9 object-contain" />
+            </div>
+            <p className="text-sm text-white/40 leading-relaxed max-w-[240px] mb-5">
+              Handcrafted Indian ethnic wear for little ones.
             </p>
-          </div>
-
-          {/* Link columns */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8 py-12 md:py-14">
-            <div>
-              <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-medium mb-5">
-                Shop
-              </h4>
-              <ul className="space-y-3">
-                {[
-                  { label: "All Products", to: "/shop" },
-                  { label: "Chikankari", to: "/shop?craft=Chikankari" },
-                  { label: "Bandhani", to: "/shop?craft=Bandhani" },
-                  { label: "Firan", to: "/shop?craft=Firan" },
-                  { label: "New Arrivals", to: "/shop" },
-                ].map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      to={link.to}
-                      className="text-[13px] text-white/55 hover:text-white transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-medium mb-5">
-                Company
-              </h4>
-              <ul className="space-y-3">
-                {[
-                  { label: "Our Story", to: "/about" },
-                  { label: "Journal", to: "/blog" },
-                  { label: "Contact Us", to: "/contact" },
-                ].map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      to={link.to}
-                      className="text-[13px] text-white/55 hover:text-white transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-medium mb-5">
-                Help
-              </h4>
-              <ul className="space-y-3">
-                {[
-                  { label: "Shipping Policy", to: "/shipping-policy" },
-                  { label: "Returns & Refunds", to: "/refund-policy" },
-                  { label: "Track Your Order", to: "/track" },
-                  { label: "Privacy Policy", to: "/privacy-policy" },
-                  { label: "Terms of Service", to: "/terms-of-service" },
-                ].map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      to={link.to}
-                      className="text-[13px] text-white/55 hover:text-white transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-medium mb-5">
-                Reach Us
-              </h4>
-              <ul className="space-y-4">
-                <li>
-                  <a
-                    href="mailto:support@stylesaplings.com"
-                    className="flex items-start gap-2.5 text-[13px] text-white/55 hover:text-white transition-colors"
-                  >
-                    <Mail className="h-3.5 w-3.5 mt-[3px] flex-shrink-0 text-white/40" />
-                    support@stylesaplings.com
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="tel:+919810901031"
-                    className="flex items-start gap-2.5 text-[13px] text-white/55 hover:text-white transition-colors"
-                  >
-                    <Phone className="h-3.5 w-3.5 mt-[3px] flex-shrink-0 text-white/40" />
-                    +91 98109 01031
-                  </a>
-                </li>
-                <li className="flex items-start gap-2.5 text-[13px] text-white/50">
-                  <MapPin className="h-3.5 w-3.5 mt-[3px] flex-shrink-0 text-white/40" />
-                  <span>Vasant Kunj, New Delhi 110070</span>
-                </li>
-              </ul>
-
-              {/* Social */}
-              <div className="flex items-center gap-3 mt-6">
-                <a
-                  href="https://instagram.com/stylesaplings"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 text-white/55 hover:text-white hover:border-white/25 transition-all"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="h-3.5 w-3.5" />
-                </a>
-                <a
-                  href="https://wa.me/919810901031"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 text-white/55 hover:text-white hover:border-white/25 transition-all"
-                  aria-label="WhatsApp"
-                >
-                  <MessageCircle className="h-3.5 w-3.5" />
-                </a>
-              </div>
+            <div className="flex gap-5 text-xs text-white/35">
+              <a href="https://instagram.com/stylesaplings" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors">Instagram</a>
+              <a href="https://wa.me/919810901031" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors">WhatsApp</a>
             </div>
           </div>
 
-          {/* Payment methods */}
-          <div className="border-t border-white/10 py-5 flex items-center justify-center gap-4">
-            {["UPI", "Razorpay", "COD", "Visa", "Mastercard"].map((m) => (
-              <span
-                key={m}
-                className="text-[10px] text-white/35 uppercase tracking-wider px-2 py-0.5 border border-white/10 rounded"
-              >
-                {m}
-              </span>
-            ))}
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">Shop</h4>
+            <ul className="space-y-2.5 text-sm text-white/40">
+              <li><Link to="/shop" className="hover:text-white/70 transition-colors">All Products</Link></li>
+              <li><Link to="/about" className="hover:text-white/70 transition-colors">Our Story</Link></li>
+              <li><Link to="/blog" className="hover:text-white/70 transition-colors">Journal</Link></li>
+              <li><Link to="/contact" className="hover:text-white/70 transition-colors">Contact</Link></li>
+            </ul>
           </div>
 
-          {/* Copyright */}
-          <div className="border-t border-white/10 py-5 flex flex-col md:flex-row items-center justify-between gap-2">
-            <span className="text-[11px] text-white/35">
-              &copy; {year} Shivaya Enterprises &middot; Style Saplings &middot; New Delhi, India
-            </span>
-            <span className="text-[11px] text-white/35">
-              Made with care in India
-            </span>
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">Help</h4>
+            <ul className="space-y-2.5 text-sm text-white/40">
+              <li><Link to="/shipping-policy" className="hover:text-white/70 transition-colors">Shipping</Link></li>
+              <li><Link to="/returns" className="hover:text-white/70 transition-colors">Returns</Link></li>
+              <li><Link to="/track" className="hover:text-white/70 transition-colors">Track Order</Link></li>
+              <li><Link to="/refund-policy" className="hover:text-white/70 transition-colors">Refunds</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">Contact</h4>
+            <ul className="space-y-2.5 text-sm text-white/40">
+              <li><a href="mailto:support@stylesaplings.com" className="hover:text-white/70 transition-colors">support@stylesaplings.com</a></li>
+              <li><a href="tel:+919810901031" className="hover:text-white/70 transition-colors">+91 98109 01031</a></li>
+              <li>New Delhi, India</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="border-t border-white/10 py-5 flex flex-col md:flex-row items-center justify-between text-[11px] text-white/25 gap-2">
+          <span>&copy; {year} Style Saplings</span>
+          <div className="flex gap-4">
+            <Link to="/privacy-policy" className="hover:text-white/50 transition-colors">Privacy</Link>
+            <Link to="/terms-of-service" className="hover:text-white/50 transition-colors">Terms</Link>
           </div>
         </div>
       </div>

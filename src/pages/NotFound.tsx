@@ -26,7 +26,7 @@ const NotFound = () => {
           <Link
             to="/shop"
             className="inline-block px-8 py-3 rounded-full text-sm font-medium tracking-wide text-white transition-colors hover:opacity-90"
-            style={{ backgroundColor: "#C47A6E" }}
+            style={{ backgroundColor: "#C4622D" }}
           >
             Back to Shop
           </Link>

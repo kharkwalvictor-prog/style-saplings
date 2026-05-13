@@ -5,8 +5,7 @@ import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { useProductSearch } from "@/hooks/useProductSearch";
-import { Marquee } from "@/components/ui/marquee";
-const logoHeader = "/assets/logo-header.png";
+import logoLight from "@/assets/logo-light.jpeg";
 
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
@@ -15,13 +14,7 @@ import product4 from "@/assets/product-4.jpg";
 
 const craftFallback: Record<string, string> = { Chikankari: product1, Bandhani: product2, Firan: product3, Festive: product4 };
 
-const desktopNavLinks = [
-  { label: "Home", to: "/" },
-  { label: "Shop", to: "/shop" },
-  { label: "About", to: "/about" },
-];
-
-const mobileNavLinks = [
+const navLinks = [
   { label: "Home", to: "/" },
   { label: "Shop", to: "/shop" },
   { label: "About", to: "/about" },
@@ -111,7 +104,7 @@ const Header = () => {
       <div className="absolute top-full left-0 right-0 bg-background border border-border rounded-b-xl shadow-xl z-50 max-h-[400px] overflow-auto">
         {displayResults.length === 0 ? (
           <div className="p-6 text-center">
-            <p className="text-sm text-muted-foreground">No products found for &lsquo;{debouncedQuery}&rsquo;</p>
+            <p className="text-sm text-muted-foreground">No products found for '{debouncedQuery}'</p>
             <p className="text-xs text-muted-foreground mt-1">Try: Chikankari, Bandhani, festive, kurta, set</p>
           </div>
         ) : (
@@ -126,7 +119,7 @@ const Header = () => {
               </button>
             ))}
             {hasMore && (
-              <button onClick={handleViewAll} className="w-full px-4 py-3 text-sm font-medium text-center hover:bg-accent transition-colors" style={{ color: '#C47A6E' }}>
+              <button onClick={handleViewAll} className="w-full px-4 py-3 text-sm font-medium text-center hover:bg-accent transition-colors" style={{ color: '#C4622D' }}>
                 View all {results.length} results →
               </button>
             )}
@@ -138,172 +131,103 @@ const Header = () => {
 
   return (
     <>
-      {/* Announcement bar -- scrolling marquee */}
-      <div className="bg-[#F1F3EF] overflow-hidden border-b border-border/30">
-        <Marquee speed="slow" pauseOnHover className="py-2">
-          <span className="text-[11px] tracking-[0.15em] uppercase text-[#1A1A1A]/60 font-medium whitespace-nowrap px-6">
-            Free shipping on orders above ₹999
-          </span>
-          <span className="text-[11px] text-[#1A1A1A]/30 px-2" aria-hidden="true">·</span>
-          <span className="text-[11px] tracking-[0.15em] uppercase text-[#1A1A1A]/60 font-medium whitespace-nowrap px-6">
-            Pan India Delivery
-          </span>
-          <span className="text-[11px] text-[#1A1A1A]/30 px-2" aria-hidden="true">·</span>
-          <span className="text-[11px] tracking-[0.15em] uppercase text-[#1A1A1A]/60 font-medium whitespace-nowrap px-6">
-            Handcrafted with Love
-          </span>
-          <span className="text-[11px] text-[#1A1A1A]/30 px-2" aria-hidden="true">·</span>
-        </Marquee>
+      {/* Announcement bar */}
+      <div className="text-center text-[10px] md:text-[11px] py-2 tracking-[0.2em] uppercase text-muted-foreground/70 border-b border-border/30">
+        Complimentary shipping on orders above ₹999
       </div>
 
-      {/* Main header -- centered logo layout */}
+      {/* Main header — ALWAYS has background, never fully transparent */}
       <motion.header
         animate={{ y: hidden ? -80 : 0 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className={`sticky top-0 z-50 transition-all duration-300 border-b ${
           scrolled
             ? "bg-background/95 backdrop-blur-xl shadow-sm border-border/50"
-            : "bg-background border-border/50"
+            : "bg-background border-border/30"
         }`}
       >
-        {/* Desktop search overlay -- expands over the full header when active */}
-        <AnimatePresence>
-          {searchOpen && (
-            <motion.div
-              key="search-overlay"
-              ref={dropdownRef}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="hidden md:flex absolute inset-0 z-10 bg-background items-center px-8"
-            >
-              <div className="relative w-full max-w-2xl mx-auto">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <input
-                  ref={searchInputRef}
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="Search products..."
-                  className="w-full pl-10 pr-10 py-2.5 text-sm border border-border rounded-xl bg-background focus:outline-none focus:ring-2 focus:ring-[#C47A6E]/20 focus:border-[#C47A6E]/40 transition-all"
-                />
-                <button onClick={closeSearch} className="absolute right-3 top-1/2 -translate-y-1/2">
-                  <X className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
-                </button>
-                <SearchDropdown />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div className="container flex items-center justify-between h-16 md:h-[68px] px-4 md:px-8">
+          {/* Mobile hamburger */}
+          <button className="md:hidden" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+            <Menu className="h-5 w-5 text-foreground" />
+          </button>
 
-        {/* Desktop: 3-column grid layout */}
-        <div className="container hidden md:grid grid-cols-3 items-center h-16 md:h-[72px] px-4 md:px-8">
-          {/* Left column: navigation links */}
-          <nav className="flex items-center justify-start gap-7">
-            {desktopNavLinks.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                className={`text-xs uppercase tracking-[0.15em] font-medium transition-colors ${
-                  location.pathname === l.to
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+          {/* Logo — always use light logo with proper rendering */}
+          <Link to="/" className="flex items-center">
+            <img
+              alt="Style Saplings"
+              className="h-11 md:h-13 object-contain"
+              src={logoLight}
+              style={{ mixBlendMode: "multiply" }}
+            />
+          </Link>
+
+          {/* Desktop nav / search */}
+          <AnimatePresence mode="wait">
+            {searchOpen ? (
+              <motion.div
+                key="search"
+                ref={dropdownRef}
+                initial={{ opacity: 0, width: 0 }}
+                animate={{ opacity: 1, width: "100%" }}
+                exit={{ opacity: 0, width: 0 }}
+                className="hidden md:flex items-center flex-1 mx-8 relative"
               >
-                {l.label}
-              </Link>
-            ))}
-          </nav>
+                <div className="relative w-full">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <input
+                    ref={searchInputRef}
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Search products..."
+                    className="w-full pl-10 pr-10 py-2.5 text-sm border border-border rounded-xl bg-background focus:outline-none focus:ring-2 focus:ring-[#C4622D]/20 focus:border-[#C4622D]/40 transition-all"
+                  />
+                  <button onClick={closeSearch} className="absolute right-3 top-1/2 -translate-y-1/2">
+                    <X className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
+                  </button>
+                  <SearchDropdown />
+                </div>
+              </motion.div>
+            ) : (
+              <motion.nav key="nav" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="hidden md:flex items-center gap-8">
+                {navLinks.map((l) => (
+                  <Link
+                    key={l.to}
+                    to={l.to}
+                    className={`relative text-sm font-medium tracking-wider uppercase transition-colors py-1 text-muted-foreground hover:text-foreground ${
+                      location.pathname === l.to ? "text-foreground after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#C4622D] after:rounded-full" : ""
+                    }`}
+                  >
+                    {l.label}
+                  </Link>
+                ))}
+              </motion.nav>
+            )}
+          </AnimatePresence>
 
-          {/* Center column: logo */}
-          <div className="flex items-center justify-center">
-            <Link to="/" className="flex items-center">
-              <img
-                alt="Style Saplings"
-                className="h-11 md:h-13 object-contain"
-                src={logoHeader}
-                              />
-            </Link>
-          </div>
-
-          {/* Right column: icon actions */}
-          <div className="flex items-center justify-end gap-5">
-            <button
-              onClick={() => setSearchOpen(true)}
-              aria-label="Search"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Search className="h-[18px] w-[18px]" />
+          {/* Right icons */}
+          <div className="flex items-center gap-4">
+            <button className="md:hidden" onClick={() => setMobileSearchOpen(!mobileSearchOpen)} aria-label="Search">
+              <Search className="h-5 w-5 text-foreground" />
             </button>
-            <Link
-              to="/wishlist"
-              className="relative text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Wishlist"
-            >
-              <Heart className="h-[18px] w-[18px]" />
+            {!searchOpen && (
+              <button className="hidden md:block" onClick={() => setSearchOpen(true)} aria-label="Search">
+                <Search className="h-5 w-5 text-foreground" />
+              </button>
+            )}
+            <Link to="/wishlist" className="relative group">
+              <Heart className="h-5 w-5 text-foreground" />
               {wishlistCount > 0 && (
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="absolute -top-2 -right-2 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center"
-                  style={{ backgroundColor: '#C47A6E' }}
-                >
+                <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute -top-2 -right-2 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center" style={{ backgroundColor: '#C4622D' }}>
                   {wishlistCount}
                 </motion.span>
               )}
             </Link>
-            <Link
-              to="/cart"
-              className="relative text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Cart"
-            >
-              <ShoppingBag className="h-[18px] w-[18px]" />
-              {totalItems > 0 && (
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="absolute -top-2 -right-2 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center"
-                  style={{ backgroundColor: '#C47A6E' }}
-                >
-                  {totalItems}
-                </motion.span>
-              )}
-            </Link>
-          </div>
-        </div>
-
-        {/* Mobile: 3-column grid layout */}
-        <div className="container grid grid-cols-3 items-center h-16 px-4 md:hidden">
-          {/* Left: hamburger */}
-          <div className="flex items-center justify-start">
-            <button onClick={() => setMenuOpen(true)} aria-label="Open menu">
-              <Menu className="h-5 w-5 text-foreground" />
-            </button>
-          </div>
-
-          {/* Center: logo */}
-          <div className="flex items-center justify-center">
-            <Link to="/" className="flex items-center">
-              <img
-                alt="Style Saplings"
-                className="h-10 object-contain"
-                src={logoHeader}
-                              />
-            </Link>
-          </div>
-
-          {/* Right: cart icon */}
-          <div className="flex items-center justify-end">
-            <Link to="/cart" className="relative" aria-label="Cart">
+            <Link to="/cart" className="relative group">
               <ShoppingBag className="h-5 w-5 text-foreground" />
               {totalItems > 0 && (
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="absolute -top-2 -right-2 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center"
-                  style={{ backgroundColor: '#C47A6E' }}
-                >
+                <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute -top-2 -right-2 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center" style={{ backgroundColor: '#C4622D' }}>
                   {totalItems}
                 </motion.span>
               )}
@@ -314,26 +238,11 @@ const Header = () => {
         {/* Mobile search bar */}
         <AnimatePresence>
           {mobileSearchOpen && (
-            <motion.div
-              ref={dropdownRef}
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="md:hidden border-t border-border overflow-visible relative bg-background"
-            >
+            <motion.div ref={dropdownRef} initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="md:hidden border-t border-border overflow-visible relative bg-background">
               <div className="relative px-4 py-3">
                 <Search className="absolute left-7 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <input
-                  ref={mobileSearchRef}
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="Search products..."
-                  className="w-full pl-10 pr-10 py-2.5 text-sm border border-border rounded-xl bg-background focus:outline-none focus:ring-2 focus:ring-[#C47A6E]/20 transition-all"
-                />
-                <button onClick={closeSearch} className="absolute right-7 top-1/2 -translate-y-1/2">
-                  <X className="h-4 w-4 text-muted-foreground hover:text-foreground" />
-                </button>
+                <input ref={mobileSearchRef} value={searchInput} onChange={(e) => setSearchInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Search products..." className="w-full pl-10 pr-10 py-2.5 text-sm border border-border rounded-xl bg-background focus:outline-none focus:ring-2 focus:ring-[#C4622D]/20 transition-all" />
+                <button onClick={closeSearch} className="absolute right-7 top-1/2 -translate-y-1/2"><X className="h-4 w-4 text-muted-foreground hover:text-foreground" /></button>
                 <SearchDropdown />
               </div>
             </motion.div>
@@ -341,17 +250,11 @@ const Header = () => {
         </AnimatePresence>
       </motion.header>
 
-      {/* Mobile menu overlay -- slide-in from left */}
+      {/* Mobile menu overlay */}
       <AnimatePresence>
         {menuOpen && (
           <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/30 z-[99]"
-              onClick={() => setMenuOpen(false)}
-            />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/30 z-[99]" onClick={() => setMenuOpen(false)} />
             <motion.div
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
@@ -359,101 +262,27 @@ const Header = () => {
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="fixed inset-y-0 left-0 w-[85%] max-w-sm z-[100] flex flex-col shadow-2xl bg-background"
             >
-              {/* Menu header */}
               <div className="flex items-center justify-between px-6 h-16 border-b border-border">
-                <img
-                  src={logoHeader}
-                  alt="Style Saplings"
-                  className="h-11 object-contain"
-                                  />
-                <button onClick={() => setMenuOpen(false)} aria-label="Close menu">
-                  <X className="h-5 w-5 text-foreground" />
-                </button>
+                <img src={logoLight} alt="Style Saplings" className="h-11 object-contain" style={{ mixBlendMode: "multiply" }} />
+                <button onClick={() => setMenuOpen(false)} aria-label="Close menu"><X className="h-5 w-5 text-foreground" /></button>
               </div>
-
-              {/* Menu search */}
-              <div className="px-6 pt-5 pb-2">
-                <button
-                  onClick={() => { setMenuOpen(false); setMobileSearchOpen(true); }}
-                  className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl border border-border text-sm text-muted-foreground hover:border-[#C47A6E]/40 transition-colors"
-                >
-                  <Search className="h-4 w-4" />
-                  Search products...
-                </button>
-              </div>
-
-              {/* Menu links */}
-              <nav className="flex flex-col px-6 pt-2 flex-1 overflow-y-auto">
-                {mobileNavLinks.map((l, i) => (
-                  <motion.div
-                    key={l.to}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + i * 0.05 }}
-                  >
-                    <Link
-                      to={l.to}
-                      onClick={() => setMenuOpen(false)}
-                      className={`block py-4 font-sans text-lg font-medium tracking-wide transition-colors ${
-                        location.pathname === l.to
-                          ? "text-[#C47A6E]"
-                          : "text-foreground hover:text-[#C47A6E]"
-                      }`}
-                    >
+              <nav className="flex flex-col px-6 pt-6 flex-1 overflow-y-auto">
+                {navLinks.map((l, i) => (
+                  <motion.div key={l.to} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 + i * 0.05 }}>
+                    <Link to={l.to} onClick={() => setMenuOpen(false)} className={`block py-4 font-sans text-lg font-medium tracking-wide transition-colors ${location.pathname === l.to ? "text-[#C4622D]" : "text-foreground hover:text-[#C4622D]"}`}>
                       {l.label}
                     </Link>
-                    {i < mobileNavLinks.length - 1 && <div className="border-b border-border" />}
+                    {i < navLinks.length - 1 && <div className="border-b border-border" />}
                   </motion.div>
                 ))}
-
-                {/* Wishlist link */}
                 <div>
                   <div className="border-b border-border" />
-                  <Link
-                    to="/wishlist"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-2 py-4 font-sans text-lg font-medium tracking-wide text-foreground hover:text-[#C47A6E] transition-colors"
-                  >
-                    Wishlist
-                    {wishlistCount > 0 && (
-                      <span
-                        className="text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center"
-                        style={{ backgroundColor: '#C47A6E' }}
-                      >
-                        {wishlistCount}
-                      </span>
-                    )}
+                  <Link to="/cart" onClick={() => setMenuOpen(false)} className="block py-4 font-sans text-lg font-medium tracking-wide text-foreground hover:text-[#C4622D] transition-colors">
+                    Cart {totalItems > 0 && `(${totalItems})`}
                   </Link>
                 </div>
-
-                {/* Cart link */}
-                <div>
-                  <div className="border-b border-border" />
-                  <Link
-                    to="/cart"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-2 py-4 font-sans text-lg font-medium tracking-wide text-foreground hover:text-[#C47A6E] transition-colors"
-                  >
-                    Cart
-                    {totalItems > 0 && (
-                      <span
-                        className="text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center"
-                        style={{ backgroundColor: '#C47A6E' }}
-                      >
-                        {totalItems}
-                      </span>
-                    )}
-                  </Link>
-                </div>
-
-                {/* Shop Now CTA */}
                 <div className="mt-auto pb-10 pt-6">
-                  <Link
-                    to="/shop"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full text-sm font-semibold tracking-wide text-white transition-transform active:scale-[0.97]"
-                    style={{ backgroundColor: "#C47A6E" }}
-                  >
+                  <Link to="/shop" onClick={() => setMenuOpen(false)} className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full text-sm font-semibold tracking-wide text-white transition-transform active:scale-[0.97]" style={{ backgroundColor: "#C4622D" }}>
                     Shop Now →
                   </Link>
                 </div>

@@ -43,7 +43,7 @@ const About = () => {
       <Header />
 
       {/* Hero Banner */}
-      <section ref={heroRef} className="relative overflow-hidden grain-overlay" style={{ backgroundColor: '#2A3A26' }}>
+      <section ref={heroRef} className="relative overflow-hidden grain-overlay" style={{ backgroundColor: '#3A5139' }}>
         <div className="relative z-10 flex items-center justify-center py-16 md:py-24 px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -56,9 +56,9 @@ const About = () => {
             </span>
             <h1 className="font-serif text-3xl md:text-5xl font-semibold text-white">
               Crafted with Love. <br className="hidden md:block" />
-              <span className="italic" style={{ color: '#C47A6E' }}>Rooted in Tradition.</span>
+              <span className="italic" style={{ color: '#E8C9A0' }}>Rooted in Tradition.</span>
             </h1>
-            <div className="w-12 h-[2px] mx-auto mt-5" style={{ backgroundColor: '#C47A6E' }} />
+            <div className="w-12 h-[2px] mx-auto mt-5" style={{ backgroundColor: '#C4622D' }} />
           </motion.div>
         </div>
       </section>
@@ -94,7 +94,7 @@ const About = () => {
       </section>
 
       {/* Craft Origins — Card Style */}
-      <section className="py-20 md:py-32" style={{ backgroundColor: '#F8F8F6' }}>
+      <section className="py-20 md:py-32" style={{ backgroundColor: '#F7F4EF' }}>
         <div className="container px-4 md:px-8">
           <motion.div {...fadeUp} className="text-center mb-16">
             <span className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-sale font-semibold">Heritage Textiles</span>
@@ -119,7 +119,7 @@ const About = () => {
                 </div>
                 <div className="p-6 md:p-8 text-center">
                   <h3 className="font-serif text-2xl font-medium mb-1">{c.name}</h3>
-                  <div className="w-8 mx-auto mt-2 mb-3" style={{ borderBottom: "2px solid #C47A6E" }} />
+                  <div className="w-8 mx-auto mt-2 mb-3" style={{ borderBottom: "2px solid hsl(21, 63%, 47%)" }} />
                   <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">{c.origin}</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
                 </div>
@@ -152,7 +152,7 @@ const About = () => {
       </section>
 
       {/* Founder Note */}
-      <section className="py-20 md:py-28" style={{ backgroundColor: '#F8F8F6' }}>
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#F7F4EF' }}>
         <div className="container px-4 md:px-8 flex justify-center">
           <motion.div
             {...fadeUp}
@@ -170,12 +170,12 @@ const About = () => {
       </section>
 
       {/* CTA Banner */}
-      <section className="py-20 md:py-28 relative grain-overlay" style={{ backgroundColor: '#2A3A26' }}>
+      <section className="py-20 md:py-28 relative grain-overlay" style={{ backgroundColor: '#3A5139' }}>
         <div className="relative z-10 container px-4 md:px-8 text-center">
           <motion.div {...fadeUp}>
             <h2 className="font-serif text-3xl md:text-5xl font-semibold mb-4 text-white leading-tight">
               Dress Your Little One in <br className="hidden md:block" />
-              India's <span className="italic" style={{ color: '#C47A6E' }}>Finest Craft</span>
+              India's <span className="italic" style={{ color: '#E8C9A0' }}>Finest Craft</span>
             </h2>
             <p className="text-white/60 text-sm md:text-base mb-10 max-w-lg mx-auto">
               Explore our collection of handcrafted ethnic wear for children aged 2–5 years.
@@ -183,7 +183,7 @@ const About = () => {
             <Link
               to="/shop"
               className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-medium tracking-wide text-foreground transition-all hover:shadow-lg"
-              style={{ backgroundColor: '#C47A6E' }}
+              style={{ backgroundColor: '#E8C9A0' }}
             >
               Explore Collection
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

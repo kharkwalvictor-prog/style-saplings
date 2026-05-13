@@ -69,7 +69,7 @@ const HeroBanner = () => {
                 alt={slide.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/70 via-[#1A1A1A]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#2A2220]/70 via-[#2A2220]/20 to-transparent" />
             </div>
           ))}
         </div>
@@ -97,7 +97,7 @@ const HeroBanner = () => {
               </p>
               <Link
                 to={slides[selectedIndex].link}
-                className="inline-flex items-center gap-2 bg-[#C47A6E] hover:bg-[#B06A5E] text-white text-sm font-semibold tracking-wide px-8 py-3.5 rounded-full transition-colors active:scale-[0.97]"
+                className="inline-flex items-center gap-2 bg-[#C4622D] hover:bg-[#B5561F] text-white text-sm font-semibold tracking-wide px-8 py-3.5 rounded-full transition-colors active:scale-[0.97]"
               >
                 {slides[selectedIndex].cta}
               </Link>

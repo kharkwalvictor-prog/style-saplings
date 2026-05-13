@@ -127,10 +127,10 @@ const HeroSection = () => {
         />
         {/* Multi-layer gradient overlay */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-[#1C2B1A]/80 via-[#2A3A26]/50 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-[#1E2E1A]/80 via-[#2A3F25]/50 to-transparent"
           style={{ opacity: overlayOpacity }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1C2B1A]/60 via-transparent to-[#1C2B1A]/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1E2E1A]/60 via-transparent to-[#1E2E1A]/30" />
       </motion.div>
 
       {/* ── Grain texture ── */}
@@ -140,28 +140,28 @@ const HeroSection = () => {
       <motion.div
         animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[15%] right-[8%] text-[#C47A6E] hidden md:block"
+        className="absolute top-[15%] right-[8%] text-[#E8C9A0] hidden md:block"
       >
         <PaisleySVG className="w-16 h-20" />
       </motion.div>
       <motion.div
         animate={{ y: [0, 12, 0], rotate: [0, -8, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="absolute bottom-[25%] right-[15%] text-[#C47A6E] hidden md:block"
+        className="absolute bottom-[25%] right-[15%] text-[#E8C9A0] hidden md:block"
       >
         <MandalaDot className="w-12 h-12" />
       </motion.div>
       <motion.div
         animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-        className="absolute top-[40%] right-[5%] text-[#C47A6E] hidden lg:block"
+        className="absolute top-[40%] right-[5%] text-[#E8C9A0] hidden lg:block"
       >
         <PaisleySVG className="w-10 h-14 rotate-45" />
       </motion.div>
       <motion.div
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute bottom-[35%] left-[5%] text-[#C47A6E]/40 hidden lg:block"
+        className="absolute bottom-[35%] left-[5%] text-[#E8C9A0]/40 hidden lg:block"
       >
         <MandalaDot className="w-8 h-8" />
       </motion.div>
@@ -178,8 +178,8 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ type: "spring", damping: 20, stiffness: 100, delay: 0.2 }}
           >
-            <span className="inline-flex items-center gap-2 text-[#C47A6E]/80 text-[10px] md:text-xs tracking-[0.3em] uppercase mb-8 font-medium border border-[#C47A6E]/20 px-5 py-2 rounded-full backdrop-blur-md bg-white/5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#C47A6E] animate-pulse" />
+            <span className="inline-flex items-center gap-2 text-[#E8C9A0]/80 text-[10px] md:text-xs tracking-[0.3em] uppercase mb-8 font-medium border border-[#E8C9A0]/20 px-5 py-2 rounded-full backdrop-blur-md bg-white/5">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#C4622D] animate-pulse" />
               Authentic Indian Craftsmanship
             </span>
           </motion.div>
@@ -190,7 +190,7 @@ const HeroSection = () => {
             <br />
             <SplitText text="Tradition," delay={0.6} />
             <br />
-            <span className="italic" style={{ color: '#C47A6E' }}>
+            <span className="italic" style={{ color: '#E8C9A0' }}>
               <SplitText text="Styled for Today" delay={0.85} />
             </span>
           </h1>
@@ -212,7 +212,7 @@ const HeroSection = () => {
             transition={{ type: "spring", damping: 20, stiffness: 80, delay: 1.5 }}
             className="flex flex-wrap gap-4"
           >
-            <ShimmerButton to="/shop" className="bg-[#7B8F72] text-white hover:bg-[#6A7F62]">
+            <ShimmerButton to="/shop" className="bg-[#5B7C5B] text-white hover:bg-[#4A6741]">
               Shop Collection
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </ShimmerButton>

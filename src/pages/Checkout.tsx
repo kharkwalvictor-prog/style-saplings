@@ -305,7 +305,7 @@ const Checkout = () => {
       description: `Order ${orderNumber}`,
       order_id: rpData.razorpay_order_id,
       prefill: { name: form.name, email: form.email, contact: form.phone },
-      theme: { color: "#7B8F72" },
+      theme: { color: "#4A6741" },
       handler: async (response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
         try {
           const { data: verifyData, error: verifyError } = await supabase.functions.invoke("verify-razorpay-payment", {
