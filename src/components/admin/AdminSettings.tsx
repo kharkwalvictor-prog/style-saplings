@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -7,11 +7,14 @@ import { Loader2, Save } from "lucide-react";
 const AdminSettings = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const gstRowId = useRef<string | null>(null);
   const [gst, setGst] = useState({
     gstin: "",
     legal_name: "",
     address: "",
     state: "Delhi",
+    state_code: "",
+    trade_name: "",
   });
   const [shipping, setShipping] = useState({
     freeAbove: "999",
@@ -33,21 +36,25 @@ const AdminSettings = () => {
   const loadSettings = async () => {
     setLoading(true);
     try {
-      // Load GST config
+      // Load GST config from Supabase
       const { data: gstData } = await supabase.from("gst_config").select("*").limit(1).single();
       if (gstData) {
+        const row = gstData as any;
+        gstRowId.current = row.id ?? null;
         setGst({
-          gstin: (gstData as any).gstin || "",
-          legal_name: (gstData as any).legal_name || "",
-          address: (gstData as any).address || "",
-          state: (gstData as any).state || "Delhi",
+          gstin: row.gstin || "",
+          legal_name: row.legal_name || "",
+          address: row.address || "",
+          state: row.state || "Delhi",
+          state_code: row.state_code || "",
+          trade_name: row.trade_name || "",
         });
       }
     } catch {
       // gst_config might not exist yet
     }
 
-    // Load shipping from localStorage (or could be a DB table)
+    // Load shipping & contact from localStorage as cache
     const savedShipping = localStorage.getItem("ss_shipping_config");
     if (savedShipping) setShipping(JSON.parse(savedShipping));
 
@@ -60,12 +67,40 @@ const AdminSettings = () => {
   const handleSave = async () => {
     setSaving(true);
     try {
-      // Save shipping & contact to localStorage
+      // Build the GST row payload
+      const gstPayload: Record<string, any> = {
+        gstin: gst.gstin,
+        legal_name: gst.legal_name,
+        address: gst.address,
+        state: gst.state,
+        state_code: gst.state_code,
+        trade_name: gst.trade_name,
+      };
+
+      // If we loaded an existing row, update it; otherwise insert a new one
+      if (gstRowId.current) {
+        const { error } = await supabase
+          .from("gst_config")
+          .update(gstPayload)
+          .eq("id", gstRowId.current);
+        if (error) throw error;
+      } else {
+        const { data, error } = await supabase
+          .from("gst_config")
+          .insert(gstPayload)
+          .select("id")
+          .single();
+        if (error) throw error;
+        if (data) gstRowId.current = (data as any).id;
+      }
+
+      // Save shipping & contact to localStorage (until a dedicated DB table is added)
       localStorage.setItem("ss_shipping_config", JSON.stringify(shipping));
       localStorage.setItem("ss_contact_config", JSON.stringify(contact));
 
       toast.success("Settings saved successfully");
-    } catch {
+    } catch (err) {
+      console.error("Settings save error:", err);
       toast.error("Failed to save settings");
     }
     setSaving(false);
@@ -88,8 +123,16 @@ const AdminSettings = () => {
             <input value={gst.legal_name} onChange={e => setGst(p => ({ ...p, legal_name: e.target.value }))} placeholder="Shivaya Enterprises" className={inputClass} />
           </div>
           <div>
+            <label className="text-xs font-medium text-muted-foreground mb-1 block">Trade Name</label>
+            <input value={gst.trade_name} onChange={e => setGst(p => ({ ...p, trade_name: e.target.value }))} placeholder="Style Saplings" className={inputClass} />
+          </div>
+          <div>
             <label className="text-xs font-medium text-muted-foreground mb-1 block">GSTIN</label>
             <input value={gst.gstin} onChange={e => setGst(p => ({ ...p, gstin: e.target.value }))} placeholder="07AAACS1234A1Z5" className={inputClass} />
+          </div>
+          <div>
+            <label className="text-xs font-medium text-muted-foreground mb-1 block">State Code</label>
+            <input value={gst.state_code} onChange={e => setGst(p => ({ ...p, state_code: e.target.value }))} placeholder="07" className={inputClass} />
           </div>
           <div className="md:col-span-2">
             <label className="text-xs font-medium text-muted-foreground mb-1 block">Business Address</label>
@@ -111,11 +154,11 @@ const AdminSettings = () => {
         <h3 className="font-semibold text-sm mb-4 uppercase tracking-wide text-muted-foreground">Shipping</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="text-xs font-medium text-muted-foreground mb-1 block">Free Shipping Above (₹)</label>
+            <label className="text-xs font-medium text-muted-foreground mb-1 block">Free Shipping Above (Rs.)</label>
             <input type="number" value={shipping.freeAbove} onChange={e => setShipping(p => ({ ...p, freeAbove: e.target.value }))} className={inputClass} />
           </div>
           <div>
-            <label className="text-xs font-medium text-muted-foreground mb-1 block">Flat Shipping Rate (₹)</label>
+            <label className="text-xs font-medium text-muted-foreground mb-1 block">Flat Shipping Rate (Rs.)</label>
             <input type="number" value={shipping.flatRate} onChange={e => setShipping(p => ({ ...p, flatRate: e.target.value }))} className={inputClass} />
           </div>
           <div>
