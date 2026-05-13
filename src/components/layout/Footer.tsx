@@ -73,9 +73,9 @@ const Footer = () => {
                 className="h-14 md:h-16 object-contain mx-auto mb-5"
               />
             </Link>
-            <p className="font-serif italic text-[15px] md:text-[17px] text-white/40 max-w-xs mx-auto leading-relaxed">
-              Inspired by India's regional artistry,
-              crafted for modern childhood.
+            <p className="font-serif italic text-[15px] md:text-[18px] text-white/45 max-w-sm mx-auto leading-[1.7]">
+              Inspired by India's regional artistry
+              and crafted for little celebrations.
             </p>
           </div>
 

@@ -121,47 +121,50 @@ const Index = () => {
             fetchPriority="high"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/15 to-black/55" />
+        {/* Warm gradient — earthy, not cold/tech */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A2B22]/50 via-[#2C2C2C]/20 to-[#1A2B22]/60" />
 
         <motion.div
           style={{ opacity: heroFade, y: heroLift }}
           className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6"
         >
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-2xl">
-            <motion.h1
-              variants={reveal}
-              className="font-serif text-[44px] sm:text-[60px] md:text-[76px] lg:text-[88px] font-semibold text-white leading-[1.02] tracking-[-0.02em]"
-            >
-              Childhood, woven
-              <br />
-              with <em className="italic font-normal">tradition.</em>
-            </motion.h1>
-
-            <motion.p
-              variants={reveal}
-              className="text-white/60 text-[16px] md:text-[20px] mt-8 mb-12 max-w-md mx-auto leading-[1.65] font-light"
-            >
-              Soft fabrics inspired by regional artistry,
-              crafted for comfort and celebration.
-            </motion.p>
-
-            <motion.div
-              variants={reveal}
-              className="flex items-center justify-center gap-6"
-            >
-              <Link
-                to="/shop"
-                className="bg-white/12 backdrop-blur-sm border border-white/20 rounded-full px-8 py-3.5 text-white text-[13px] font-medium tracking-wide hover:bg-white/22 transition-all"
+            {/* Warm translucent panel behind text */}
+            <div className="bg-[#1A2B22]/20 backdrop-blur-[2px] rounded-3xl px-8 py-12 md:px-14 md:py-16">
+              <motion.h1
+                variants={reveal}
+                className="font-serif text-[42px] sm:text-[58px] md:text-[72px] lg:text-[84px] font-semibold text-[#FAF7F2] leading-[1.04] tracking-[-0.02em]"
               >
-                Shop Collection
-              </Link>
-              <Link
-                to="/about"
-                className="text-white/60 text-[13px] font-medium hover:text-white transition-colors"
+                Childhood, woven
+                <br />
+                with <em className="italic font-normal text-[#FAF7F2]/80">tradition.</em>
+              </motion.h1>
+
+              <motion.p
+                variants={reveal}
+                className="text-[#FAF7F2]/55 text-[16px] md:text-[19px] mt-7 mb-10 max-w-md mx-auto leading-[1.7]"
               >
-                Our Story
-              </Link>
-            </motion.div>
+                Regional artistry, reimagined for modern childhood.
+              </motion.p>
+
+              <motion.div
+                variants={reveal}
+                className="flex items-center justify-center gap-6"
+              >
+                <Link
+                  to="/shop"
+                  className="bg-[#FAF7F2]/12 backdrop-blur-sm border border-[#FAF7F2]/18 rounded-full px-8 py-3.5 text-[#FAF7F2] text-[13px] font-medium tracking-wide hover:bg-[#FAF7F2]/20 transition-all"
+                >
+                  Shop Collection
+                </Link>
+                <Link
+                  to="/about"
+                  className="text-[#FAF7F2]/50 text-[13px] font-medium hover:text-[#FAF7F2]/80 transition-colors"
+                >
+                  Our Story
+                </Link>
+              </motion.div>
+            </div>
           </motion.div>
         </motion.div>
 
@@ -206,7 +209,7 @@ const Index = () => {
               variants={reveal}
               className="text-muted-foreground text-[15px] mt-5 leading-relaxed"
             >
-              Five regions. Centuries of tradition. One collection.
+              Centuries of tradition, one collection.
             </motion.p>
           </motion.div>
 
@@ -291,9 +294,8 @@ const Index = () => {
                 variants={reveal}
                 className="text-[15px] text-muted-foreground leading-[1.8] max-w-[360px] mb-8"
               >
-                400 years of technique. Pure cotton mulmul.
-                No machines, no shortcuts — just patience,
-                precision, and pride.
+                Pure cotton mulmul, hand-embroidered over 400 years
+                of tradition. No machines — just patience and pride.
               </motion.p>
               <motion.div variants={reveal}>
                 <Link
