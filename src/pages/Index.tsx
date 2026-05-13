@@ -43,11 +43,11 @@ const stagger = {
 
 /* ── Data ── */
 const regions = [
-  { name: "Lucknow", craft: "Chikankari", desc: "Soft embroidery adapted for modern comfort", image: product1 },
-  { name: "Kashmir", craft: "Firan", desc: "Warm traditions from the mountains", image: product3 },
-  { name: "Rajasthan", craft: "Bandhani", desc: "Playful craft reimagined for little ones", image: product2 },
-  { name: "Punjab", craft: "Phulkari", desc: "Vibrant floral threadwork in cotton", image: product4 },
-  { name: "Gujarat", craft: "Patola", desc: "Double-weave heritage, gentle on skin", image: product1 },
+  { name: "Lucknow", craft: "Chikankari", image: product1, size: "large" as const },
+  { name: "Kashmir", craft: "Firan", image: product3, size: "small" as const },
+  { name: "Rajasthan", craft: "Bandhani", image: product2, size: "small" as const },
+  { name: "Punjab", craft: "Phulkari", image: product4, size: "large" as const },
+  { name: "Gujarat", craft: "Patola", image: product1, size: "small" as const },
 ];
 
 const testimonials = [
@@ -139,10 +139,10 @@ const Index = () => {
 
             <motion.p
               variants={reveal}
-              className="text-white/65 text-[15px] md:text-[17px] mt-7 mb-11 max-w-sm mx-auto leading-relaxed"
+              className="text-white/60 text-[16px] md:text-[20px] mt-8 mb-12 max-w-md mx-auto leading-[1.65] font-light"
             >
-              Handcrafted across India for little celebrations.
-              Soft fabrics, regional artistry, everyday comfort.
+              Soft fabrics inspired by regional artistry,
+              crafted for comfort and celebration.
             </motion.p>
 
             <motion.div
@@ -182,72 +182,77 @@ const Index = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          EXPLORE INDIA — Interactive region cards
+          EXPLORE INDIA — Signature section, asymmetric grid
       ═══════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-36 bg-background">
+      <section className="py-28 md:py-44 bg-background">
         <div className="container px-6 md:px-8">
+          {/* Left-aligned heading — NOT centered, editorial feel */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="text-center mb-14 md:mb-20"
+            className="mb-16 md:mb-24 max-w-lg"
           >
-            <motion.p
-              variants={reveal}
-              className="text-[12px] uppercase tracking-[0.2em] text-muted-foreground font-medium mb-5"
-            >
-              Five Regions · Five Traditions
-            </motion.p>
             <motion.h2
               variants={reveal}
-              className="font-serif text-[30px] md:text-[46px] font-semibold leading-[1.08] tracking-[-0.02em]"
+              className="font-serif text-[36px] md:text-[54px] font-semibold leading-[1.04] tracking-[-0.025em]"
             >
               Explore India
               <br />
               through <em className="italic font-normal">clothing.</em>
             </motion.h2>
+            <motion.p
+              variants={reveal}
+              className="text-muted-foreground text-[15px] mt-5 leading-relaxed"
+            >
+              Five regions. Centuries of tradition. One collection.
+            </motion.p>
           </motion.div>
 
+          {/* Asymmetric masonry-like grid */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
             variants={stagger}
-            className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4"
+            className="grid grid-cols-2 md:grid-cols-12 gap-4 md:gap-5"
           >
-            {regions.map((region) => (
-              <motion.div
-                key={region.name}
-                variants={reveal}
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              >
-                <Link
-                  to="/shop"
-                  className="group block relative aspect-[3/4] rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-500"
+            {regions.map((region, i) => {
+              /* Alternate sizing: 7-5, 5-7, 5-4-3 pattern */
+              const colSpans = ["md:col-span-7", "md:col-span-5", "md:col-span-5", "md:col-span-4", "md:col-span-3"];
+              const aspects = ["aspect-[4/5]", "aspect-[3/4]", "aspect-[3/4]", "aspect-[4/5]", "aspect-[3/4]"];
+              return (
+                <motion.div
+                  key={region.name}
+                  variants={reveal}
+                  whileHover={{ y: -5 }}
+                  transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                  className={colSpans[i]}
                 >
-                  <img
-                    src={region.image}
-                    alt={region.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                  <div className="absolute bottom-0 left-0 p-5 md:p-6">
-                    <h3 className="font-serif text-[18px] md:text-[20px] text-white font-semibold leading-tight">
-                      {region.name}
-                    </h3>
-                    <p className="text-white/60 text-[12px] uppercase tracking-[0.1em] mt-1">
-                      {region.craft}
-                    </p>
-                    <p className="text-white/45 text-[13px] mt-1.5 hidden md:block leading-snug">
-                      {region.desc}
-                    </p>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+                  <Link
+                    to={`/shop?craft=${region.craft}`}
+                    className={`group block relative ${aspects[i]} rounded-2xl overflow-hidden`}
+                  >
+                    <img
+                      src={region.image}
+                      alt={region.name}
+                      className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent" />
+                    <div className="absolute bottom-0 left-0 p-5 md:p-7">
+                      <p className="text-white/50 text-[11px] uppercase tracking-[0.15em] mb-1">
+                        {region.craft}
+                      </p>
+                      <h3 className="font-serif text-[22px] md:text-[26px] text-white font-semibold leading-tight">
+                        {region.name}
+                      </h3>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -255,7 +260,7 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           CRAFT STORY — Editorial, asymmetric, emotional
       ═══════════════════════════════════════════════════ */}
-      <section className="py-28 md:py-40 bg-[#EDE8DF]" ref={craftRef}>
+      <section className="py-28 md:py-40 bg-[#F0EBE1]" ref={craftRef}>
         <div className="container px-6 md:px-8">
           <div className="grid md:grid-cols-12 gap-12 md:gap-0 items-center">
             {/* Text — left */}
@@ -284,12 +289,11 @@ const Index = () => {
               </motion.h2>
               <motion.p
                 variants={reveal}
-                className="text-[15px] text-muted-foreground leading-[1.85] max-w-[380px] mb-8"
+                className="text-[15px] text-muted-foreground leading-[1.8] max-w-[360px] mb-8"
               >
-                Our artisans in Lucknow, Jaipur, and Kashmir carry forward
-                techniques perfected over 400 years. Each garment is
-                hand-embroidered on pure cotton mulmul — no machines,
-                no shortcuts. Just patience, precision, and pride.
+                400 years of technique. Pure cotton mulmul.
+                No machines, no shortcuts — just patience,
+                precision, and pride.
               </motion.p>
               <motion.div variants={reveal}>
                 <Link
@@ -394,7 +398,7 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           SOCIAL PROOF — Testimonials, warm background
       ═══════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#EDE8DF]">
+      <section className="py-24 md:py-32 bg-[#F0EBE1]">
         <div className="container px-6 md:px-8">
           <motion.h2
             initial="hidden"

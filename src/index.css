@@ -6,12 +6,13 @@
   :root {
     /* ── Style Saplings — Warm Premium Palette ── */
 
-    /* Background: Warm ivory #FAF8F4 */
-    --background: 40 33% 97%;
+    /* Background: Warm ivory #FAF7F2 */
+    --background: 34 40% 96%;
     /* Foreground: Deep charcoal #2C2C2C */
     --foreground: 0 0% 17%;
 
-    --card: 40 30% 98%;
+    /* Cards: Clean warm white #FFFDFC */
+    --card: 20 50% 99%;
     --card-foreground: 0 0% 17%;
 
     --popover: 0 0% 100%;

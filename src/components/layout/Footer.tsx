@@ -18,15 +18,16 @@ const Footer = () => {
   return (
     <footer>
       {/* ── Newsletter — warm, editorial ── */}
-      <section className="bg-[#EDE8DF]">
+      <section className="bg-[#F0EBE1]">
         <div className="container px-6 md:px-8 py-20 md:py-28">
           <div className="max-w-md mx-auto text-center">
-            <h3 className="font-serif text-[26px] md:text-[32px] font-medium leading-[1.15] mb-3">
-              Stories worth
-              <br />
-              <em className="italic">wearing.</em>
+            <p className="font-serif italic text-[17px] md:text-[20px] text-muted-foreground/70 mb-6 leading-relaxed">
+              Inspired by India's regional artistry,<br />designed for little celebrations.
+            </p>
+            <h3 className="font-serif text-[28px] md:text-[34px] font-medium leading-[1.12] mb-3">
+              Stay close to the craft.
             </h3>
-            <p className="text-[13px] text-muted-foreground mb-8">
+            <p className="text-[14px] text-muted-foreground mb-8">
               New collections and artisan journeys, in your inbox.
             </p>
 
