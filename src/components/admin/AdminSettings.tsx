@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { Loader2, Save } from "lucide-react";
+import { Loader2, Save, Rocket } from "lucide-react";
 
 const AdminSettings = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [storeLive, setStoreLive] = useState(false);
+  const [togglingLive, setTogglingLive] = useState(false);
   const gstRowId = useRef<string | null>(null);
   const [gst, setGst] = useState({
     gstin: "",
@@ -60,6 +63,16 @@ const AdminSettings = () => {
     } catch (err) {
       console.error("Load settings error:", err);
     }
+
+    // Load store live status
+    try {
+      const { data: liveData } = await supabase
+        .from("site_content")
+        .select("value")
+        .eq("key", "store_live")
+        .maybeSingle();
+      setStoreLive(liveData?.value === "true");
+    } catch { /* ignore */ }
 
     const savedShipping = localStorage.getItem("ss_shipping_config");
     if (savedShipping) setShipping(JSON.parse(savedShipping));
@@ -132,6 +145,48 @@ const AdminSettings = () => {
   return (
     <div className="max-w-2xl">
       <h2 className="font-serif text-xl font-semibold mb-6">Store Settings</h2>
+
+      {/* Go Live Toggle */}
+      <section className={`border-2 rounded-2xl p-5 mb-6 ${storeLive ? "border-green-500/50 bg-green-50/30" : "border-amber-500/50 bg-amber-50/30"}`}>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Rocket className={`h-5 w-5 ${storeLive ? "text-green-600" : "text-amber-600"}`} />
+            <div>
+              <h3 className="font-semibold text-sm">
+                {storeLive ? "Store is LIVE" : "Store is PAUSED"}
+              </h3>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {storeLive
+                  ? "Customers can place orders and make payments."
+                  : "Checkout is disabled. Customers see a 'Coming Soon' page."}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            {togglingLive && <Loader2 className="h-4 w-4 animate-spin" />}
+            <Switch
+              checked={storeLive}
+              disabled={togglingLive}
+              onCheckedChange={async (checked) => {
+                setTogglingLive(true);
+                try {
+                  const { error } = await supabase
+                    .from("site_content")
+                    .update({ value: checked ? "true" : "false", updated_at: new Date().toISOString() })
+                    .eq("key", "store_live");
+                  if (error) throw error;
+                  setStoreLive(checked);
+                  toast.success(checked ? "Store is now LIVE! Customers can place orders." : "Store paused. Checkout is disabled.");
+                } catch (err: any) {
+                  console.error("Toggle error:", err);
+                  toast.error("Failed to update store status");
+                }
+                setTogglingLive(false);
+              }}
+            />
+          </div>
+        </div>
+      </section>
 
       {/* Business / GST Details */}
       <section className="border rounded-2xl p-5 mb-6">

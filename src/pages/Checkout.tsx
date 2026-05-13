@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -376,8 +377,16 @@ const Checkout = () => {
 
   const fmt = (n: number) => `₹${n.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-  // ── STORE NOT LIVE YET — disable checkout ──
-  const STORE_LIVE = false;
+  // ── STORE LIVE FLAG — controlled from Admin → Settings ──
+  const { data: siteContent } = useQuery({
+    queryKey: ["site-content-store-live"],
+    queryFn: async () => {
+      const { data } = await supabase.from("site_content").select("value").eq("key", "store_live").maybeSingle();
+      return data?.value === "true";
+    },
+    staleTime: 30 * 1000,
+  });
+  const STORE_LIVE = siteContent ?? false;
 
   if (!STORE_LIVE) {
     return (
