@@ -43,11 +43,11 @@ const stagger = {
 
 /* ── Data ── */
 const regions = [
-  { name: "Lucknow", craft: "Chikankari", image: product1, size: "large" as const },
-  { name: "Kashmir", craft: "Firan", image: product3, size: "small" as const },
-  { name: "Rajasthan", craft: "Bandhani", image: product2, size: "small" as const },
-  { name: "Punjab", craft: "Phulkari", image: product4, size: "large" as const },
-  { name: "Gujarat", craft: "Patola", image: product1, size: "small" as const },
+  { name: "Lucknow", craft: "Chikankari", line: "Timeless embroidery, gentle on skin.", image: product1 },
+  { name: "Kashmir", craft: "Firan", line: "Mountain traditions, woven in warmth.", image: product3 },
+  { name: "Rajasthan", craft: "Bandhani", line: "Playful tie-dye, reimagined for play.", image: product2 },
+  { name: "Punjab", craft: "Phulkari", line: "Floral threadwork in pure cotton.", image: product4 },
+  { name: "Gujarat", craft: "Patola", line: "Double-weave heritage, soft to touch.", image: product1 },
 ];
 
 const testimonials = [
@@ -121,50 +121,48 @@ const Index = () => {
             fetchPriority="high"
           />
         </motion.div>
-        {/* Warm gradient — earthy, not cold/tech */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1A2B22]/50 via-[#2C2C2C]/20 to-[#1A2B22]/60" />
+        {/* Localized vignette — only where text lives, preserves image richness */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(26,43,34,0.35)_0%,_transparent_70%)]" />
+        <div className="absolute bottom-0 left-0 right-0 h-[45%] bg-gradient-to-t from-[#1A2B22]/50 to-transparent" />
 
         <motion.div
           style={{ opacity: heroFade, y: heroLift }}
           className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6"
         >
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-2xl">
-            {/* Warm translucent panel behind text */}
-            <div className="bg-[#1A2B22]/20 backdrop-blur-[2px] rounded-3xl px-8 py-12 md:px-14 md:py-16">
-              <motion.h1
-                variants={reveal}
-                className="font-serif text-[42px] sm:text-[58px] md:text-[72px] lg:text-[84px] font-semibold text-[#FAF7F2] leading-[1.04] tracking-[-0.02em]"
-              >
-                Childhood, woven
-                <br />
-                with <em className="italic font-normal text-[#FAF7F2]/80">tradition.</em>
-              </motion.h1>
+            <motion.h1
+              variants={reveal}
+              className="font-serif text-[42px] sm:text-[58px] md:text-[72px] lg:text-[84px] font-semibold text-[#F7F1E8] leading-[1.04] tracking-[-0.02em] drop-shadow-[0_2px_20px_rgba(26,43,34,0.3)]"
+            >
+              Childhood, woven
+              <br />
+              with <em className="italic font-normal text-[#F7F1E8]/75">tradition.</em>
+            </motion.h1>
 
-              <motion.p
-                variants={reveal}
-                className="text-[#FAF7F2]/55 text-[16px] md:text-[19px] mt-7 mb-10 max-w-md mx-auto leading-[1.7]"
-              >
-                Regional artistry, reimagined for modern childhood.
-              </motion.p>
+            <motion.p
+              variants={reveal}
+              className="text-[#F7F1E8]/50 text-[16px] md:text-[19px] mt-7 mb-10 max-w-md mx-auto leading-[1.7] drop-shadow-[0_1px_8px_rgba(26,43,34,0.2)]"
+            >
+              Regional artistry, reimagined for modern childhood.
+            </motion.p>
 
-              <motion.div
-                variants={reveal}
-                className="flex items-center justify-center gap-6"
+            <motion.div
+              variants={reveal}
+              className="flex items-center justify-center gap-6"
+            >
+              <Link
+                to="/shop"
+                className="bg-[#F7F1E8]/10 border border-[#F7F1E8]/15 rounded-full px-8 py-3.5 text-[#F7F1E8] text-[13px] font-medium tracking-wide hover:bg-[#F7F1E8]/18 transition-all"
               >
-                <Link
-                  to="/shop"
-                  className="bg-[#FAF7F2]/12 backdrop-blur-sm border border-[#FAF7F2]/18 rounded-full px-8 py-3.5 text-[#FAF7F2] text-[13px] font-medium tracking-wide hover:bg-[#FAF7F2]/20 transition-all"
-                >
-                  Shop Collection
-                </Link>
-                <Link
-                  to="/about"
-                  className="text-[#FAF7F2]/50 text-[13px] font-medium hover:text-[#FAF7F2]/80 transition-colors"
-                >
-                  Our Story
-                </Link>
-              </motion.div>
-            </div>
+                Shop Collection
+              </Link>
+              <Link
+                to="/about"
+                className="text-[#F7F1E8]/45 text-[13px] font-medium hover:text-[#F7F1E8]/75 transition-colors"
+              >
+                Our Story
+              </Link>
+            </motion.div>
           </motion.div>
         </motion.div>
 
@@ -213,49 +211,46 @@ const Index = () => {
             </motion.p>
           </motion.div>
 
-          {/* Asymmetric masonry-like grid */}
+          {/* Consistent 4:5 cards — editorial covers, not random grid */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
             variants={stagger}
-            className="grid grid-cols-2 md:grid-cols-12 gap-4 md:gap-5"
+            className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5"
           >
-            {regions.map((region, i) => {
-              /* Alternate sizing: 7-5, 5-7, 5-4-3 pattern */
-              const colSpans = ["md:col-span-7", "md:col-span-5", "md:col-span-5", "md:col-span-4", "md:col-span-3"];
-              const aspects = ["aspect-[4/5]", "aspect-[3/4]", "aspect-[3/4]", "aspect-[4/5]", "aspect-[3/4]"];
-              return (
-                <motion.div
-                  key={region.name}
-                  variants={reveal}
-                  whileHover={{ y: -5 }}
-                  transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                  className={colSpans[i]}
+            {regions.map((region) => (
+              <motion.div
+                key={region.name}
+                variants={reveal}
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              >
+                <Link
+                  to={`/shop?craft=${region.craft}`}
+                  className="group block relative aspect-[4/5] rounded-2xl overflow-hidden"
                 >
-                  <Link
-                    to={`/shop?craft=${region.craft}`}
-                    className={`group block relative ${aspects[i]} rounded-2xl overflow-hidden`}
-                  >
-                    <img
-                      src={region.image}
-                      alt={region.name}
-                      className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent" />
-                    <div className="absolute bottom-0 left-0 p-5 md:p-7">
-                      <p className="text-white/50 text-[12px] uppercase tracking-[0.15em] mb-1">
-                        {region.craft}
-                      </p>
-                      <h3 className="font-serif text-[22px] md:text-[26px] text-white font-semibold leading-tight">
-                        {region.name}
-                      </h3>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
+                  <img
+                    src={region.image}
+                    alt={region.name}
+                    className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
+                  <div className="absolute bottom-0 left-0 p-5 md:p-6">
+                    <p className="text-[#F7F1E8]/45 text-[12px] uppercase tracking-[0.12em] mb-1.5">
+                      {region.craft}
+                    </p>
+                    <h3 className="font-serif text-[20px] md:text-[22px] text-[#F7F1E8] font-semibold leading-tight">
+                      {region.name}
+                    </h3>
+                    <p className="text-[#F7F1E8]/35 text-[13px] mt-2 leading-snug hidden md:block">
+                      {region.line}
+                    </p>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
