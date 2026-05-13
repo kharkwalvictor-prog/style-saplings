@@ -90,7 +90,7 @@ const About = () => {
         >
           <motion.span
             variants={reveal}
-            className="text-white/40 text-xs uppercase tracking-[0.25em] font-medium block mb-5"
+            className="text-white/60 text-xs uppercase tracking-[0.25em] font-medium block mb-5"
           >
             Our Story
           </motion.span>

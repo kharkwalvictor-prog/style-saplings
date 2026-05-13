@@ -121,9 +121,9 @@ const Index = () => {
             fetchPriority="high"
           />
         </motion.div>
-        {/* Localized vignette — only where text lives, preserves image richness */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(26,43,34,0.35)_0%,_transparent_70%)]" />
-        <div className="absolute bottom-0 left-0 right-0 h-[45%] bg-gradient-to-t from-[#1A2B22]/50 to-transparent" />
+        {/* Strong readable overlay — dark enough to guarantee text contrast */}
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-black/50 to-transparent" />
 
         <motion.div
           style={{ opacity: heroFade, y: heroLift }}
@@ -132,16 +132,16 @@ const Index = () => {
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-2xl">
             <motion.h1
               variants={reveal}
-              className="font-serif text-[42px] sm:text-[58px] md:text-[72px] lg:text-[84px] font-semibold text-[#F7F1E8] leading-[1.04] tracking-[-0.02em] drop-shadow-[0_2px_20px_rgba(26,43,34,0.3)]"
+              className="font-serif text-[42px] sm:text-[58px] md:text-[72px] lg:text-[84px] font-semibold text-white leading-[1.04] tracking-[-0.02em]"
             >
               Childhood, woven
               <br />
-              with <em className="italic font-normal text-[#F7F1E8]/75">tradition.</em>
+              with <em className="italic font-normal text-white/85">tradition.</em>
             </motion.h1>
 
             <motion.p
               variants={reveal}
-              className="text-[#F7F1E8]/50 text-[16px] md:text-[19px] mt-7 mb-10 max-w-md mx-auto leading-[1.7] drop-shadow-[0_1px_8px_rgba(26,43,34,0.2)]"
+              className="text-white/70 text-[17px] md:text-[20px] mt-7 mb-10 max-w-md mx-auto leading-[1.7]"
             >
               Regional artistry, reimagined for modern childhood.
             </motion.p>
@@ -152,13 +152,13 @@ const Index = () => {
             >
               <Link
                 to="/shop"
-                className="bg-[#F7F1E8]/10 border border-[#F7F1E8]/15 rounded-full px-8 py-3.5 text-[#F7F1E8] text-[13px] font-medium tracking-wide hover:bg-[#F7F1E8]/18 transition-all"
+                className="bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-8 py-3.5 text-white text-[14px] font-medium tracking-wide hover:bg-white/25 transition-all"
               >
                 Shop Collection
               </Link>
               <Link
                 to="/about"
-                className="text-[#F7F1E8]/45 text-[13px] font-medium hover:text-[#F7F1E8]/75 transition-colors"
+                className="text-white/65 text-[14px] font-medium hover:text-white transition-colors"
               >
                 Our Story
               </Link>
@@ -177,7 +177,7 @@ const Index = () => {
           <motion.div
             animate={{ scaleY: [0, 1, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-10 bg-white/25 origin-top"
+            className="w-px h-10 bg-white/40 origin-top"
           />
         </motion.div>
       </section>
@@ -238,13 +238,13 @@ const Index = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
                   <div className="absolute bottom-0 left-0 p-5 md:p-6">
-                    <p className="text-[#F7F1E8]/45 text-[12px] uppercase tracking-[0.12em] mb-1.5">
+                    <p className="text-white/60 text-[12px] uppercase tracking-[0.12em] mb-1.5">
                       {region.craft}
                     </p>
-                    <h3 className="font-serif text-[20px] md:text-[22px] text-[#F7F1E8] font-semibold leading-tight">
+                    <h3 className="font-serif text-[20px] md:text-[22px] text-white font-semibold leading-tight">
                       {region.name}
                     </h3>
-                    <p className="text-[#F7F1E8]/35 text-[13px] mt-2 leading-snug hidden md:block">
+                    <p className="text-white/50 text-[13px] mt-2 leading-snug hidden md:block">
                       {region.line}
                     </p>
                   </div>
