@@ -236,7 +236,7 @@ const Shop = () => {
       ═══════════════════════════════════════════════════ */}
       <section
         ref={heroRef}
-        className="relative h-[40vh] min-h-[300px] overflow-hidden"
+        className="relative h-[40vh] min-h-[200px] md:min-h-[300px] overflow-hidden"
       >
         <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
           <AnimatePresence mode="wait">
@@ -259,7 +259,7 @@ const Shop = () => {
 
         {/* Content — bottom left */}
         <div className="absolute inset-0 z-10 flex items-end">
-          <div className="container px-6 md:px-8 pb-10 md:pb-14">
+          <div className="container px-5 md:px-8 pb-10 md:pb-14">
             <AnimatePresence mode="wait">
               <motion.div
                 key={heroTitle}
@@ -284,11 +284,11 @@ const Shop = () => {
           FILTER BAR — Sticky, minimal, magazine-like
       ═══════════════════════════════════════════════════ */}
       <div className="sticky top-0 z-30 bg-background border-b border-border">
-        <div className="container px-6 md:px-8">
+        <div className="container px-5 md:px-8">
           <div className="flex items-center justify-between h-14 gap-4">
             {/* Craft type text filters */}
             <nav
-              className="flex items-center gap-1 overflow-x-auto no-scrollbar"
+              className="flex items-center gap-1 overflow-x-auto no-scrollbar -mx-1 px-1"
               role="tablist"
               aria-label="Filter by craft type"
             >
@@ -422,7 +422,7 @@ const Shop = () => {
                 value={localSearch}
                 onChange={(e) => setLocalSearch(e.target.value)}
                 placeholder="Search pieces..."
-                className="w-full bg-accent/40 rounded-lg border-none text-[13px] pl-8 pr-8 py-2 focus:outline-none focus:ring-1 focus:ring-border placeholder:text-muted-foreground/60"
+                className="w-full bg-accent/40 rounded-lg border-none text-[16px] pl-8 pr-8 py-2 focus:outline-none focus:ring-1 focus:ring-border placeholder:text-muted-foreground/60"
                 aria-label="Search products"
               />
               {localSearch && (
@@ -474,7 +474,7 @@ const Shop = () => {
       {/* ═══════════════════════════════════════════════════
           PRODUCT GRID with inline storytelling
       ═══════════════════════════════════════════════════ */}
-      <div className="container px-6 md:px-8 py-10 md:py-14">
+      <div className="container px-5 md:px-8 py-10 md:py-14">
         {/* Count */}
         {!loading && !isSearching && (
           <motion.p
@@ -534,7 +534,7 @@ const Shop = () => {
             initial="hidden"
             animate="visible"
             variants={stagger}
-            className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8"
+            className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8"
           >
             {gridItems.map((item) => {
               if (item.type === "story") {
@@ -544,7 +544,7 @@ const Shop = () => {
                     variants={reveal}
                     className="col-span-2 md:col-span-3"
                   >
-                    <div className="bg-[#EDE7DE] rounded-3xl p-10 md:p-14 flex items-center justify-center">
+                    <div className="bg-[#EDE7DE] rounded-3xl p-6 md:p-14 flex items-center justify-center">
                       <p className="font-serif italic text-[17px] md:text-[20px] leading-[1.7] text-foreground/80 max-w-2xl text-center">
                         &ldquo;{item.text}&rdquo;
                       </p>

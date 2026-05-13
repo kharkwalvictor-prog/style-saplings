@@ -41,7 +41,7 @@ const loadRazorpayScript = (): Promise<boolean> =>
     document.body.appendChild(script);
   });
 
-const inputClass = "w-full border rounded-2xl px-4 py-3 text-sm bg-background focus:outline-none focus:ring-1 focus:ring-ring";
+const inputClass = "w-full border rounded-2xl px-4 py-3 text-[16px] bg-background focus:outline-none focus:ring-1 focus:ring-ring";
 
 interface DiscountState {
   id: string;
@@ -380,7 +380,7 @@ const Checkout = () => {
     <div className="min-h-screen">
       <Header />
       <PageBanner label="Checkout" title="Complete Your Order" />
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="container px-4 md:px-8 py-16 md:py-24">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="container px-5 md:px-8 py-12 md:py-24">
         <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-6">
             {/* Contact */}
@@ -443,12 +443,12 @@ const Checkout = () => {
             <div className="space-y-4">
               <h2 className="font-serif text-xl font-semibold">Payment Method</h2>
               <div className="space-y-2">
-                <label className="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer hover:border-primary transition-colors">
-                  <input type="radio" name="payment" value="razorpay" checked={form.paymentMethod === "razorpay"} onChange={() => update("paymentMethod", "razorpay")} className="accent-primary" />
+                <label className="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer hover:border-primary transition-colors min-h-[44px]">
+                  <input type="radio" name="payment" value="razorpay" checked={form.paymentMethod === "razorpay"} onChange={() => update("paymentMethod", "razorpay")} className="accent-primary w-5 h-5" />
                   <div><p className="text-sm font-medium">Razorpay (UPI / Card / Netbanking)</p><p className="text-xs text-muted-foreground">Pay securely online</p></div>
                 </label>
-                <label className="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer hover:border-primary transition-colors">
-                  <input type="radio" name="payment" value="cod" checked={form.paymentMethod === "cod"} onChange={() => update("paymentMethod", "cod")} className="accent-primary" />
+                <label className="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer hover:border-primary transition-colors min-h-[44px]">
+                  <input type="radio" name="payment" value="cod" checked={form.paymentMethod === "cod"} onChange={() => update("paymentMethod", "cod")} className="accent-primary w-5 h-5" />
                   <div><p className="text-sm font-medium">Cash on Delivery</p><p className="text-xs text-muted-foreground">Pay when you receive your order</p></div>
                 </label>
               </div>
@@ -571,7 +571,7 @@ const Checkout = () => {
                 Prices are inclusive of all applicable taxes
               </p>
 
-              <Button type="submit" variant="hero" className="w-full" disabled={submitting}>
+              <Button type="submit" variant="hero" className="w-full py-4 min-h-[44px] text-[16px]" disabled={submitting}>
                 {submitting ? "Processing..." : form.paymentMethod === "razorpay" ? "Pay Now" : "Place Order (COD)"}
               </Button>
             </div>

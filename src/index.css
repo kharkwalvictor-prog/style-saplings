@@ -138,6 +138,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Prevent iOS input zoom */
+@supports (-webkit-touch-callout: none) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
 ::selection {
   background-color: hsl(18 42% 52% / 0.15);
 }

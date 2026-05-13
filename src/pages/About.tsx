@@ -84,7 +84,7 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           1. HERO — Dark sage, text-focused, editorial
       ═══════════════════════════════════════════════════ */}
-      <section className="relative h-[50vh] min-h-[350px] bg-[#1E3320] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[50vh] min-h-[250px] md:min-h-[350px] bg-[#1E3320] flex items-center justify-center overflow-hidden">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -113,8 +113,8 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           2. THE SEARCH — Origin story, asymmetric layout
       ═══════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-36 bg-background">
-        <div className="container px-6 md:px-8">
+      <section className="py-12 md:py-36 bg-background">
+        <div className="container px-5 md:px-8">
           <div className="grid md:grid-cols-12 gap-12 md:gap-0 items-center">
             {/* Left — Image */}
             <motion.div
@@ -174,8 +174,8 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           3. THE CRAFTS — Editorial cards on warm background
       ═══════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-32 bg-[#EDE7DE]">
-        <div className="container px-6 md:px-8">
+      <section className="py-12 md:py-32 bg-[#EDE7DE]">
+        <div className="container px-5 md:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -196,7 +196,7 @@ const About = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
             variants={stagger}
-            className="grid md:grid-cols-3 gap-6 md:gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
           >
             {crafts.map((craft) => (
               <motion.div
@@ -233,20 +233,20 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           4. STATS ROW — Centered with dividers
       ═══════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-20 bg-background">
-        <div className="container px-6 md:px-8">
+      <section className="py-12 md:py-20 bg-background">
+        <div className="container px-5 md:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
             variants={stagger}
-            className="flex flex-wrap items-center justify-center md:divide-x divide-border"
+            className="grid grid-cols-2 md:flex md:flex-wrap items-center justify-center gap-4 md:gap-0 md:divide-x divide-border"
           >
             {stats.map((stat) => (
               <motion.div
                 key={stat.label}
                 variants={reveal}
-                className="text-center px-8 md:px-12 py-4 md:py-0 w-1/2 md:w-auto"
+                className="text-center px-4 md:px-12 py-4 md:py-0"
               >
                 <p className="font-serif text-3xl md:text-4xl font-semibold text-foreground leading-none">
                   {stat.value}
@@ -263,14 +263,14 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           5. FOUNDER QUOTE — Centered card
       ═══════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-28 bg-[#EDE7DE]">
-        <div className="container px-6 md:px-8 flex justify-center">
+      <section className="py-12 md:py-28 bg-[#EDE7DE]">
+        <div className="container px-5 md:px-8 flex justify-center">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="max-w-[700px] w-full bg-white rounded-3xl p-10 md:p-14 text-center shadow-sm"
+            className="max-w-[700px] w-full bg-white rounded-3xl p-6 md:p-14 text-center shadow-sm"
           >
             <motion.div
               variants={reveal}
@@ -300,10 +300,10 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           6. CTA BANNER — Dark sage, cinematic close
       ═══════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-[#1E3320] relative overflow-hidden">
+      <section className="py-16 md:py-28 bg-[#1E3320] relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0id2hpdGUiLz48L3N2Zz4=')] pointer-events-none" />
 
-        <div className="container px-6 md:px-8 text-center relative">
+        <div className="container px-5 md:px-8 text-center relative">
           <motion.div
             initial="hidden"
             whileInView="visible"

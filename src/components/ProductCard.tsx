@@ -93,7 +93,7 @@ const ProductCard = ({ product, index = 0 }: Props) => {
             {/* Wishlist */}
             <button
               onClick={handleWishlist}
-              className="absolute top-3 right-3 bg-white/90 backdrop-blur-md rounded-full p-2 shadow-md z-10 hover:scale-110 transition-transform"
+              className="absolute top-3 right-3 bg-white/90 backdrop-blur-md rounded-full min-w-[36px] min-h-[36px] flex items-center justify-center shadow-md z-10 hover:scale-110 transition-transform"
               aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
             >
               <Heart
@@ -119,10 +119,10 @@ const ProductCard = ({ product, index = 0 }: Props) => {
 
         {/* Info */}
         <div className="mt-3.5 space-y-1 px-0.5">
-          <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#4A6B45]">
+          <span className="text-[12px] uppercase tracking-[0.2em] font-bold text-[#4A6B45]">
             {product.craft_type}
           </span>
-          <h3 className="font-serif text-base md:text-lg font-medium leading-tight">
+          <h3 className="font-serif text-[14px] md:text-lg font-medium leading-tight">
             {product.name}
           </h3>
           {reviewSummary && (
@@ -142,11 +142,11 @@ const ProductCard = ({ product, index = 0 }: Props) => {
           <div className="flex items-center gap-2 pt-0.5">
             {product.sale_price ? (
               <>
-                <span className="text-sm font-bold">₹{Number(product.sale_price).toLocaleString("en-IN")}</span>
+                <span className="text-[14px] font-bold">₹{Number(product.sale_price).toLocaleString("en-IN")}</span>
                 <span className="text-xs text-muted-foreground line-through">₹{Number(product.price).toLocaleString("en-IN")}</span>
               </>
             ) : (
-              <span className="text-sm font-bold">₹{Number(product.price).toLocaleString("en-IN")}</span>
+              <span className="text-[14px] font-bold">₹{Number(product.price).toLocaleString("en-IN")}</span>
             )}
           </div>
         </div>

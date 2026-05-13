@@ -31,7 +31,7 @@ const Contact = () => {
 
       {/* Body */}
       <section className="py-16 md:py-24" style={{ backgroundColor: "#F7F4EF" }}>
-        <div className="max-w-[1100px] mx-auto px-4 md:px-8">
+        <div className="max-w-[1100px] mx-auto px-5 md:px-8">
           <div className="grid md:grid-cols-5 gap-8">
             {/* Left — info card */}
             <motion.div {...fade} transition={{ duration: 0.5 }} className="md:col-span-2 rounded-2xl p-8 text-white" style={{ backgroundColor: '#1E3320' }}>
@@ -86,17 +86,17 @@ const Contact = () => {
                 <input
                   type="text" placeholder="Full Name" required value={form.name}
                   onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
-                  className="w-full border border-border rounded-md px-4 py-3 text-[14px] bg-background focus:outline-none focus:ring-1 focus:ring-ring"
+                  className="w-full border border-border rounded-md px-4 py-3 text-[16px] bg-background focus:outline-none focus:ring-1 focus:ring-ring"
                 />
                 <input
                   type="email" placeholder="Email Address" required value={form.email}
                   onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
-                  className="w-full border border-border rounded-md px-4 py-3 text-[14px] bg-background focus:outline-none focus:ring-1 focus:ring-ring"
+                  className="w-full border border-border rounded-md px-4 py-3 text-[16px] bg-background focus:outline-none focus:ring-1 focus:ring-ring"
                 />
                 <select
                   value={form.subject}
                   onChange={e => setForm(p => ({ ...p, subject: e.target.value }))}
-                  className="w-full border border-border rounded-md px-4 py-3 text-[14px] bg-background focus:outline-none focus:ring-1 focus:ring-ring"
+                  className="w-full border border-border rounded-md px-4 py-3 text-[16px] bg-background focus:outline-none focus:ring-1 focus:ring-ring"
                 >
                   <option value="Order Query">Order Query</option>
                   <option value="Product Information">Product Information</option>
@@ -106,9 +106,9 @@ const Contact = () => {
                 <textarea
                   placeholder="Your Message" required value={form.message}
                   onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
-                  className="w-full border border-border rounded-md px-4 py-3 text-[14px] bg-background focus:outline-none focus:ring-1 focus:ring-ring resize-none h-32"
+                  className="w-full border border-border rounded-md px-4 py-3 text-[16px] bg-background focus:outline-none focus:ring-1 focus:ring-ring resize-none h-32"
                 />
-                <Button type="submit" className="w-full bg-foreground text-background hover:bg-foreground/90 py-3 rounded-full text-[14px] font-medium">
+                <Button type="submit" className="w-full bg-foreground text-background hover:bg-foreground/90 py-4 rounded-full text-[14px] font-medium min-h-[44px]">
                   Send Message
                 </Button>
               </form>

@@ -47,15 +47,15 @@ const Blog = () => {
       {/* Featured post */}
       {activeCategory === "All" && featured && (
         <section className="py-0 bg-background">
-          <div className="container px-4 md:px-8 py-10 md:py-14">
-            <motion.div {...fade} transition={{ duration: 0.5 }} className="rounded-2xl overflow-hidden grid md:grid-cols-5" style={{ backgroundColor: "#1E3320" }}>
-              <div className="md:col-span-3 p-8 md:p-10 flex flex-col justify-end text-white">
+          <div className="container px-5 md:px-8 py-10 md:py-14">
+            <motion.div {...fade} transition={{ duration: 0.5 }} className="rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-5" style={{ backgroundColor: "#1E3320" }}>
+              <div className="md:col-span-3 p-6 md:p-10 flex flex-col justify-end text-white order-2 md:order-1">
                 <span className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#C06A4F" }}>{featured.category}</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-semibold leading-snug mb-4">{featured.title}</h2>
                 <p className="text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.7)" }}>{featured.excerpt}</p>
                 <Link to={`/blog/${featured.slug}`} className="text-sm font-medium hover:underline underline-offset-4" style={{ color: "#C06A4F" }}>Read More →</Link>
               </div>
-              <div className="md:col-span-2 min-h-[200px] md:min-h-[300px]">
+              <div className="md:col-span-2 min-h-[200px] md:min-h-[300px] order-1 md:order-2">
                 <img src={featured.cover_image || product1} alt={featured.title} className="w-full h-full object-cover" />
               </div>
             </motion.div>
@@ -64,14 +64,14 @@ const Blog = () => {
       )}
 
       {/* Category pills + grid */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container px-4 md:px-8">
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
+      <section className="py-12 md:py-24 bg-background">
+        <div className="container px-5 md:px-8">
+          <div className="flex overflow-x-auto no-scrollbar md:flex-wrap md:justify-center gap-2 mb-10 -mx-1 px-1 pb-2">
             {categories.map(c => (
               <button
                 key={c}
                 onClick={() => setActiveCategory(c)}
-                className={`px-5 py-2 text-sm font-medium rounded-full border transition-colors ${
+                className={`px-5 py-2 text-sm font-medium rounded-full border transition-colors whitespace-nowrap min-h-[44px] ${
                   activeCategory === c
                     ? "text-white border-transparent"
                     : "bg-white border-primary text-primary hover:bg-primary/5"

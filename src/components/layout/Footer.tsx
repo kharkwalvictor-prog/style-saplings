@@ -21,7 +21,7 @@ const Footer = () => {
     <footer>
       {/* ── Newsletter — warm, editorial ── */}
       <section className="bg-[#EDE7DE]">
-        <div className="container px-6 md:px-8 py-20 md:py-28">
+        <div className="container px-5 md:px-8 py-14 md:py-28">
           <div className="max-w-md mx-auto text-center">
             <p className="font-serif italic text-[17px] md:text-[20px] text-muted-foreground mb-6 leading-relaxed">
               {getContent(content, "footer_newsletter_tagline", "Inspired by India's regional artistry, designed for little celebrations.")}
@@ -42,14 +42,14 @@ const Footer = () => {
                 Welcome to the family.
               </motion.p>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex gap-2 max-w-sm mx-auto">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 max-w-sm mx-auto">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email"
                   required
-                  className="flex-1 px-5 py-3 text-[14px] bg-white/80 border-0 rounded-full text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-2 focus:ring-[#4A6B45]/20 transition-all min-h-[44px]"
+                  className="flex-1 px-5 py-3 text-[16px] sm:text-[14px] bg-white/80 border-0 rounded-full text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-2 focus:ring-[#4A6B45]/20 transition-all min-h-[44px]"
                 />
                 <button
                   type="submit"
@@ -65,7 +65,7 @@ const Footer = () => {
 
       {/* ── Main footer — atmospheric ── */}
       <div className="bg-[#1E3320]">
-        <div className="container px-6 md:px-8">
+        <div className="container px-5 md:px-8">
           {/* Brand statement */}
           <div className="pt-16 md:pt-20 pb-12 md:pb-14 text-center border-b border-white/10">
             <Link to="/">
@@ -81,7 +81,7 @@ const Footer = () => {
           </div>
 
           {/* Links — clean, minimal */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8 py-12 md:py-14">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-8 py-12 md:py-14">
             <div>
               <h4 className="text-[13px] uppercase tracking-[0.2em] text-white/60 mb-5">Shop</h4>
               <ul className="space-y-3">
@@ -143,19 +143,19 @@ const Footer = () => {
               </ul>
               <div className="flex items-center gap-3 mt-5">
                 <a href="https://instagram.com/stylesaplings" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full border border-white/25 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all" aria-label="Instagram">
-                  <Instagram className="h-3.5 w-3.5" />
+                  className="w-10 h-10 rounded-full border border-white/25 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all" aria-label="Instagram">
+                  <Instagram className="h-4 w-4" />
                 </a>
                 <a href="https://wa.me/919810901031" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full border border-white/25 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all" aria-label="WhatsApp">
-                  <MessageCircle className="h-3.5 w-3.5" />
+                  className="w-10 h-10 rounded-full border border-white/25 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all" aria-label="WhatsApp">
+                  <MessageCircle className="h-4 w-4" />
                 </a>
               </div>
             </div>
           </div>
 
           {/* Bottom */}
-          <div className="border-t border-white/10 py-6 flex flex-col md:flex-row items-center justify-between text-[12px] text-white/50 gap-2">
+          <div className="border-t border-white/10 py-6 flex flex-col md:flex-row items-center justify-between text-[13px] text-white/50 gap-2">
             <span>&copy; {new Date().getFullYear()} Shivaya Enterprises</span>
             <div className="flex gap-5">
               <Link to="/privacy-policy" className="hover:text-white/70 transition-colors">Privacy</Link>

@@ -137,20 +137,20 @@ const Header = () => {
     <>
       {/* Announcement bar — sage green brand statement */}
       <div className="bg-[#4A6B45] overflow-hidden">
-        <Marquee speed="slow" pauseOnHover className="py-2">
-          <span className="text-[12px] md:text-[12px] tracking-[0.2em] uppercase text-white/90 mx-8">
+        <Marquee speed="slow" pauseOnHover className="py-1.5">
+          <span className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/90 mx-8">
             {getContent(content, "announcement_1", "Free shipping on orders above ₹999")}
           </span>
-          <span className="text-[12px] md:text-[12px] tracking-[0.2em] uppercase text-white/60 mx-8">
+          <span className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/60 mx-8">
             ·
           </span>
-          <span className="text-[12px] md:text-[12px] tracking-[0.2em] uppercase text-white/90 mx-8">
+          <span className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/90 mx-8">
             {getContent(content, "announcement_2", "Pan India Delivery")}
           </span>
-          <span className="text-[12px] md:text-[12px] tracking-[0.2em] uppercase text-white/60 mx-8">
+          <span className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/60 mx-8">
             ·
           </span>
-          <span className="text-[12px] md:text-[12px] tracking-[0.2em] uppercase text-white/90 mx-8">
+          <span className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/90 mx-8">
             {getContent(content, "announcement_3", "Handcrafted with Love")}
           </span>
         </Marquee>
@@ -168,7 +168,7 @@ const Header = () => {
       >
         <div className="container flex items-center justify-between h-16 md:h-[68px] px-4 md:px-8">
           {/* Mobile hamburger */}
-          <button className="md:hidden" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+          <button className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={() => setMenuOpen(true)} aria-label="Open menu">
             <Menu className="h-5 w-5 text-foreground" />
           </button>
 
@@ -176,7 +176,7 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <img
               alt="Style Saplings"
-              className="h-11 md:h-13 object-contain"
+              className="h-10 md:h-13 object-contain"
               src={logoUrl}
             />
           </Link>
@@ -227,7 +227,7 @@ const Header = () => {
 
           {/* Right icons */}
           <div className="flex items-center gap-4">
-            <button className="md:hidden" onClick={() => setMobileSearchOpen(!mobileSearchOpen)} aria-label="Search">
+            <button className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={() => setMobileSearchOpen(!mobileSearchOpen)} aria-label="Search">
               <Search className="h-5 w-5 text-foreground" />
             </button>
             {!searchOpen && (
@@ -235,7 +235,7 @@ const Header = () => {
                 <Search className="h-5 w-5 text-foreground" />
               </button>
             )}
-            <Link to="/wishlist" className="relative group">
+            <Link to="/wishlist" className="relative group min-w-[44px] min-h-[44px] flex items-center justify-center">
               <Heart className="h-5 w-5 text-foreground" />
               {wishlistCount > 0 && (
                 <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute -top-2 -right-2 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center bg-[#4A6B45]">
@@ -243,7 +243,7 @@ const Header = () => {
                 </motion.span>
               )}
             </Link>
-            <Link to="/cart" className="relative group">
+            <Link to="/cart" className="relative group min-w-[44px] min-h-[44px] flex items-center justify-center">
               <ShoppingBag className="h-5 w-5 text-foreground" />
               {totalItems > 0 && (
                 <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute -top-2 -right-2 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center bg-[#4A6B45]">
@@ -260,7 +260,7 @@ const Header = () => {
             <motion.div ref={dropdownRef} initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="md:hidden border-t border-border overflow-visible relative bg-background">
               <div className="relative px-4 py-3">
                 <Search className="absolute left-7 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <input ref={mobileSearchRef} value={searchInput} onChange={(e) => setSearchInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Search products..." className="w-full pl-10 pr-10 py-2.5 text-sm border border-border rounded-xl bg-background focus:outline-none focus:ring-2 focus:ring-[#4A6B45]/20 transition-all" />
+                <input ref={mobileSearchRef} value={searchInput} onChange={(e) => setSearchInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Search products..." className="w-full pl-10 pr-10 py-2.5 text-[16px] border border-border rounded-xl bg-background focus:outline-none focus:ring-2 focus:ring-[#4A6B45]/20 transition-all" />
                 <button onClick={closeSearch} className="absolute right-7 top-1/2 -translate-y-1/2"><X className="h-4 w-4 text-muted-foreground hover:text-foreground" /></button>
                 <SearchDropdown />
               </div>
@@ -288,7 +288,7 @@ const Header = () => {
               <nav className="flex flex-col px-6 pt-6 flex-1 overflow-y-auto">
                 {navLinks.map((l, i) => (
                   <motion.div key={l.to} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 + i * 0.05 }}>
-                    <Link to={l.to} onClick={() => setMenuOpen(false)} className={`block py-4 font-sans text-lg font-medium tracking-wide transition-colors ${location.pathname === l.to ? "text-[#4A6B45]" : "text-foreground hover:text-[#4A6B45]"}`}>
+                    <Link to={l.to} onClick={() => setMenuOpen(false)} className={`block py-4 min-h-[44px] font-sans text-lg font-medium tracking-wide transition-colors ${location.pathname === l.to ? "text-[#4A6B45]" : "text-foreground hover:text-[#4A6B45]"}`}>
                       {l.label}
                     </Link>
                     {i < navLinks.length - 1 && <div className="border-b border-border" />}
@@ -296,7 +296,7 @@ const Header = () => {
                 ))}
                 <div>
                   <div className="border-b border-border" />
-                  <Link to="/cart" onClick={() => setMenuOpen(false)} className="block py-4 font-sans text-lg font-medium tracking-wide text-foreground hover:text-[#4A6B45] transition-colors">
+                  <Link to="/cart" onClick={() => setMenuOpen(false)} className="block py-4 min-h-[44px] font-sans text-lg font-medium tracking-wide text-foreground hover:text-[#4A6B45] transition-colors">
                     Cart {totalItems > 0 && `(${totalItems})`}
                   </Link>
                 </div>

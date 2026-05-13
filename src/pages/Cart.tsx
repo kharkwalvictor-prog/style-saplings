@@ -29,7 +29,7 @@ const Cart = () => {
     <div className="min-h-screen">
       <Header />
       <PageBanner label="Shopping" title="Your Cart" />
-      <div className="container px-4 md:px-8 py-16 md:py-24">
+      <div className="container px-5 md:px-8 py-12 md:py-24">
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-4">
@@ -57,11 +57,11 @@ const Cart = () => {
                   </div>
                   <div className="flex items-center justify-between mt-4">
                     <div className="flex items-center border rounded-2xl">
-                      <button onClick={() => updateQuantity(item.product.id, item.size, item.quantity - 1)} className="px-2 py-1">
+                      <button onClick={() => updateQuantity(item.product.id, item.size, item.quantity - 1)} className="px-3 py-2 min-w-[44px] min-h-[44px] flex items-center justify-center">
                         <Minus className="h-3 w-3" />
                       </button>
                       <span className="px-3 text-sm font-medium">{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.product.id, item.size, item.quantity + 1)} className="px-2 py-1">
+                      <button onClick={() => updateQuantity(item.product.id, item.size, item.quantity + 1)} className="px-3 py-2 min-w-[44px] min-h-[44px] flex items-center justify-center">
                         <Plus className="h-3 w-3" />
                       </button>
                     </div>
@@ -96,7 +96,7 @@ const Cart = () => {
                   Add ₹{(999 - totalAmount).toLocaleString("en-IN")} more for free shipping
                 </p>
               )}
-              <Button variant="hero" className="w-full" asChild>
+              <Button variant="hero" className="w-full py-4 min-h-[44px] text-[16px]" asChild>
                 <Link to="/checkout">Proceed to Checkout</Link>
               </Button>
             </div>

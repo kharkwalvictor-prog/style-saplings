@@ -113,7 +113,7 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           HERO — Cinematic, emotional, minimal copy
       ═══════════════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative h-[100svh] min-h-[550px] md:min-h-[650px] overflow-hidden">
+      <section ref={heroRef} className="relative h-[100svh] min-h-[500px] md:min-h-[650px] overflow-hidden">
         <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
           <img
             src={heroImg}
@@ -128,19 +128,19 @@ const Index = () => {
 
         <motion.div
           style={{ opacity: heroFade, y: heroLift }}
-          className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6"
+          className="relative z-10 h-full flex flex-col items-center justify-center text-center px-5 md:px-6"
         >
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-2xl">
             <motion.h1
               variants={reveal}
-              className="font-serif text-[36px] sm:text-[58px] md:text-[72px] lg:text-[84px] font-semibold text-white leading-[1.04] tracking-[-0.02em] [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]"
+              className="font-serif text-[32px] sm:text-[58px] md:text-[72px] lg:text-[84px] font-semibold text-white leading-[1.04] tracking-[-0.02em] [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]"
             >
               {getContent(content, "hero_headline", "Childhood, woven with tradition.")}
             </motion.h1>
 
             <motion.p
               variants={reveal}
-              className="text-white/85 text-[18px] md:text-[22px] mt-7 mb-10 max-w-md mx-auto leading-[1.7] [text-shadow:_0_1px_15px_rgba(0,0,0,0.2)]"
+              className="text-white/85 text-[15px] md:text-[22px] mt-7 mb-10 max-w-md mx-auto leading-[1.7] [text-shadow:_0_1px_15px_rgba(0,0,0,0.2)]"
             >
               {getContent(content, "hero_subtitle", "Regional artistry, reimagined for modern childhood.")}
             </motion.p>
@@ -184,19 +184,19 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           EXPLORE INDIA — Signature section, asymmetric grid
       ═══════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-44 bg-background">
-        <div className="container px-6 md:px-8">
+      <section className="py-12 md:py-44 bg-background">
+        <div className="container px-5 md:px-8">
           {/* Left-aligned heading — NOT centered, editorial feel */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="mb-16 md:mb-24 max-w-lg"
+            className="mb-10 md:mb-24 max-w-lg"
           >
             <motion.h2
               variants={reveal}
-              className="font-serif text-[36px] md:text-[54px] font-semibold leading-[1.04] tracking-[-0.025em]"
+              className="font-serif text-[28px] md:text-[54px] font-semibold leading-[1.04] tracking-[-0.025em]"
             >
               {getContent(content, "explore_heading", "Explore India through clothing.")}
             </motion.h2>
@@ -225,7 +225,7 @@ const Index = () => {
               >
                 <Link
                   to={`/shop?craft=${region.craft}`}
-                  className="group block relative aspect-[4/5] rounded-2xl overflow-hidden"
+                  className="group block relative aspect-[4/5] rounded-2xl overflow-hidden min-h-[44px]"
                 >
                   <img
                     src={region.image}
@@ -255,16 +255,16 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           CRAFT STORY — Editorial, asymmetric, emotional
       ═══════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-40 bg-[#EDE7DE]" ref={craftRef}>
-        <div className="container px-6 md:px-8">
-          <div className="grid md:grid-cols-12 gap-12 md:gap-0 items-center">
-            {/* Text — left */}
+      <section className="py-12 md:py-40 bg-[#EDE7DE]" ref={craftRef}>
+        <div className="container px-5 md:px-8">
+          <div className="grid md:grid-cols-12 gap-10 md:gap-0 items-center">
+            {/* Image — shown first on mobile (order-first), text below */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-80px" }}
               variants={stagger}
-              className="md:col-span-5"
+              className="md:col-span-5 order-2 md:order-1"
             >
               <motion.span
                 variants={reveal}
@@ -303,7 +303,7 @@ const Index = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-80px" }}
               variants={imageReveal}
-              className="md:col-span-6 md:col-start-7"
+              className="md:col-span-6 md:col-start-7 order-1 md:order-2"
             >
               <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-black/10">
                 <motion.img
@@ -335,8 +335,8 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           FEATURED — Minimal, big imagery, breathing room
       ═══════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-36 bg-background">
-        <div className="container px-6 md:px-8">
+      <section className="py-12 md:py-36 bg-background">
+        <div className="container px-5 md:px-8">
           <div className="flex items-end justify-between mb-12 md:mb-16">
             <motion.h2
               initial="hidden"
@@ -357,7 +357,7 @@ const Index = () => {
           </div>
 
           {isLoading ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8">
               {Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} className="space-y-4">
                   <Skeleton className="aspect-[3/4] rounded-2xl" />
@@ -372,7 +372,7 @@ const Index = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
               variants={stagger}
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8"
+              className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8"
             >
               {featuredProducts.map((product) => (
                 <motion.div key={product.id} variants={reveal}>
@@ -387,8 +387,8 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           SOCIAL PROOF — Testimonials, warm background
       ═══════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-32 bg-[#EDE7DE]">
-        <div className="container px-6 md:px-8">
+      <section className="py-12 md:py-32 bg-[#EDE7DE]">
+        <div className="container px-5 md:px-8">
           <motion.h2
             initial="hidden"
             whileInView="visible"
@@ -404,13 +404,13 @@ const Index = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
             variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8"
           >
             {testimonials.map((t) => (
               <motion.div
                 key={t.name}
                 variants={reveal}
-                className="bg-background rounded-3xl p-8 md:p-10"
+                className="bg-background rounded-3xl p-6 md:p-10"
               >
                 <div className="flex gap-1 mb-5">
                   {Array.from({ length: 5 }).map((_, i) => (
@@ -432,11 +432,11 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           FINAL CTA — Emotional close, cinematic
       ═══════════════════════════════════════════════════ */}
-      <section className="py-32 md:py-44 bg-[#1E3320] relative overflow-hidden">
+      <section className="py-16 md:py-44 bg-[#1E3320] relative overflow-hidden">
         {/* Subtle texture */}
         <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0id2hpdGUiLz48L3N2Zz4=')] pointer-events-none" />
 
-        <div className="container px-6 md:px-8 relative">
+        <div className="container px-5 md:px-8 relative">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -446,7 +446,7 @@ const Index = () => {
           >
             <motion.h2
               variants={reveal}
-              className="font-serif text-[34px] md:text-[52px] lg:text-[60px] text-white font-semibold leading-[1.08] tracking-[-0.01em]"
+              className="font-serif text-[28px] md:text-[52px] lg:text-[60px] text-white font-semibold leading-[1.08] tracking-[-0.01em]"
             >
               {getContent(content, "cta_heading", "Childhood deserves stories woven into every thread.")}
             </motion.h2>
@@ -480,14 +480,14 @@ const Index = () => {
         className="border-t border-border py-10 md:py-12 bg-background"
       >
         <div className="container px-6 md:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-0 md:divide-x md:divide-border">
+          <div className="grid grid-cols-2 md:flex md:flex-wrap items-center justify-center gap-4 md:gap-0 md:divide-x md:divide-border">
             {[
               { icon: Sparkles, label: "Handcrafted" },
               { icon: ShieldCheck, label: "Pure Cotton" },
               { icon: Ruler, label: "Ages 2\u20135" },
               { icon: Truck, label: "Free Shipping \u20B9999+" },
             ].map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-2.5 px-6 md:px-10">
+              <div key={label} className="flex items-center justify-center gap-2.5 px-4 md:px-10">
                 <Icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
                 <span className="text-[13px] uppercase tracking-[0.1em] text-muted-foreground">
                   {label}

@@ -253,7 +253,7 @@ const ProductDetail = () => {
         initial="hidden"
         animate="visible"
         variants={stagger}
-        className="container px-4 md:px-8 py-6 md:py-10"
+        className="container px-5 md:px-8 py-6 md:py-10 pb-24 md:pb-10"
       >
         {/* ── Breadcrumb ── */}
         <motion.nav
@@ -388,12 +388,12 @@ const ProductDetail = () => {
             {/* Emotional content cards (2x2 grid) */}
             <motion.div
               variants={reveal}
-              className="grid grid-cols-2 gap-3 mb-8"
+              className="grid grid-cols-2 gap-2 md:gap-3 mb-8"
             >
               {emotionalCards.map((card) => (
                 <div
                   key={card.label}
-                  className="bg-[#EDE7DE]/50 rounded-xl p-4"
+                  className="bg-[#EDE7DE]/50 rounded-xl p-3 md:p-4"
                 >
                   <span className="text-[12px] uppercase tracking-wider text-muted-foreground block mb-1">
                     {card.label}
@@ -422,7 +422,7 @@ const ProductDetail = () => {
                       key={s}
                       disabled={!available}
                       onClick={() => setSelectedSize(s)}
-                      className={`h-12 px-5 text-[14px] font-medium rounded-lg transition-all duration-200 ${
+                      className={`min-h-[48px] min-w-[48px] px-5 text-[14px] font-medium rounded-lg transition-all duration-200 ${
                         selectedSize === s
                           ? "bg-foreground text-background"
                           : available
@@ -453,7 +453,7 @@ const ProductDetail = () => {
               <Button
                 disabled={isOutOfStock}
                 onClick={handleAddToCart}
-                className={`flex-1 rounded-full py-4 h-auto text-[15px] font-medium transition-all duration-300 ${
+                className={`flex-1 rounded-full py-4 h-auto text-[16px] font-medium transition-all duration-300 ${
                   addedToCart
                     ? "bg-[#4A6B45] hover:bg-[#4A6B45] text-white"
                     : "bg-foreground text-background hover:bg-foreground/90"
@@ -540,7 +540,7 @@ const ProductDetail = () => {
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </Link>
             </motion.div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
               {related.map((p, i) => (
                 <ProductCard key={p.id} product={p} index={i} />
               ))}
@@ -553,6 +553,29 @@ const ProductDetail = () => {
         ════════════════════════════════════════════ */}
         <ProductReviews productId={product.id} />
       </motion.div>
+
+      {/* Sticky add-to-cart bar for mobile */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4 z-40">
+        <Button
+          disabled={isOutOfStock}
+          onClick={handleAddToCart}
+          className={`w-full rounded-full py-4 h-auto text-[16px] font-medium transition-all duration-300 ${
+            addedToCart
+              ? "bg-[#4A6B45] hover:bg-[#4A6B45] text-white"
+              : "bg-foreground text-background hover:bg-foreground/90"
+          }`}
+        >
+          {addedToCart ? (
+            <>
+              <Check className="h-4 w-4 mr-2" /> Added to cart
+            </>
+          ) : isOutOfStock ? (
+            "Out of Stock"
+          ) : (
+            <>Add to Cart {product.sale_price ? `\u00B7 \u20B9${Number(product.sale_price).toLocaleString("en-IN")}` : `\u00B7 \u20B9${Number(product.price).toLocaleString("en-IN")}`}</>
+          )}
+        </Button>
+      </div>
 
       <Footer />
     </div>
