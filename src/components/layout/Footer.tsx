@@ -67,7 +67,7 @@ const Footer = () => {
       <div className="bg-[#1C2B1A]">
         <div className="container px-6 md:px-8">
           {/* Top section — logo + tagline centered */}
-          <div className="pt-16 md:pt-20 pb-12 md:pb-14 text-center border-b border-white/[0.06]">
+          <div className="pt-16 md:pt-20 pb-12 md:pb-14 text-center border-b border-white/10">
             <Link to="/" className="inline-block mb-4">
               <img
                 src={logoUrl}
@@ -75,7 +75,7 @@ const Footer = () => {
                 className="h-16 md:h-20 object-contain mx-auto"
               />
             </Link>
-            <p className="font-serif text-[15px] md:text-[17px] text-white/40 italic max-w-sm mx-auto leading-relaxed">
+            <p className="font-serif text-[15px] md:text-[17px] text-white/60 italic max-w-sm mx-auto leading-relaxed">
               Authentic Indian craftsmanship for little ones
             </p>
           </div>
@@ -83,7 +83,7 @@ const Footer = () => {
           {/* Link columns */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8 py-12 md:py-14">
             <div>
-              <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/20 font-medium mb-5">
+              <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-medium mb-5">
                 Shop
               </h4>
               <ul className="space-y-3">
@@ -97,7 +97,7 @@ const Footer = () => {
                   <li key={link.label}>
                     <Link
                       to={link.to}
-                      className="text-[13px] text-white/30 hover:text-white/70 transition-colors"
+                      className="text-[13px] text-white/55 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -107,7 +107,7 @@ const Footer = () => {
             </div>
 
             <div>
-              <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/20 font-medium mb-5">
+              <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-medium mb-5">
                 Company
               </h4>
               <ul className="space-y-3">
@@ -119,7 +119,7 @@ const Footer = () => {
                   <li key={link.label}>
                     <Link
                       to={link.to}
-                      className="text-[13px] text-white/30 hover:text-white/70 transition-colors"
+                      className="text-[13px] text-white/55 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -129,7 +129,7 @@ const Footer = () => {
             </div>
 
             <div>
-              <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/20 font-medium mb-5">
+              <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-medium mb-5">
                 Help
               </h4>
               <ul className="space-y-3">
@@ -143,7 +143,7 @@ const Footer = () => {
                   <li key={link.label}>
                     <Link
                       to={link.to}
-                      className="text-[13px] text-white/30 hover:text-white/70 transition-colors"
+                      className="text-[13px] text-white/55 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -153,30 +153,30 @@ const Footer = () => {
             </div>
 
             <div>
-              <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/20 font-medium mb-5">
+              <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-medium mb-5">
                 Reach Us
               </h4>
               <ul className="space-y-4">
                 <li>
                   <a
                     href="mailto:support@stylesaplings.com"
-                    className="flex items-start gap-2.5 text-[13px] text-white/30 hover:text-white/70 transition-colors"
+                    className="flex items-start gap-2.5 text-[13px] text-white/55 hover:text-white transition-colors"
                   >
-                    <Mail className="h-3.5 w-3.5 mt-[3px] flex-shrink-0 text-white/15" />
+                    <Mail className="h-3.5 w-3.5 mt-[3px] flex-shrink-0 text-white/40" />
                     support@stylesaplings.com
                   </a>
                 </li>
                 <li>
                   <a
                     href="tel:+919810901031"
-                    className="flex items-start gap-2.5 text-[13px] text-white/30 hover:text-white/70 transition-colors"
+                    className="flex items-start gap-2.5 text-[13px] text-white/55 hover:text-white transition-colors"
                   >
-                    <Phone className="h-3.5 w-3.5 mt-[3px] flex-shrink-0 text-white/15" />
+                    <Phone className="h-3.5 w-3.5 mt-[3px] flex-shrink-0 text-white/40" />
                     +91 98109 01031
                   </a>
                 </li>
-                <li className="flex items-start gap-2.5 text-[13px] text-white/20">
-                  <MapPin className="h-3.5 w-3.5 mt-[3px] flex-shrink-0 text-white/15" />
+                <li className="flex items-start gap-2.5 text-[13px] text-white/50">
+                  <MapPin className="h-3.5 w-3.5 mt-[3px] flex-shrink-0 text-white/40" />
                   <span>Vasant Kunj, New Delhi 110070</span>
                 </li>
               </ul>
@@ -187,7 +187,7 @@ const Footer = () => {
                   href="https://instagram.com/stylesaplings"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 text-white/30 hover:text-white/70 hover:border-white/25 transition-all"
+                  className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 text-white/55 hover:text-white hover:border-white/25 transition-all"
                   aria-label="Instagram"
                 >
                   <Instagram className="h-3.5 w-3.5" />
@@ -196,7 +196,7 @@ const Footer = () => {
                   href="https://wa.me/919810901031"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 text-white/30 hover:text-white/70 hover:border-white/25 transition-all"
+                  className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 text-white/55 hover:text-white hover:border-white/25 transition-all"
                   aria-label="WhatsApp"
                 >
                   <MessageCircle className="h-3.5 w-3.5" />
@@ -206,11 +206,11 @@ const Footer = () => {
           </div>
 
           {/* Payment methods */}
-          <div className="border-t border-white/[0.06] py-5 flex items-center justify-center gap-4">
+          <div className="border-t border-white/10 py-5 flex items-center justify-center gap-4">
             {["UPI", "Razorpay", "COD", "Visa", "Mastercard"].map((m) => (
               <span
                 key={m}
-                className="text-[10px] text-white/12 uppercase tracking-wider px-2 py-0.5 border border-white/[0.06] rounded"
+                className="text-[10px] text-white/35 uppercase tracking-wider px-2 py-0.5 border border-white/10 rounded"
               >
                 {m}
               </span>
@@ -218,11 +218,11 @@ const Footer = () => {
           </div>
 
           {/* Copyright */}
-          <div className="border-t border-white/[0.06] py-5 flex flex-col md:flex-row items-center justify-between gap-2">
-            <span className="text-[11px] text-white/12">
+          <div className="border-t border-white/10 py-5 flex flex-col md:flex-row items-center justify-between gap-2">
+            <span className="text-[11px] text-white/35">
               &copy; {year} Shivaya Enterprises &middot; Style Saplings &middot; New Delhi, India
             </span>
-            <span className="text-[11px] text-white/12">
+            <span className="text-[11px] text-white/35">
               Made with care in India
             </span>
           </div>
