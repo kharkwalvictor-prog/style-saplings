@@ -126,11 +126,20 @@ const Index = () => {
           className="relative z-10 text-center px-6 max-w-3xl mx-auto"
           style={{ opacity: heroOpacity }}
         >
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="text-[11px] md:text-[12px] uppercase tracking-[0.3em] text-white/50 font-medium mb-6"
+          >
+            Authentic Indian Craftsmanship
+          </motion.p>
+
           <motion.h1
             initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="font-serif text-[36px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-semibold text-white leading-[1.08]"
+            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="font-serif text-[38px] sm:text-[50px] md:text-[60px] lg:text-[72px] font-semibold text-white leading-[1.06]"
           >
             Rooted in Tradition,
             <br />
@@ -139,7 +148,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{
                 duration: 1,
-                delay: 0.5,
+                delay: 0.6,
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="italic font-normal"
@@ -148,20 +157,36 @@ const Index = () => {
             </motion.em>
           </motion.h1>
 
-          <motion.div
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-10"
+            className="text-[14px] md:text-[16px] text-white/55 max-w-md mx-auto leading-relaxed mt-6 mb-10"
+          >
+            Handcrafted Chikankari, Bandhani & Kashmiri ethnic wear
+            for children aged 2–5. Made by artisans, worn with love.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Link
               to="/shop"
-              className="inline-flex items-center gap-2.5 text-[13px] uppercase tracking-[0.2em] font-medium text-white/90 hover:text-white transition-all group"
+              className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-[13px] uppercase tracking-[0.15em] font-medium text-white hover:bg-white/20 transition-all group"
             >
-              <span className="relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 group-hover:after:w-full">
-                Shop the Collection
-              </span>
+              Shop the Collection
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.15em] font-medium text-white/60 hover:text-white transition-all group"
+            >
+              <span className="relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-white/60 after:transition-all after:duration-300 group-hover:after:w-full">
+                Our Story
+              </span>
             </Link>
           </motion.div>
         </motion.div>
@@ -458,7 +483,80 @@ const Index = () => {
       </section>
 
       {/* ────────────────────────────────────────────
-          6. TRUST STRIP — Minimal, elegant
+          6. FOUNDER QUOTE — Personal touch
+      ──────────────────────────────────────────── */}
+      <section className="py-24 md:py-32 bg-[#F8F8F6]">
+        <div className="container px-6 md:px-8">
+          <motion.div
+            custom={0}
+            variants={revealVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-2xl mx-auto text-center"
+          >
+            <div className="font-serif text-5xl text-muted-foreground/20 mb-4" aria-hidden="true">&ldquo;</div>
+            <p className="font-serif text-xl md:text-2xl italic leading-[1.6] text-foreground/80 -mt-2 mb-6">
+              Style Saplings began with a simple wish — to dress our children
+              in the same beautiful handcrafted traditions that have defined
+              Indian culture for generations.
+            </p>
+            <div className="w-8 h-px bg-border mx-auto mb-4" />
+            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-medium">
+              Victor & Family, Founders
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ────────────────────────────────────────────
+          7. INSTAGRAM — Social proof
+      ──────────────────────────────────────────── */}
+      <section className="py-20 md:py-24 bg-white">
+        <div className="container px-6 md:px-8">
+          <motion.div
+            custom={0}
+            variants={revealVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <h2 className="font-serif text-2xl md:text-[2rem] font-semibold">
+              @stylesaplings
+            </h2>
+            <p className="text-sm text-muted-foreground mt-2">
+              Follow along for styling inspiration & new drops
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
+            {[product1, product2, product3, product4, product1, product2].map((img, i) => (
+              <motion.a
+                key={i}
+                href="https://instagram.com/stylesaplings"
+                target="_blank"
+                rel="noopener noreferrer"
+                custom={i * 0.06}
+                variants={revealVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="aspect-square overflow-hidden rounded-xl group"
+              >
+                <img
+                  src={img}
+                  alt={`@stylesaplings — photo ${i + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ────────────────────────────────────────────
+          8. TRUST STRIP — Minimal, elegant
       ──────────────────────────────────────────── */}
       <motion.section
         initial={{ opacity: 0 }}

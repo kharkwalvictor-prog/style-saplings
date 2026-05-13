@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Instagram, MessageCircle } from "lucide-react";
+import logoLight from "@/assets/logo-light.jpeg";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -72,9 +73,13 @@ const Footer = () => {
           {/* Brand column */}
           <div className="col-span-2 md:col-span-4">
             <Link to="/" className="inline-block mb-6">
-              <span className="font-serif text-xl font-semibold text-white">
-                Style Saplings
-              </span>
+              <div className="bg-white rounded-lg p-1.5 inline-block">
+                <img
+                  src={logoLight}
+                  alt="Style Saplings"
+                  className="h-10 object-contain"
+                />
+              </div>
             </Link>
             <p className="text-[13px] text-white/35 leading-[1.8] max-w-[260px] mb-8">
               Handcrafted Indian ethnic wear for children aged 2–5.
