@@ -13,7 +13,7 @@ const AdminSettings = () => {
     legal_name: "",
     address: "",
     state: "Delhi",
-    state_code: "",
+    state_code: "07",
     trade_name: "",
   });
   const [shipping, setShipping] = useState({
@@ -36,25 +36,31 @@ const AdminSettings = () => {
   const loadSettings = async () => {
     setLoading(true);
     try {
-      // Load GST config from Supabase
-      const { data: gstData } = await supabase.from("gst_config").select("*").limit(1).single();
-      if (gstData) {
-        const row = gstData as any;
-        gstRowId.current = row.id ?? null;
+      const { data, error } = await supabase
+        .from("gst_config")
+        .select("*")
+        .limit(1)
+        .maybeSingle();
+
+      if (error) {
+        console.error("Load GST error:", error);
+      }
+
+      if (data) {
+        gstRowId.current = data.id;
         setGst({
-          gstin: row.gstin || "",
-          legal_name: row.legal_name || "",
-          address: row.address || "",
-          state: row.state || "Delhi",
-          state_code: row.state_code || "",
-          trade_name: row.trade_name || "",
+          gstin: data.gstin || "",
+          legal_name: data.legal_name || "",
+          address: data.address || "",
+          state: data.state || "Delhi",
+          state_code: data.state_code || "07",
+          trade_name: data.trade_name || "",
         });
       }
-    } catch {
-      // gst_config might not exist yet
+    } catch (err) {
+      console.error("Load settings error:", err);
     }
 
-    // Load shipping & contact from localStorage as cache
     const savedShipping = localStorage.getItem("ss_shipping_config");
     if (savedShipping) setShipping(JSON.parse(savedShipping));
 
@@ -67,48 +73,54 @@ const AdminSettings = () => {
   const handleSave = async () => {
     setSaving(true);
     try {
-      // Build the GST row payload
-      const gstPayload = {
-        gstin: gst.gstin || "",
-        legal_name: gst.legal_name || "",
-        trade_name: gst.trade_name || "",
-        address: gst.address || "",
-        state: gst.state || "Delhi",
-        state_code: gst.state_code || "07",
-        updated_at: new Date().toISOString(),
-      };
-
-      let saveError: any = null;
-
+      // Always try update first, then insert if no rows affected
       if (gstRowId.current) {
-        const { error } = await (supabase as any)
+        const { error } = await supabase
           .from("gst_config")
-          .update(gstPayload)
+          .update({
+            gstin: gst.gstin,
+            legal_name: gst.legal_name,
+            trade_name: gst.trade_name,
+            address: gst.address,
+            state: gst.state,
+            state_code: gst.state_code,
+          })
           .eq("id", gstRowId.current);
-        saveError = error;
+
+        if (error) {
+          console.error("Update GST error:", error);
+          throw error;
+        }
       } else {
-        const { data, error } = await (supabase as any)
+        // No existing row — insert new
+        const { data, error } = await supabase
           .from("gst_config")
-          .insert({ ...gstPayload, effective_from: new Date().toISOString().split("T")[0] })
+          .insert({
+            gstin: gst.gstin,
+            legal_name: gst.legal_name,
+            trade_name: gst.trade_name,
+            address: gst.address,
+            state: gst.state,
+            state_code: gst.state_code,
+          })
           .select("id")
           .single();
-        saveError = error;
+
+        if (error) {
+          console.error("Insert GST error:", error);
+          throw error;
+        }
         if (data) gstRowId.current = data.id;
       }
 
-      if (saveError) {
-        console.error("GST save error:", saveError);
-        throw saveError;
-      }
-
-      // Save shipping & contact to localStorage (until a dedicated DB table is added)
+      // Save shipping & contact to localStorage
       localStorage.setItem("ss_shipping_config", JSON.stringify(shipping));
       localStorage.setItem("ss_contact_config", JSON.stringify(contact));
 
       toast.success("Settings saved successfully");
-    } catch (err) {
-      console.error("Settings save error:", err);
-      toast.error("Failed to save settings");
+    } catch (err: any) {
+      console.error("Save failed:", err);
+      toast.error(err?.message || "Failed to save settings");
     }
     setSaving(false);
   };
@@ -127,15 +139,15 @@ const AdminSettings = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="text-xs font-medium text-muted-foreground mb-1 block">Business Name</label>
-            <input value={gst.legal_name} onChange={e => setGst(p => ({ ...p, legal_name: e.target.value }))} placeholder="Shivaya Enterprises" className={inputClass} />
+            <input value={gst.legal_name} onChange={e => setGst(p => ({ ...p, legal_name: e.target.value }))} placeholder="Victor Arun Kharkwal" className={inputClass} />
           </div>
           <div>
             <label className="text-xs font-medium text-muted-foreground mb-1 block">Trade Name</label>
-            <input value={gst.trade_name} onChange={e => setGst(p => ({ ...p, trade_name: e.target.value }))} placeholder="Style Saplings" className={inputClass} />
+            <input value={gst.trade_name} onChange={e => setGst(p => ({ ...p, trade_name: e.target.value }))} placeholder="Shivaya Enterprises" className={inputClass} />
           </div>
           <div>
             <label className="text-xs font-medium text-muted-foreground mb-1 block">GSTIN</label>
-            <input value={gst.gstin} onChange={e => setGst(p => ({ ...p, gstin: e.target.value }))} placeholder="07AAACS1234A1Z5" className={inputClass} />
+            <input value={gst.gstin} onChange={e => setGst(p => ({ ...p, gstin: e.target.value }))} placeholder="07BEGPK0002P1ZN" className={inputClass} />
           </div>
           <div>
             <label className="text-xs font-medium text-muted-foreground mb-1 block">State Code</label>
