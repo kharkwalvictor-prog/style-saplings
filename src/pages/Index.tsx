@@ -510,53 +510,7 @@ const Index = () => {
       </section>
 
       {/* ────────────────────────────────────────────
-          7. INSTAGRAM — Social proof
-      ──────────────────────────────────────────── */}
-      <section className="py-20 md:py-24 bg-white">
-        <div className="container px-6 md:px-8">
-          <motion.div
-            custom={0}
-            variants={revealVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-center mb-10"
-          >
-            <h2 className="font-serif text-2xl md:text-[2rem] font-semibold">
-              @stylesaplings
-            </h2>
-            <p className="text-sm text-muted-foreground mt-2">
-              Follow along for styling inspiration & new drops
-            </p>
-          </motion.div>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
-            {[product1, product2, product3, product4, product1, product2].map((img, i) => (
-              <motion.a
-                key={i}
-                href="https://instagram.com/stylesaplings"
-                target="_blank"
-                rel="noopener noreferrer"
-                custom={i * 0.06}
-                variants={revealVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="aspect-square overflow-hidden rounded-xl group"
-              >
-                <img
-                  src={img}
-                  alt={`@stylesaplings — photo ${i + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
-                />
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ────────────────────────────────────────────
-          8. TRUST STRIP — Minimal, elegant
+          7. TRUST STRIP — Minimal, elegant
       ──────────────────────────────────────────── */}
       <motion.section
         initial={{ opacity: 0 }}
