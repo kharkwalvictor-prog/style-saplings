@@ -393,9 +393,9 @@ const ProductDetail = () => {
               {emotionalCards.map((card) => (
                 <div
                   key={card.label}
-                  className="bg-[#EDE8DF]/50 rounded-xl p-4"
+                  className="bg-[#F0EBE1]/50 rounded-xl p-4"
                 >
-                  <span className="text-[11px] uppercase tracking-wider text-muted-foreground block mb-1">
+                  <span className="text-[12px] uppercase tracking-wider text-muted-foreground block mb-1">
                     {card.label}
                   </span>
                   <span className="text-[14px] font-medium leading-snug block">

@@ -134,21 +134,21 @@ const Header = () => {
   return (
     <>
       {/* Announcement bar — scrolling marquee */}
-      <div className="bg-[#EDE8DF] border-b border-border/30 overflow-hidden">
+      <div className="bg-[#F0EBE1] border-b border-border/30 overflow-hidden">
         <Marquee speed="slow" pauseOnHover className="py-2">
-          <span className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-muted-foreground/70 mx-8">
+          <span className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-muted-foreground/70 mx-8">
             Free shipping on orders above ₹999
           </span>
-          <span className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-muted-foreground/70 mx-8">
+          <span className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-muted-foreground/70 mx-8">
             ·
           </span>
-          <span className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-muted-foreground/70 mx-8">
+          <span className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-muted-foreground/70 mx-8">
             Pan India Delivery
           </span>
-          <span className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-muted-foreground/70 mx-8">
+          <span className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-muted-foreground/70 mx-8">
             ·
           </span>
-          <span className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-muted-foreground/70 mx-8">
+          <span className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-muted-foreground/70 mx-8">
             Handcrafted with Love
           </span>
         </Marquee>

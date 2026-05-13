@@ -154,7 +154,7 @@ const Footer = () => {
           </div>
 
           {/* Bottom */}
-          <div className="border-t border-white/8 py-6 flex flex-col md:flex-row items-center justify-between text-[11px] text-white/25 gap-2">
+          <div className="border-t border-white/8 py-6 flex flex-col md:flex-row items-center justify-between text-[12px] text-white/25 gap-2">
             <span>&copy; {new Date().getFullYear()} Shivaya Enterprises</span>
             <div className="flex gap-5">
               <Link to="/privacy-policy" className="hover:text-white/50 transition-colors">Privacy</Link>

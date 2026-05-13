@@ -184,7 +184,7 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           3. THE CRAFTS — Editorial cards on warm background
       ═══════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#EDE8DF]">
+      <section className="py-24 md:py-32 bg-[#F0EBE1]">
         <div className="container px-6 md:px-8">
           <motion.div
             initial="hidden"
@@ -273,7 +273,7 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           5. FOUNDER QUOTE — Centered card
       ═══════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-[#EDE8DF]">
+      <section className="py-20 md:py-28 bg-[#F0EBE1]">
         <div className="container px-6 md:px-8 flex justify-center">
           <motion.div
             initial="hidden"

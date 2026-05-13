@@ -69,7 +69,7 @@ const HeroBanner = () => {
                 alt={slide.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#2A2220]/70 via-[#2A2220]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A2B22]/70 via-[#1A2B22]/20 to-transparent" />
             </div>
           ))}
         </div>
@@ -86,7 +86,7 @@ const HeroBanner = () => {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="text-white/50 text-[11px] tracking-[0.35em] uppercase mb-4 font-medium">
+              <p className="text-white/50 text-[12px] tracking-[0.35em] uppercase mb-4 font-medium">
                 {slides[selectedIndex].subtitle}
               </p>
               <h1 className="font-serif text-3xl md:text-5xl lg:text-[4rem] font-semibold text-white leading-[1.1] mb-4 max-w-2xl">
@@ -97,7 +97,7 @@ const HeroBanner = () => {
               </p>
               <Link
                 to={slides[selectedIndex].link}
-                className="inline-flex items-center gap-2 bg-[#C4622D] hover:bg-[#B5561F] text-white text-sm font-semibold tracking-wide px-8 py-3.5 rounded-full transition-colors active:scale-[0.97]"
+                className="inline-flex items-center gap-2 bg-[#C4785A] hover:bg-[#B0684E] text-white text-sm font-semibold tracking-wide px-8 py-3.5 rounded-full transition-colors active:scale-[0.97]"
               >
                 {slides[selectedIndex].cta}
               </Link>

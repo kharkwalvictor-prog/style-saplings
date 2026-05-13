@@ -567,7 +567,7 @@ const Checkout = () => {
                 <span>Total (incl. GST)</span>
                 <span>₹{grandTotal.toLocaleString("en-IN")}</span>
               </div>
-              <p className="text-[11px] text-muted-foreground text-center mb-4">
+              <p className="text-[12px] text-muted-foreground text-center mb-4">
                 Prices are inclusive of all applicable taxes
               </p>
 

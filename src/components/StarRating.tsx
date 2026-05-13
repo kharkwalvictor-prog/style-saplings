@@ -25,8 +25,8 @@ const StarRating = ({ value, onChange, readonly = false, size = 16 }: StarRating
         >
           <Star
             size={size}
-            fill={(hover || value) >= star ? "#C4622D" : "none"}
-            stroke={(hover || value) >= star ? "#C4622D" : "#d1d5db"}
+            fill={(hover || value) >= star ? "#C4785A" : "none"}
+            stroke={(hover || value) >= star ? "#C4785A" : "#d1d5db"}
             strokeWidth={1.5}
           />
         </button>

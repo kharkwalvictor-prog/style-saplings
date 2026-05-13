@@ -544,7 +544,7 @@ const Shop = () => {
                     variants={reveal}
                     className="col-span-2 md:col-span-3"
                   >
-                    <div className="bg-[#EDE8DF] rounded-3xl p-10 md:p-14 flex items-center justify-center">
+                    <div className="bg-[#F0EBE1] rounded-3xl p-10 md:p-14 flex items-center justify-center">
                       <p className="font-serif italic text-[17px] md:text-[20px] leading-[1.7] text-foreground/80 max-w-2xl text-center">
                         &ldquo;{item.text}&rdquo;
                       </p>

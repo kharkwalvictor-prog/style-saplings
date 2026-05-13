@@ -242,7 +242,7 @@ const Index = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent" />
                     <div className="absolute bottom-0 left-0 p-5 md:p-7">
-                      <p className="text-white/50 text-[11px] uppercase tracking-[0.15em] mb-1">
+                      <p className="text-white/50 text-[12px] uppercase tracking-[0.15em] mb-1">
                         {region.craft}
                       </p>
                       <h3 className="font-serif text-[22px] md:text-[26px] text-white font-semibold leading-tight">
