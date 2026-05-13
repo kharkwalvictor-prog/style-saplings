@@ -6,7 +6,7 @@ import { useWishlist } from "@/context/WishlistContext";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { useProductSearch } from "@/hooks/useProductSearch";
 import { Marquee } from "@/components/ui/marquee";
-import logoLight from "@/assets/logo-light.jpeg";
+const logoHeader = "/assets/logo-header.png";
 
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
@@ -222,9 +222,8 @@ const Header = () => {
               <img
                 alt="Style Saplings"
                 className="h-11 md:h-13 object-contain"
-                src={logoLight}
-                style={{ mixBlendMode: "multiply" }}
-              />
+                src={logoHeader}
+                              />
             </Link>
           </div>
 
@@ -289,9 +288,8 @@ const Header = () => {
               <img
                 alt="Style Saplings"
                 className="h-10 object-contain"
-                src={logoLight}
-                style={{ mixBlendMode: "multiply" }}
-              />
+                src={logoHeader}
+                              />
             </Link>
           </div>
 
@@ -364,11 +362,10 @@ const Header = () => {
               {/* Menu header */}
               <div className="flex items-center justify-between px-6 h-16 border-b border-border">
                 <img
-                  src={logoLight}
+                  src={logoHeader}
                   alt="Style Saplings"
                   className="h-11 object-contain"
-                  style={{ mixBlendMode: "multiply" }}
-                />
+                                  />
                 <button onClick={() => setMenuOpen(false)} aria-label="Close menu">
                   <X className="h-5 w-5 text-foreground" />
                 </button>
