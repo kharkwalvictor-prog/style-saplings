@@ -5,6 +5,7 @@ import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { useProductSearch } from "@/hooks/useProductSearch";
+import { Marquee } from "@/components/ui/marquee";
 import logoLight from "@/assets/logo-light.jpeg";
 
 import product1 from "@/assets/product-1.jpg";
@@ -131,9 +132,22 @@ const Header = () => {
 
   return (
     <>
-      {/* Announcement bar */}
-      <div className="text-center text-[10px] md:text-[11px] py-2 tracking-[0.2em] uppercase text-muted-foreground/70 border-b border-border/30">
-        Complimentary shipping on orders above ₹999
+      {/* Announcement bar — scrolling marquee */}
+      <div className="bg-[#EDE8DF] overflow-hidden border-b border-border/30">
+        <Marquee speed="slow" pauseOnHover className="py-2">
+          <span className="text-[11px] tracking-[0.15em] uppercase text-[#2A2220]/60 font-medium whitespace-nowrap px-6">
+            Free shipping on orders above ₹999
+          </span>
+          <span className="text-[11px] text-[#2A2220]/30 px-2" aria-hidden="true">·</span>
+          <span className="text-[11px] tracking-[0.15em] uppercase text-[#2A2220]/60 font-medium whitespace-nowrap px-6">
+            Pan India Delivery
+          </span>
+          <span className="text-[11px] text-[#2A2220]/30 px-2" aria-hidden="true">·</span>
+          <span className="text-[11px] tracking-[0.15em] uppercase text-[#2A2220]/60 font-medium whitespace-nowrap px-6">
+            Handcrafted with Love
+          </span>
+          <span className="text-[11px] text-[#2A2220]/30 px-2" aria-hidden="true">·</span>
+        </Marquee>
       </div>
 
       {/* Main header — ALWAYS has background, never fully transparent */}

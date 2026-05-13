@@ -64,7 +64,7 @@ const About = () => {
       </section>
 
       {/* Brand Story */}
-      <section className="py-20 md:py-32" className="bg-background">
+      <section className="py-20 md:py-32 bg-background">
         <div className="container px-4 md:px-8">
           <div className="grid md:grid-cols-5 gap-10 md:gap-16 items-center">
             <motion.div {...fadeUp} className="md:col-span-2">
@@ -130,7 +130,7 @@ const About = () => {
       </section>
 
       {/* Stats */}
-      <section className="py-16 md:py-24" className="bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container px-4 md:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {stats.map((s, i) => (
