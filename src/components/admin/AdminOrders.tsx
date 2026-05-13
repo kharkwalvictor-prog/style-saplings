@@ -6,8 +6,10 @@ import { toast } from "sonner";
 import { formatDistanceToNow, format } from "date-fns";
 import {
   Loader2, X, ArrowRight, Search,
-  MessageSquare, Printer, ChevronRight, Download
+  MessageSquare, Printer, ChevronRight, Download,
+  ExternalLink, Copy, Package, Truck,
 } from "lucide-react";
+import ShipOrderDialog from "./ShipOrderDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -71,6 +73,7 @@ const AdminOrders = () => {
   const [search, setSearch] = useState("");
   const [selectedOrder, setSelectedOrder] = useState<DbOrder | null>(null);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [shippingOrder, setShippingOrder] = useState<DbOrder | null>(null);
   const [trackingModal, setTrackingModal] = useState<{ order: DbOrder; next: string } | null>(null);
   const [trackingInput, setTrackingInput] = useState("");
   const [cancelModal, setCancelModal] = useState<DbOrder | null>(null);
@@ -116,8 +119,7 @@ const AdminOrders = () => {
     const next = nextStatus[order.order_status];
     if (!next) return;
     if (next === "shipped") {
-      setTrackingModal({ order, next });
-      setTrackingInput("");
+      setShippingOrder(order);
       return;
     }
     await advanceOrder(order, next);
@@ -300,25 +302,16 @@ const AdminOrders = () => {
       {/* Order Detail Drawer */}
       <OrderDetailDrawer order={selectedOrder} onClose={() => setSelectedOrder(null)} onAdvance={handleAdvance} gstConfig={gstConfig || undefined} />
 
-      {/* Tracking Number Modal */}
-      <Dialog open={!!trackingModal} onOpenChange={() => setTrackingModal(null)}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="font-serif">Enter Tracking Number</DialogTitle>
-          </DialogHeader>
-          <p className="text-sm text-muted-foreground">
-            Moving <strong>{trackingModal?.order.order_number}</strong> to <strong>Shipped</strong>.
-            Add a tracking number (optional).
-          </p>
-          <Input placeholder="Tracking number" value={trackingInput}
-            onChange={e => setTrackingInput(e.target.value)}
-            onKeyDown={e => e.key === "Enter" && handleTrackingConfirm()} />
-          <DialogFooter className="flex gap-2">
-            <Button variant="outline" onClick={() => setTrackingModal(null)}>Cancel</Button>
-            <Button onClick={handleTrackingConfirm}>Confirm & Ship</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {/* Shiprocket Ship Order Dialog */}
+      <ShipOrderDialog
+        order={shippingOrder}
+        open={!!shippingOrder}
+        onClose={() => setShippingOrder(null)}
+        onShipped={() => {
+          setShippingOrder(null);
+          qc.invalidateQueries({ queryKey: ["admin-orders"] });
+        }}
+      />
 
       {/* Cancel Order Modal */}
       <Dialog open={!!cancelModal} onOpenChange={() => setCancelModal(null)}>
@@ -365,6 +358,9 @@ interface DrawerProps {
 const OrderDetailDrawer = ({ order, onClose, onAdvance, gstConfig }: DrawerProps) => {
   const [note, setNote] = useState("");
   const [tracking, setTracking] = useState("");
+  const [trackingData, setTrackingData] = useState<any[] | null>(null);
+  const [trackingLoading, setTrackingLoading] = useState(false);
+  const [labelLoading, setLabelLoading] = useState(false);
   const qc = useQueryClient();
 
   const { data: notes = [] } = useQuery({
@@ -400,6 +396,45 @@ const OrderDetailDrawer = ({ order, onClose, onAdvance, gstConfig }: DrawerProps
     await supabase.from("orders").update({ tracking_number: tracking.trim() } as any).eq("id", order.id);
     qc.invalidateQueries({ queryKey: ["admin-orders"] });
     toast.success("Tracking number saved");
+  };
+
+  const handleTrackLive = async () => {
+    if (!order) return;
+    setTrackingLoading(true);
+    setTrackingData(null);
+    try {
+      const { data, error } = await supabase.functions.invoke("track-shipment", {
+        body: { order_id: order.id },
+      });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      setTrackingData(data?.tracking_data?.tracking_data?.shipment_track_activities || data?.activities || []);
+    } catch (err: any) {
+      toast.error(err?.message || "Failed to fetch tracking");
+    } finally {
+      setTrackingLoading(false);
+    }
+  };
+
+  const handleShippingLabel = async () => {
+    if (!order) return;
+    setLabelLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("get-shipping-label", {
+        body: { order_id: order.id },
+      });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      if (data?.label_url) {
+        window.open(data.label_url, "_blank");
+      } else {
+        toast.error("No label URL returned");
+      }
+    } catch (err: any) {
+      toast.error(err?.message || "Failed to get shipping label");
+    } finally {
+      setLabelLoading(false);
+    }
   };
 
   const sendWhatsApp = () => {
@@ -501,6 +536,63 @@ const OrderDetailDrawer = ({ order, onClose, onAdvance, gstConfig }: DrawerProps
             {order.razorpay_order_id && <p className="text-xs text-muted-foreground mt-1">ID: {order.razorpay_order_id}</p>}
           </div>
 
+          {/* Shipment Details */}
+          {order.tracking_number && (
+            <div className="border rounded-lg p-3 space-y-3 bg-orange-50/50">
+              <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
+                <Truck className="h-3.5 w-3.5" /> Shipment Details
+              </h4>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-muted-foreground">AWB:</span>
+                <span className="font-mono font-semibold text-sm">{order.tracking_number}</span>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(order.tracking_number || "");
+                    toast.success("AWB copied");
+                  }}
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label="Copy AWB"
+                >
+                  <Copy className="h-3.5 w-3.5" />
+                </button>
+              </div>
+              <div className="flex gap-2">
+                <Button size="sm" variant="outline" className="flex-1 h-8 text-xs" onClick={handleTrackLive} disabled={trackingLoading}>
+                  {trackingLoading ? <Loader2 className="h-3 w-3 animate-spin mr-1" /> : <Package className="h-3 w-3 mr-1" />}
+                  Track Live
+                </Button>
+                <Button size="sm" variant="outline" className="flex-1 h-8 text-xs" onClick={handleShippingLabel} disabled={labelLoading}>
+                  {labelLoading ? <Loader2 className="h-3 w-3 animate-spin mr-1" /> : <ExternalLink className="h-3 w-3 mr-1" />}
+                  Download Label
+                </Button>
+              </div>
+
+              {/* Tracking Timeline */}
+              {trackingData && trackingData.length > 0 && (
+                <div className="space-y-0 mt-2">
+                  <h5 className="text-xs font-medium mb-2">Tracking Timeline</h5>
+                  <div className="relative pl-4 border-l-2 border-primary/30 space-y-3">
+                    {trackingData.map((event: any, i: number) => (
+                      <div key={i} className="relative">
+                        <div className="absolute -left-[calc(0.5rem+1px)] top-1 h-2 w-2 rounded-full bg-primary" />
+                        <p className="text-xs font-medium">{event.activity || event.status}</p>
+                        <p className="text-[10px] text-muted-foreground">
+                          {event.date ? format(new Date(event.date), "dd MMM yyyy, hh:mm a") : event.location || ""}
+                        </p>
+                        {event.location && event.date && (
+                          <p className="text-[10px] text-muted-foreground">{event.location}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {trackingData && trackingData.length === 0 && (
+                <p className="text-xs text-muted-foreground">No tracking events available yet.</p>
+              )}
+            </div>
+          )}
+
           {/* Actions */}
           <div className="space-y-2">
             {nextStatus[order.order_status] && (
@@ -508,7 +600,7 @@ const OrderDetailDrawer = ({ order, onClose, onAdvance, gstConfig }: DrawerProps
                 → Advance to {nextStatus[order.order_status]}
               </Button>
             )}
-            {(order.order_status === "packed" || order.order_status === "shipped") && (
+            {(order.order_status === "shipped") && !order.tracking_number && (
               <div className="flex gap-2">
                 <Input placeholder="Tracking number" value={tracking} onChange={e => setTracking(e.target.value)} className="h-9" />
                 <Button size="sm" variant="outline" onClick={saveTracking}>Save</Button>
