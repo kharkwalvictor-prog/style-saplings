@@ -139,9 +139,10 @@ const Index = () => {
 
             <motion.p
               variants={reveal}
-              className="text-white/40 text-[13px] md:text-[15px] mt-8 mb-12 max-w-xs mx-auto leading-relaxed font-light"
+              className="text-white/65 text-[15px] md:text-[17px] mt-7 mb-11 max-w-sm mx-auto leading-relaxed"
             >
               Handcrafted across India for little celebrations.
+              Soft fabrics, regional artistry, everyday comfort.
             </motion.p>
 
             <motion.div
@@ -150,16 +151,13 @@ const Index = () => {
             >
               <Link
                 to="/shop"
-                className="text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:text-white/70 transition-colors group"
+                className="bg-white/12 backdrop-blur-sm border border-white/20 rounded-full px-8 py-3.5 text-white text-[13px] font-medium tracking-wide hover:bg-white/22 transition-all"
               >
-                <span className="relative pb-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-white/30 group-hover:after:bg-white/60 after:transition-colors after:duration-300">
-                  Shop Collection
-                </span>
+                Shop Collection
               </Link>
-              <span className="text-white/15">|</span>
               <Link
                 to="/about"
-                className="text-white/50 text-[12px] uppercase tracking-[0.2em] font-medium hover:text-white/80 transition-colors"
+                className="text-white/60 text-[13px] font-medium hover:text-white transition-colors"
               >
                 Our Story
               </Link>
@@ -197,7 +195,7 @@ const Index = () => {
           >
             <motion.p
               variants={reveal}
-              className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground/60 font-medium mb-5"
+              className="text-[12px] uppercase tracking-[0.2em] text-muted-foreground font-medium mb-5"
             >
               Five Regions · Five Traditions
             </motion.p>
@@ -240,10 +238,10 @@ const Index = () => {
                     <h3 className="font-serif text-[18px] md:text-[20px] text-white font-semibold leading-tight">
                       {region.name}
                     </h3>
-                    <p className="text-white/50 text-[11px] uppercase tracking-[0.12em] mt-1">
+                    <p className="text-white/60 text-[12px] uppercase tracking-[0.1em] mt-1">
                       {region.craft}
                     </p>
-                    <p className="text-white/35 text-[12px] mt-1 hidden md:block">
+                    <p className="text-white/45 text-[13px] mt-1.5 hidden md:block leading-snug">
                       {region.desc}
                     </p>
                   </div>
@@ -270,7 +268,7 @@ const Index = () => {
             >
               <motion.span
                 variants={reveal}
-                className="text-[11px] uppercase tracking-[0.25em] text-[#C4785A] font-medium block mb-5"
+                className="text-[12px] uppercase tracking-[0.2em] text-[#C4785A] font-medium block mb-5"
               >
                 The Craft
               </motion.span>
@@ -465,7 +463,7 @@ const Index = () => {
             </motion.h2>
             <motion.p
               variants={reveal}
-              className="text-white/35 text-[14px] mt-6 max-w-xs mx-auto leading-relaxed"
+              className="text-white/50 text-[15px] mt-6 max-w-sm mx-auto leading-relaxed"
             >
               Handcrafted in India. Made for little ones.
             </motion.p>
@@ -501,8 +499,8 @@ const Index = () => {
               { icon: Truck, label: "Free Shipping \u20B9999+" },
             ].map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-2.5 px-6 md:px-10">
-                <Icon className="h-4 w-4 text-muted-foreground/60" strokeWidth={1.5} />
-                <span className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+                <Icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
+                <span className="text-[12px] uppercase tracking-[0.1em] text-muted-foreground">
                   {label}
                 </span>
               </div>
