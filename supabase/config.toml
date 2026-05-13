@@ -1,0 +1,25 @@
+project_id = "__YOUR_SUPABASE_PROJECT_ID__"
+
+[functions.create-razorpay-order]
+verify_jwt = false
+
+[functions.verify-razorpay-payment]
+verify_jwt = false
+
+[functions.validate-return-upload]
+verify_jwt = false
+
+[functions.send-order-confirmation]
+verify_jwt = false
+
+[functions.send-shipping-notification]
+verify_jwt = false
+
+[functions.generate-invoice]
+verify_jwt = false
+
+[functions.track-order]
+verify_jwt = false
+
+[functions.sitemap]
+verify_jwt = false
