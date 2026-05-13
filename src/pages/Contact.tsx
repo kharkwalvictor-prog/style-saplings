@@ -34,7 +34,7 @@ const Contact = () => {
         <div className="max-w-[1100px] mx-auto px-4 md:px-8">
           <div className="grid md:grid-cols-5 gap-8">
             {/* Left — info card */}
-            <motion.div {...fade} transition={{ duration: 0.5 }} className="md:col-span-2 rounded-2xl p-8 text-white" style={{ backgroundColor: '#1A2B22' }}>
+            <motion.div {...fade} transition={{ duration: 0.5 }} className="md:col-span-2 rounded-2xl p-8 text-white" style={{ backgroundColor: '#1E3320' }}>
               <h2 className="font-serif text-xl font-semibold mb-8">Contact Details</h2>
 
               <div className="space-y-6">

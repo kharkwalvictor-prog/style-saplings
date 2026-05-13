@@ -99,7 +99,7 @@ const ProductCard = ({ product, index = 0 }: Props) => {
               <Heart
                 className="h-4 w-4 transition-all duration-300"
                 fill={wishlisted ? "#C06A4F" : "none"}
-                stroke={wishlisted ? "#C06A4F" : "#1A2B22"}
+                stroke={wishlisted ? "#C06A4F" : "#1E3320"}
                 strokeWidth={2}
               />
             </button>

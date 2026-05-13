@@ -6,7 +6,7 @@ interface PageBannerProps {
 }
 
 const PageBanner = ({ label, title }: PageBannerProps) => (
-  <section className="relative overflow-hidden grain-overlay" style={{ backgroundColor: '#1A2B22' }}>
+  <section className="relative overflow-hidden grain-overlay" style={{ backgroundColor: '#1E3320' }}>
     <div className="relative z-10 flex items-center justify-center py-14 md:py-20 px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -20,7 +20,7 @@ const PageBanner = ({ label, title }: PageBannerProps) => (
         <h1 className="font-serif text-3xl md:text-5xl font-semibold text-white">
           {title}
         </h1>
-        <div className="w-12 h-[2px] mx-auto mt-5" style={{ backgroundColor: '#C4785A' }} />
+        <div className="w-12 h-[2px] mx-auto mt-5" style={{ backgroundColor: '#C06A4F' }} />
       </motion.div>
     </div>
   </section>

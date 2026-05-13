@@ -69,7 +69,7 @@ const SectionHeading = ({ label, title }: { label: string; title: string }) => {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
         className="text-[10px] md:text-xs tracking-[0.35em] uppercase font-bold block mb-3"
-        style={{ color: '#C4785A' }}
+        style={{ color: '#C06A4F' }}
       >
         {label}
       </motion.span>
@@ -86,7 +86,7 @@ const SectionHeading = ({ label, title }: { label: string; title: string }) => {
         animate={inView ? { scaleX: 1 } : {}}
         transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="w-16 h-[2px] mx-auto origin-center"
-        style={{ backgroundColor: '#C4785A' }}
+        style={{ backgroundColor: '#C06A4F' }}
       />
     </div>
   );
@@ -142,7 +142,7 @@ const CraftShowcase = () => {
                   {/* CTA — slides in */}
                   <motion.div
                     className="flex items-center gap-2 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0"
-                    style={{ color: '#C4785A' }}
+                    style={{ color: '#C06A4F' }}
                   >
                     Explore Collection
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />

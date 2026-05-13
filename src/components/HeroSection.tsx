@@ -179,7 +179,7 @@ const HeroSection = () => {
             transition={{ type: "spring", damping: 20, stiffness: 100, delay: 0.2 }}
           >
             <span className="inline-flex items-center gap-2 text-[#E8C9A0]/80 text-[10px] md:text-xs tracking-[0.3em] uppercase mb-8 font-medium border border-[#E8C9A0]/20 px-5 py-2 rounded-full backdrop-blur-md bg-white/5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#C4785A] animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#C06A4F] animate-pulse" />
               Authentic Indian Craftsmanship
             </span>
           </motion.div>
@@ -212,7 +212,7 @@ const HeroSection = () => {
             transition={{ type: "spring", damping: 20, stiffness: 80, delay: 1.5 }}
             className="flex flex-wrap gap-4"
           >
-            <ShimmerButton to="/shop" className="bg-[#7B8B6F] text-white hover:bg-[#4A6741]">
+            <ShimmerButton to="/shop" className="bg-[#4A6B45] text-white hover:bg-[#4A6741]">
               Shop Collection
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </ShimmerButton>
