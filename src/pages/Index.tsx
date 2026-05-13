@@ -7,7 +7,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
-import { ArrowRight, Sparkles, ShieldCheck, Ruler, Truck, Star, Quote } from "lucide-react";
+import { ArrowRight, Sparkles, ShieldCheck, Ruler, Truck, Star } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import heroImg from "@/assets/hero.jpg";
 import product1 from "@/assets/product-1.jpg";
@@ -15,8 +15,8 @@ import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
 import product4 from "@/assets/product-4.jpg";
 
-/* ── Animation variants ── */
-const revealVariants = {
+/* ── Smooth spring animation ── */
+const reveal = {
   hidden: { opacity: 0, y: 30, filter: "blur(6px)" },
   visible: {
     opacity: 1,
@@ -26,44 +26,43 @@ const revealVariants = {
   },
 };
 
-const imageRevealVariants = {
-  hidden: { opacity: 0, scale: 1.05, filter: "blur(3px)" },
+const imageReveal = {
+  hidden: { opacity: 0, scale: 1.04, filter: "blur(3px)" },
   visible: {
     opacity: 1,
     scale: 1,
     filter: "blur(0px)",
-    transition: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 1.4, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
-const staggerContainer = {
+const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.15 } },
 };
 
-/* ── Region data ── */
+/* ── Data ── */
 const regions = [
-  { name: "Lucknow", craft: "Chikankari", image: product1 },
-  { name: "Kashmir", craft: "Firan", image: product3 },
-  { name: "Rajasthan", craft: "Bandhani", image: product2 },
-  { name: "Punjab", craft: "Phulkari", image: product4 },
-  { name: "Gujarat", craft: "Patola", image: product1 },
+  { name: "Lucknow", craft: "Chikankari", desc: "Delicate hand embroidery", image: product1 },
+  { name: "Kashmir", craft: "Firan", desc: "Warm mountain traditions", image: product3 },
+  { name: "Rajasthan", craft: "Bandhani", desc: "Ancient tie-dye artistry", image: product2 },
+  { name: "Punjab", craft: "Phulkari", desc: "Vibrant floral threadwork", image: product4 },
+  { name: "Gujarat", craft: "Patola", desc: "Double-weave heritage", image: product1 },
 ];
 
-/* ── Testimonials ── */
 const testimonials = [
   {
-    quote: "The Chikankari set was absolutely stunning. The embroidery is so delicate and the cotton is incredibly soft on her skin.",
+    quote: "The embroidery is so delicate, the cotton incredibly soft. My daughter wore it all day at her nani's house and didn't want to take it off.",
     name: "Priya S.",
     location: "Mumbai",
   },
   {
-    quote: "Finally found ethnic wear my son actually wants to wear. Comfortable enough for play, beautiful enough for Diwali.",
+    quote: "Finally — ethnic wear my son actually wants to wear. Comfortable enough for play, beautiful enough for Diwali.",
     name: "Ananya P.",
     location: "Bangalore",
   },
   {
-    quote: "We've ordered three times now. The quality is unmatched at this price. Each piece feels like an heirloom.",
+    quote: "Three orders in. Each piece feels like an heirloom. The craftsmanship is unmatched at this price.",
     name: "Deepika R.",
     location: "Delhi",
   },
@@ -83,7 +82,7 @@ const Index = () => {
     return featured.length > 0 ? featured.slice(0, 4) : products.slice(0, 4);
   })();
 
-  /* ── Hero parallax ── */
+  /* Hero parallax */
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroRef,
@@ -91,151 +90,170 @@ const Index = () => {
   });
   const heroImageY = useSpring(useTransform(heroProgress, [0, 1], [0, 200]), {
     damping: 30,
-    stiffness: 120,
+    stiffness: 90,
   });
-  const heroContentOpacity = useTransform(heroProgress, [0, 0.6], [1, 0]);
-  const heroContentY = useTransform(heroProgress, [0, 0.6], [0, 60]);
+  const heroFade = useTransform(heroProgress, [0, 0.6], [1, 0]);
+  const heroLift = useTransform(heroProgress, [0, 0.6], [0, 80]);
+
+  /* Craft section parallax */
+  const craftRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: craftScroll } = useScroll({
+    target: craftRef,
+    offset: ["start end", "end start"],
+  });
+  const craftImageY = useTransform(craftScroll, [0, 1], [-30, 30]);
 
   return (
     <div className="min-h-screen bg-background">
       <JsonLd data={ORGANIZATION_JSONLD} />
       <Header />
 
-      {/* ═══════════════════════════════════════════
-          SECTION 1 — HERO (full viewport)
-      ═══════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative h-screen overflow-hidden">
-        {/* Parallax background */}
+      {/* ═══════════════════════════════════════════════════
+          HERO — Cinematic, emotional, minimal copy
+      ═══════════════════════════════════════════════════ */}
+      <section ref={heroRef} className="relative h-[100svh] min-h-[650px] overflow-hidden">
         <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
           <img
             src={heroImg}
-            alt="Children in beautiful Indian ethnic wear"
+            alt=""
             className="w-full h-[120%] object-cover"
+            loading="eager"
+            fetchPriority="high"
           />
         </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/15 to-black/55" />
 
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/20 to-black/50" />
-
-        {/* Hero content */}
         <motion.div
-          style={{ opacity: heroContentOpacity, y: heroContentY }}
+          style={{ opacity: heroFade, y: heroLift }}
           className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6"
         >
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="max-w-3xl"
-          >
-            <motion.h1
-              variants={revealVariants}
-              className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white leading-[1.08] mb-6"
-            >
-              India's heritage, stitched for little explorers.
-            </motion.h1>
+          <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-2xl">
             <motion.p
-              variants={revealVariants}
-              className="text-white/60 text-sm md:text-base mb-10 max-w-lg mx-auto"
+              variants={reveal}
+              className="text-[11px] md:text-[12px] uppercase tracking-[0.35em] text-white/45 font-medium mb-8"
             >
-              Handcrafted Chikankari, Bandhani & Kashmiri ethnic wear for ages
-              2-5
+              Crafted across India
             </motion.p>
+
+            <motion.h1
+              variants={reveal}
+              className="font-serif text-[42px] sm:text-[56px] md:text-[68px] lg:text-[80px] font-semibold text-white leading-[1.04] tracking-[-0.01em]"
+            >
+              Traditions tailored
+              <br />
+              for modern
+              <br />
+              <em className="italic font-normal">childhood.</em>
+            </motion.h1>
+
+            <motion.p
+              variants={reveal}
+              className="text-white/45 text-[14px] md:text-[16px] mt-7 mb-10 max-w-sm mx-auto leading-relaxed"
+            >
+              Soft fabrics inspired by regional artistry,
+              designed for comfort.
+            </motion.p>
+
             <motion.div
-              variants={revealVariants}
-              className="flex items-center justify-center gap-6 flex-wrap"
+              variants={reveal}
+              className="flex items-center justify-center gap-5 flex-wrap"
             >
               <Link
                 to="/shop"
-                className="bg-white/15 backdrop-blur border border-white/20 rounded-full px-8 py-3.5 text-white text-sm font-medium tracking-wide hover:bg-white/25 transition-colors"
+                className="bg-white/12 backdrop-blur-sm border border-white/15 rounded-full px-8 py-3.5 text-white text-[13px] font-medium tracking-wide hover:bg-white/20 transition-all"
               >
                 Shop the Collection
               </Link>
               <Link
                 to="/about"
-                className="text-white/60 hover:text-white text-sm font-medium transition-colors underline-offset-4 hover:underline"
+                className="text-white/45 hover:text-white/80 text-[13px] font-medium transition-colors group"
               >
-                Our Story
+                <span className="relative after:absolute after:bottom-[-3px] after:left-0 after:w-0 after:h-px after:bg-white/50 after:transition-all after:duration-300 group-hover:after:w-full">
+                  Our Story
+                </span>
               </Link>
             </motion.div>
           </motion.div>
         </motion.div>
 
-        {/* Scroll indicator */}
+        {/* Scroll line */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
+          style={{ opacity: heroFade }}
         >
-          <motion.span
-            animate={{ opacity: [0.3, 0.7, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-white/40 text-[9px] tracking-[0.3em] uppercase font-medium"
-          >
-            Scroll
-          </motion.span>
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-6 bg-white/30"
+            animate={{ scaleY: [0, 1, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-px h-10 bg-white/25 origin-top"
           />
         </motion.div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          SECTION 2 — EXPLORE BY REGION
-      ═══════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-background">
+      {/* ═══════════════════════════════════════════════════
+          EXPLORE INDIA — Interactive region cards
+      ═══════════════════════════════════════════════════ */}
+      <section className="py-24 md:py-36 bg-background">
         <div className="container px-6 md:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
-            variants={staggerContainer}
-            className="text-center mb-12 md:mb-16"
+            variants={stagger}
+            className="text-center mb-14 md:mb-20"
           >
             <motion.h2
-              variants={revealVariants}
-              className="font-serif text-2xl md:text-4xl font-semibold mb-3"
+              variants={reveal}
+              className="font-serif text-[30px] md:text-[44px] font-semibold leading-[1.1] tracking-[-0.01em]"
             >
-              Explore India's Living Crafts
+              Explore India through clothing
             </motion.h2>
             <motion.p
-              variants={revealVariants}
-              className="text-muted-foreground text-sm max-w-md mx-auto"
+              variants={reveal}
+              className="text-muted-foreground text-[14px] mt-4 max-w-sm mx-auto leading-relaxed"
             >
-              Each region carries centuries of textile tradition
+              Each region carries centuries of textile tradition.
+              Discover the craft behind the fabric.
             </motion.p>
           </motion.div>
 
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={staggerContainer}
-            className="grid grid-cols-2 md:grid-cols-5 gap-4"
+            viewport={{ once: true, margin: "-40px" }}
+            variants={stagger}
+            className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4"
           >
             {regions.map((region) => (
-              <motion.div key={region.name} variants={revealVariants}>
+              <motion.div
+                key={region.name}
+                variants={reveal}
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              >
                 <Link
                   to="/shop"
-                  className="group block relative aspect-[4/5] rounded-2xl overflow-hidden"
+                  className="group block relative aspect-[3/4] rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-500"
                 >
                   <img
                     src={region.image}
                     alt={region.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute bottom-0 left-0 p-4 md:p-5">
-                    <h3 className="font-serif text-lg text-white font-semibold leading-tight">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                  <div className="absolute bottom-0 left-0 p-5 md:p-6">
+                    <h3 className="font-serif text-[18px] md:text-[20px] text-white font-semibold leading-tight">
                       {region.name}
                     </h3>
-                    <span className="text-white/60 text-xs uppercase tracking-wider">
+                    <p className="text-white/50 text-[11px] uppercase tracking-[0.12em] mt-1">
                       {region.craft}
-                    </span>
+                    </p>
+                    <p className="text-white/35 text-[12px] mt-1 hidden md:block">
+                      {region.desc}
+                    </p>
                   </div>
                 </Link>
               </motion.div>
@@ -244,66 +262,73 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          SECTION 3 — CRAFT STORY (editorial)
-      ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#EDE8DF]">
+      {/* ═══════════════════════════════════════════════════
+          CRAFT STORY — Editorial, asymmetric, emotional
+      ═══════════════════════════════════════════════════ */}
+      <section className="py-28 md:py-40 bg-[#EDE8DF]" ref={craftRef}>
         <div className="container px-6 md:px-8">
-          <div className="grid md:grid-cols-12 gap-10 md:gap-0 items-center">
-            {/* Left: text */}
+          <div className="grid md:grid-cols-12 gap-12 md:gap-0 items-center">
+            {/* Text — left */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-80px" }}
-              variants={staggerContainer}
+              variants={stagger}
               className="md:col-span-5"
             >
               <motion.span
-                variants={revealVariants}
-                className="text-xs uppercase tracking-[0.2em] text-[#C4785A] font-medium block mb-4"
+                variants={reveal}
+                className="text-[11px] uppercase tracking-[0.25em] text-[#C4785A] font-medium block mb-5"
               >
                 The Craft
               </motion.span>
               <motion.h2
-                variants={revealVariants}
-                className="font-serif text-[28px] md:text-[36px] font-medium leading-[1.2] mb-6"
+                variants={reveal}
+                className="font-serif text-[32px] md:text-[42px] font-medium leading-[1.12] tracking-[-0.01em] mb-7"
               >
-                Every stitch tells a story of generations.
+                Every stitch tells
+                <br />
+                a story of
+                <br />
+                <em className="italic">generations.</em>
               </motion.h2>
               <motion.p
-                variants={revealVariants}
-                className="text-[15px] text-muted-foreground leading-[1.8] max-w-[400px] mb-8"
+                variants={reveal}
+                className="text-[15px] text-muted-foreground leading-[1.85] max-w-[380px] mb-8"
               >
                 Our artisans in Lucknow, Jaipur, and Kashmir carry forward
                 techniques perfected over 400 years. Each garment is
-                hand-embroidered on pure cotton mulmul — no machines, no
-                shortcuts. Just patience, precision, and pride.
+                hand-embroidered on pure cotton mulmul — no machines,
+                no shortcuts. Just patience, precision, and pride.
               </motion.p>
-              <motion.div variants={revealVariants}>
+              <motion.div variants={reveal}>
                 <Link
                   to="/about"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-foreground group"
+                  className="inline-flex items-center gap-2 text-[13px] font-medium text-foreground group"
                 >
-                  Meet the artisans
+                  <span className="relative after:absolute after:bottom-[-3px] after:left-0 after:w-full after:h-px after:bg-foreground/30 after:origin-left after:scale-x-100 group-hover:after:bg-foreground after:transition-colors after:duration-300">
+                    Meet the artisans
+                  </span>
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </motion.div>
             </motion.div>
 
-            {/* Right: image */}
+            {/* Image — right, with parallax */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-80px" }}
-              variants={imageRevealVariants}
+              variants={imageReveal}
               className="md:col-span-6 md:col-start-7"
             >
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
-                <img
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-black/10">
+                <motion.img
                   src={product2}
                   alt="Artisan handcrafting ethnic wear"
                   className="w-full h-full object-cover"
                   loading="lazy"
+                  style={{ y: craftImageY }}
                 />
               </div>
             </motion.div>
@@ -311,35 +336,35 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          SECTION 4 — FEATURED COLLECTIONS
-      ═══════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-background">
+      {/* ═══════════════════════════════════════════════════
+          FEATURED — Minimal, big imagery, breathing room
+      ═══════════════════════════════════════════════════ */}
+      <section className="py-24 md:py-36 bg-background">
         <div className="container px-6 md:px-8">
-          <div className="flex items-end justify-between mb-10 md:mb-14">
+          <div className="flex items-end justify-between mb-12 md:mb-16">
             <motion.h2
-              initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ type: "spring", damping: 30, stiffness: 120 }}
-              className="font-serif text-2xl md:text-4xl font-semibold"
+              variants={reveal}
+              className="font-serif text-[28px] md:text-[40px] font-semibold tracking-[-0.01em]"
             >
-              New Arrivals
+              Crafted for celebrations
             </motion.h2>
             <Link
               to="/shop"
-              className="group flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="group flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              View all{" "}
+              View all
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
 
           {isLoading ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-7">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="space-y-3">
-                  <Skeleton className="aspect-[3/4] rounded-xl" />
+                <div key={i} className="space-y-4">
+                  <Skeleton className="aspect-[3/4] rounded-2xl" />
                   <Skeleton className="h-4 w-2/3" />
                   <Skeleton className="h-3 w-1/3" />
                 </div>
@@ -350,12 +375,12 @@ const Index = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
-              variants={staggerContainer}
-              className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-7"
+              variants={stagger}
+              className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8"
             >
-              {featuredProducts.map((product, i) => (
-                <motion.div key={product.id} variants={revealVariants}>
-                  <ProductCard product={product} index={i} />
+              {featuredProducts.map((product) => (
+                <motion.div key={product.id} variants={reveal}>
+                  <ProductCard product={product} index={0} />
                 </motion.div>
               ))}
             </motion.div>
@@ -363,17 +388,17 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          SECTION 5 — SOCIAL PROOF (testimonials)
-      ═══════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-[#EDE8DF]">
+      {/* ═══════════════════════════════════════════════════
+          SOCIAL PROOF — Testimonials, warm background
+      ═══════════════════════════════════════════════════ */}
+      <section className="py-24 md:py-32 bg-[#EDE8DF]">
         <div className="container px-6 md:px-8">
           <motion.h2
-            initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ type: "spring", damping: 30, stiffness: 120 }}
-            className="font-serif text-2xl md:text-4xl font-semibold text-center mb-12 md:mb-16"
+            variants={reveal}
+            className="font-serif text-[28px] md:text-[40px] font-semibold text-center mb-14 md:mb-18 tracking-[-0.01em]"
           >
             Loved by parents across India
           </motion.h2>
@@ -381,99 +406,105 @@ const Index = () => {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            viewport={{ once: true, margin: "-40px" }}
+            variants={stagger}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
           >
             {testimonials.map((t) => (
               <motion.div
                 key={t.name}
-                variants={revealVariants}
-                className="bg-background rounded-2xl p-8 shadow-sm"
+                variants={reveal}
+                className="bg-background rounded-3xl p-8 md:p-10"
               >
-                <div className="flex gap-0.5 mb-4">
+                <div className="flex gap-1 mb-5">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-4 w-4 text-amber-400"
-                      fill="currentColor"
-                    />
+                    <Star key={i} className="h-[14px] w-[14px] text-amber-400" fill="currentColor" />
                   ))}
                 </div>
-                <p className="font-serif italic text-[15px] leading-relaxed text-foreground mb-4">
-                  "{t.quote}"
+                <p className="font-serif italic text-[16px] md:text-[17px] leading-[1.7] text-foreground/85 mb-6">
+                  &ldquo;{t.quote}&rdquo;
                 </p>
-                <div className="w-8 h-px bg-border my-4" />
-                <p className="text-sm font-medium">{t.name}</p>
-                <p className="text-xs text-muted-foreground">{t.location}</p>
+                <div className="w-8 h-px bg-border mb-4" />
+                <p className="text-[13px] font-medium">{t.name}</p>
+                <p className="text-[12px] text-muted-foreground mt-0.5">{t.location}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          SECTION 6 — FINAL CTA
-      ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#1A2B22]">
-        <div className="container px-6 md:px-8">
+      {/* ═══════════════════════════════════════════════════
+          FINAL CTA — Emotional close, cinematic
+      ═══════════════════════════════════════════════════ */}
+      <section className="py-32 md:py-44 bg-[#1A2B22] relative overflow-hidden">
+        {/* Subtle texture */}
+        <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0id2hpdGUiLz48L3N2Zz4=')] pointer-events-none" />
+
+        <div className="container px-6 md:px-8 relative">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={staggerContainer}
+            variants={stagger}
             className="max-w-2xl mx-auto text-center"
           >
             <motion.h2
-              variants={revealVariants}
-              className="font-serif text-3xl md:text-5xl text-white font-semibold leading-tight"
+              variants={reveal}
+              className="font-serif text-[34px] md:text-[52px] lg:text-[60px] text-white font-semibold leading-[1.08] tracking-[-0.01em]"
             >
-              Dress childhood with stories worth remembering.
+              Childhood deserves
+              <br />
+              stories woven into
+              <br />
+              <em className="italic font-normal text-white/70">every thread.</em>
             </motion.h2>
             <motion.p
-              variants={revealVariants}
-              className="text-white/50 text-sm mt-4"
+              variants={reveal}
+              className="text-white/35 text-[14px] mt-6 max-w-xs mx-auto leading-relaxed"
             >
               Handcrafted in India. Made for little ones.
             </motion.p>
-            <motion.div variants={revealVariants}>
+            <motion.div variants={reveal}>
               <Link
                 to="/shop"
-                className="inline-flex items-center gap-2 mt-8 bg-white/10 backdrop-blur border border-white/20 rounded-full px-8 py-4 text-white text-sm font-medium tracking-wide hover:bg-white/20 transition-colors"
+                className="inline-flex items-center gap-2.5 mt-10 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-9 py-4 text-white text-[13px] font-medium tracking-wide hover:bg-white/18 transition-all group"
               >
                 Explore the Collection
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          SECTION 7 — TRUST STRIP
-      ═══════════════════════════════════════════ */}
-      <section className="border-t border-border py-10 bg-background">
+      {/* ═══════════════════════════════════════════════════
+          TRUST — Minimal single strip
+      ═══════════════════════════════════════════════════ */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="border-t border-border py-10 md:py-12 bg-background"
+      >
         <div className="container px-6 md:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-0 md:divide-x md:divide-border">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-0 md:divide-x md:divide-border">
             {[
               { icon: Sparkles, label: "Handcrafted" },
               { icon: ShieldCheck, label: "Pure Cotton" },
-              { icon: Ruler, label: "Ages 2-5" },
+              { icon: Ruler, label: "Ages 2\u20135" },
               { icon: Truck, label: "Free Shipping \u20B9999+" },
             ].map(({ icon: Icon, label }) => (
-              <div
-                key={label}
-                className="flex items-center gap-2 px-6 md:px-8"
-              >
-                <Icon className="h-4 w-4 text-muted-foreground" />
-                <span className="text-xs uppercase tracking-wider text-muted-foreground">
+              <div key={label} className="flex items-center gap-2.5 px-6 md:px-10">
+                <Icon className="h-4 w-4 text-muted-foreground/60" strokeWidth={1.5} />
+                <span className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
                   {label}
                 </span>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       <Footer />
     </div>
