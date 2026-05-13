@@ -207,13 +207,13 @@ const Header = () => {
                 </div>
               </motion.div>
             ) : (
-              <motion.nav key="nav" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="hidden md:flex items-center gap-8">
+              <motion.nav key="nav" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="hidden md:flex items-center gap-7">
                 {navLinks.map((l) => (
                   <Link
                     key={l.to}
                     to={l.to}
-                    className={`relative text-sm font-medium tracking-wider uppercase transition-colors py-1 text-muted-foreground hover:text-foreground ${
-                      location.pathname === l.to ? "text-foreground after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#C4785A] after:rounded-full" : ""
+                    className={`relative text-[13px] font-medium tracking-[0.08em] uppercase transition-colors py-1 text-muted-foreground hover:text-foreground ${
+                      location.pathname === l.to ? "text-foreground" : ""
                     }`}
                   >
                     {l.label}

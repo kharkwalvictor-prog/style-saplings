@@ -51,7 +51,7 @@ const Footer = () => {
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 text-[12px] uppercase tracking-[0.1em] font-medium bg-foreground text-background rounded-full hover:bg-foreground/85 transition-colors"
+                  className="px-6 py-3 text-[12px] uppercase tracking-[0.1em] font-medium bg-[#C4785A] text-white rounded-full hover:bg-[#B0684E] transition-colors"
                 >
                   Join
                 </button>

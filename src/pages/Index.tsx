@@ -121,9 +121,8 @@ const Index = () => {
             fetchPriority="high"
           />
         </motion.div>
-        {/* Strong readable overlay — dark enough to guarantee text contrast */}
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-black/50 to-transparent" />
+        {/* Overlay: warm tint, lighter but still readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/45" />
 
         <motion.div
           style={{ opacity: heroFade, y: heroLift }}
@@ -132,16 +131,16 @@ const Index = () => {
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-2xl">
             <motion.h1
               variants={reveal}
-              className="font-serif text-[42px] sm:text-[58px] md:text-[72px] lg:text-[84px] font-semibold text-white leading-[1.04] tracking-[-0.02em]"
+              className="font-serif text-[42px] sm:text-[58px] md:text-[72px] lg:text-[84px] font-semibold text-[#FAF7F2] leading-[1.04] tracking-[-0.02em] [text-shadow:_0_2px_30px_rgba(0,0,0,0.3)]"
             >
               Childhood, woven
               <br />
-              with <em className="italic font-normal text-white/85">tradition.</em>
+              with <em className="italic font-normal text-[#FAF7F2]/80">tradition.</em>
             </motion.h1>
 
             <motion.p
               variants={reveal}
-              className="text-white/70 text-[17px] md:text-[20px] mt-7 mb-10 max-w-md mx-auto leading-[1.7]"
+              className="text-[#FAF7F2]/70 text-[17px] md:text-[20px] mt-7 mb-10 max-w-md mx-auto leading-[1.7] [text-shadow:_0_1px_15px_rgba(0,0,0,0.2)]"
             >
               Regional artistry, reimagined for modern childhood.
             </motion.p>
@@ -152,13 +151,13 @@ const Index = () => {
             >
               <Link
                 to="/shop"
-                className="bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-8 py-3.5 text-white text-[14px] font-medium tracking-wide hover:bg-white/25 transition-all"
+                className="bg-[#FAF7F2]/12 backdrop-blur-sm border border-[#FAF7F2]/20 rounded-full px-8 py-3.5 text-[#FAF7F2] text-[14px] font-medium tracking-wide hover:bg-[#FAF7F2]/22 transition-all"
               >
                 Shop Collection
               </Link>
               <Link
                 to="/about"
-                className="text-white/65 text-[14px] font-medium hover:text-white transition-colors"
+                className="text-[#FAF7F2]/60 text-[14px] font-medium hover:text-[#FAF7F2] transition-colors"
               >
                 Our Story
               </Link>

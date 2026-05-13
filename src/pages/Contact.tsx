@@ -108,7 +108,7 @@ const Contact = () => {
                   onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
                   className="w-full border border-border rounded-md px-4 py-3 text-sm bg-background focus:outline-none focus:ring-1 focus:ring-ring resize-none h-32"
                 />
-                <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-3 rounded-full">
+                <Button type="submit" className="w-full bg-foreground text-background hover:bg-foreground/90 py-3 rounded-full text-[14px] font-medium">
                   Send Message
                 </Button>
               </form>
