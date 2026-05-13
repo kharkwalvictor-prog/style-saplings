@@ -23,6 +23,8 @@ const Blog = () => {
   const { data: posts = [], isLoading } = useBlogPosts(true);
   const [activeCategory, setActiveCategory] = useState("All");
 
+  useSEO({ title: "The Journal | Style Saplings", description: "Stories of craft, heritage, and dressing your little one in India's finest traditions.", canonicalPath: "/blog" });
+
   const filtered = activeCategory === "All" ? posts : posts.filter(p => p.category === activeCategory);
   const featured = posts[0];
   const gridPosts = filtered.filter(p => !featured || p.id !== featured.id || activeCategory !== "All");
@@ -36,8 +38,6 @@ const Blog = () => {
       </div>
     );
   }
-
-  useSEO({ title: "The Journal | Style Saplings", description: "Stories of craft, heritage, and dressing your little one in India's finest traditions.", canonicalPath: "/blog" });
 
   return (
     <div className="min-h-screen">
