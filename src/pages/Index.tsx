@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import { useSEO } from "@/hooks/useSEO";
 import JsonLd, { ORGANIZATION_JSONLD } from "@/components/JsonLd";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+} from "framer-motion";
+import { useRef } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ProductCard from "@/components/ProductCard";
@@ -14,19 +20,30 @@ import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
 import product4 from "@/assets/product-4.jpg";
 
-/* ─── animation helpers ─── */
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, delay, ease: [0.25, 0.4, 0.25, 1] },
-});
+/* ─── Apple-style spring config ─── */
+const smooth = { type: "spring" as const, damping: 30, stiffness: 120 };
+const snappy = { type: "spring" as const, damping: 25, stiffness: 200 };
 
-const revealUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 } as const,
-  whileInView: { opacity: 1, y: 0 } as const,
-  viewport: { once: true } as const,
-  transition: { duration: 0.6, delay, ease: [0.25, 0.4, 0.25, 1] },
-});
+/* ─── Reveal variants with blur + y + opacity ─── */
+const revealVariants = {
+  hidden: { opacity: 0, y: 40, filter: "blur(6px)" },
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { ...smooth, delay },
+  }),
+};
+
+const imageRevealVariants = {
+  hidden: { opacity: 0, scale: 1.08, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 1.4, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 /* ─── data ─── */
 const collections = [
@@ -56,16 +73,44 @@ const Index = () => {
     return featured.length > 0 ? featured.slice(0, 4) : products.slice(0, 4);
   })();
 
+  /* ─── Parallax for hero image ─── */
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroY = useSpring(useTransform(heroProgress, [0, 1], [0, 150]), {
+    damping: 40,
+    stiffness: 90,
+  });
+  const heroScale = useTransform(heroProgress, [0, 1], [1, 1.1]);
+  const heroOpacity = useTransform(heroProgress, [0, 0.8], [1, 0]);
+
+  /* ─── Parallax for craft banner ─── */
+  const craftRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: craftProgress } = useScroll({
+    target: craftRef,
+    offset: ["start end", "end start"],
+  });
+  const craftY = useTransform(craftProgress, [0, 1], [-40, 40]);
+
   return (
     <div className="min-h-screen bg-background">
       <JsonLd data={ORGANIZATION_JSONLD} />
       <Header />
 
       {/* ────────────────────────────────────────────
-          1. HERO — Full viewport, single image, minimal text
+          1. HERO — Parallax image, text fades with blur
       ──────────────────────────────────────────── */}
-      <section className="relative h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
+      <section
+        ref={heroRef}
+        className="relative h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden"
+      >
+        {/* Parallax background */}
+        <motion.div
+          className="absolute inset-0"
+          style={{ y: heroY, scale: heroScale }}
+        >
           <img
             src={heroImg}
             alt=""
@@ -73,94 +118,131 @@ const Index = () => {
             loading="eager"
             fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/50" />
-        </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/55" />
+        </motion.div>
 
-        <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
+        {/* Content — fades out on scroll */}
+        <motion.div
+          className="relative z-10 text-center px-6 max-w-3xl mx-auto"
+          style={{ opacity: heroOpacity }}
+        >
           <motion.h1
-            {...fadeUp(0.3)}
-            className="font-serif text-[36px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-semibold text-white leading-[1.1] mb-8"
+            initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="font-serif text-[36px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-semibold text-white leading-[1.08]"
           >
             Rooted in Tradition,
             <br />
-            <em className="italic font-normal">Styled for Today</em>
+            <motion.em
+              initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{
+                duration: 1,
+                delay: 0.5,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="italic font-normal"
+            >
+              Styled for Today
+            </motion.em>
           </motion.h1>
 
-          <motion.div {...fadeUp(0.6)}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-10"
+          >
             <Link
               to="/shop"
-              className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] font-medium text-white hover:underline underline-offset-4 transition-all"
+              className="inline-flex items-center gap-2.5 text-[13px] uppercase tracking-[0.2em] font-medium text-white/90 hover:text-white transition-all group"
             >
-              Shop the Collection
-              <ArrowRight className="h-3.5 w-3.5" />
+              <span className="relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 group-hover:after:w-full">
+                Shop the Collection
+              </span>
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator — gentle pulse */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 0.8 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          transition={{ delay: 1.6, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          style={{ opacity: heroOpacity }}
         >
-          <div className="w-5 h-8 border-2 border-white/30 rounded-full flex items-start justify-center p-1">
+          <div className="w-[22px] h-[34px] border border-white/25 rounded-full flex items-start justify-center p-[5px]">
             <motion.div
-              animate={{ y: [0, 8, 0] }}
+              animate={{ y: [0, 10, 0] }}
               transition={{
-                duration: 1.8,
+                duration: 2,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="w-1 h-1.5 bg-white/60 rounded-full"
+              className="w-[3px] h-[6px] bg-white/50 rounded-full"
             />
           </div>
         </motion.div>
       </section>
 
       {/* ────────────────────────────────────────────
-          2. EDITORIAL STORY BLOCK — Asymmetric two-column
+          2. EDITORIAL STORY — Image reveals with scale, text with blur
       ──────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-white">
+      <section className="py-28 md:py-36 bg-white">
         <div className="container px-6 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
-            {/* Image — 7 columns */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-20 items-center">
+            {/* Image — cinematic reveal */}
             <motion.div
-              {...revealUp()}
               className="md:col-span-7"
+              variants={imageRevealVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
             >
-              <div className="aspect-[3/4] rounded-xl overflow-hidden">
-                <motion.img
+              <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl shadow-black/10">
+                <img
                   src={product1}
                   alt="Handcrafted Indian children's clothing"
                   className="w-full h-full object-cover"
                   loading="lazy"
-                  whileInView={{ scale: [1.06, 1] }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.2, ease: [0.25, 0.4, 0.25, 1] }}
                 />
               </div>
             </motion.div>
 
-            {/* Text — 5 columns */}
-            <div className="md:col-span-5">
+            {/* Text — staggered blur reveal */}
+            <div className="md:col-span-5 space-y-0">
               <motion.span
-                {...revealUp(0)}
-                className="text-xs uppercase tracking-widest text-muted-foreground"
+                custom={0}
+                variants={revealVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                className="text-xs uppercase tracking-[0.2em] text-muted-foreground block"
               >
                 Our Story
               </motion.span>
 
               <motion.h2
-                {...revealUp(0.1)}
-                className="font-serif text-[28px] md:text-[32px] font-medium leading-snug mt-4 mb-5"
+                custom={0.1}
+                variants={revealVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                className="font-serif text-[26px] md:text-[32px] font-medium leading-[1.25] mt-5 mb-6"
               >
                 When our daughter was two, we searched everywhere.
               </motion.h2>
 
               <motion.p
-                {...revealUp(0.2)}
-                className="text-sm text-muted-foreground leading-relaxed max-w-sm mb-6"
+                custom={0.2}
+                variants={revealVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                className="text-[15px] text-muted-foreground leading-[1.7] max-w-[380px] mb-7"
               >
                 We wanted something handcrafted, something that carried the
                 warmth of our culture. What we found was either low quality fast
@@ -168,13 +250,21 @@ const Index = () => {
                 went directly to the artisans.
               </motion.p>
 
-              <motion.div {...revealUp(0.3)}>
+              <motion.div
+                custom={0.3}
+                variants={revealVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+              >
                 <Link
                   to="/about"
-                  className="inline-flex items-center gap-1.5 text-sm hover:underline underline-offset-4 transition-all"
+                  className="inline-flex items-center gap-2 text-sm font-medium group transition-colors"
                 >
-                  Read our story
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <span className="relative after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-px after:bg-foreground after:origin-left after:scale-x-0 after:transition-transform after:duration-300 group-hover:after:scale-x-100">
+                    Read our story
+                  </span>
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </motion.div>
             </div>
@@ -183,18 +273,28 @@ const Index = () => {
       </section>
 
       {/* ────────────────────────────────────────────
-          3. PRODUCT GRID — Clean, generous spacing
+          3. PRODUCTS — Cards reveal with stagger
       ──────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-[#F8F8F6]">
+      <section className="py-24 md:py-32 bg-[#F8F8F6]">
         <div className="container px-6 md:px-8">
-          <div className="flex items-end justify-between mb-10 md:mb-14">
+          <div className="flex items-end justify-between mb-12 md:mb-16">
             <motion.h2
-              {...revealUp()}
-              className="font-serif text-2xl md:text-3xl font-semibold"
+              custom={0}
+              variants={revealVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="font-serif text-2xl md:text-[2rem] font-semibold"
             >
               New Arrivals
             </motion.h2>
-            <motion.div {...revealUp(0.1)}>
+            <motion.div
+              custom={0.1}
+              variants={revealVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
               <Link
                 to="/shop"
                 className="group flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -206,9 +306,9 @@ const Index = () => {
           </div>
 
           {isLoading ? (
-            <div className="grid grid-cols-2 gap-5 md:gap-8">
+            <div className="grid grid-cols-2 gap-6 md:gap-10">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="space-y-3">
+                <div key={i} className="space-y-4">
                   <Skeleton className="aspect-[3/4] rounded-xl" />
                   <Skeleton className="h-4 w-2/3" />
                   <Skeleton className="h-3 w-1/3" />
@@ -216,9 +316,18 @@ const Index = () => {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-5 md:gap-8">
+            <div className="grid grid-cols-2 gap-6 md:gap-10">
               {featuredProducts.map((product, i) => (
-                <ProductCard key={product.id} product={product} index={i} />
+                <motion.div
+                  key={product.id}
+                  custom={i * 0.12}
+                  variants={revealVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-60px" }}
+                >
+                  <ProductCard product={product} index={i} />
+                </motion.div>
               ))}
             </div>
           )}
@@ -226,74 +335,119 @@ const Index = () => {
       </section>
 
       {/* ────────────────────────────────────────────
-          4. FULL-BLEED CRAFT BANNER — Visual break
+          4. CRAFT BANNER — Parallax image, bottom-pinned text
       ──────────────────────────────────────────── */}
-      <section className="relative h-[50vh] md:h-[60vh] min-h-[360px] flex items-end justify-start overflow-hidden">
-        <div className="absolute inset-0">
+      <section
+        ref={craftRef}
+        className="relative h-[55vh] md:h-[65vh] min-h-[400px] flex items-end overflow-hidden"
+      >
+        <motion.div className="absolute inset-[-40px]" style={{ y: craftY }}>
           <img
             src={product3}
             alt="Chikankari embroidery detail"
             className="w-full h-full object-cover"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-        </div>
+        </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
 
-        <div className="relative z-10 container px-6 md:px-8 pb-12 md:pb-16">
-          <motion.div {...revealUp()}>
-            <span className="text-xs uppercase tracking-[0.2em] text-white/50 mb-3 block">
-              The Tradition
-            </span>
-            <h2 className="font-serif text-3xl md:text-5xl font-semibold text-white leading-tight">
-              400 Years of Chikankari
-            </h2>
-            <p className="text-sm text-white/60 max-w-md mt-3 leading-relaxed">
-              Each stitch placed by hand — no machines, no shortcuts.
-            </p>
+        <div className="relative z-10 container px-6 md:px-8 pb-14 md:pb-20">
+          <motion.span
+            custom={0}
+            variants={revealVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-[11px] uppercase tracking-[0.25em] text-white/40 block mb-4"
+          >
+            The Tradition
+          </motion.span>
+          <motion.h2
+            custom={0.1}
+            variants={revealVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="font-serif text-[32px] md:text-[48px] font-semibold text-white leading-[1.1]"
+          >
+            400 Years of Chikankari
+          </motion.h2>
+          <motion.p
+            custom={0.2}
+            variants={revealVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-[15px] text-white/55 max-w-md mt-4 leading-relaxed"
+          >
+            Each stitch placed by hand — no machines, no shortcuts.
+          </motion.p>
+          <motion.div
+            custom={0.35}
+            variants={revealVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             <Link
               to="/about"
-              className="inline-flex items-center gap-1.5 text-sm text-white/80 hover:text-white mt-4 transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white mt-5 transition-colors group"
             >
-              Discover the craft
-              <ArrowRight className="h-3.5 w-3.5" />
+              <span className="relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 group-hover:after:w-full">
+                Discover the craft
+              </span>
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>
         </div>
       </section>
 
       {/* ────────────────────────────────────────────
-          5. SHOP BY CRAFT — 3 editorial image cards
+          5. COLLECTION CARDS — Staggered with hover lift
       ──────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-28 md:py-36 bg-white">
         <div className="container px-6 md:px-8">
           <motion.h2
-            {...revealUp()}
-            className="font-serif text-2xl md:text-3xl font-semibold text-center mb-12"
+            custom={0}
+            variants={revealVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="font-serif text-2xl md:text-[2rem] font-semibold text-center mb-14 md:mb-16"
           >
             The Collection
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-7">
             {collections.map((craft, i) => (
-              <motion.div key={craft.name} {...revealUp(i * 0.1)}>
+              <motion.div
+                key={craft.name}
+                custom={i * 0.15}
+                variants={revealVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                whileHover={{ y: -6 }}
+                transition={snappy}
+              >
                 <Link
                   to={craft.href}
-                  className="group block relative aspect-[3/4] rounded-xl overflow-hidden"
+                  className="group block relative aspect-[3/4] rounded-2xl overflow-hidden shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-black/10 transition-shadow duration-500"
                 >
                   <img
                     src={craft.image}
                     alt={craft.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-[800ms] ease-out group-hover:scale-[1.04]"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-0 left-0 p-6">
-                    <h3 className="font-serif text-xl md:text-2xl font-semibold text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+                  <div className="absolute bottom-0 left-0 p-7">
+                    <h3 className="font-serif text-2xl md:text-[1.6rem] font-semibold text-white">
                       {craft.name}
                     </h3>
-                    <span className="text-xs uppercase tracking-widest text-white/70 mt-1 inline-flex items-center gap-1">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.15em] text-white/60 mt-2 group-hover:text-white/90 transition-colors">
                       Explore
-                      <ArrowRight className="h-3 w-3" />
+                      <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                     </span>
                   </div>
                 </Link>
@@ -304,9 +458,15 @@ const Index = () => {
       </section>
 
       {/* ────────────────────────────────────────────
-          6. TRUST STRIP — Minimal, single row
+          6. TRUST STRIP — Minimal, elegant
       ──────────────────────────────────────────── */}
-      <section className="border-t border-b border-border py-8 md:py-10">
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="border-t border-border py-10 md:py-12"
+      >
         <div className="container px-6 md:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0">
             {trustItems.map((item, i) => {
@@ -318,14 +478,14 @@ const Index = () => {
                 >
                   {i > 0 && (
                     <span
-                      className="hidden md:inline text-border mr-4"
+                      className="hidden md:inline text-border/60 mr-5"
                       aria-hidden="true"
                     >
                       |
                     </span>
                   )}
-                  <Icon className="h-4 w-4 flex-shrink-0" strokeWidth={1.5} />
-                  <span className="text-xs uppercase tracking-wider">
+                  <Icon className="h-[15px] w-[15px] flex-shrink-0" strokeWidth={1.5} />
+                  <span className="text-[11px] uppercase tracking-[0.12em]">
                     {item.label}
                   </span>
                 </div>
@@ -333,7 +493,7 @@ const Index = () => {
             })}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       <Footer />
     </div>
