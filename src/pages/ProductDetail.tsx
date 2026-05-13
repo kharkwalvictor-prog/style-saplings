@@ -258,7 +258,7 @@ const ProductDetail = () => {
         {/* ── Breadcrumb ── */}
         <motion.nav
           variants={reveal}
-          className="text-xs text-muted-foreground mb-8 flex items-center gap-1.5"
+          className="text-[13px] text-muted-foreground mb-8 flex items-center gap-1.5"
           aria-label="Breadcrumb"
         >
           <Link
@@ -356,7 +356,7 @@ const ProductDetail = () => {
             {/* Product name */}
             <motion.h1
               variants={reveal}
-              className="font-serif text-[28px] md:text-[34px] font-medium leading-tight mb-5"
+              className="font-serif text-[28px] md:text-[36px] font-medium leading-tight mb-5"
             >
               {product.name}
             </motion.h1>
@@ -368,7 +368,7 @@ const ProductDetail = () => {
             >
               {product.sale_price ? (
                 <>
-                  <span className="text-[22px] font-semibold text-[#C4785A]">
+                  <span className="text-[24px] font-semibold text-[#C4785A]">
                     {"\u20B9"}
                     {Number(product.sale_price).toLocaleString("en-IN")}
                   </span>
@@ -378,7 +378,7 @@ const ProductDetail = () => {
                   </span>
                 </>
               ) : (
-                <span className="text-[22px] font-semibold">
+                <span className="text-[24px] font-semibold">
                   {"\u20B9"}
                   {Number(product.price).toLocaleString("en-IN")}
                 </span>
@@ -398,7 +398,7 @@ const ProductDetail = () => {
                   <span className="text-[12px] uppercase tracking-wider text-muted-foreground block mb-1">
                     {card.label}
                   </span>
-                  <span className="text-[14px] font-medium leading-snug block">
+                  <span className="text-[15px] font-medium leading-snug block">
                     {card.value}
                   </span>
                 </div>
@@ -422,7 +422,7 @@ const ProductDetail = () => {
                       key={s}
                       disabled={!available}
                       onClick={() => setSelectedSize(s)}
-                      className={`h-12 px-5 text-sm font-medium rounded-lg transition-all duration-200 ${
+                      className={`h-12 px-5 text-[14px] font-medium rounded-lg transition-all duration-200 ${
                         selectedSize === s
                           ? "bg-foreground text-background"
                           : available
@@ -453,7 +453,7 @@ const ProductDetail = () => {
               <Button
                 disabled={isOutOfStock}
                 onClick={handleAddToCart}
-                className={`flex-1 rounded-full py-4 h-auto text-[14px] font-medium transition-all duration-300 ${
+                className={`flex-1 rounded-full py-4 h-auto text-[15px] font-medium transition-all duration-300 ${
                   addedToCart
                     ? "bg-[#7B8B6F] hover:bg-[#7B8B6F] text-white"
                     : "bg-foreground text-background hover:bg-foreground/90"
@@ -494,7 +494,7 @@ const ProductDetail = () => {
             {/* Description */}
             {product.description && (
               <motion.div variants={reveal} className="mb-8">
-                <p className="text-[14px] text-muted-foreground leading-relaxed">
+                <p className="text-[15px] text-muted-foreground leading-relaxed">
                   {product.description}
                 </p>
               </motion.div>
@@ -505,7 +505,7 @@ const ProductDetail = () => {
               variants={reveal}
               className="pt-6 border-t border-border"
             >
-              <p className="text-xs text-muted-foreground">
+              <p className="text-[13px] text-muted-foreground">
                 Easy exchange{" "}
                 <span className="mx-2 text-border">{"·"}</span> Gentle
                 fabrics{" "}

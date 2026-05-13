@@ -41,30 +41,30 @@ const Contact = () => {
                 <div className="flex items-start gap-3">
                   <Mail className="h-5 w-5 mt-0.5 shrink-0 opacity-80" />
                   <div>
-                    <p className="text-sm font-medium mb-0.5">Email</p>
-                    <a href="mailto:support@stylesaplings.com" className="text-sm text-white/70 hover:text-white transition-colors">support@stylesaplings.com</a>
+                    <p className="text-[14px] font-medium mb-0.5">Email</p>
+                    <a href="mailto:support@stylesaplings.com" className="text-[14px] text-white/70 hover:text-white transition-colors">support@stylesaplings.com</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Phone className="h-5 w-5 mt-0.5 shrink-0 opacity-80" />
                   <div>
-                    <p className="text-sm font-medium mb-0.5">Phone</p>
-                    <a href="tel:+919810901031" className="text-sm text-white/70 hover:text-white transition-colors">+91-9810901031</a>
-                    <p className="text-xs text-white/50 mt-0.5">Mon–Fri, 9AM–6PM IST</p>
+                    <p className="text-[14px] font-medium mb-0.5">Phone</p>
+                    <a href="tel:+919810901031" className="text-[14px] text-white/70 hover:text-white transition-colors">+91-9810901031</a>
+                    <p className="text-[13px] text-white/70 mt-0.5">Mon-Fri, 9AM-6PM IST</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <MapPin className="h-5 w-5 mt-0.5 shrink-0 opacity-80" />
                   <div>
-                    <p className="text-sm font-medium mb-0.5">Address</p>
-                    <p className="text-sm text-white/70">6488, C6, Vasant Kunj,<br/>New Delhi 110070</p>
+                    <p className="text-[14px] font-medium mb-0.5">Address</p>
+                    <p className="text-[14px] text-white/70">6488, C6, Vasant Kunj,<br/>New Delhi 110070</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Clock className="h-5 w-5 mt-0.5 shrink-0 opacity-80" />
                   <div>
-                    <p className="text-sm font-medium mb-0.5">Hours</p>
-                    <p className="text-sm text-white/70">Monday to Friday<br />9:00 AM – 6:00 PM IST</p>
+                    <p className="text-[14px] font-medium mb-0.5">Hours</p>
+                    <p className="text-[14px] text-white/70">Monday to Friday<br />9:00 AM - 6:00 PM IST</p>
                   </div>
                 </div>
               </div>
@@ -86,17 +86,17 @@ const Contact = () => {
                 <input
                   type="text" placeholder="Full Name" required value={form.name}
                   onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
-                  className="w-full border border-border rounded-md px-4 py-3 text-sm bg-background focus:outline-none focus:ring-1 focus:ring-ring"
+                  className="w-full border border-border rounded-md px-4 py-3 text-[14px] bg-background focus:outline-none focus:ring-1 focus:ring-ring"
                 />
                 <input
                   type="email" placeholder="Email Address" required value={form.email}
                   onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
-                  className="w-full border border-border rounded-md px-4 py-3 text-sm bg-background focus:outline-none focus:ring-1 focus:ring-ring"
+                  className="w-full border border-border rounded-md px-4 py-3 text-[14px] bg-background focus:outline-none focus:ring-1 focus:ring-ring"
                 />
                 <select
                   value={form.subject}
                   onChange={e => setForm(p => ({ ...p, subject: e.target.value }))}
-                  className="w-full border border-border rounded-md px-4 py-3 text-sm bg-background focus:outline-none focus:ring-1 focus:ring-ring"
+                  className="w-full border border-border rounded-md px-4 py-3 text-[14px] bg-background focus:outline-none focus:ring-1 focus:ring-ring"
                 >
                   <option value="Order Query">Order Query</option>
                   <option value="Product Information">Product Information</option>
@@ -106,7 +106,7 @@ const Contact = () => {
                 <textarea
                   placeholder="Your Message" required value={form.message}
                   onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
-                  className="w-full border border-border rounded-md px-4 py-3 text-sm bg-background focus:outline-none focus:ring-1 focus:ring-ring resize-none h-32"
+                  className="w-full border border-border rounded-md px-4 py-3 text-[14px] bg-background focus:outline-none focus:ring-1 focus:ring-ring resize-none h-32"
                 />
                 <Button type="submit" className="w-full bg-foreground text-background hover:bg-foreground/90 py-3 rounded-full text-[14px] font-medium">
                   Send Message

@@ -90,13 +90,13 @@ const About = () => {
         >
           <motion.span
             variants={reveal}
-            className="text-white/60 text-xs uppercase tracking-[0.25em] font-medium block mb-5"
+            className="text-white/70 text-[13px] uppercase tracking-[0.25em] font-medium block mb-5"
           >
             Our Story
           </motion.span>
           <motion.h1
             variants={reveal}
-            className="font-serif text-3xl md:text-5xl font-semibold text-white leading-[1.12] tracking-[-0.01em] max-w-xl mx-auto"
+            className="font-serif text-3xl md:text-5xl font-semibold text-white leading-[1.12] tracking-[-0.01em] max-w-xl mx-auto [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]"
           >
             We looked everywhere.
             <br />
@@ -112,7 +112,7 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           2. THE SEARCH — Origin story, asymmetric layout
       ═══════════════════════════════════════════════════ */}
-      <section className="py-28 md:py-36 bg-background">
+      <section className="py-16 md:py-36 bg-background">
         <div className="container px-6 md:px-8">
           <div className="grid md:grid-cols-12 gap-12 md:gap-0 items-center">
             {/* Left — Image */}
@@ -143,7 +143,7 @@ const About = () => {
             >
               <motion.span
                 variants={reveal}
-                className="text-[12px] uppercase tracking-[0.2em] text-[#C4785A] font-medium block mb-5"
+                className="text-[13px] uppercase tracking-[0.2em] text-[#C4785A] font-medium block mb-5"
               >
                 How Style Saplings Began
               </motion.span>
@@ -155,7 +155,7 @@ const About = () => {
               </motion.h2>
               <motion.p
                 variants={reveal}
-                className="text-[15px] text-muted-foreground leading-[1.8] mb-5"
+                className="text-[16px] text-muted-foreground leading-[1.8] mb-5"
               >
                 When our daughter was two, we wanted to dress her in something
                 that felt truly Indian — not a costume, but real. Something
@@ -166,7 +166,7 @@ const About = () => {
               </motion.p>
               <motion.p
                 variants={reveal}
-                className="text-[15px] text-muted-foreground leading-[1.8]"
+                className="text-[16px] text-muted-foreground leading-[1.8]"
               >
                 So we went directly to the artisans. We visited workshops in
                 Lucknow, spent time in Rajasthan understanding Bandhani, and
@@ -184,7 +184,7 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           3. THE CRAFTS — Editorial cards on warm background
       ═══════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#F0EBE1]">
+      <section className="py-16 md:py-32 bg-[#F0EBE1]">
         <div className="container px-6 md:px-8">
           <motion.div
             initial="hidden"
@@ -227,10 +227,10 @@ const About = () => {
                     {craft.name}
                   </h3>
                   <div className="w-8 border-b-2 border-[#C4785A] mt-3 mb-3" />
-                  <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
+                  <p className="text-[13px] uppercase tracking-widest text-muted-foreground mb-3">
                     {craft.origin}
                   </p>
-                  <p className="text-[14px] text-muted-foreground leading-relaxed">
+                  <p className="text-[15px] text-muted-foreground leading-relaxed">
                     {craft.desc}
                   </p>
                 </div>
@@ -261,7 +261,7 @@ const About = () => {
                 <p className="font-serif text-3xl md:text-4xl font-semibold text-foreground leading-none">
                   {stat.value}
                 </p>
-                <p className="text-xs text-muted-foreground tracking-wide mt-2">
+                <p className="text-[13px] text-muted-foreground tracking-wide mt-2">
                   {stat.label}
                 </p>
               </motion.div>
@@ -273,7 +273,7 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           5. FOUNDER QUOTE — Centered card
       ═══════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-[#F0EBE1]">
+      <section className="py-16 md:py-28 bg-[#F0EBE1]">
         <div className="container px-6 md:px-8 flex justify-center">
           <motion.div
             initial="hidden"
@@ -290,7 +290,7 @@ const About = () => {
             </motion.div>
             <motion.p
               variants={reveal}
-              className="font-serif italic text-lg md:text-xl leading-relaxed text-foreground mb-6 -mt-2"
+              className="font-serif italic text-[18px] md:text-[20px] leading-relaxed text-foreground mb-6 -mt-2"
             >
               Style Saplings began with a simple wish — to dress our children
               in the same beautiful handcrafted traditions that have defined
@@ -336,7 +336,7 @@ const About = () => {
             </motion.h2>
             <motion.p
               variants={reveal}
-              className="text-white/50 text-[15px] mt-6 mb-10 max-w-lg mx-auto leading-relaxed"
+              className="text-white/70 text-[16px] mt-6 mb-10 max-w-lg mx-auto leading-relaxed"
             >
               Explore our collection of handcrafted ethnic wear for children
               aged 2-5 years. Made by skilled artisans across India.
@@ -344,7 +344,7 @@ const About = () => {
             <motion.div variants={reveal}>
               <Link
                 to="/shop"
-                className="group inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-9 py-4 text-white text-[13px] font-medium tracking-wide hover:bg-white/18 transition-all"
+                className="group inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-sm border border-white/25 rounded-full px-9 py-4 text-white text-[14px] font-medium tracking-wide hover:bg-white/18 transition-all min-h-[44px]"
               >
                 Explore Collection
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

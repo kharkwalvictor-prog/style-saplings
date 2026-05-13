@@ -268,10 +268,10 @@ const Shop = () => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ type: "spring", damping: 30, stiffness: 120 }}
               >
-                <h1 className="font-serif text-3xl md:text-5xl font-semibold text-white leading-tight">
+                <h1 className="font-serif text-3xl md:text-5xl font-semibold text-white leading-tight [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]">
                   {heroTitle}
                 </h1>
-                <p className="text-white/60 text-sm mt-2 max-w-md leading-relaxed">
+                <p className="text-white/80 text-[15px] mt-2 max-w-md leading-relaxed [text-shadow:_0_1px_10px_rgba(0,0,0,0.3)]">
                   {heroTagline}
                 </p>
               </motion.div>
@@ -298,7 +298,7 @@ const Shop = () => {
                   role="tab"
                   aria-selected={selectedCraft === craft}
                   onClick={() => handleCraftSelect(craft)}
-                  className={`relative whitespace-nowrap px-3 py-1.5 text-[13px] transition-colors duration-200 ${
+                  className={`relative whitespace-nowrap px-3 py-1.5 text-[14px] transition-colors duration-200 min-h-[44px] flex items-center ${
                     selectedCraft === craft
                       ? "text-foreground font-medium"
                       : "text-muted-foreground hover:text-foreground"
@@ -350,7 +350,7 @@ const Shop = () => {
               <div className="relative">
                 <button
                   onClick={() => setSortOpen(!sortOpen)}
-                  className="flex items-center gap-1.5 text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+                  className="flex items-center gap-1.5 text-[14px] text-muted-foreground hover:text-foreground transition-colors min-h-[44px]"
                   aria-haspopup="listbox"
                   aria-expanded={sortOpen}
                 >
@@ -534,7 +534,7 @@ const Shop = () => {
             initial="hidden"
             animate="visible"
             variants={stagger}
-            className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8"
+            className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8"
           >
             {gridItems.map((item) => {
               if (item.type === "story") {

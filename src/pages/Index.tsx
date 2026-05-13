@@ -111,7 +111,7 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           HERO — Cinematic, emotional, minimal copy
       ═══════════════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative h-[100svh] min-h-[650px] overflow-hidden">
+      <section ref={heroRef} className="relative h-[100svh] min-h-[550px] md:min-h-[650px] overflow-hidden">
         <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
           <img
             src={heroImg}
@@ -122,7 +122,7 @@ const Index = () => {
           />
         </motion.div>
         {/* Overlay: warm tint, lighter but still readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50" />
 
         <motion.div
           style={{ opacity: heroFade, y: heroLift }}
@@ -131,16 +131,16 @@ const Index = () => {
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-2xl">
             <motion.h1
               variants={reveal}
-              className="font-serif text-[42px] sm:text-[58px] md:text-[72px] lg:text-[84px] font-semibold text-[#FAF7F2] leading-[1.04] tracking-[-0.02em] [text-shadow:_0_2px_30px_rgba(0,0,0,0.3)]"
+              className="font-serif text-[36px] sm:text-[58px] md:text-[72px] lg:text-[84px] font-semibold text-white leading-[1.04] tracking-[-0.02em] [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]"
             >
               Childhood, woven
               <br />
-              with <em className="italic font-normal text-[#FAF7F2]/80">tradition.</em>
+              with <em className="italic font-normal text-white/80">tradition.</em>
             </motion.h1>
 
             <motion.p
               variants={reveal}
-              className="text-[#FAF7F2]/70 text-[17px] md:text-[20px] mt-7 mb-10 max-w-md mx-auto leading-[1.7] [text-shadow:_0_1px_15px_rgba(0,0,0,0.2)]"
+              className="text-white/80 text-[18px] md:text-[22px] mt-7 mb-10 max-w-md mx-auto leading-[1.7] [text-shadow:_0_1px_15px_rgba(0,0,0,0.2)]"
             >
               Regional artistry, reimagined for modern childhood.
             </motion.p>
@@ -151,13 +151,13 @@ const Index = () => {
             >
               <Link
                 to="/shop"
-                className="bg-[#FAF7F2]/12 backdrop-blur-sm border border-[#FAF7F2]/20 rounded-full px-8 py-3.5 text-[#FAF7F2] text-[14px] font-medium tracking-wide hover:bg-[#FAF7F2]/22 transition-all"
+                className="bg-white/12 backdrop-blur-sm border border-white/30 rounded-full px-8 py-3.5 text-white text-[14px] font-medium tracking-wide hover:bg-white/22 transition-all min-h-[44px]"
               >
                 Shop Collection
               </Link>
               <Link
                 to="/about"
-                className="text-[#FAF7F2]/60 text-[14px] font-medium hover:text-[#FAF7F2] transition-colors"
+                className="text-white/70 text-[14px] font-medium hover:text-white transition-colors min-h-[44px] flex items-center"
               >
                 Our Story
               </Link>
@@ -184,7 +184,7 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           EXPLORE INDIA — Signature section, asymmetric grid
       ═══════════════════════════════════════════════════ */}
-      <section className="py-28 md:py-44 bg-background">
+      <section className="py-16 md:py-44 bg-background">
         <div className="container px-6 md:px-8">
           {/* Left-aligned heading — NOT centered, editorial feel */}
           <motion.div
@@ -204,7 +204,7 @@ const Index = () => {
             </motion.h2>
             <motion.p
               variants={reveal}
-              className="text-muted-foreground text-[15px] mt-5 leading-relaxed"
+              className="text-muted-foreground text-[16px] mt-5 leading-relaxed"
             >
               Centuries of tradition, one collection.
             </motion.p>
@@ -216,7 +216,7 @@ const Index = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
             variants={stagger}
-            className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5"
+            className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-5"
           >
             {regions.map((region) => (
               <motion.div
@@ -237,13 +237,13 @@ const Index = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
                   <div className="absolute bottom-0 left-0 p-5 md:p-6">
-                    <p className="text-white/60 text-[12px] uppercase tracking-[0.12em] mb-1.5">
+                    <p className="text-white/80 text-[13px] uppercase tracking-[0.12em] mb-1.5">
                       {region.craft}
                     </p>
-                    <h3 className="font-serif text-[20px] md:text-[22px] text-white font-semibold leading-tight">
+                    <h3 className="font-serif text-[22px] md:text-[24px] text-white font-semibold leading-tight">
                       {region.name}
                     </h3>
-                    <p className="text-white/50 text-[13px] mt-2 leading-snug hidden md:block">
+                    <p className="text-white/70 text-[13px] mt-2 leading-snug hidden md:block">
                       {region.line}
                     </p>
                   </div>
@@ -257,7 +257,7 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           CRAFT STORY — Editorial, asymmetric, emotional
       ═══════════════════════════════════════════════════ */}
-      <section className="py-28 md:py-40 bg-[#F0EBE1]" ref={craftRef}>
+      <section className="py-16 md:py-40 bg-[#F0EBE1]" ref={craftRef}>
         <div className="container px-6 md:px-8">
           <div className="grid md:grid-cols-12 gap-12 md:gap-0 items-center">
             {/* Text — left */}
@@ -270,7 +270,7 @@ const Index = () => {
             >
               <motion.span
                 variants={reveal}
-                className="text-[12px] uppercase tracking-[0.2em] text-[#C4785A] font-medium block mb-5"
+                className="text-[13px] uppercase tracking-[0.2em] text-[#C4785A] font-medium block mb-5"
               >
                 The Craft
               </motion.span>
@@ -286,7 +286,7 @@ const Index = () => {
               </motion.h2>
               <motion.p
                 variants={reveal}
-                className="text-[15px] text-muted-foreground leading-[1.8] max-w-[360px] mb-8"
+                className="text-[16px] text-muted-foreground leading-[1.8] max-w-[360px] mb-8"
               >
                 Pure cotton mulmul, hand-embroidered over 400 years
                 of tradition. No machines — just patience and pride.
@@ -294,7 +294,7 @@ const Index = () => {
               <motion.div variants={reveal}>
                 <Link
                   to="/about"
-                  className="inline-flex items-center gap-2 text-[13px] font-medium text-foreground group"
+                  className="inline-flex items-center gap-2 text-[14px] font-medium text-foreground group"
                 >
                   <span className="relative after:absolute after:bottom-[-3px] after:left-0 after:w-full after:h-px after:bg-foreground/30 after:origin-left after:scale-x-100 group-hover:after:bg-foreground after:transition-colors after:duration-300">
                     Meet the artisans
@@ -342,7 +342,7 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           FEATURED — Minimal, big imagery, breathing room
       ═══════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-36 bg-background">
+      <section className="py-16 md:py-36 bg-background">
         <div className="container px-6 md:px-8">
           <div className="flex items-end justify-between mb-12 md:mb-16">
             <motion.h2
@@ -364,7 +364,7 @@ const Index = () => {
           </div>
 
           {isLoading ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
               {Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} className="space-y-4">
                   <Skeleton className="aspect-[3/4] rounded-2xl" />
@@ -379,7 +379,7 @@ const Index = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
               variants={stagger}
-              className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8"
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8"
             >
               {featuredProducts.map((product) => (
                 <motion.div key={product.id} variants={reveal}>
@@ -394,7 +394,7 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           SOCIAL PROOF — Testimonials, warm background
       ═══════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#F0EBE1]">
+      <section className="py-16 md:py-32 bg-[#F0EBE1]">
         <div className="container px-6 md:px-8">
           <motion.h2
             initial="hidden"
@@ -424,12 +424,12 @@ const Index = () => {
                     <Star key={i} className="h-[14px] w-[14px] text-amber-400" fill="currentColor" />
                   ))}
                 </div>
-                <p className="font-serif italic text-[16px] md:text-[17px] leading-[1.7] text-foreground/85 mb-6">
+                <p className="font-serif italic text-[17px] md:text-[18px] leading-[1.7] text-foreground/85 mb-6">
                   &ldquo;{t.quote}&rdquo;
                 </p>
                 <div className="w-8 h-px bg-border mb-4" />
-                <p className="text-[13px] font-medium">{t.name}</p>
-                <p className="text-[12px] text-muted-foreground mt-0.5">{t.location}</p>
+                <p className="text-[14px] font-medium">{t.name}</p>
+                <p className="text-[13px] text-muted-foreground mt-0.5">{t.location}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -463,14 +463,14 @@ const Index = () => {
             </motion.h2>
             <motion.p
               variants={reveal}
-              className="text-white/50 text-[15px] mt-6 max-w-sm mx-auto leading-relaxed"
+              className="text-white/70 text-[16px] mt-6 max-w-sm mx-auto leading-relaxed"
             >
               Handcrafted in India. Made for little ones.
             </motion.p>
             <motion.div variants={reveal}>
               <Link
                 to="/shop"
-                className="inline-flex items-center gap-2.5 mt-10 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-9 py-4 text-white text-[13px] font-medium tracking-wide hover:bg-white/18 transition-all group"
+                className="inline-flex items-center gap-2.5 mt-10 bg-white/10 backdrop-blur-sm border border-white/25 rounded-full px-9 py-4 text-white text-[14px] font-medium tracking-wide hover:bg-white/18 transition-all group min-h-[44px]"
               >
                 Explore the Collection
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -500,7 +500,7 @@ const Index = () => {
             ].map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-2.5 px-6 md:px-10">
                 <Icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
-                <span className="text-[12px] uppercase tracking-[0.1em] text-muted-foreground">
+                <span className="text-[13px] uppercase tracking-[0.1em] text-muted-foreground">
                   {label}
                 </span>
               </div>
