@@ -14,7 +14,7 @@ const PageBanner = ({ label, title }: PageBannerProps) => (
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="text-center"
       >
-        <span className="text-[10px] md:text-xs tracking-[0.3em] uppercase font-medium text-white/50 mb-3 block">
+        <span className="text-[12px] md:text-xs tracking-[0.3em] uppercase font-medium text-white/75 mb-3 block">
           {label}
         </span>
         <h1 className="font-serif text-3xl md:text-5xl font-semibold text-white">
