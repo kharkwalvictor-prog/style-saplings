@@ -4,61 +4,60 @@
 
 @layer base {
   :root {
-    /* ── Royal Boutique Palette ──
-       Warm cream + gold + sage — inspired by Manyavar/Sabyasachi
-    */
+    /* ── Style Saplings — Warm Premium Palette ── */
 
-    /* Background: Warm cream #FBF8F3 */
-    --background: 38 40% 97%;
-    /* Foreground: Rich espresso #2A2220 */
-    --foreground: 12 12% 15%;
+    /* Background: Warm ivory #FAF8F4 */
+    --background: 40 33% 97%;
+    /* Foreground: Deep charcoal #2C2C2C */
+    --foreground: 0 0% 17%;
 
-    --card: 36 35% 96%;
-    --card-foreground: 12 12% 15%;
+    --card: 40 30% 98%;
+    --card-foreground: 0 0% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 12 12% 15%;
+    --popover-foreground: 0 0% 17%;
 
-    /* Primary: Burnt orange #C4622D */
-    --primary: 18 63% 47%;
+    /* Primary: Terracotta #C4785A */
+    --primary: 18 42% 56%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Sage green #5B7C5B */
-    --secondary: 120 15% 42%;
+    /* Secondary: Muted sage #7B8B6F */
+    --secondary: 100 12% 49%;
     --secondary-foreground: 0 0% 100%;
 
     /* Sage accent token */
-    --sage: 120 15% 42%;
+    --sage: 100 12% 49%;
 
-    --muted: 36 18% 91%;
-    --muted-foreground: 20 8% 46%;
+    --muted: 36 22% 91%;
+    --muted-foreground: 30 5% 45%;
 
-    --accent: 36 22% 93%;
-    --accent-foreground: 12 12% 15%;
+    --accent: 36 25% 93%;
+    --accent-foreground: 0 0% 17%;
 
-    /* Destructive/Sale: Warm terracotta #B85C38 */
-    --destructive: 18 52% 47%;
+    /* Destructive/Sale */
+    --destructive: 18 42% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 36 14% 87%;
-    --input: 36 14% 87%;
-    --ring: 18 63% 47%;
+    --border: 36 18% 88%;
+    --input: 36 18% 88%;
+    --ring: 18 42% 56%;
 
     --radius: 0.5rem;
 
-    --sale: 18 52% 47%;
+    --sale: 18 42% 50%;
 
-    --footer: 15 10% 13%;
-    --footer-foreground: 38 40% 97%;
+    /* Footer: Deep forest-charcoal #1A2B22 */
+    --footer: 160 20% 12%;
+    --footer-foreground: 40 33% 97%;
 
     --sidebar-background: 36 20% 94%;
-    --sidebar-foreground: 12 12% 15%;
-    --sidebar-primary: 18 63% 47%;
+    --sidebar-foreground: 0 0% 17%;
+    --sidebar-primary: 18 42% 56%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 36 18% 91%;
-    --sidebar-accent-foreground: 12 12% 15%;
-    --sidebar-border: 36 14% 87%;
-    --sidebar-ring: 18 63% 47%;
+    --sidebar-accent: 36 22% 91%;
+    --sidebar-accent-foreground: 0 0% 17%;
+    --sidebar-border: 36 18% 88%;
+    --sidebar-ring: 18 42% 56%;
   }
 
   .dark {
@@ -139,5 +138,5 @@ html {
 }
 
 ::selection {
-  background-color: hsl(18 63% 47% / 0.15);
+  background-color: hsl(18 42% 56% / 0.15);
 }
