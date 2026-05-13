@@ -4,51 +4,51 @@
 
 @layer base {
   :root {
-    /* ── Style Saplings — Warm Premium Palette ── */
+    /* ── Style Saplings — Warm Confident Palette ── */
 
-    /* Background: Warm ivory #FAF7F2 */
-    --background: 34 40% 96%;
-    /* Foreground: Deep charcoal #2C2C2C */
-    --foreground: 0 0% 17%;
+    /* Background: Warm ivory #FAF6F0 */
+    --background: 38 33% 97%;
+    /* Foreground: Warm charcoal #2A2523 */
+    --foreground: 20 10% 16%;
 
-    /* Cards: Clean warm white #FFFDFC */
-    --card: 20 50% 99%;
-    --card-foreground: 0 0% 17%;
+    /* Cards: Very warm white #FFFDF9 */
+    --card: 36 30% 99%;
+    --card-foreground: 20 10% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 17%;
+    --popover-foreground: 20 10% 16%;
 
-    /* Primary: Terracotta #C4785A */
-    --primary: 18 42% 56%;
+    /* Primary: Terracotta #C06A4F — deeper, confident */
+    --primary: 18 42% 52%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Muted sage #7B8B6F */
-    --secondary: 100 12% 49%;
+    /* Secondary: Sage green #4A6B45 — visible, confident */
+    --secondary: 115 18% 36%;
     --secondary-foreground: 0 0% 100%;
 
     /* Sage accent token */
-    --sage: 100 12% 49%;
+    --sage: 115 18% 36%;
 
-    --muted: 36 22% 91%;
-    --muted-foreground: 30 5% 45%;
+    --muted: 34 20% 92%;
+    --muted-foreground: 25 8% 40%;
 
-    --accent: 36 25% 93%;
-    --accent-foreground: 0 0% 17%;
+    --accent: 34 22% 94%;
+    --accent-foreground: 20 10% 16%;
 
     /* Destructive/Sale */
     --destructive: 18 42% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 36 18% 88%;
-    --input: 36 18% 88%;
-    --ring: 18 42% 56%;
+    --border: 30 15% 86%;
+    --input: 30 15% 86%;
+    --ring: 18 42% 52%;
 
     --radius: 0.5rem;
 
-    --sale: 18 42% 50%;
+    --sale: 18 42% 48%;
 
-    /* Footer: Deep forest-charcoal #1A2B22 */
-    --footer: 160 20% 12%;
+    /* Footer: Dark sage #1E3320 — admin sidebar tone */
+    --footer: 130 22% 15%;
     --footer-foreground: 40 33% 97%;
 
     --sidebar-background: 36 20% 94%;
@@ -139,7 +139,7 @@ html {
 }
 
 ::selection {
-  background-color: hsl(18 42% 56% / 0.15);
+  background-color: hsl(18 42% 52% / 0.15);
 }
 
 /* ── Subtle textile grain — adds tactile warmth ── */

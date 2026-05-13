@@ -20,13 +20,13 @@ const Footer = () => {
   return (
     <footer>
       {/* ── Newsletter — warm, editorial ── */}
-      <section className="bg-[#F0EBE1]">
+      <section className="bg-[#EDE7DE]">
         <div className="container px-6 md:px-8 py-20 md:py-28">
           <div className="max-w-md mx-auto text-center">
             <p className="font-serif italic text-[17px] md:text-[20px] text-muted-foreground mb-6 leading-relaxed">
               {getContent(content, "footer_newsletter_tagline", "Inspired by India's regional artistry, designed for little celebrations.")}
             </p>
-            <h3 className="font-serif text-[28px] md:text-[34px] font-medium leading-[1.12] mb-3">
+            <h3 className="font-serif text-[28px] md:text-[34px] font-medium leading-[1.12] mb-3 text-foreground">
               {getContent(content, "footer_newsletter_heading", "Stay close to the craft.")}
             </h3>
             <p className="text-[15px] text-muted-foreground mb-8">
@@ -37,7 +37,7 @@ const Footer = () => {
               <motion.p
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-[14px] text-[#7B8B6F] font-medium"
+                className="text-[14px] text-[#4A6B45] font-medium"
               >
                 Welcome to the family.
               </motion.p>
@@ -49,11 +49,11 @@ const Footer = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email"
                   required
-                  className="flex-1 px-5 py-3 text-[14px] bg-white/80 border-0 rounded-full text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-2 focus:ring-[#7B8B6F]/20 transition-all min-h-[44px]"
+                  className="flex-1 px-5 py-3 text-[14px] bg-white/80 border-0 rounded-full text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-2 focus:ring-[#4A6B45]/20 transition-all min-h-[44px]"
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 text-[13px] uppercase tracking-[0.1em] font-medium bg-[#C4785A] text-white rounded-full hover:bg-[#B0684E] transition-colors min-h-[44px]"
+                  className="px-6 py-3 text-[13px] uppercase tracking-[0.1em] font-medium bg-[#4A6B45] text-white rounded-full hover:bg-[#3D5C39] transition-colors min-h-[44px]"
                 >
                   Join
                 </button>
@@ -64,7 +64,7 @@ const Footer = () => {
       </section>
 
       {/* ── Main footer — atmospheric ── */}
-      <div className="bg-[#1A2B22]">
+      <div className="bg-[#1E3320]">
         <div className="container px-6 md:px-8">
           {/* Brand statement */}
           <div className="pt-16 md:pt-20 pb-12 md:pb-14 text-center border-b border-white/10">
@@ -75,7 +75,7 @@ const Footer = () => {
                 className="h-14 md:h-16 object-contain mx-auto mb-5"
               />
             </Link>
-            <p className="font-serif italic text-[16px] md:text-[18px] text-white/60 max-w-sm mx-auto leading-[1.7]">
+            <p className="font-serif italic text-[16px] md:text-[18px] text-white/65 max-w-sm mx-auto leading-[1.7]">
               {getContent(content, "footer_tagline", "Inspired by India's regional artistry and crafted for little celebrations.")}
             </p>
           </div>
@@ -143,11 +143,11 @@ const Footer = () => {
               </ul>
               <div className="flex items-center gap-3 mt-5">
                 <a href="https://instagram.com/stylesaplings" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all" aria-label="Instagram">
+                  className="w-8 h-8 rounded-full border border-white/25 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all" aria-label="Instagram">
                   <Instagram className="h-3.5 w-3.5" />
                 </a>
                 <a href="https://wa.me/919810901031" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all" aria-label="WhatsApp">
+                  className="w-8 h-8 rounded-full border border-white/25 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all" aria-label="WhatsApp">
                   <MessageCircle className="h-3.5 w-3.5" />
                 </a>
               </div>
@@ -155,11 +155,11 @@ const Footer = () => {
           </div>
 
           {/* Bottom */}
-          <div className="border-t border-white/8 py-6 flex flex-col md:flex-row items-center justify-between text-[12px] text-white/40 gap-2">
+          <div className="border-t border-white/10 py-6 flex flex-col md:flex-row items-center justify-between text-[12px] text-white/50 gap-2">
             <span>&copy; {new Date().getFullYear()} Shivaya Enterprises</span>
             <div className="flex gap-5">
-              <Link to="/privacy-policy" className="hover:text-white/50 transition-colors">Privacy</Link>
-              <Link to="/terms-of-service" className="hover:text-white/50 transition-colors">Terms</Link>
+              <Link to="/privacy-policy" className="hover:text-white/70 transition-colors">Privacy</Link>
+              <Link to="/terms-of-service" className="hover:text-white/70 transition-colors">Terms</Link>
             </div>
           </div>
         </div>

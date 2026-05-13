@@ -123,8 +123,8 @@ const Index = () => {
             fetchPriority="high"
           />
         </motion.div>
-        {/* Overlay: warm tint, lighter but still readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50" />
+        {/* Overlay: moderate, readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/55" />
 
         <motion.div
           style={{ opacity: heroFade, y: heroLift }}
@@ -140,7 +140,7 @@ const Index = () => {
 
             <motion.p
               variants={reveal}
-              className="text-white/80 text-[18px] md:text-[22px] mt-7 mb-10 max-w-md mx-auto leading-[1.7] [text-shadow:_0_1px_15px_rgba(0,0,0,0.2)]"
+              className="text-white/85 text-[18px] md:text-[22px] mt-7 mb-10 max-w-md mx-auto leading-[1.7] [text-shadow:_0_1px_15px_rgba(0,0,0,0.2)]"
             >
               {getContent(content, "hero_subtitle", "Regional artistry, reimagined for modern childhood.")}
             </motion.p>
@@ -151,13 +151,13 @@ const Index = () => {
             >
               <Link
                 to="/shop"
-                className="bg-white/12 backdrop-blur-sm border border-white/30 rounded-full px-8 py-3.5 text-white text-[14px] font-medium tracking-wide hover:bg-white/22 transition-all min-h-[44px]"
+                className="bg-[#4A6B45] border border-[#4A6B45] rounded-full px-8 py-3.5 text-white text-[14px] font-medium tracking-wide hover:bg-[#3D5C39] transition-all min-h-[44px]"
               >
                 {getContent(content, "hero_cta_primary", "Shop Collection")}
               </Link>
               <Link
                 to="/about"
-                className="text-white/70 text-[14px] font-medium hover:text-white transition-colors min-h-[44px] flex items-center"
+                className="text-white/75 text-[14px] font-medium hover:text-white transition-colors min-h-[44px] flex items-center"
               >
                 {getContent(content, "hero_cta_secondary", "Our Story")}
               </Link>
@@ -241,7 +241,7 @@ const Index = () => {
                     <h3 className="font-serif text-[22px] md:text-[24px] text-white font-semibold leading-tight">
                       {region.name}
                     </h3>
-                    <p className="text-white/70 text-[13px] mt-2 leading-snug hidden md:block">
+                    <p className="text-white/80 text-[13px] mt-2 leading-snug hidden md:block">
                       {region.line}
                     </p>
                   </div>
@@ -255,7 +255,7 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           CRAFT STORY — Editorial, asymmetric, emotional
       ═══════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-40 bg-[#F0EBE1]" ref={craftRef}>
+      <section className="py-16 md:py-40 bg-[#EDE7DE]" ref={craftRef}>
         <div className="container px-6 md:px-8">
           <div className="grid md:grid-cols-12 gap-12 md:gap-0 items-center">
             {/* Text — left */}
@@ -268,7 +268,7 @@ const Index = () => {
             >
               <motion.span
                 variants={reveal}
-                className="text-[13px] uppercase tracking-[0.2em] text-[#C4785A] font-medium block mb-5"
+                className="text-[13px] uppercase tracking-[0.2em] text-[#4A6B45] font-medium block mb-5"
               >
                 {getContent(content, "craft_label", "The Craft")}
               </motion.span>
@@ -280,7 +280,7 @@ const Index = () => {
               </motion.h2>
               <motion.p
                 variants={reveal}
-                className="text-[16px] text-muted-foreground leading-[1.8] max-w-[360px] mb-8"
+                className="text-[16px] text-foreground/75 leading-[1.8] max-w-[360px] mb-8"
               >
                 {getContent(content, "craft_body", "Pure cotton mulmul, hand-embroidered over 400 years of tradition. No machines — just patience and pride.")}
               </motion.p>
@@ -387,7 +387,7 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           SOCIAL PROOF — Testimonials, warm background
       ═══════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-32 bg-[#F0EBE1]">
+      <section className="py-16 md:py-32 bg-[#EDE7DE]">
         <div className="container px-6 md:px-8">
           <motion.h2
             initial="hidden"
@@ -417,7 +417,7 @@ const Index = () => {
                     <Star key={i} className="h-[14px] w-[14px] text-amber-400" fill="currentColor" />
                   ))}
                 </div>
-                <p className="font-serif italic text-[17px] md:text-[18px] leading-[1.7] text-foreground/85 mb-6">
+                <p className="font-serif italic text-[17px] md:text-[18px] leading-[1.7] text-foreground/90 mb-6">
                   &ldquo;{t.quote}&rdquo;
                 </p>
                 <div className="w-8 h-px bg-border mb-4" />
@@ -432,7 +432,7 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════
           FINAL CTA — Emotional close, cinematic
       ═══════════════════════════════════════════════════ */}
-      <section className="py-32 md:py-44 bg-[#1A2B22] relative overflow-hidden">
+      <section className="py-32 md:py-44 bg-[#1E3320] relative overflow-hidden">
         {/* Subtle texture */}
         <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0id2hpdGUiLz48L3N2Zz4=')] pointer-events-none" />
 
@@ -452,14 +452,14 @@ const Index = () => {
             </motion.h2>
             <motion.p
               variants={reveal}
-              className="text-white/70 text-[16px] mt-6 max-w-sm mx-auto leading-relaxed"
+              className="text-white/75 text-[16px] mt-6 max-w-sm mx-auto leading-relaxed"
             >
               {getContent(content, "cta_subtitle", "Handcrafted in India. Made for little ones.")}
             </motion.p>
             <motion.div variants={reveal}>
               <Link
                 to="/shop"
-                className="inline-flex items-center gap-2.5 mt-10 bg-white/10 backdrop-blur-sm border border-white/25 rounded-full px-9 py-4 text-white text-[14px] font-medium tracking-wide hover:bg-white/18 transition-all group min-h-[44px]"
+                className="inline-flex items-center gap-2.5 mt-10 bg-white/15 backdrop-blur-sm border border-white/30 rounded-full px-9 py-4 text-white text-[14px] font-medium tracking-wide hover:bg-white/25 transition-all group min-h-[44px]"
               >
                 {getContent(content, "cta_button_text", "Explore the Collection")}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

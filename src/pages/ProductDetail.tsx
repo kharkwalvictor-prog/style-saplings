@@ -348,7 +348,7 @@ const ProductDetail = () => {
             {/* Craft badge */}
             <motion.span
               variants={reveal}
-              className="text-xs uppercase tracking-[0.18em] text-[#7B8B6F] font-medium mb-3"
+              className="text-xs uppercase tracking-[0.18em] text-[#4A6B45] font-medium mb-3"
             >
               {product.craft_type}
             </motion.span>
@@ -368,7 +368,7 @@ const ProductDetail = () => {
             >
               {product.sale_price ? (
                 <>
-                  <span className="text-[24px] font-semibold text-[#C4785A]">
+                  <span className="text-[24px] font-semibold text-[#C06A4F]">
                     {"\u20B9"}
                     {Number(product.sale_price).toLocaleString("en-IN")}
                   </span>
@@ -393,7 +393,7 @@ const ProductDetail = () => {
               {emotionalCards.map((card) => (
                 <div
                   key={card.label}
-                  className="bg-[#F0EBE1]/50 rounded-xl p-4"
+                  className="bg-[#EDE7DE]/50 rounded-xl p-4"
                 >
                   <span className="text-[12px] uppercase tracking-wider text-muted-foreground block mb-1">
                     {card.label}
@@ -437,7 +437,7 @@ const ProductDetail = () => {
                 })}
               </div>
               {isLowStock && (
-                <p className="text-xs text-[#C4785A] mt-2 font-medium">
+                <p className="text-xs text-[#C06A4F] mt-2 font-medium">
                   Low stock -- order soon
                 </p>
               )}
@@ -455,7 +455,7 @@ const ProductDetail = () => {
                 onClick={handleAddToCart}
                 className={`flex-1 rounded-full py-4 h-auto text-[15px] font-medium transition-all duration-300 ${
                   addedToCart
-                    ? "bg-[#7B8B6F] hover:bg-[#7B8B6F] text-white"
+                    ? "bg-[#4A6B45] hover:bg-[#4A6B45] text-white"
                     : "bg-foreground text-background hover:bg-foreground/90"
                 }`}
               >
@@ -473,7 +473,7 @@ const ProductDetail = () => {
                 onClick={() => toggleWishlist(product.id)}
                 className={`w-14 h-auto rounded-full border flex items-center justify-center transition-all duration-200 ${
                   isWishlisted(product.id)
-                    ? "bg-[#C4785A]/10 border-[#C4785A]/30"
+                    ? "bg-[#C06A4F]/10 border-[#C06A4F]/30"
                     : "border-border hover:border-foreground/30"
                 }`}
                 aria-label={
@@ -484,8 +484,8 @@ const ProductDetail = () => {
               >
                 <Heart
                   className="h-5 w-5 transition-colors duration-200"
-                  fill={isWishlisted(product.id) ? "#C4785A" : "none"}
-                  stroke={isWishlisted(product.id) ? "#C4785A" : "currentColor"}
+                  fill={isWishlisted(product.id) ? "#C06A4F" : "none"}
+                  stroke={isWishlisted(product.id) ? "#C06A4F" : "currentColor"}
                   strokeWidth={1.5}
                 />
               </button>

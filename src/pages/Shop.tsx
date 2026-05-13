@@ -300,7 +300,7 @@ const Shop = () => {
                   onClick={() => handleCraftSelect(craft)}
                   className={`relative whitespace-nowrap px-3 py-1.5 text-[14px] transition-colors duration-200 min-h-[44px] flex items-center ${
                     selectedCraft === craft
-                      ? "text-foreground font-medium"
+                      ? "text-[#4A6B45] font-medium"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -308,7 +308,7 @@ const Shop = () => {
                   {selectedCraft === craft && (
                     <motion.span
                       layoutId="craft-underline"
-                      className="absolute bottom-0 left-3 right-3 h-px bg-foreground"
+                      className="absolute bottom-0 left-3 right-3 h-px bg-[#4A6B45]"
                       transition={{ type: "spring", damping: 30, stiffness: 300 }}
                     />
                   )}
@@ -462,7 +462,7 @@ const Shop = () => {
               </p>
               <button
                 onClick={clearSearch}
-                className="text-[13px] font-medium text-[#C4785A] hover:underline flex items-center gap-1"
+                className="text-[13px] font-medium text-[#C06A4F] hover:underline flex items-center gap-1"
               >
                 <X className="h-3.5 w-3.5" /> Clear
               </button>
@@ -509,7 +509,7 @@ const Shop = () => {
                 </p>
                 <button
                   onClick={clearSearch}
-                  className="text-[13px] font-medium text-[#C4785A] mt-5 hover:underline"
+                  className="text-[13px] font-medium text-[#C06A4F] mt-5 hover:underline"
                 >
                   Clear search
                 </button>
@@ -521,7 +521,7 @@ const Shop = () => {
                 </p>
                 <button
                   onClick={() => handleCraftSelect("All")}
-                  className="text-[13px] font-medium text-[#C4785A] mt-5 hover:underline"
+                  className="text-[13px] font-medium text-[#C06A4F] mt-5 hover:underline"
                 >
                   View all
                 </button>
@@ -544,7 +544,7 @@ const Shop = () => {
                     variants={reveal}
                     className="col-span-2 md:col-span-3"
                   >
-                    <div className="bg-[#F0EBE1] rounded-3xl p-10 md:p-14 flex items-center justify-center">
+                    <div className="bg-[#EDE7DE] rounded-3xl p-10 md:p-14 flex items-center justify-center">
                       <p className="font-serif italic text-[17px] md:text-[20px] leading-[1.7] text-foreground/80 max-w-2xl text-center">
                         &ldquo;{item.text}&rdquo;
                       </p>

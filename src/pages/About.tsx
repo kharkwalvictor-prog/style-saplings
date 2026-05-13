@@ -84,7 +84,7 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           1. HERO — Dark sage, text-focused, editorial
       ═══════════════════════════════════════════════════ */}
-      <section className="relative h-[50vh] min-h-[350px] bg-[#1A2B22] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[50vh] min-h-[350px] bg-[#1E3320] flex items-center justify-center overflow-hidden">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -93,7 +93,7 @@ const About = () => {
         >
           <motion.span
             variants={reveal}
-            className="text-white/70 text-[13px] uppercase tracking-[0.25em] font-medium block mb-5"
+            className="text-white/75 text-[13px] uppercase tracking-[0.25em] font-medium block mb-5"
           >
             {getContent(content, "about_hero_label", "Our Story")}
           </motion.span>
@@ -105,7 +105,7 @@ const About = () => {
           </motion.h1>
           <motion.div
             variants={reveal}
-            className="w-12 h-px bg-[#C4785A] mx-auto mt-6"
+            className="w-12 h-px bg-[#C06A4F] mx-auto mt-6"
           />
         </motion.div>
       </section>
@@ -144,7 +144,7 @@ const About = () => {
             >
               <motion.span
                 variants={reveal}
-                className="text-[13px] uppercase tracking-[0.2em] text-[#C4785A] font-medium block mb-5"
+                className="text-[13px] uppercase tracking-[0.2em] text-[#4A6B45] font-medium block mb-5"
               >
                 {getContent(content, "about_origin_label", "How Style Saplings Began")}
               </motion.span>
@@ -174,7 +174,7 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           3. THE CRAFTS — Editorial cards on warm background
       ═══════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-32 bg-[#F0EBE1]">
+      <section className="py-16 md:py-32 bg-[#EDE7DE]">
         <div className="container px-6 md:px-8">
           <motion.div
             initial="hidden"
@@ -216,7 +216,7 @@ const About = () => {
                   <h3 className="font-serif text-2xl font-medium">
                     {craft.name}
                   </h3>
-                  <div className="w-8 border-b-2 border-[#C4785A] mt-3 mb-3" />
+                  <div className="w-8 border-b-2 border-[#4A6B45] mt-3 mb-3" />
                   <p className="text-[13px] uppercase tracking-widest text-muted-foreground mb-3">
                     {craft.origin}
                   </p>
@@ -263,7 +263,7 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           5. FOUNDER QUOTE — Centered card
       ═══════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-28 bg-[#F0EBE1]">
+      <section className="py-16 md:py-28 bg-[#EDE7DE]">
         <div className="container px-6 md:px-8 flex justify-center">
           <motion.div
             initial="hidden"
@@ -274,7 +274,7 @@ const About = () => {
           >
             <motion.div
               variants={reveal}
-              className="font-serif text-5xl text-muted-foreground/20 leading-none mb-4"
+              className="font-serif text-5xl text-muted-foreground/40 leading-none mb-4"
             >
               &ldquo;
             </motion.div>
@@ -300,7 +300,7 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           6. CTA BANNER — Dark sage, cinematic close
       ═══════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-[#1A2B22] relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-[#1E3320] relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0id2hpdGUiLz48L3N2Zz4=')] pointer-events-none" />
 
         <div className="container px-6 md:px-8 text-center relative">
@@ -319,14 +319,14 @@ const About = () => {
             </motion.h2>
             <motion.p
               variants={reveal}
-              className="text-white/70 text-[16px] mt-6 mb-10 max-w-lg mx-auto leading-relaxed"
+              className="text-white/75 text-[16px] mt-6 mb-10 max-w-lg mx-auto leading-relaxed"
             >
               {getContent(content, "about_cta_subtitle", "Explore our collection of handcrafted ethnic wear for children aged 2-5 years. Made by skilled artisans across India.")}
             </motion.p>
             <motion.div variants={reveal}>
               <Link
                 to="/shop"
-                className="group inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-sm border border-white/25 rounded-full px-9 py-4 text-white text-[14px] font-medium tracking-wide hover:bg-white/18 transition-all min-h-[44px]"
+                className="group inline-flex items-center gap-2.5 bg-white/15 backdrop-blur-sm border border-white/30 rounded-full px-9 py-4 text-white text-[14px] font-medium tracking-wide hover:bg-white/25 transition-all min-h-[44px]"
               >
                 {getContent(content, "about_cta_button", "Explore Collection")}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

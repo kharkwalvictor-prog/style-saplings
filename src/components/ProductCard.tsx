@@ -85,7 +85,7 @@ const ProductCard = ({ product, index = 0 }: Props) => {
 
             {/* Sale badge */}
             {discount > 0 && (
-              <span className="absolute top-3 left-3 bg-[#C4785A] text-white text-[10px] font-bold px-2.5 py-1 rounded-full z-10">
+              <span className="absolute top-3 left-3 bg-[#C06A4F] text-white text-[10px] font-bold px-2.5 py-1 rounded-full z-10">
                 -{discount}%
               </span>
             )}
@@ -98,8 +98,8 @@ const ProductCard = ({ product, index = 0 }: Props) => {
             >
               <Heart
                 className="h-4 w-4 transition-all duration-300"
-                fill={wishlisted ? "#C4785A" : "none"}
-                stroke={wishlisted ? "#C4785A" : "#1A2B22"}
+                fill={wishlisted ? "#C06A4F" : "none"}
+                stroke={wishlisted ? "#C06A4F" : "#1A2B22"}
                 strokeWidth={2}
               />
             </button>
@@ -119,7 +119,7 @@ const ProductCard = ({ product, index = 0 }: Props) => {
 
         {/* Info */}
         <div className="mt-3.5 space-y-1 px-0.5">
-          <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#C4785A]">
+          <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#4A6B45]">
             {product.craft_type}
           </span>
           <h3 className="font-serif text-base md:text-lg font-medium leading-tight">
@@ -131,8 +131,8 @@ const ProductCard = ({ product, index = 0 }: Props) => {
                 <Star
                   key={i}
                   className="h-3 w-3"
-                  fill={i < Math.round(reviewSummary.avg_rating) ? "#C4785A" : "none"}
-                  stroke="#C4785A"
+                  fill={i < Math.round(reviewSummary.avg_rating) ? "#C06A4F" : "none"}
+                  stroke="#C06A4F"
                   strokeWidth={i < Math.round(reviewSummary.avg_rating) ? 0 : 1.5}
                 />
               ))}
