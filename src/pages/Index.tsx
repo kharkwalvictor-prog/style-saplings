@@ -43,11 +43,11 @@ const stagger = {
 
 /* ── Data ── */
 const regions = [
-  { name: "Lucknow", craft: "Chikankari", desc: "Delicate hand embroidery", image: product1 },
-  { name: "Kashmir", craft: "Firan", desc: "Warm mountain traditions", image: product3 },
-  { name: "Rajasthan", craft: "Bandhani", desc: "Ancient tie-dye artistry", image: product2 },
-  { name: "Punjab", craft: "Phulkari", desc: "Vibrant floral threadwork", image: product4 },
-  { name: "Gujarat", craft: "Patola", desc: "Double-weave heritage", image: product1 },
+  { name: "Lucknow", craft: "Chikankari", desc: "Soft embroidery adapted for modern comfort", image: product1 },
+  { name: "Kashmir", craft: "Firan", desc: "Warm traditions from the mountains", image: product3 },
+  { name: "Rajasthan", craft: "Bandhani", desc: "Playful craft reimagined for little ones", image: product2 },
+  { name: "Punjab", craft: "Phulkari", desc: "Vibrant floral threadwork in cotton", image: product4 },
+  { name: "Gujarat", craft: "Patola", desc: "Double-weave heritage, gentle on skin", image: product1 },
 ];
 
 const testimonials = [
@@ -128,49 +128,40 @@ const Index = () => {
           className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6"
         >
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-2xl">
-            <motion.p
-              variants={reveal}
-              className="text-[11px] md:text-[12px] uppercase tracking-[0.35em] text-white/45 font-medium mb-8"
-            >
-              Crafted across India
-            </motion.p>
-
             <motion.h1
               variants={reveal}
-              className="font-serif text-[42px] sm:text-[56px] md:text-[68px] lg:text-[80px] font-semibold text-white leading-[1.04] tracking-[-0.01em]"
+              className="font-serif text-[44px] sm:text-[60px] md:text-[76px] lg:text-[88px] font-semibold text-white leading-[1.02] tracking-[-0.02em]"
             >
-              Traditions tailored
+              Childhood, woven
               <br />
-              for modern
-              <br />
-              <em className="italic font-normal">childhood.</em>
+              with <em className="italic font-normal">tradition.</em>
             </motion.h1>
 
             <motion.p
               variants={reveal}
-              className="text-white/45 text-[14px] md:text-[16px] mt-7 mb-10 max-w-sm mx-auto leading-relaxed"
+              className="text-white/40 text-[13px] md:text-[15px] mt-8 mb-12 max-w-xs mx-auto leading-relaxed font-light"
             >
-              Soft fabrics inspired by regional artistry,
-              designed for comfort.
+              Handcrafted across India for little celebrations.
             </motion.p>
 
             <motion.div
               variants={reveal}
-              className="flex items-center justify-center gap-5 flex-wrap"
+              className="flex items-center justify-center gap-6"
             >
               <Link
                 to="/shop"
-                className="bg-white/12 backdrop-blur-sm border border-white/15 rounded-full px-8 py-3.5 text-white text-[13px] font-medium tracking-wide hover:bg-white/20 transition-all"
+                className="text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:text-white/70 transition-colors group"
               >
-                Shop the Collection
+                <span className="relative pb-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-white/30 group-hover:after:bg-white/60 after:transition-colors after:duration-300">
+                  Shop Collection
+                </span>
               </Link>
+              <span className="text-white/15">|</span>
               <Link
                 to="/about"
-                className="text-white/45 hover:text-white/80 text-[13px] font-medium transition-colors group"
+                className="text-white/50 text-[12px] uppercase tracking-[0.2em] font-medium hover:text-white/80 transition-colors"
               >
-                <span className="relative after:absolute after:bottom-[-3px] after:left-0 after:w-0 after:h-px after:bg-white/50 after:transition-all after:duration-300 group-hover:after:w-full">
-                  Our Story
-                </span>
+                Our Story
               </Link>
             </motion.div>
           </motion.div>
@@ -204,19 +195,20 @@ const Index = () => {
             variants={stagger}
             className="text-center mb-14 md:mb-20"
           >
-            <motion.h2
-              variants={reveal}
-              className="font-serif text-[30px] md:text-[44px] font-semibold leading-[1.1] tracking-[-0.01em]"
-            >
-              Explore India through clothing
-            </motion.h2>
             <motion.p
               variants={reveal}
-              className="text-muted-foreground text-[14px] mt-4 max-w-sm mx-auto leading-relaxed"
+              className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground/60 font-medium mb-5"
             >
-              Each region carries centuries of textile tradition.
-              Discover the craft behind the fabric.
+              Five Regions · Five Traditions
             </motion.p>
+            <motion.h2
+              variants={reveal}
+              className="font-serif text-[30px] md:text-[46px] font-semibold leading-[1.08] tracking-[-0.02em]"
+            >
+              Explore India
+              <br />
+              through <em className="italic font-normal">clothing.</em>
+            </motion.h2>
           </motion.div>
 
           <motion.div
@@ -334,6 +326,19 @@ const Index = () => {
             </motion.div>
           </div>
         </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════
+          LIFESTYLE BREAK — Full-width image, no text
+      ═══════════════════════════════════════════════════ */}
+      <section className="relative h-[40vh] md:h-[50vh] min-h-[280px] overflow-hidden">
+        <img
+          src={product4}
+          alt="Children in ethnic wear"
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-black/10" />
       </section>
 
       {/* ═══════════════════════════════════════════════════
