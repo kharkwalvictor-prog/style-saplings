@@ -1,21 +1,16 @@
-project_id = "__YOUR_SUPABASE_PROJECT_ID__"
+project_id = "igjltsdmlqxziokjeuwa"
 
+# Public / guest-callable functions (no auth required)
 [functions.create-razorpay-order]
 verify_jwt = false
 
 [functions.verify-razorpay-payment]
 verify_jwt = false
 
-[functions.validate-return-upload]
-verify_jwt = false
-
 [functions.send-order-confirmation]
 verify_jwt = false
 
-[functions.send-shipping-notification]
-verify_jwt = false
-
-[functions.generate-invoice]
+[functions.validate-return-upload]
 verify_jwt = false
 
 [functions.track-order]
@@ -24,11 +19,22 @@ verify_jwt = false
 [functions.sitemap]
 verify_jwt = false
 
-[functions.create-shipment]
-verify_jwt = false
-
-[functions.get-shipping-label]
-verify_jwt = false
-
 [functions.track-shipment]
 verify_jwt = false
+
+# Admin / server-only functions (require valid Supabase JWT)
+# create-shipment and get-shipping-label are called via supabase.functions.invoke()
+# from the admin panel — the admin's session JWT is forwarded automatically.
+# generate-invoice is only called server-side with the SERVICE_ROLE_KEY as Bearer token.
+# send-shipping-notification is triggered from the admin orders tab.
+[functions.create-shipment]
+verify_jwt = true
+
+[functions.get-shipping-label]
+verify_jwt = true
+
+[functions.generate-invoice]
+verify_jwt = true
+
+[functions.send-shipping-notification]
+verify_jwt = true

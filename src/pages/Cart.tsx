@@ -6,6 +6,17 @@ import PageBanner from "@/components/PageBanner";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { Minus, Plus, X } from "lucide-react";
+import product1 from "@/assets/product-1.jpg";
+import product2 from "@/assets/product-2.jpg";
+import product3 from "@/assets/product-3.jpg";
+import product4 from "@/assets/product-4.jpg";
+
+const fallbackImages: Record<string, string> = {
+  Chikankari: product1,
+  Bandhani: product2,
+  Firan: product3,
+  Festive: product4,
+};
 
 const Cart = () => {
   const { items, updateQuantity, removeItem, totalAmount } = useCart();
@@ -43,7 +54,11 @@ const Cart = () => {
                 className="flex gap-4 p-4 border rounded-2xl"
               >
                 <div className="w-20 h-24 md:w-24 md:h-32 bg-muted rounded-2xl overflow-hidden flex-shrink-0">
-                  <img src={item.product.images[0]} alt={item.product.name} className="w-full h-full object-cover" />
+                  <img
+                    src={item.product.images?.[0] && !item.product.images[0].includes("placeholder") ? item.product.images[0] : fallbackImages[item.product.craft_type] || product1}
+                    alt={item.product.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
@@ -84,12 +99,12 @@ const Cart = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping</span>
-                  <span className={freeShipping ? "text-secondary" : ""}>{freeShipping ? "Free" : "₹79"}</span>
+                  <span className={freeShipping ? "text-secondary" : ""}>{freeShipping ? "Free" : "₹99"}</span>
                 </div>
               </div>
               <div className="border-t my-4 pt-4 flex justify-between font-serif text-lg font-semibold">
                 <span>Total</span>
-                <span>₹{(totalAmount + (freeShipping ? 0 : 79)).toLocaleString("en-IN")}</span>
+                <span>₹{(totalAmount + (freeShipping ? 0 : 99)).toLocaleString("en-IN")}</span>
               </div>
               {!freeShipping && (
                 <p className="text-xs text-muted-foreground mb-4">

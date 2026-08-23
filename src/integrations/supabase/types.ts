@@ -7,86 +7,25 @@ export type Json =
   | Json[]
 
 export type Database = {
+  __InternalSupabase: { PostgrestVersion: "14.4" }
   public: {
     Tables: {
       back_in_stock_requests: {
-        Row: {
-          created_at: string | null
-          customer_email: string
-          customer_phone: string | null
-          id: string
-          notified: boolean | null
-          notified_at: string | null
-          product_id: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          customer_email: string
-          customer_phone?: string | null
-          id?: string
-          notified?: boolean | null
-          notified_at?: string | null
-          product_id?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          customer_email?: string
-          customer_phone?: string | null
-          id?: string
-          notified?: boolean | null
-          notified_at?: string | null
-          product_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "back_in_stock_requests_product_id_fkey"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "products"
-            referencedColumns: ["id"]
-          },
-        ]
+        Row: { created_at: string | null; customer_email: string; customer_phone: string | null; id: string; notified: boolean | null; notified_at: string | null; product_id: string | null }
+        Insert: { created_at?: string | null; customer_email: string; customer_phone?: string | null; id?: string; notified?: boolean | null; notified_at?: string | null; product_id?: string | null }
+        Update: { created_at?: string | null; customer_email?: string; customer_phone?: string | null; id?: string; notified?: boolean | null; notified_at?: string | null; product_id?: string | null }
+        Relationships: [{ foreignKeyName: "back_in_stock_requests_product_id_fkey"; columns: ["product_id"]; isOneToOne: false; referencedRelation: "products"; referencedColumns: ["id"] }]
       }
       blog_posts: {
-        Row: {
-          category: string | null
-          content: string | null
-          cover_image: string | null
-          created_at: string
-          excerpt: string | null
-          id: string
-          published: boolean
-          published_at: string | null
-          slug: string
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          category?: string | null
-          content?: string | null
-          cover_image?: string | null
-          created_at?: string
-          excerpt?: string | null
-          id?: string
-          published?: boolean
-          published_at?: string | null
-          slug: string
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          category?: string | null
-          content?: string | null
-          cover_image?: string | null
-          created_at?: string
-          excerpt?: string | null
-          id?: string
-          published?: boolean
-          published_at?: string | null
-          slug?: string
-          title?: string
-          updated_at?: string
-        }
+        Row: { category: string | null; content: string | null; cover_image: string | null; created_at: string; excerpt: string | null; id: string; published: boolean; published_at: string | null; slug: string; title: string; updated_at: string }
+        Insert: { category?: string | null; content?: string | null; cover_image?: string | null; created_at?: string; excerpt?: string | null; id?: string; published?: boolean; published_at?: string | null; slug: string; title: string; updated_at?: string }
+        Update: { category?: string | null; content?: string | null; cover_image?: string | null; created_at?: string; excerpt?: string | null; id?: string; published?: boolean; published_at?: string | null; slug?: string; title?: string; updated_at?: string }
+        Relationships: []
+      }
+      categories: {
+        Row: { created_at: string; description: string; id: string; name: string; slug: string; sort_order: number; updated_at: string }
+        Insert: { created_at?: string; description?: string; id?: string; name: string; slug: string; sort_order?: number; updated_at?: string }
+        Update: { created_at?: string; description?: string; id?: string; name?: string; slug?: string; sort_order?: number; updated_at?: string }
         Relationships: []
       }
       cod_otp: {
@@ -120,9 +59,9 @@ export type Database = {
         Relationships: [{ foreignKeyName: "email_log_order_id_fkey"; columns: ["order_id"]; isOneToOne: false; referencedRelation: "orders"; referencedColumns: ["id"] }]
       }
       gst_config: {
-        Row: { address: string; created_at: string; effective_from: string; gstin: string; id: string; legal_name: string; state: string; state_code: string; trade_name: string; updated_at: string }
-        Insert: { address: string; created_at?: string; effective_from?: string; gstin: string; id?: string; legal_name: string; state: string; state_code: string; trade_name: string; updated_at?: string }
-        Update: { address?: string; created_at?: string; effective_from?: string; gstin?: string; id?: string; legal_name?: string; state?: string; state_code?: string; trade_name?: string; updated_at?: string }
+        Row: { address: string | null; created_at: string; effective_from: string; gstin: string | null; id: string; legal_name: string | null; state: string | null; state_code: string | null; trade_name: string | null; updated_at: string }
+        Insert: { address?: string | null; created_at?: string; effective_from?: string; gstin?: string | null; id?: string; legal_name?: string | null; state?: string | null; state_code?: string | null; trade_name?: string | null; updated_at?: string }
+        Update: { address?: string | null; created_at?: string; effective_from?: string; gstin?: string | null; id?: string; legal_name?: string | null; state?: string | null; state_code?: string | null; trade_name?: string | null; updated_at?: string }
         Relationships: []
       }
       invoice_sequence: {
@@ -168,9 +107,9 @@ export type Database = {
         Relationships: [{ foreignKeyName: "product_reviews_order_id_fkey"; columns: ["order_id"]; isOneToOne: false; referencedRelation: "orders"; referencedColumns: ["id"] }, { foreignKeyName: "product_reviews_product_id_fkey"; columns: ["product_id"]; isOneToOne: false; referencedRelation: "products"; referencedColumns: ["id"] }]
       }
       products: {
-        Row: { category: string | null; craft_type: Database["public"]["Enums"]["craft_type"]; created_at: string; description: string | null; hsn_code: string | null; id: string; images: string[]; is_featured: boolean; low_stock_threshold: number; name: string; price: number; sale_price: number | null; search_vector: unknown; sizes: string[]; slug: string; stock_count: number; stock_status: Database["public"]["Enums"]["stock_status"]; supplier_notes: string | null; updated_at: string }
-        Insert: { category?: string | null; craft_type: Database["public"]["Enums"]["craft_type"]; created_at?: string; description?: string | null; hsn_code?: string | null; id?: string; images?: string[]; is_featured?: boolean; low_stock_threshold?: number; name: string; price: number; sale_price?: number | null; search_vector?: unknown; sizes?: string[]; slug: string; stock_count?: number; stock_status?: Database["public"]["Enums"]["stock_status"]; supplier_notes?: string | null; updated_at?: string }
-        Update: { category?: string | null; craft_type?: Database["public"]["Enums"]["craft_type"]; created_at?: string; description?: string | null; hsn_code?: string | null; id?: string; images?: string[]; is_featured?: boolean; low_stock_threshold?: number; name?: string; price?: number; sale_price?: number | null; search_vector?: unknown; sizes?: string[]; slug?: string; stock_count?: number; stock_status?: Database["public"]["Enums"]["stock_status"]; supplier_notes?: string | null; updated_at?: string }
+        Row: { category: string | null; craft_type: string; created_at: string; description: string | null; hsn_code: string | null; id: string; images: string[]; is_featured: boolean; low_stock_threshold: number; name: string; price: number; sale_price: number | null; search_vector: unknown; sizes: string[]; slug: string; stock_count: number; stock_status: Database["public"]["Enums"]["stock_status"]; supplier_notes: string | null; updated_at: string }
+        Insert: { category?: string | null; craft_type: string; created_at?: string; description?: string | null; hsn_code?: string | null; id?: string; images?: string[]; is_featured?: boolean; low_stock_threshold?: number; name: string; price: number; sale_price?: number | null; search_vector?: unknown; sizes?: string[]; slug: string; stock_count?: number; stock_status?: Database["public"]["Enums"]["stock_status"]; supplier_notes?: string | null; updated_at?: string }
+        Update: { category?: string | null; craft_type?: string; created_at?: string; description?: string | null; hsn_code?: string | null; id?: string; images?: string[]; is_featured?: boolean; low_stock_threshold?: number; name?: string; price?: number; sale_price?: number | null; search_vector?: unknown; sizes?: string[]; slug?: string; stock_count?: number; stock_status?: Database["public"]["Enums"]["stock_status"]; supplier_notes?: string | null; updated_at?: string }
         Relationships: []
       }
       refund_requests: {
@@ -184,6 +123,12 @@ export type Database = {
         Insert: { created_at?: string | null; id?: string; new_count: number; old_count: number; product_id?: string | null; product_name: string; updated_by?: string | null }
         Update: { created_at?: string | null; id?: string; new_count?: number; old_count?: number; product_id?: string | null; product_name?: string; updated_by?: string | null }
         Relationships: [{ foreignKeyName: "restock_history_product_id_fkey"; columns: ["product_id"]; isOneToOne: false; referencedRelation: "products"; referencedColumns: ["id"] }]
+      }
+      shipments: {
+        Row: { awb_code: string | null; courier_id: number | null; courier_name: string | null; created_at: string; dimensions: Json | null; estimated_delivery: string | null; id: string; label_url: string | null; order_id: string; pickup_scheduled_at: string | null; pickup_token: string | null; provider: string; provider_order_id: string | null; raw_response: Json | null; shipment_id: string | null; shipping_cost: number | null; status: string | null; updated_at: string; weight_grams: number | null }
+        Insert: { awb_code?: string | null; courier_id?: number | null; courier_name?: string | null; created_at?: string; dimensions?: Json | null; estimated_delivery?: string | null; id?: string; label_url?: string | null; order_id: string; pickup_scheduled_at?: string | null; pickup_token?: string | null; provider?: string; provider_order_id?: string | null; raw_response?: Json | null; shipment_id?: string | null; shipping_cost?: number | null; status?: string | null; updated_at?: string; weight_grams?: number | null }
+        Update: { awb_code?: string | null; courier_id?: number | null; courier_name?: string | null; created_at?: string; dimensions?: Json | null; estimated_delivery?: string | null; id?: string; label_url?: string | null; order_id?: string; pickup_scheduled_at?: string | null; pickup_token?: string | null; provider?: string; provider_order_id?: string | null; raw_response?: Json | null; shipment_id?: string | null; shipping_cost?: number | null; status?: string | null; updated_at?: string; weight_grams?: number | null }
+        Relationships: [{ foreignKeyName: "shipments_order_id_fkey"; columns: ["order_id"]; isOneToOne: true; referencedRelation: "orders"; referencedColumns: ["id"] }]
       }
       site_content: {
         Row: { field_type: string; id: string; key: string; label: string | null; section: string; sort_order: number | null; updated_at: string; value: string }
@@ -204,16 +149,13 @@ export type Database = {
         Relationships: [{ foreignKeyName: "wishlists_product_id_fkey"; columns: ["product_id"]; isOneToOne: false; referencedRelation: "products"; referencedColumns: ["id"] }]
       }
     }
-    Views: {
-      [_ in never]: never
-    }
+    Views: { [_ in never]: never }
     Functions: {
       get_next_invoice_number: { Args: { p_year_month: string }; Returns: number }
       has_role: { Args: { _role: Database["public"]["Enums"]["app_role"]; _user_id: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "user"
-      craft_type: "Chikankari" | "Bandhani" | "Firan" | "Festive"
       order_status: "pending" | "processing" | "packed" | "shipped" | "delivered" | "cancelled"
       payment_method: "razorpay" | "cod"
       payment_status: "pending" | "paid" | "failed" | "refunded"
@@ -221,66 +163,73 @@ export type Database = {
       refund_status: "pending" | "approved" | "rejected" | "processed"
       stock_status: "in_stock" | "low_stock" | "out_of_stock"
     }
-    CompositeTypes: {
-      [_ in never]: never
-    }
+    CompositeTypes: { [_ in never]: never }
   }
 }
 
-type DefaultSchema = Database[Extract<keyof Database, "public">]
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
 
 export type Tables<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
-    | { schema: keyof Database },
-  TableName extends DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-    ? keyof (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] & Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+  DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] & DefaultSchema["Views"]) | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] & DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] & Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends { Row: infer R } ? R : never
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] & DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends { Row: infer R } ? R : never
   : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
     ? (DefaultSchema["Tables"] & DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends { Row: infer R } ? R : never
     : never
 
 export type TablesInsert<
-  DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"] | { schema: keyof Database },
-  TableName extends DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+  DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"] | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends { Insert: infer I } ? I : never
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends { Insert: infer I } ? I : never
   : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
     ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends { Insert: infer I } ? I : never
     : never
 
 export type TablesUpdate<
-  DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"] | { schema: keyof Database },
-  TableName extends DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+  DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"] | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends { Update: infer U } ? U : never
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends { Update: infer U } ? U : never
   : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
     ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends { Update: infer U } ? U : never
     : never
 
 export type Enums<
-  DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"] | { schema: keyof Database },
-  EnumName extends DefaultSchemaEnumNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+  DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"] | { schema: keyof DatabaseWithoutInternals },
+  EnumName extends DefaultSchemaEnumNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
     : never = never,
-> = DefaultSchemaEnumNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+> = DefaultSchemaEnumNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
     ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"] | { schema: keyof DatabaseWithoutInternals },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
+    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
 
 export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
-      craft_type: ["Chikankari", "Bandhani", "Firan", "Festive"],
-      order_status: ["pending", "processing", "packed", "shipped", "delivered", "cancelled"],
+      order_status: ["pending","processing","packed","shipped","delivered","cancelled"],
       payment_method: ["razorpay", "cod"],
       payment_status: ["pending", "paid", "failed", "refunded"],
       refund_request_type: ["refund", "exchange", "return"],

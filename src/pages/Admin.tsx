@@ -3,7 +3,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useAdminRealtime } from "@/hooks/useAdminRealtime";
 import { useAllReviews } from "@/hooks/useReviews";
 import { Button } from "@/components/ui/button";
-import { Loader2, LogOut, LayoutDashboard, ShoppingCart, Users, Package, RotateCcw, Megaphone, CircleDot, Receipt, Settings, FileText } from "lucide-react";
+import { Loader2, LogOut, LayoutDashboard, ShoppingCart, Users, Package, RotateCcw, Megaphone, CircleDot, Receipt, Settings, FileText, Tag } from "lucide-react";
 import AdminLogin from "./AdminLogin";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import AdminOrders from "@/components/admin/AdminOrders";
@@ -15,14 +15,16 @@ import AdminMarketing from "@/components/admin/AdminMarketing";
 import AdminGSTReport from "@/components/admin/AdminGSTReport";
 import AdminSettings from "@/components/admin/AdminSettings";
 import AdminContent from "@/components/admin/AdminContent";
+import AdminCategories from "@/components/admin/AdminCategories";
 
-type Tab = "dashboard" | "orders" | "customers" | "inventory" | "refunds" | "marketing" | "gst" | "blog" | "content" | "settings";
+type Tab = "dashboard" | "orders" | "customers" | "inventory" | "refunds" | "marketing" | "gst" | "blog" | "content" | "categories" | "settings";
 
 const sidebarTabs = [
   { key: "dashboard" as Tab, label: "Dashboard", icon: LayoutDashboard, mobileIcon: "📊" },
   { key: "orders" as Tab, label: "Orders", icon: ShoppingCart, mobileIcon: "🛍️" },
   { key: "customers" as Tab, label: "Customers", icon: Users, mobileIcon: "👥" },
   { key: "inventory" as Tab, label: "Inventory", icon: Package, mobileIcon: "📦" },
+  { key: "categories" as Tab, label: "Categories", icon: Tag, mobileIcon: "🏷️" },
   { key: "refunds" as Tab, label: "Refunds", icon: RotateCcw, mobileIcon: "🔄" },
   { key: "gst" as Tab, label: "GST", icon: Receipt, mobileIcon: "🧾" },
   { key: "marketing" as Tab, label: "Marketing", icon: Megaphone, mobileIcon: "📣" },
@@ -32,6 +34,7 @@ const mobileTabs = [
   { key: "dashboard" as Tab, label: "Dashboard", mobileIcon: "📊" },
   { key: "orders" as Tab, label: "Orders", mobileIcon: "🛍️" },
   { key: "inventory" as Tab, label: "Inventory", mobileIcon: "📦" },
+  { key: "categories" as Tab, label: "Categories", mobileIcon: "🏷️" },
   { key: "customers" as Tab, label: "Customers", mobileIcon: "👥" },
   { key: "refunds" as Tab, label: "Refunds", mobileIcon: "🔄" },
   { key: "gst" as Tab, label: "GST", mobileIcon: "🧾" },
@@ -117,6 +120,7 @@ const Admin = () => {
           {tab === "marketing" && <AdminMarketing />}
           {tab === "blog" && <AdminBlog />}
           {tab === "content" && <AdminContent />}
+          {tab === "categories" && <AdminCategories />}
           {tab === "settings" && <AdminSettings />}
         </main>
       </div>

@@ -1,73 +1,168 @@
-# Welcome to your Lovable project
+# Style Saplings
 
-## Project info
+Premium Indian children's ethnic wear (ages 2–5) — D2C e-commerce platform.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Business:** Shivaya Enterprises (Proprietorship)
+**Owner:** Victor Arun Kharkwal
+**Admin user:** shamvi.sharma@gmail.com
+**Production URL:** https://stylesaplings.com
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+| Layer | Technology |
+|---|---|
+| Frontend | React 18 + TypeScript + Vite |
+| Styling | Tailwind CSS + shadcn/ui + Framer Motion |
+| Database / Auth / Storage | Supabase (`igjltsdmlqxziokjeuwa`, ap-southeast-1) |
+| Edge Functions | Deno (11 functions in `supabase/functions/`) |
+| Hosting | Vercel (project: `style-saplings`, account: `kharkwalvictor-5541`) |
+| Payments | Razorpay (LIVE mode) |
+| Email | Resend (pending setup — `RESEND_API_KEY` not yet set) |
+| Shipping | Shiprocket (LIVE account: shamvi.sharma@gmail.com) |
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## Local Development
 
-**Use your preferred IDE**
+### Prerequisites
+- Node.js 20+ or Bun
+- A `.env` file (see `.env.example`)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Setup
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# 1. Clone
+git clone https://github.com/kharkwalvictor-prog/style-saplings.git
+cd style-saplings
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# 2. Install dependencies
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
+# 3. Configure environment
+cp .env.example .env
+# Edit .env — fill in VITE_SUPABASE_* and VITE_RAZORPAY_KEY_ID
+# Retrieve values from Supabase Dashboard → Settings → API
+# and Razorpay Dashboard → Settings → API Keys
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 4. Start dev server
 npm run dev
+# → http://localhost:5173
 ```
 
-**Edit a file directly in GitHub**
+### Useful commands
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```sh
+npm run build      # Production build → dist/
+npm run lint       # ESLint check
+npm run test       # Run Vitest test suite
+npm run preview    # Preview production build locally
+```
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Deployment
 
-## What technologies are used for this project?
+The project is deployed on **Vercel** (not Lovable).
 
-This project is built with:
+- **Preview:** Every push to `main` triggers an automatic preview deployment on Vercel.
+- **Production:** Promote a preview to production in Vercel Dashboard, or run `vercel --prod`.
+- **Environment variables:** Set in Vercel Dashboard → Project → Settings → Environment Variables. The four required frontend vars are `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `VITE_SUPABASE_PROJECT_ID`, and `VITE_RAZORPAY_KEY_ID`.
+- **Edge Functions:** Deployed separately to Supabase. Run `supabase functions deploy <name>` after updating `supabase/functions/`. The `project_id` in `supabase/config.toml` is already set to the live project ref.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
+## Project Structure
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+```
+src/
+├── pages/              # 19 route pages (App.tsx defines all routes)
+├── components/
+│   ├── admin/          # Admin panel tabs + ShipOrderDialog
+│   └── ui/             # shadcn/ui components
+├── hooks/              # useAdmin, useOrders, useProducts, useAdminRealtime, …
+├── utils/              # gstUtils.ts (GST engine), invoiceUtils.ts
+├── context/            # CartContext (localStorage key: ss_cart)
+└── integrations/supabase/client.ts
 
-## Can I connect a custom domain to my Lovable project?
+supabase/
+├── config.toml         # Edge function JWT settings + project ref
+├── functions/          # 11 Edge Functions (Deno)
+│   ├── _shared/        # sendEmail.ts, emailTemplates.ts
+│   ├── create-razorpay-order/
+│   ├── verify-razorpay-payment/
+│   ├── send-order-confirmation/
+│   ├── generate-invoice/
+│   ├── create-shipment/
+│   ├── get-shipping-label/
+│   ├── send-shipping-notification/
+│   ├── track-shipment/
+│   ├── track-order/
+│   ├── validate-return-upload/
+│   └── sitemap/
+└── migrations/         # 15 SQL migration files
 
-Yes, you can!
+docs/
+├── TECH_DOCUMENT.md
+├── BACKEND_ARCHITECTURE.md
+├── ADMIN_PANEL.md
+└── SHIPPING_INTEGRATION.md
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Admin Panel
+
+Access at `/admin` — login with `shamvi.sharma@gmail.com`.
+
+**Tabs:** Dashboard · Orders · Customers · Inventory · Refunds · GST · Marketing · Blog · Content · Settings
+
+**Go Live toggle:** Admin → Settings → "Store is PAUSED/LIVE". When paused, checkout shows a "Coming Soon" page. This is controlled by the `store_live` key in the `site_content` database table.
+
+**To add an admin user:**
+1. Create the user in Supabase Dashboard → Authentication → Users
+2. Run in Supabase SQL Editor:
+```sql
+INSERT INTO user_roles (user_id, role) VALUES ('<user-uuid>', 'admin');
+```
+
+---
+
+## Edge Function Security
+
+Functions split by access level:
+
+| Function | JWT required | Who calls it |
+|---|---|---|
+| `create-razorpay-order` | No | Guest checkout |
+| `verify-razorpay-payment` | No | Guest checkout |
+| `send-order-confirmation` | No | Guest checkout (fire-and-forget) |
+| `validate-return-upload` | No | Guest returns form |
+| `track-order` | No | Public tracking page |
+| `sitemap` | No | Search engine crawlers |
+| `track-shipment` | No | Public tracking |
+| `create-shipment` | **Yes** | Admin panel (ShipOrderDialog) |
+| `get-shipping-label` | **Yes** | Admin panel (ShipOrderDialog) |
+| `generate-invoice` | **Yes** | Called server-side with SERVICE_ROLE_KEY |
+| `send-shipping-notification` | **Yes** | Admin panel |
+
+---
+
+## Before Going Live
+
+- [ ] Set `RESEND_API_KEY` in Supabase Edge Function secrets
+- [ ] Verify `stylesaplings.com` domain with Resend (add DNS TXT/MX records)
+- [ ] Add `VITE_RAZORPAY_KEY_ID` to Vercel environment variables
+- [ ] Point `stylesaplings.com` DNS: A record → `76.76.21.21`, www CNAME → `cname.vercel-dns.com`
+- [ ] Upload real product photos via Admin → Inventory
+- [ ] Flip "Go Live" in Admin → Settings
+
+---
+
+## Key Documentation
+
+- [`docs/TECH_DOCUMENT.md`](docs/TECH_DOCUMENT.md) — Full technical reference
+- [`docs/BACKEND_ARCHITECTURE.md`](docs/BACKEND_ARCHITECTURE.md) — DB schema, RLS, edge functions, data flows
+- [`docs/ADMIN_PANEL.md`](docs/ADMIN_PANEL.md) — Admin panel architecture
+- [`docs/SHIPPING_INTEGRATION.md`](docs/SHIPPING_INTEGRATION.md) — Shiprocket integration details

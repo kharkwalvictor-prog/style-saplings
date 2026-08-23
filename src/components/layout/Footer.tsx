@@ -20,7 +20,7 @@ const Footer = () => {
   return (
     <footer>
       {/* ── Newsletter — warm, editorial ── */}
-      <section className="bg-[#EDE7DE]">
+      <section className="bg-background border-t border-border/40">
         <div className="container px-5 md:px-8 py-14 md:py-28">
           <div className="max-w-md mx-auto text-center">
             <p className="font-serif italic text-[17px] md:text-[20px] text-muted-foreground mb-6 leading-relaxed">
@@ -49,7 +49,7 @@ const Footer = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email"
                   required
-                  className="flex-1 px-5 py-3 text-[16px] sm:text-[14px] bg-white/80 border-0 rounded-full text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-2 focus:ring-[#4A6B45]/20 transition-all min-h-[44px]"
+                  className="flex-1 px-5 py-3 text-[16px] sm:text-[14px] bg-background border border-border rounded-full text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-2 focus:ring-[#4A6B45]/20 transition-all min-h-[44px]"
                 />
                 <button
                   type="submit"
@@ -70,7 +70,7 @@ const Footer = () => {
           <div className="pt-16 md:pt-20 pb-12 md:pb-14 text-center border-b border-white/10">
             <Link to="/">
               <img
-                src="/assets/logo-header.png"
+                src={content?.logo_image || "/assets/logo-header.png"}
                 alt="Style Saplings"
                 className="h-14 md:h-16 object-contain mx-auto mb-5"
               />

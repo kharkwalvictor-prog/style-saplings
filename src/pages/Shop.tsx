@@ -14,6 +14,8 @@ import Footer from "@/components/layout/Footer";
 import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
 import { useProductSearch } from "@/hooks/useProductSearch";
+import { useSiteContent } from "@/hooks/useSiteContent";
+import { useCategories } from "@/hooks/useCategories";
 import { Search, X, Loader2, ChevronDown } from "lucide-react";
 
 import product1 from "@/assets/product-1.jpg";
@@ -22,39 +24,7 @@ import product3 from "@/assets/product-3.jpg";
 import product4 from "@/assets/product-4.jpg";
 
 /* ── Types ── */
-type CraftType = "Chikankari" | "Bandhani" | "Firan" | "Festive";
 type SortOption = "newest" | "price-asc" | "price-desc";
-
-const craftTypes: ("All" | CraftType)[] = [
-  "All",
-  "Chikankari",
-  "Bandhani",
-  "Firan",
-  "Festive",
-];
-
-/* ── Craft metadata for hero banners ── */
-const craftMeta: Record<
-  CraftType,
-  { image: string; tagline: string }
-> = {
-  Chikankari: {
-    image: product1,
-    tagline: "400 years of Lucknowi hand-embroidery, reimagined for little ones.",
-  },
-  Bandhani: {
-    image: product2,
-    tagline: "Rajasthani tie-dye craft, vibrant and playful for every celebration.",
-  },
-  Firan: {
-    image: product3,
-    tagline: "Kashmiri warmth woven into delicate silhouettes for children.",
-  },
-  Festive: {
-    image: product4,
-    tagline: "Curated pieces for Diwali, Eid, Onam, and every joyful occasion.",
-  },
-};
 
 /* ── Storytelling quotes inserted between product rows ── */
 const storyCards = [
@@ -92,13 +62,28 @@ const sortLabels: Record<SortOption, string> = {
 const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("search") || "";
-  const craftParam = searchParams.get("craft") as CraftType | null;
+  const craftParam = searchParams.get("craft") || null;
 
-  const { data: products = [], isLoading } = useProducts();
+  const { data: products = [], isLoading, error: productsError } = useProducts();
   const { data: searchResults = [], isLoading: searchLoading } =
     useProductSearch(searchQuery);
+  const { data: content } = useSiteContent();
+  const { data: categories = [] } = useCategories();
 
-  const [selectedCraft, setSelectedCraft] = useState<"All" | CraftType>(
+  // Dynamic image fallbacks keyed by sort_order (1-4 → product1-4)
+  const fallbackImages = [product1, product2, product3, product4];
+  const craftMeta: Record<string, { image: string; tagline: string }> = {};
+  categories.forEach((cat, i) => {
+    craftMeta[cat.name] = {
+      image: content?.[`craft_image_${i + 1}`] || fallbackImages[i] || product1,
+      tagline: cat.description || `Handcrafted ${cat.name} ethnic wear for little ones.`,
+    };
+  });
+
+  // All filter options: "All" + dynamic category names
+  const craftTypes = ["All", ...categories.map(c => c.name)];
+
+  const [selectedCraft, setSelectedCraft] = useState<string>(
     craftParam && craftTypes.includes(craftParam) ? craftParam : "All"
   );
   const [sortBy, setSortBy] = useState<SortOption>("newest");
@@ -131,7 +116,7 @@ const Shop = () => {
   );
 
   const handleCraftSelect = useCallback(
-    (craft: "All" | CraftType) => {
+    (craft: string) => {
       setSelectedCraft(craft);
       const next = new URLSearchParams(searchParams);
       if (craft === "All") {
@@ -202,13 +187,12 @@ const Shop = () => {
   });
 
   /* ── Hero content ── */
-  const activeCraft =
-    selectedCraft !== "All" ? (selectedCraft as CraftType) : null;
-  const heroImage = activeCraft
+  const activeCraft = selectedCraft !== "All" ? selectedCraft : null;
+  const heroImage = activeCraft && craftMeta[activeCraft]
     ? craftMeta[activeCraft].image
-    : product1;
+    : content?.craft_image_1 || product1;
   const heroTitle = activeCraft || "The Collection";
-  const heroTagline = activeCraft
+  const heroTagline = activeCraft && craftMeta[activeCraft]
     ? craftMeta[activeCraft].tagline
     : "Handcrafted Indian ethnic wear, curated for little ones.";
 
@@ -236,7 +220,7 @@ const Shop = () => {
       ═══════════════════════════════════════════════════ */}
       <section
         ref={heroRef}
-        className="relative h-[40vh] min-h-[200px] md:min-h-[300px] overflow-hidden"
+        className="relative h-[45vh] min-h-[260px] overflow-hidden"
       >
         <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
           <AnimatePresence mode="wait">
@@ -462,7 +446,7 @@ const Shop = () => {
               </p>
               <button
                 onClick={clearSearch}
-                className="text-[13px] font-medium text-[#C06A4F] hover:underline flex items-center gap-1"
+                className="text-[13px] font-medium text-[#4A6B45] hover:underline flex items-center gap-1"
               >
                 <X className="h-3.5 w-3.5" /> Clear
               </button>
@@ -476,7 +460,7 @@ const Shop = () => {
       ═══════════════════════════════════════════════════ */}
       <div className="container px-5 md:px-8 py-10 md:py-14">
         {/* Count */}
-        {!loading && !isSearching && (
+        {!loading && !isSearching && !productsError && (
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -491,6 +475,23 @@ const Shop = () => {
           <div className="flex justify-center py-32">
             <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
           </div>
+        ) : productsError ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center py-32"
+          >
+            <p className="font-serif text-2xl text-foreground mb-3">Unable to load products</p>
+            <p className="text-sm text-muted-foreground max-w-xs mx-auto leading-relaxed mb-5">
+              We couldn't connect to our database. Please check your internet connection or try again in a moment.
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="text-[13px] font-medium text-[#4A6B45] hover:underline"
+            >
+              Try again
+            </button>
+          </motion.div>
         ) : filtered.length === 0 ? (
           /* ── Empty state ── */
           <motion.div
@@ -509,22 +510,29 @@ const Shop = () => {
                 </p>
                 <button
                   onClick={clearSearch}
-                  className="text-[13px] font-medium text-[#C06A4F] mt-5 hover:underline"
+                  className="text-[13px] font-medium text-[#4A6B45] mt-5 hover:underline"
                 >
                   Clear search
                 </button>
               </>
             ) : (
               <>
-                <p className="font-serif text-2xl text-foreground">
-                  No pieces found for this craft yet.
+                <p className="font-serif text-2xl text-foreground mb-3">
+                  {selectedCraft !== "All" ? `No ${selectedCraft} pieces yet.` : "Collection coming soon."}
                 </p>
-                <button
-                  onClick={() => handleCraftSelect("All")}
-                  className="text-[13px] font-medium text-[#C06A4F] mt-5 hover:underline"
-                >
-                  View all
-                </button>
+                <p className="text-sm text-muted-foreground max-w-xs mx-auto leading-relaxed">
+                  {selectedCraft !== "All"
+                    ? "Try browsing all crafts while we add more pieces."
+                    : "We're handcrafting our collection. Check back soon."}
+                </p>
+                {selectedCraft !== "All" && (
+                  <button
+                    onClick={() => handleCraftSelect("All")}
+                    className="text-[13px] font-medium text-[#4A6B45] mt-5 hover:underline"
+                  >
+                    View all crafts
+                  </button>
+                )}
               </>
             )}
           </motion.div>
@@ -544,8 +552,8 @@ const Shop = () => {
                     variants={reveal}
                     className="col-span-2 md:col-span-3"
                   >
-                    <div className="bg-[#EDE7DE] rounded-3xl p-6 md:p-14 flex items-center justify-center">
-                      <p className="font-serif italic text-[17px] md:text-[20px] leading-[1.7] text-foreground/80 max-w-2xl text-center">
+                    <div className="py-10 md:py-14 border-y border-border/40 flex items-center justify-center">
+                      <p className="font-serif italic text-[17px] md:text-[22px] leading-[1.7] text-foreground/70 max-w-2xl text-center">
                         &ldquo;{item.text}&rdquo;
                       </p>
                     </div>

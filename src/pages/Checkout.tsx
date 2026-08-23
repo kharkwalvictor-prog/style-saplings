@@ -370,14 +370,8 @@ const Checkout = () => {
     }
   };
 
-  if (items.length === 0) {
-    navigate("/cart");
-    return null;
-  }
-
-  const fmt = (n: number) => `₹${n.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-
   // ── STORE LIVE FLAG — controlled from Admin → Settings ──
+  // Must be declared before any early returns to satisfy Rules of Hooks.
   const { data: siteContent } = useQuery({
     queryKey: ["site-content-store-live"],
     queryFn: async () => {
@@ -387,6 +381,13 @@ const Checkout = () => {
     staleTime: 30 * 1000,
   });
   const STORE_LIVE = siteContent ?? false;
+
+  if (items.length === 0) {
+    navigate("/cart");
+    return null;
+  }
+
+  const fmt = (n: number) => `₹${n.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
   if (!STORE_LIVE) {
     return (

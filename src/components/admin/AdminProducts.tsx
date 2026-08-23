@@ -1,5 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useProducts, DbProduct } from "@/hooks/useProducts";
+import { useCategories } from "@/hooks/useCategories";
 import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ const ALL_SIZES = ["2Y", "3Y", "4Y", "5Y"];
 
 const AdminProducts = () => {
   const { data: products = [], isLoading } = useProducts();
+  const { data: categories = [] } = useCategories();
   const qc = useQueryClient();
   const [editing, setEditing] = useState<DbProduct | null>(null);
   const [creating, setCreating] = useState(false);
@@ -51,7 +53,7 @@ const AdminProducts = () => {
       </div>
 
       {(creating || editing) && (
-        <ProductForm product={editing} onClose={() => { setEditing(null); setCreating(false); }}
+        <ProductForm product={editing} categories={categories} onClose={() => { setEditing(null); setCreating(false); }}
           onSaved={() => { setEditing(null); setCreating(false); qc.invalidateQueries({ queryKey: ["products"] }); }} />
       )}
 
@@ -176,9 +178,14 @@ interface ProductFormProps {
   product: DbProduct | null;
   onClose: () => void;
   onSaved: () => void;
+  categories: { id: string; name: string }[];
 }
 
-const ProductForm = ({ product, onClose, onSaved }: ProductFormProps) => {
+const ProductForm = ({ product, onClose, onSaved, categories }: ProductFormProps) => {
+  const formRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
   const prod = product as any;
   const [form, setForm] = useState({
     name: product?.name || "",
@@ -281,7 +288,7 @@ const ProductForm = ({ product, onClose, onSaved }: ProductFormProps) => {
   const inputClass = "w-full border rounded px-3 py-2 text-sm bg-background focus:outline-none focus:ring-1 focus:ring-ring";
 
   return (
-    <div className="border rounded-lg p-4 mb-6 bg-accent/10">
+    <div ref={formRef} className="border rounded-lg p-4 mb-6 bg-accent/10">
       <h3 className="font-serif text-lg font-semibold mb-4">{product ? "Edit Product" : "New Product"}</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
@@ -305,7 +312,7 @@ const ProductForm = ({ product, onClose, onSaved }: ProductFormProps) => {
         <div>
           <label className="text-xs font-medium text-muted-foreground mb-1 block">Craft Type</label>
           <select value={form.craft_type} onChange={e => u("craft_type", e.target.value)} className={inputClass}>
-            <option value="Chikankari">Chikankari</option><option value="Bandhani">Bandhani</option><option value="Firan">Firan</option><option value="Festive">Festive</option>
+            {categories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
           </select>
         </div>
         <div>

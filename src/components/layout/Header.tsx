@@ -27,13 +27,13 @@ const navLinks = [
 
 const Header = () => {
   const { data: content } = useSiteContent();
+  const logo = content?.logo_image || logoUrl;
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const { totalItems } = useCart();
   const { count: wishlistCount } = useWishlist();
   const navigate = useNavigate();
@@ -42,18 +42,11 @@ const Header = () => {
   const mobileSearchRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Scroll-aware header: hide on scroll down, show on scroll up
+  // Scroll-aware header styling only (no hide/show)
   const { scrollY } = useScroll();
-  const lastScrollY = useRef(0);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 50);
-    if (latest > lastScrollY.current && latest > 300) {
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
-    lastScrollY.current = latest;
   });
 
   // Debounce
@@ -156,14 +149,12 @@ const Header = () => {
         </Marquee>
       </div>
 
-      {/* Main header — ALWAYS has background, never fully transparent */}
+      {/* Main header */}
       <motion.header
-        animate={{ y: hidden ? -80 : 0 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className={`sticky top-0 z-50 transition-all duration-300 border-b ${
+        className={`sticky top-0 z-50 transition-all duration-500 border-b ${
           scrolled
             ? "bg-background/95 backdrop-blur-xl shadow-sm border-border/50"
-            : "bg-background border-border/30"
+            : "bg-background/90 backdrop-blur-md border-border/20"
         }`}
       >
         <div className="container flex items-center justify-between h-16 md:h-[68px] px-4 md:px-8">
@@ -176,8 +167,8 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <img
               alt="Style Saplings"
-              className="h-10 md:h-13 object-contain"
-              src={logoUrl}
+              className="h-10 md:h-12 object-contain"
+              src={logo}
             />
           </Link>
 
@@ -282,7 +273,7 @@ const Header = () => {
               className="fixed inset-y-0 left-0 w-[85%] max-w-sm z-[100] flex flex-col shadow-2xl bg-background"
             >
               <div className="flex items-center justify-between px-6 h-16 border-b border-border">
-                <img src={logoUrl} alt="Style Saplings" className="h-11 object-contain" />
+                <img src={logo} alt="Style Saplings" className="h-11 object-contain" />
                 <button onClick={() => setMenuOpen(false)} aria-label="Close menu"><X className="h-5 w-5 text-foreground" /></button>
               </div>
               <nav className="flex flex-col px-6 pt-6 flex-1 overflow-y-auto">

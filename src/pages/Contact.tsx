@@ -30,7 +30,7 @@ const Contact = () => {
       <PageBanner label="Get In Touch" title="Contact Us" />
 
       {/* Body */}
-      <section className="py-16 md:py-24" style={{ backgroundColor: "#F7F4EF" }}>
+      <section className="py-16 md:py-24 bg-background">
         <div className="max-w-[1100px] mx-auto px-5 md:px-8">
           <div className="grid md:grid-cols-5 gap-8">
             {/* Left — info card */}
@@ -80,7 +80,7 @@ const Contact = () => {
             </motion.div>
 
             {/* Right — form card */}
-            <motion.div {...fade} transition={{ duration: 0.5, delay: 0.1 }} className="md:col-span-3 rounded-2xl p-8 bg-white shadow-sm">
+            <motion.div {...fade} transition={{ duration: 0.5, delay: 0.1 }} className="md:col-span-3 rounded-2xl p-8 border border-border/50">
               <h2 className="font-serif text-xl font-semibold mb-6">Send a Message</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <input

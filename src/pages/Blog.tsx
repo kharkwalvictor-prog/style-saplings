@@ -93,21 +93,20 @@ const Blog = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08, duration: 0.4 }}
-                  className="rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow"
-                  style={{ borderTop: "3px solid #C06A4F" }}
+                  className="rounded-2xl overflow-hidden border border-border/50 group"
                 >
-                  <div className="h-[180px] overflow-hidden bg-muted">
-                    <img src={post.cover_image || fallbackImages[i % fallbackImages.length]} alt={post.title} className="w-full h-full object-cover" />
+                  <div className="aspect-[16/10] overflow-hidden bg-muted">
+                    <img src={post.cover_image || fallbackImages[i % fallbackImages.length]} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
                   </div>
                   <div className="p-6">
-                    <span className="text-[10px] uppercase tracking-[0.15em] text-sale font-medium">{post.category}</span>
+                    <span className="text-[11px] uppercase tracking-[0.18em] text-[#4A6B45] font-medium">{post.category}</span>
                     <h2 className="font-serif text-xl font-semibold mt-2 mb-3 leading-snug">{post.title}</h2>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-4">{post.excerpt}</p>
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-muted-foreground">
                         {post.published_at ? new Date(post.published_at).toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "numeric" }) : ""}
                       </span>
-                      <Link to={`/blog/${post.slug}`} className="text-sm font-medium hover:underline underline-offset-4" style={{ color: "#C06A4F" }}>Read More →</Link>
+                      <Link to={`/blog/${post.slug}`} className="text-[12px] font-medium text-[#4A6B45] hover:underline underline-offset-4">Read More →</Link>
                     </div>
                   </div>
                 </motion.article>

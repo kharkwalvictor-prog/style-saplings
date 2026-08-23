@@ -37,25 +37,22 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.15 } },
 };
 
-/* ── Data ── */
-const crafts = [
+/* ── Craft descriptions (images resolved dynamically inside component) ── */
+const craftDescs = [
   {
     name: "Chikankari",
     origin: "Lucknow, Uttar Pradesh",
     desc: "A 400-year-old hand embroidery tradition on fine muslin. Cotton thread, no machines — just generations of skill passed from master to apprentice.",
-    image: product1,
   },
   {
     name: "Bandhani",
     origin: "Rajasthan & Gujarat",
     desc: "An ancient tie-dye art where thousands of tiny knots are tied by hand before dyeing, creating mesmerising patterns unique to each piece.",
-    image: product2,
   },
   {
     name: "Firan",
     origin: "Kashmir",
     desc: "A traditional full-length tunic with hand-embroidered detailing on soft cotton. Kashmiri heritage, reimagined in miniature for little ones.",
-    image: product3,
   },
 ];
 
@@ -68,6 +65,16 @@ const stats = [
 
 const About = () => {
   const { data: content } = useSiteContent();
+
+  const craftImg1 = content?.craft_image_1 || product1;
+  const craftImg2 = content?.craft_image_2 || product2;
+  const craftImg3 = content?.craft_image_3 || product3;
+
+  const crafts = [
+    { ...craftDescs[0], image: craftImg1 },
+    { ...craftDescs[1], image: craftImg2 },
+    { ...craftDescs[2], image: craftImg3 },
+  ];
 
   useSEO({
     title: "Our Story | Style Saplings",
@@ -84,7 +91,7 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           1. HERO — Dark sage, text-focused, editorial
       ═══════════════════════════════════════════════════ */}
-      <section className="relative h-[50vh] min-h-[250px] md:min-h-[350px] bg-[#1E3320] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[45vh] min-h-[260px] bg-[#1E3320] flex items-center justify-center overflow-hidden">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -113,7 +120,7 @@ const About = () => {
       {/* ═══════════════════════════════════════════════════
           2. THE SEARCH — Origin story, asymmetric layout
       ═══════════════════════════════════════════════════ */}
-      <section className="py-12 md:py-36 bg-background">
+      <section className="py-12 md:py-24 bg-background">
         <div className="container px-5 md:px-8">
           <div className="grid md:grid-cols-12 gap-12 md:gap-0 items-center">
             {/* Left — Image */}
@@ -126,7 +133,7 @@ const About = () => {
             >
               <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl shadow-black/10">
                 <img
-                  src={product1}
+                  src={craftImg1}
                   alt="Handcrafted Chikankari garment flat lay"
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -172,20 +179,23 @@ const About = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          3. THE CRAFTS — Editorial cards on warm background
+          3. THE CRAFTS — Same ivory canvas, image-forward
       ═══════════════════════════════════════════════════ */}
-      <section className="py-12 md:py-32 bg-[#EDE7DE]">
+      <section className="py-12 md:py-24 bg-background">
         <div className="container px-5 md:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="text-center mb-14 md:mb-20"
+            className="mb-10 md:mb-14"
           >
+            <motion.span variants={reveal} className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground block mb-3">
+              The Crafts
+            </motion.span>
             <motion.h2
               variants={reveal}
-              className="font-serif text-[30px] md:text-[42px] font-semibold leading-[1.1] tracking-[-0.01em]"
+              className="font-serif text-[26px] md:text-[38px] font-semibold leading-[1.1] tracking-[-0.01em]"
             >
               {getContent(content, "about_crafts_heading", "The Crafts We Celebrate")}
             </motion.h2>
@@ -196,31 +206,30 @@ const About = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
             variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5"
           >
             {crafts.map((craft) => (
               <motion.div
                 key={craft.name}
                 variants={reveal}
-                className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500 group"
+                className="group border border-border/50 rounded-2xl overflow-hidden"
               >
                 <div className="aspect-[16/10] overflow-hidden">
                   <img
                     src={craft.image}
                     alt={craft.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     loading="lazy"
                   />
                 </div>
-                <div className="p-8">
-                  <h3 className="font-serif text-2xl font-medium">
-                    {craft.name}
-                  </h3>
-                  <div className="w-8 border-b-2 border-[#4A6B45] mt-3 mb-3" />
-                  <p className="text-[13px] uppercase tracking-widest text-muted-foreground mb-3">
+                <div className="p-6 md:p-7">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[#4A6B45] font-medium mb-2">
                     {craft.origin}
                   </p>
-                  <p className="text-[15px] text-muted-foreground leading-relaxed">
+                  <h3 className="font-serif text-[22px] font-medium mb-3">
+                    {craft.name}
+                  </h3>
+                  <p className="text-[14px] text-muted-foreground leading-relaxed">
                     {craft.desc}
                   </p>
                 </div>
@@ -231,27 +240,27 @@ const About = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          4. STATS ROW — Centered with dividers
+          4. STATS ROW — On ivory, large serif numbers
       ═══════════════════════════════════════════════════ */}
-      <section className="py-12 md:py-20 bg-background">
+      <section className="py-10 md:py-16 bg-background">
         <div className="container px-5 md:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
             variants={stagger}
-            className="grid grid-cols-2 md:flex md:flex-wrap items-center justify-center gap-4 md:gap-0 md:divide-x divide-border"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
           >
             {stats.map((stat) => (
               <motion.div
                 key={stat.label}
                 variants={reveal}
-                className="text-center px-4 md:px-12 py-4 md:py-0"
+                className="text-center md:text-left"
               >
-                <p className="font-serif text-3xl md:text-4xl font-semibold text-foreground leading-none">
+                <p className="font-serif text-[40px] md:text-[48px] font-semibold text-foreground leading-none tracking-[-0.02em]">
                   {stat.value}
                 </p>
-                <p className="text-[13px] text-muted-foreground tracking-wide mt-2">
+                <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground mt-2">
                   {stat.label}
                 </p>
               </motion.div>
@@ -261,37 +270,33 @@ const About = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          5. FOUNDER QUOTE — Centered card
+          5. FOUNDER QUOTE — On ivory, no card wrapper
       ═══════════════════════════════════════════════════ */}
-      <section className="py-12 md:py-28 bg-[#EDE7DE]">
+      <section className="py-12 md:py-24 bg-background">
         <div className="container px-5 md:px-8 flex justify-center">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="max-w-[700px] w-full bg-white rounded-3xl p-6 md:p-14 text-center shadow-sm"
+            className="max-w-[640px] w-full text-center"
           >
             <motion.div
               variants={reveal}
-              className="font-serif text-5xl text-muted-foreground/40 leading-none mb-4"
+              className="font-serif text-[64px] text-[#4A6B45]/25 leading-none mb-2"
             >
               &ldquo;
             </motion.div>
             <motion.p
               variants={reveal}
-              className="font-serif italic text-[18px] md:text-[20px] leading-relaxed text-foreground mb-6 -mt-2"
+              className="font-serif italic text-[18px] md:text-[22px] leading-[1.7] text-foreground/80 mb-8 -mt-4"
             >
               {getContent(content, "about_founder_quote", "Style Saplings began with a simple wish — to dress our children in the same beautiful handcrafted traditions that have defined Indian culture for generations.")}
             </motion.p>
             <motion.div variants={reveal}>
-              <div className="w-10 h-px bg-border mx-auto mb-4" />
-              <p className="text-sm font-medium text-foreground">
-                Victor Kharkwal
-              </p>
-              <p className="text-xs text-muted-foreground mt-1">
-                Founder, Style Saplings
-              </p>
+              <div className="w-8 h-px bg-border mx-auto mb-4" />
+              <p className="text-[13px] font-medium text-foreground">Victor Kharkwal</p>
+              <p className="text-[12px] text-muted-foreground mt-1">Founder, Style Saplings</p>
             </motion.div>
           </motion.div>
         </div>

@@ -15,6 +15,7 @@ import { Heart, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useSEO } from "@/hooks/useSEO";
 
+
 const Wishlist = () => {
   useSEO({ title: "Wishlist | Style Saplings", description: "Your saved items", canonicalPath: "/wishlist" });
 

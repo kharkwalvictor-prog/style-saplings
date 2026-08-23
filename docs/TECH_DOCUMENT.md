@@ -325,8 +325,12 @@ Client → Rate limit check → Order created with payment_status: 'pending'
 | `create-razorpay-order` | No | Create Razorpay order | RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET |
 | `verify-razorpay-payment` | No | HMAC signature verification | RAZORPAY_KEY_SECRET |
 | `send-order-confirmation` | No | Customer + admin email + invoice | RESEND_API_KEY, SUPABASE_SERVICE_ROLE_KEY |
-| `send-shipping-notification` | No | Shipping update email | RESEND_API_KEY, SUPABASE_SERVICE_ROLE_KEY |
-| `generate-invoice` | No | PDF invoice generation + storage | SUPABASE_SERVICE_ROLE_KEY |
+| `send-shipping-notification` | **Yes** | Shipping update email (admin-only) | RESEND_API_KEY, SUPABASE_SERVICE_ROLE_KEY |
+| `generate-invoice` | **Yes** | HTML invoice generation + storage (called server-side with SERVICE_ROLE_KEY) | SUPABASE_SERVICE_ROLE_KEY |
+| `create-shipment` | **Yes** | Creates Shiprocket order, saves shipment record, marks order shipped | SHIPROCKET_EMAIL, SHIPROCKET_PASSWORD, SUPABASE_SERVICE_ROLE_KEY |
+| `get-shipping-label` | **Yes** | Fetches Shiprocket shipping label PDF URL | SHIPROCKET_EMAIL, SHIPROCKET_PASSWORD |
+| `track-shipment` | No | Tracks shipment via Shiprocket | SHIPROCKET_EMAIL, SHIPROCKET_PASSWORD |
+| `track-order` | No | Customer-facing order lookup | SUPABASE_SERVICE_ROLE_KEY |
 | `validate-return-upload` | No | Return image validation | SUPABASE_SERVICE_ROLE_KEY |
 | `sitemap` | No | Dynamic XML sitemap (products + blog) | None (uses anon key) |
 
@@ -382,11 +386,12 @@ Connection status displayed as green/red indicator in admin header.
 
 | Feature | Status | Notes |
 |---------|--------|-------|
-| COD OTP (Twilio) | Planned | Phone verification before COD orders |
-| Shiprocket | Not started | Order push + tracking webhooks |
-| WhatsApp API | Manual only | Admin has copy-to-clipboard templates |
+| COD OTP (Twilio) | Planned | Phone verification before COD orders; `cod_otp` table exists, edge functions not built |
+| ~~Shiprocket~~ | ✅ Done | `create-shipment`, `get-shipping-label`, `track-shipment` edge functions deployed; admin UI via `ShipOrderDialog` |
+| WhatsApp API | Manual only | Admin has copy-to-clipboard templates; no automated integration |
 | Customer accounts | Not planned | Currently guest checkout only |
 | ~~Dynamic sitemap~~ | ✅ Done | Edge function generates XML with products + blog posts |
+| ~~Email notifications~~ | ✅ Done | `send-order-confirmation`, `send-shipping-notification` deployed; **pending `RESEND_API_KEY` secret** |
 | Wishlist UI | DB ready | `wishlists` table exists, UI not built |
 | Product reviews UI | DB ready | `product_reviews` table exists, UI not built |
 
