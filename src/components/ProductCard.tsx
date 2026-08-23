@@ -81,7 +81,7 @@ const ProductCard = ({ product, index = 0 }: Props) => {
             />
 
             {/* Hover gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
 
             {/* Sale badge */}
             {discount > 0 && (
@@ -105,7 +105,7 @@ const ProductCard = ({ product, index = 0 }: Props) => {
             </button>
 
             {/* Quick add */}
-            <div className="absolute bottom-0 inset-x-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
+            <div className="absolute bottom-0 inset-x-0 p-3 translate-y-0 md:translate-y-full md:group-hover:translate-y-0 transition-transform duration-300 ease-out">
               <button
                 onClick={handleQuickAdd}
                 className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium text-white bg-white/15 backdrop-blur-xl border border-white/20 hover:bg-white/25 transition-colors"
