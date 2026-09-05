@@ -43,7 +43,6 @@ const testimonials = [
   { quote: "Ordered the Bandhani kurta set on a whim. The quality blew me away — looks far more expensive than it is.", name: "Sneha M.", location: "Hyderabad" },
 ];
 
-const marqueeItems = [...testimonials, ...testimonials];
 
 /* ── Shared tile component for craft + spotlight grids ── */
 function ImageTile({
@@ -116,143 +115,160 @@ const Index = () => {
       <HeroSection />
 
       {/* ══════════════════════════════════════
-          2. SHOP BY CRAFT — 4 tiles, immediately after hero
+          2. CRAFT GALLERY — Full-bleed edge-to-edge strip
+          No padding, no container — images fill the viewport
       ══════════════════════════════════════ */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container px-5 md:px-8">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-8 md:mb-10">
-            <motion.p variants={reveal} className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground mb-3">
-              Shop by Craft
-            </motion.p>
-            <motion.h2 variants={reveal} className="font-serif text-[26px] md:text-[38px] font-medium tracking-[-0.01em] leading-tight">
-              Rooted in India's living traditions
-            </motion.h2>
-          </motion.div>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={stagger}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {crafts.map((c) => (
-              <ImageTile key={c.name} image={c.image} label={c.region} title={c.name} href={c.href} />
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════
-          3. EDITORIAL PAIR — 2 wide images, overlaid text.
-          AD's "Hands Free, Hearts Full" equivalent.
-      ══════════════════════════════════════ */}
-      <section className="py-0 md:pb-16 bg-background">
-        <div className="container px-5 md:px-8">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-            <motion.div variants={reveal}>
-              <Link to="/about" className="group block relative aspect-[4/3] md:aspect-[4/5] rounded-2xl overflow-hidden">
-                <img src={craftImg1} alt="The Craft" className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-6 md:p-8">
-                  <p className="text-white/60 text-[11px] uppercase tracking-[0.18em] mb-2">The Craft</p>
-                  <h3 className="font-serif text-[24px] md:text-[30px] text-white font-medium leading-tight max-w-[220px]">
-                    400 years of living tradition
-                  </h3>
-                  <div className="mt-4 inline-flex items-center gap-1.5 text-white/55 text-[12px] group-hover:text-white/90 transition-colors">
-                    <span>Our story</span>
-                    <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+      <section className="bg-background pt-3 md:pt-4">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          variants={stagger}
+          className="grid grid-cols-2 md:grid-cols-4 gap-1.5 md:gap-2 px-3 md:px-4"
+        >
+          {crafts.map((c) => (
+            <motion.div key={c.name} variants={reveal}>
+              <Link to={c.href} className="group block relative aspect-[3/4] md:aspect-[2/3] overflow-hidden rounded-xl">
+                <img
+                  src={c.image}
+                  alt={c.name}
+                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 p-4 md:p-6">
+                  <p className="text-white/55 text-[9px] md:text-[10px] uppercase tracking-[0.2em] mb-1">{c.region}</p>
+                  <h3 className="font-serif text-[18px] md:text-[22px] text-white font-medium leading-tight">{c.name}</h3>
+                  <div className="mt-2 inline-flex items-center gap-1 text-white/40 text-[10px] group-hover:text-white/70 transition-colors">
+                    <span>Shop</span>
+                    <ArrowRight className="h-2.5 w-2.5 transition-transform group-hover:translate-x-0.5" />
                   </div>
                 </div>
               </Link>
             </motion.div>
-            <motion.div variants={reveal}>
-              <Link to="/shop" className="group block relative aspect-[4/3] md:aspect-[4/5] rounded-2xl overflow-hidden">
-                <img src={craftImg3} alt="New Collection" className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-6 md:p-8">
-                  <p className="text-white/60 text-[11px] uppercase tracking-[0.18em] mb-2">New In</p>
-                  <h3 className="font-serif text-[24px] md:text-[30px] text-white font-medium leading-tight max-w-[220px]">
-                    {getContent(content, "featured_heading", "Crafted for celebrations")}
-                  </h3>
-                  <div className="mt-4 inline-flex items-center gap-1.5 text-white/55 text-[12px] group-hover:text-white/90 transition-colors">
-                    <span>Shop now</span>
-                    <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          </motion.div>
-        </div>
+          ))}
+        </motion.div>
       </section>
 
       {/* ══════════════════════════════════════
-          5. FEATURED PRODUCTS — Swimlane.
-          AD's "Ready to Ship" equivalent.
-          Heading left-aligned, products scroll right.
+          3. BRAND STATEMENT — Editorial pause
+          Pure typography, maximum whitespace
       ══════════════════════════════════════ */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container px-5 md:px-8 mb-7 md:mb-9">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-            className="flex items-end justify-between">
+      <section className="py-24 md:py-40 bg-background">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="max-w-[820px] mx-auto px-5 md:px-8 text-center"
+        >
+          <motion.span variants={reveal} className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground block mb-8">
+            The Style Saplings Promise
+          </motion.span>
+          <motion.h2 variants={reveal} className="font-serif text-[32px] sm:text-[44px] md:text-[58px] font-medium leading-[1.08] tracking-[-0.025em] text-foreground">
+            India's living craft traditions,<br className="hidden md:block" /> scaled for little shoulders.
+          </motion.h2>
+          <motion.div variants={reveal} className="w-10 h-px bg-[#C06A4F] mx-auto mt-10 mb-8" />
+          <motion.p variants={reveal} className="text-[16px] md:text-[18px] text-muted-foreground leading-[1.85] max-w-[520px] mx-auto">
+            Every piece is handcrafted by artisans across Lucknow, Rajasthan, and Kashmir —
+            using techniques passed down through generations.
+          </motion.p>
+          <motion.div variants={reveal} className="mt-10">
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 text-[13px] font-medium text-foreground border-b border-foreground/20 pb-0.5 hover:border-foreground/60 transition-colors group"
+            >
+              Our story
+              <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          4. FEATURED PRODUCTS — Clean grid
+          Left-aligned heading, 2×3 product grid
+      ══════════════════════════════════════ */}
+      <section className="pb-24 md:pb-32 bg-background">
+        <div className="container px-5 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="flex items-end justify-between mb-8 md:mb-12"
+          >
             <div>
-              <motion.p variants={reveal} className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground mb-3">
+              <motion.p variants={reveal} className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-3">
                 Ready to Wear
               </motion.p>
-              <motion.h2 variants={reveal} className="font-serif text-[26px] md:text-[40px] font-medium tracking-[-0.01em] leading-tight">
+              <motion.h2 variants={reveal} className="font-serif text-[28px] md:text-[42px] font-medium tracking-[-0.02em] leading-[1.1]">
                 {getContent(content, "featured_heading", "Crafted for celebrations")}
               </motion.h2>
             </div>
             <motion.div variants={reveal}>
-              <Link to="/shop" className="group flex items-center gap-1 text-[12px] font-medium text-muted-foreground hover:text-foreground transition-colors shrink-0 ml-6">
-                View all <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+              <Link
+                to="/shop"
+                className="group hidden md:flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground hover:text-foreground transition-colors shrink-0 ml-8"
+              >
+                View all
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </motion.div>
           </motion.div>
-        </div>
 
-        {isLoading ? (
-          <div className="flex gap-4 px-5 md:px-8 overflow-hidden">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="w-[65vw] md:w-[calc(25%-12px)] flex-shrink-0 space-y-3">
-                <Skeleton className="aspect-[3/4] rounded-2xl" />
-                <Skeleton className="h-4 w-2/3" />
-                <Skeleton className="h-3 w-1/3" />
-              </div>
-            ))}
-          </div>
-        ) : (
+          {isLoading ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="space-y-3">
+                  <Skeleton className="aspect-[3/4] rounded-2xl" />
+                  <Skeleton className="h-4 w-2/3" />
+                  <Skeleton className="h-3 w-1/3" />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={stagger}
+              className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6"
+            >
+              {featuredProducts.map((product, i) => (
+                <motion.div key={product.id} variants={reveal}>
+                  <ProductCard product={product} index={i} />
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+
           <motion.div
-            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-            className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory px-5 md:px-8 pb-1"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+            className="mt-10 md:mt-14 text-center md:hidden"
           >
-            {featuredProducts.map((product, i) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.07, duration: 0.45, ease: "easeOut" }}
-                className="w-[65vw] sm:w-[45vw] md:w-[calc(25%-9px)] flex-shrink-0 snap-start"
-              >
-                <ProductCard product={product} index={i} />
-              </motion.div>
-            ))}
+            <Link
+              to="/shop"
+              className="inline-flex items-center gap-2 text-[13px] font-medium text-foreground border-b border-foreground/20 pb-0.5 hover:border-foreground/60 transition-colors group"
+            >
+              View full collection
+              <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+            </Link>
           </motion.div>
-        )}
+        </div>
       </section>
 
       {/* ══════════════════════════════════════
-          6. HERITAGE BANNER — Full-bleed editorial moment.
-          Text + CTA overlay. AD's "editorial banner" equivalent.
-          Tells the brand story mid-scroll, links to /about.
+          5. HERITAGE BANNER — Full-bleed, edge to edge
       ══════════════════════════════════════ */}
-      <section className="relative h-[50vh] md:h-[62vh] min-h-[300px] overflow-hidden">
+      <section className="relative h-[60vh] md:h-[75vh] min-h-[380px] overflow-hidden">
         <img
           src={heroImg}
           alt="Handcrafted Indian heritage"
           className="w-full h-full object-cover object-[center_20%]"
           loading="lazy"
         />
-        {/* Gradient left-heavy so text stays readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/30 to-black/5" />
-
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent" />
         <div className="absolute inset-0 flex items-center">
           <div className="container px-5 md:px-8">
             <motion.div
@@ -260,21 +276,21 @@ const Index = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-80px" }}
               variants={stagger}
-              className="max-w-[520px]"
+              className="max-w-[560px]"
             >
-              <motion.p variants={reveal} className="text-white/60 text-[11px] uppercase tracking-[0.28em] mb-4">
+              <motion.p variants={reveal} className="text-white/55 text-[10px] uppercase tracking-[0.32em] mb-6">
                 The Heritage
               </motion.p>
-              <motion.h2 variants={reveal} className="font-serif text-[26px] sm:text-[34px] md:text-[46px] text-white font-medium leading-[1.1] tracking-[-0.01em]">
+              <motion.h2 variants={reveal} className="font-serif text-[32px] sm:text-[40px] md:text-[54px] text-white font-medium leading-[1.08] tracking-[-0.02em]">
                 Every piece carries 400 years of tradition.
               </motion.h2>
-              <motion.p variants={reveal} className="text-white/65 text-[14px] mt-4 mb-8 max-w-[340px] leading-[1.7]">
-                Hand-embroidered by master artisans from Lucknow, Rajasthan, and Kashmir — for little ones who deserve to wear India's finest.
+              <motion.p variants={reveal} className="text-white/60 text-[15px] mt-6 mb-10 max-w-[380px] leading-[1.8]">
+                Hand-embroidered by master artisans from Lucknow, Rajasthan, and Kashmir.
               </motion.p>
               <motion.div variants={reveal}>
                 <Link
                   to="/about"
-                  className="inline-flex items-center gap-2 border border-white/30 rounded-full px-7 py-3 text-white text-[13px] font-medium hover:bg-white/10 transition-all group min-h-[44px]"
+                  className="inline-flex items-center gap-2.5 border border-white/25 rounded-full px-8 py-3.5 text-white text-[13px] font-medium hover:bg-white/10 transition-all group min-h-[44px]"
                 >
                   Discover the Craft
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -285,36 +301,48 @@ const Index = () => {
         </div>
       </section>
 
-
       {/* ══════════════════════════════════════
-          8. TESTIMONIALS — Infinite marquee
+          6. TESTIMONIALS — No cards, large editorial quotes
       ══════════════════════════════════════ */}
-      <section className="py-16 md:py-24 bg-background overflow-hidden">
-        <div className="container px-5 md:px-8 mb-8 md:mb-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.p variants={reveal} className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground mb-3">
-              Reviews
+      <section className="py-24 md:py-36 bg-background">
+        <div className="container px-5 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="mb-16 md:mb-20"
+          >
+            <motion.p variants={reveal} className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-3">
+              What parents say
             </motion.p>
-            <motion.h2 variants={reveal} className="font-serif text-[26px] md:text-[40px] font-medium tracking-[-0.01em]">
-              Loved by parents across India
+            <motion.h2 variants={reveal} className="font-serif text-[28px] md:text-[42px] font-medium tracking-[-0.02em]">
+              Loved across India
             </motion.h2>
           </motion.div>
-        </div>
 
-        <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-10 md:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-10 md:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-          <motion.div className="flex gap-4 w-max px-5 md:px-8" animate={{ x: ["0%", "-50%"] }} transition={{ duration: 42, repeat: Infinity, ease: "linear" }}>
-            {marqueeItems.map((t, i) => (
-              <div key={`${t.name}-${i}`} className="w-[280px] md:w-[340px] border border-border/40 rounded-2xl p-6 md:p-7 flex-shrink-0">
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: 5 }).map((_, j) => <Star key={j} className="h-3 w-3 text-amber-400" fill="currentColor" />)}
+          {/* 3 featured testimonials — no cards, pure typography */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16"
+          >
+            {testimonials.slice(0, 3).map((t) => (
+              <motion.div key={t.name} variants={reveal}>
+                <div className="flex gap-0.5 mb-5">
+                  {Array.from({ length: 5 }).map((_, j) => (
+                    <Star key={j} className="h-3 w-3 text-amber-400" fill="currentColor" />
+                  ))}
                 </div>
-                <p className="font-serif italic text-[14px] md:text-[15px] leading-[1.8] text-foreground/80 mb-5">&ldquo;{t.quote}&rdquo;</p>
-                <div className="w-5 h-px bg-border mb-3" />
-                <p className="text-[12px] font-medium">{t.name}</p>
-                <p className="text-[11px] text-muted-foreground mt-0.5">{t.location}</p>
-              </div>
+                <p className="font-serif italic text-[17px] md:text-[18px] leading-[1.85] text-foreground/75 mb-6">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <div className="w-6 h-px bg-[#C06A4F] mb-4" />
+                <p className="text-[13px] font-medium text-foreground">{t.name}</p>
+                <p className="text-[11px] text-muted-foreground mt-0.5 uppercase tracking-[0.12em]">{t.location}</p>
+              </motion.div>
             ))}
           </motion.div>
         </div>
