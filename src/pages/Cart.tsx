@@ -24,12 +24,23 @@ const Cart = () => {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen">
+      <div className="min-h-screen flex flex-col">
         <Header />
-        <div className="container px-4 py-20 text-center">
-          <h1 className="font-serif text-3xl font-semibold mb-4">Your Cart is Empty</h1>
-          <p className="text-muted-foreground mb-6">Looks like you haven't added anything yet.</p>
-          <Button variant="hero" asChild><Link to="/shop">Continue Shopping</Link></Button>
+        <PageBanner label="Shopping" title="Your Cart" />
+        <div className="flex-1 flex flex-col items-center justify-center text-center px-6 py-20 bg-background">
+          <p className="font-serif italic text-muted-foreground text-[15px] mb-2">Your cart is empty.</p>
+          <h2 className="font-serif text-[1.8rem] md:text-[2.2rem] font-medium text-foreground mb-4 leading-snug">
+            Begin your collection.
+          </h2>
+          <p className="text-muted-foreground text-[14px] leading-relaxed mb-8 max-w-xs">
+            Each piece is handcrafted by artisans across India — Chikankari, Bandhani, Firan and more.
+          </p>
+          <Link
+            to="/shop"
+            className="inline-flex items-center gap-2 bg-[#1E3320] text-white rounded-full px-8 py-3.5 text-[13px] font-medium tracking-wide hover:bg-[#2a4a2e] transition-colors min-h-[44px]"
+          >
+            Explore the Collection
+          </Link>
         </div>
         <Footer />
       </div>
@@ -114,6 +125,20 @@ const Cart = () => {
               <Button variant="hero" className="w-full py-4 min-h-[44px] text-[16px]" asChild>
                 <Link to="/checkout">Proceed to Checkout</Link>
               </Button>
+
+              {/* Trust strip */}
+              <div className="mt-5 pt-5 border-t border-border/50 space-y-2.5">
+                {[
+                  "Artisan-made, naturally sourced fabrics",
+                  "Easy exchange within 7 days",
+                  "Pan-India delivery · Tracked shipping",
+                ].map((point) => (
+                  <div key={point} className="flex items-start gap-2.5">
+                    <div className="w-1 h-1 rounded-full bg-[#C06A4F] mt-[7px] flex-shrink-0" />
+                    <p className="text-[12px] text-muted-foreground leading-snug">{point}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

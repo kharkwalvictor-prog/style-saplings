@@ -37,6 +37,26 @@ const craftOrigins: Record<string, string> = {
   Festive: "Across India",
 };
 
+/* -- Craft story quotes -- */
+const craftStories: Record<string, { quote: string; sub: string }> = {
+  Chikankari: {
+    quote: "Each stitch placed by hand over 400 years of tradition — Lucknow's most celebrated art, now made small enough for little shoulders.",
+    sub: "Hand-embroidered · Lucknow, Uttar Pradesh",
+  },
+  Bandhani: {
+    quote: "Thousands of tiny knots tied by hand before a single drop of dye touches the cloth. The magic of Bandhani is in what you cannot see.",
+    sub: "Hand-tied resist dyeing · Rajasthan & Gujarat",
+  },
+  Firan: {
+    quote: "Born in the valleys of Kashmir, the Firan carries centuries of warmth, memory, and craft passed quietly between generations.",
+    sub: "Hand-embroidered · Srinagar, Kashmir",
+  },
+  Festive: {
+    quote: "From Diwali to first birthdays — India's finest craft traditions, lovingly scaled down for your little one's most cherished moments.",
+    sub: "Handcrafted · Across India",
+  },
+};
+
 /* -- Animation variants (matching Index.tsx patterns) -- */
 const reveal = {
   hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
@@ -516,6 +536,44 @@ const ProductDetail = () => {
           </motion.div>
         </div>
 
+      </motion.div>
+
+      {/* ════════════════════════════════════════════
+          CRAFT STORY BANNER — full-bleed, dark green
+      ════════════════════════════════════════════ */}
+      {craftStories[product.craft_type] && (
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7 }}
+          className="bg-[#1E3320] py-16 md:py-20 px-6 text-center relative overflow-hidden"
+        >
+          <div className="absolute inset-0 opacity-[0.04] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0id2hpdGUiLz48L3N2Zz4=')] pointer-events-none" />
+          <div className="max-w-2xl mx-auto relative">
+            <p className="text-[#E8C9A0]/60 text-[10px] uppercase tracking-[0.4em] mb-6">
+              {craftStories[product.craft_type].sub}
+            </p>
+            <p className="font-serif italic text-[1.2rem] md:text-[1.5rem] text-white/85 leading-[1.7] mb-7">
+              &ldquo;{craftStories[product.craft_type].quote}&rdquo;
+            </p>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[#E8C9A0]/60 hover:text-[#E8C9A0] transition-colors border-b border-[#E8C9A0]/20 hover:border-[#E8C9A0]/50 pb-px"
+            >
+              The story behind the craft
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+        </motion.section>
+      )}
+
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={stagger}
+        className="container px-5 md:px-8 pb-24 md:pb-10"
+      >
         {/* ════════════════════════════════════════════
             RELATED PRODUCTS
         ════════════════════════════════════════════ */}
