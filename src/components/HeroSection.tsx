@@ -91,14 +91,14 @@ const HeroSection = () => {
         >
           <Link
             to="/shop"
-            className="inline-flex items-center gap-2.5 bg-white text-[#1A0E08] px-8 py-3.5 text-[11px] font-semibold tracking-[0.16em] uppercase hover:bg-[#E8C9A0] transition-colors duration-300"
+            className="inline-flex items-center gap-2.5 bg-white text-[#1A0E08] px-8 py-3.5 rounded-full text-[12px] font-semibold tracking-wide hover:bg-[#E8C9A0] transition-colors duration-300 min-h-[44px]"
           >
             Shop Collection
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
           <Link
             to="/about"
-            className="text-[11px] tracking-[0.16em] uppercase text-white/60 hover:text-white transition-colors border-b border-white/25 hover:border-white/50 pb-px"
+            className="text-[12px] tracking-wide text-white/65 hover:text-white transition-colors border-b border-white/25 hover:border-white/50 pb-px min-h-[44px] flex items-center"
           >
             Our Story
           </Link>
