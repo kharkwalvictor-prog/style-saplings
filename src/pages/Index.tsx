@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useSEO } from "@/hooks/useSEO";
 import JsonLd, { ORGANIZATION_JSONLD } from "@/components/JsonLd";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import HeroSection from "@/components/HeroSection";
 import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
 import { ArrowRight, Star } from "lucide-react";
@@ -82,7 +82,6 @@ const Index = () => {
   const { data: content } = useSiteContent();
 
   // Dynamic images with local asset fallbacks
-  const heroImage    = content?.hero_image    || heroImg;
   const craftImg1    = content?.craft_image_1 || product1;
   const craftImg2    = content?.craft_image_2 || product2;
   const craftImg3    = content?.craft_image_3 || product3;
@@ -95,12 +94,6 @@ const Index = () => {
     { name: "Festive",    region: "Pan India",  image: craftImg4, href: "/shop?craft=Festive" },
   ];
 
-  const spotlight = [
-    { label: "New In",     title: "Summer\nCollection",  image: craftImg1, href: "/shop" },
-    { label: "Chikankari", title: "The Art of\nLucknow", image: craftImg2, href: "/shop?craft=Chikankari" },
-    { label: "Festive",    title: "Celebration\nPieces", image: craftImg3, href: "/shop?craft=Festive" },
-    { label: "Gift Guide", title: "For Little\nOnes",    image: craftImg4, href: "/shop" },
-  ];
   useSEO({
     title: "Style Saplings — Handcrafted Ethnic Wear for Little Ones",
     description: "Authentic Chikankari, Bandhani and Kashmiri ethnic wear for children aged 2-5. Made by skilled artisans. Pan India delivery.",
@@ -112,12 +105,6 @@ const Index = () => {
     return featured.length > 0 ? featured.slice(0, 6) : products.slice(0, 6);
   })();
 
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress: heroProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroImageY = useSpring(useTransform(heroProgress, [0, 1], [0, 160]), { damping: 30, stiffness: 90 });
-  const heroFade  = useTransform(heroProgress, [0, 0.6], [1, 0]);
-  const heroLift  = useTransform(heroProgress, [0, 0.6], [0, 60]);
-
   return (
     <div className="min-h-screen bg-background">
       <JsonLd data={ORGANIZATION_JSONLD} />
@@ -126,40 +113,7 @@ const Index = () => {
       {/* ══════════════════════════════════════
           1. HERO
       ══════════════════════════════════════ */}
-      <section ref={heroRef} className="relative h-[100svh] min-h-[500px] overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
-          <img src={heroImage} alt="" className="w-full h-[120%] object-cover object-[center_20%] md:object-center" loading="eager" fetchPriority="high" />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/50" />
-
-        <motion.div style={{ opacity: heroFade, y: heroLift }} className="relative z-10 h-full flex flex-col items-center justify-center text-center px-5">
-          <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-2xl">
-            <motion.p variants={reveal} className="text-white/60 text-[11px] uppercase tracking-[0.3em] mb-5">
-              Est. 2024 &nbsp;·&nbsp; Handcrafted in India
-            </motion.p>
-            <motion.h1 variants={reveal} className="font-serif text-[34px] sm:text-[60px] md:text-[78px] lg:text-[96px] font-semibold text-white leading-[1.02] tracking-[-0.02em] [text-shadow:_0_2px_24px_rgba(0,0,0,0.35)]">
-              {getContent(content, "hero_headline", "Childhood, woven with tradition.")}
-            </motion.h1>
-            <motion.p variants={reveal} className="text-white/80 text-[15px] md:text-[19px] mt-6 mb-9 max-w-sm mx-auto leading-[1.75]">
-              {getContent(content, "hero_subtitle", "Regional artistry, reimagined for modern childhood.")}
-            </motion.p>
-            <motion.div variants={reveal} className="flex items-center justify-center gap-6">
-              <Link to="/shop" className="bg-[#4A6B45] rounded-full px-8 py-3.5 text-white text-[13px] font-medium tracking-wide hover:bg-[#3D5C39] transition-colors min-h-[44px] flex items-center">
-                {getContent(content, "hero_cta_primary", "Shop Collection")}
-              </Link>
-              <Link to="/about" className="text-white/70 text-[13px] font-medium hover:text-white transition-colors min-h-[44px] flex items-center">
-                {getContent(content, "hero_cta_secondary", "Our Story")}
-              </Link>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2, duration: 1 }}
-          className="absolute bottom-9 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2" style={{ opacity: heroFade }}>
-          <span className="text-white/35 text-[10px] uppercase tracking-[0.22em]">Scroll</span>
-          <motion.div animate={{ scaleY: [0, 1, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }} className="w-px h-9 bg-white/35 origin-top" />
-        </motion.div>
-      </section>
+      <HeroSection />
 
       {/* ══════════════════════════════════════
           2. SHOP BY CRAFT — 4 tiles, immediately after hero
@@ -287,9 +241,9 @@ const Index = () => {
       ══════════════════════════════════════ */}
       <section className="relative h-[50vh] md:h-[62vh] min-h-[300px] overflow-hidden">
         <img
-          src={craftImg2}
+          src={heroImg}
           alt="Handcrafted Indian heritage"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-[center_20%]"
           loading="lazy"
         />
         {/* Gradient left-heavy so text stays readable */}
@@ -327,25 +281,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════
-          7. IN THE SPOTLIGHT — 4 tiles.
-          Same grid as "Shop by Craft" — visual rhythm.
-          Flows directly from featured (no break between them).
-      ══════════════════════════════════════ */}
-      <section className="pb-12 md:pb-16 bg-background">
-        <div className="container px-5 md:px-8">
-          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-            className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground mb-6 md:mb-7">
-            In the Spotlight
-          </motion.p>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={stagger}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {spotlight.map((item) => (
-              <ImageTile key={item.title} image={item.image} label={item.label} title={item.title} href={item.href} />
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════
           8. TESTIMONIALS — Infinite marquee
