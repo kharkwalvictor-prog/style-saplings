@@ -85,7 +85,7 @@ const ProductCard = ({ product, index = 0 }: Props) => {
 
             {/* Sale badge */}
             {discount > 0 && (
-              <span className="absolute top-3 left-3 bg-[#C06A4F] text-white text-[10px] font-bold px-2.5 py-1 rounded-full z-10">
+              <span className="absolute top-3 left-3 bg-[#C06A4F] text-white text-[10px] font-medium px-2.5 py-1 rounded-full z-10">
                 -{discount}%
               </span>
             )}
@@ -119,7 +119,7 @@ const ProductCard = ({ product, index = 0 }: Props) => {
 
         {/* Info */}
         <div className="mt-3.5 space-y-1 px-0.5">
-          <span className="text-[12px] uppercase tracking-[0.2em] font-bold text-[#4A6B45]">
+          <span className="text-[12px] uppercase tracking-[0.2em] font-medium text-[#4A6B45]">
             {product.craft_type}
           </span>
           <h3 className="font-serif text-[14px] md:text-lg font-medium leading-tight">
@@ -142,11 +142,11 @@ const ProductCard = ({ product, index = 0 }: Props) => {
           <div className="flex items-center gap-2 pt-0.5">
             {product.sale_price ? (
               <>
-                <span className="text-[14px] font-bold">₹{Number(product.sale_price).toLocaleString("en-IN")}</span>
+                <span className="text-[14px] font-medium">₹{Number(product.sale_price).toLocaleString("en-IN")}</span>
                 <span className="text-xs text-muted-foreground line-through">₹{Number(product.price).toLocaleString("en-IN")}</span>
               </>
             ) : (
-              <span className="text-[14px] font-bold">₹{Number(product.price).toLocaleString("en-IN")}</span>
+              <span className="text-[14px] font-medium">₹{Number(product.price).toLocaleString("en-IN")}</span>
             )}
           </div>
         </div>

@@ -100,7 +100,7 @@ const OrderConfirmation = () => {
               <div className="border rounded-2xl p-5">
                 <div className="flex items-center gap-2 mb-4">
                   <Package className="h-4 w-4 text-muted-foreground" />
-                  <h2 className="font-serif text-lg font-semibold">Items Ordered</h2>
+                  <h2 className="font-serif text-lg font-medium">Items Ordered</h2>
                 </div>
                 <div className="space-y-3">
                   {order.items.map((item, idx) => (
@@ -123,12 +123,12 @@ const OrderConfirmation = () => {
                 <div className="border rounded-2xl p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <CreditCard className="h-4 w-4 text-muted-foreground" />
-                    <h3 className="font-serif font-semibold">Payment</h3>
+                    <h3 className="font-serif font-medium">Payment</h3>
                   </div>
                   <p className="text-sm">
                     {isCOD ? "Cash on Delivery" : "Paid via Razorpay"}
                   </p>
-                  <p className="text-lg font-serif font-semibold mt-1">
+                  <p className="text-lg font-serif font-medium mt-1">
                     ₹{order.total_amount.toLocaleString("en-IN")}
                   </p>
                   {isCOD && (
@@ -141,7 +141,7 @@ const OrderConfirmation = () => {
                 <div className="border rounded-2xl p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <MapPin className="h-4 w-4 text-muted-foreground" />
-                    <h3 className="font-serif font-semibold">Shipping</h3>
+                    <h3 className="font-serif font-medium">Shipping</h3>
                   </div>
                   <p className="text-sm leading-relaxed">
                     {order.shipping_address.address}

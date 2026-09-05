@@ -51,7 +51,7 @@ const Blog = () => {
             <motion.div {...fade} transition={{ duration: 0.5 }} className="rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-5" style={{ backgroundColor: "#1E3320" }}>
               <div className="md:col-span-3 p-6 md:p-10 flex flex-col justify-end text-white order-2 md:order-1">
                 <span className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#C06A4F" }}>{featured.category}</span>
-                <h2 className="font-serif text-2xl md:text-3xl font-semibold leading-snug mb-4">{featured.title}</h2>
+                <h2 className="font-serif text-2xl md:text-3xl font-medium leading-snug mb-4">{featured.title}</h2>
                 <p className="text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.7)" }}>{featured.excerpt}</p>
                 <Link to={`/blog/${featured.slug}`} className="text-sm font-medium hover:underline underline-offset-4" style={{ color: "#C06A4F" }}>Read More →</Link>
               </div>

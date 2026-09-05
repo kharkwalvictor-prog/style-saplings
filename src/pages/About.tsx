@@ -106,7 +106,7 @@ const About = () => {
           </motion.span>
           <motion.h1
             variants={reveal}
-            className="font-serif text-3xl md:text-5xl font-semibold text-white leading-[1.12] tracking-[-0.01em] max-w-xl mx-auto [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]"
+            className="font-serif text-3xl md:text-5xl font-medium text-white leading-[1.12] tracking-[-0.01em] max-w-xl mx-auto [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]"
           >
             {getContent(content, "about_hero_heading", "We looked everywhere. So we built it ourselves.")}
           </motion.h1>
@@ -195,7 +195,7 @@ const About = () => {
             </motion.span>
             <motion.h2
               variants={reveal}
-              className="font-serif text-[26px] md:text-[38px] font-semibold leading-[1.1] tracking-[-0.01em]"
+              className="font-serif text-[26px] md:text-[38px] font-medium leading-[1.1] tracking-[-0.01em]"
             >
               {getContent(content, "about_crafts_heading", "The Crafts We Celebrate")}
             </motion.h2>
@@ -257,7 +257,7 @@ const About = () => {
                 variants={reveal}
                 className="text-center md:text-left"
               >
-                <p className="font-serif text-[40px] md:text-[48px] font-semibold text-foreground leading-none tracking-[-0.02em]">
+                <p className="font-serif text-[40px] md:text-[48px] font-medium text-foreground leading-none tracking-[-0.02em]">
                   {stat.value}
                 </p>
                 <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground mt-2">
@@ -318,7 +318,7 @@ const About = () => {
           >
             <motion.h2
               variants={reveal}
-              className="font-serif text-3xl md:text-5xl font-semibold text-white leading-[1.1] tracking-[-0.01em]"
+              className="font-serif text-3xl md:text-5xl font-medium text-white leading-[1.1] tracking-[-0.01em]"
             >
               {getContent(content, "about_cta_heading", "Dress Your Little One in India's Finest Craft")}
             </motion.h2>

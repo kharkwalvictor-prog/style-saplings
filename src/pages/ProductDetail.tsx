@@ -388,7 +388,7 @@ const ProductDetail = () => {
             >
               {product.sale_price ? (
                 <>
-                  <span className="text-[24px] font-semibold text-[#C06A4F]">
+                  <span className="text-[24px] font-medium text-[#C06A4F]">
                     {"\u20B9"}
                     {Number(product.sale_price).toLocaleString("en-IN")}
                   </span>
@@ -398,27 +398,24 @@ const ProductDetail = () => {
                   </span>
                 </>
               ) : (
-                <span className="text-[24px] font-semibold">
+                <span className="text-[24px] font-medium">
                   {"\u20B9"}
                   {Number(product.price).toLocaleString("en-IN")}
                 </span>
               )}
             </motion.div>
 
-            {/* Emotional content cards (2x2 grid) */}
+            {/* Product attributes — clean text rows, no borders */}
             <motion.div
               variants={reveal}
-              className="grid grid-cols-2 gap-2 md:gap-3 mb-8"
+              className="divide-y divide-border/30 mb-8"
             >
               {emotionalCards.map((card) => (
-                <div
-                  key={card.label}
-                  className="border border-border/50 rounded-xl p-3 md:p-4"
-                >
-                  <span className="text-[12px] uppercase tracking-wider text-muted-foreground block mb-1">
+                <div key={card.label} className="flex items-start justify-between py-3 gap-4">
+                  <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground shrink-0 pt-0.5">
                     {card.label}
                   </span>
-                  <span className="text-[15px] font-medium leading-snug block">
+                  <span className="text-[14px] text-foreground text-right leading-snug">
                     {card.value}
                   </span>
                 </div>

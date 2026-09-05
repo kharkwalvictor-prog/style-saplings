@@ -35,7 +35,7 @@ const ProductReviews = ({ productId }: Props) => {
   return (
     <section className="mt-16 border-t pt-10">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="font-serif text-2xl font-semibold">Customer Reviews</h2>
+        <h2 className="font-serif text-2xl font-medium">Customer Reviews</h2>
         <Button variant="outline" className="border-sale text-sale hover:bg-sale/10" onClick={() => setModalOpen(true)}>
           Write a Review
         </Button>

@@ -35,7 +35,7 @@ const CollectionGrid = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-serif text-2xl md:text-4xl font-semibold text-center mb-10 md:mb-14"
+          className="font-serif text-2xl md:text-4xl font-medium text-center mb-10 md:mb-14"
         >
           Shop by Collection
         </motion.h2>
@@ -58,7 +58,7 @@ const CollectionGrid = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                  <h3 className="font-serif text-xl md:text-2xl font-semibold text-white mb-1">
+                  <h3 className="font-serif text-xl md:text-2xl font-medium text-white mb-1">
                     {col.title}
                   </h3>
                   <p className="text-white/60 text-sm">{col.subtitle}</p>

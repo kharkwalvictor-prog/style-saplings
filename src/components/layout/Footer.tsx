@@ -70,7 +70,7 @@ const Footer = () => {
           <div className="pt-16 md:pt-20 pb-12 md:pb-14 text-center border-b border-white/10">
             <Link to="/">
               <img
-                src={content?.logo_image || "/assets/logo-light.svg"}
+                src={content?.logo_image || "/assets/logo-footer.svg"}
                 alt="Style Saplings"
                 className="h-14 md:h-16 object-contain mx-auto mb-5"
               />

@@ -66,7 +66,7 @@ function ImageTile({
         <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent" />
         <div className="absolute bottom-0 left-0 p-4 md:p-6">
           <p className="text-white/60 text-[10px] uppercase tracking-[0.14em] mb-1.5">{label}</p>
-          <h3 className={`font-serif text-white font-semibold leading-tight whitespace-pre-line ${titleClass}`}>{title}</h3>
+          <h3 className={`font-serif text-white font-medium leading-tight whitespace-pre-line ${titleClass}`}>{title}</h3>
           <div className="mt-3 inline-flex items-center gap-1 text-white/50 text-[11px] group-hover:text-white/80 transition-colors">
             <span>Discover</span>
             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
@@ -124,7 +124,7 @@ const Index = () => {
             <motion.p variants={reveal} className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground mb-3">
               Shop by Craft
             </motion.p>
-            <motion.h2 variants={reveal} className="font-serif text-[26px] md:text-[38px] font-semibold tracking-[-0.01em] leading-tight">
+            <motion.h2 variants={reveal} className="font-serif text-[26px] md:text-[38px] font-medium tracking-[-0.01em] leading-tight">
               Rooted in India's living traditions
             </motion.h2>
           </motion.div>
@@ -151,7 +151,7 @@ const Index = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 md:p-8">
                   <p className="text-white/60 text-[11px] uppercase tracking-[0.18em] mb-2">The Craft</p>
-                  <h3 className="font-serif text-[24px] md:text-[30px] text-white font-semibold leading-tight max-w-[220px]">
+                  <h3 className="font-serif text-[24px] md:text-[30px] text-white font-medium leading-tight max-w-[220px]">
                     400 years of living tradition
                   </h3>
                   <div className="mt-4 inline-flex items-center gap-1.5 text-white/55 text-[12px] group-hover:text-white/90 transition-colors">
@@ -167,7 +167,7 @@ const Index = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 md:p-8">
                   <p className="text-white/60 text-[11px] uppercase tracking-[0.18em] mb-2">New In</p>
-                  <h3 className="font-serif text-[24px] md:text-[30px] text-white font-semibold leading-tight max-w-[220px]">
+                  <h3 className="font-serif text-[24px] md:text-[30px] text-white font-medium leading-tight max-w-[220px]">
                     {getContent(content, "featured_heading", "Crafted for celebrations")}
                   </h3>
                   <div className="mt-4 inline-flex items-center gap-1.5 text-white/55 text-[12px] group-hover:text-white/90 transition-colors">
@@ -194,7 +194,7 @@ const Index = () => {
               <motion.p variants={reveal} className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground mb-3">
                 Ready to Wear
               </motion.p>
-              <motion.h2 variants={reveal} className="font-serif text-[26px] md:text-[40px] font-semibold tracking-[-0.01em] leading-tight">
+              <motion.h2 variants={reveal} className="font-serif text-[26px] md:text-[40px] font-medium tracking-[-0.01em] leading-tight">
                 {getContent(content, "featured_heading", "Crafted for celebrations")}
               </motion.h2>
             </div>
@@ -265,7 +265,7 @@ const Index = () => {
               <motion.p variants={reveal} className="text-white/60 text-[11px] uppercase tracking-[0.28em] mb-4">
                 The Heritage
               </motion.p>
-              <motion.h2 variants={reveal} className="font-serif text-[26px] sm:text-[34px] md:text-[46px] text-white font-semibold leading-[1.1] tracking-[-0.01em]">
+              <motion.h2 variants={reveal} className="font-serif text-[26px] sm:text-[34px] md:text-[46px] text-white font-medium leading-[1.1] tracking-[-0.01em]">
                 Every piece carries 400 years of tradition.
               </motion.h2>
               <motion.p variants={reveal} className="text-white/65 text-[14px] mt-4 mb-8 max-w-[340px] leading-[1.7]">
@@ -295,7 +295,7 @@ const Index = () => {
             <motion.p variants={reveal} className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground mb-3">
               Reviews
             </motion.p>
-            <motion.h2 variants={reveal} className="font-serif text-[26px] md:text-[40px] font-semibold tracking-[-0.01em]">
+            <motion.h2 variants={reveal} className="font-serif text-[26px] md:text-[40px] font-medium tracking-[-0.01em]">
               Loved by parents across India
             </motion.h2>
           </motion.div>
@@ -328,7 +328,7 @@ const Index = () => {
         <div className="container px-5 md:px-8 relative">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-xl mx-auto text-center">
             <motion.span variants={reveal} className="text-white/35 text-[10px] uppercase tracking-[0.28em] block mb-7">Style Saplings</motion.span>
-            <motion.h2 variants={reveal} className="font-serif text-[28px] md:text-[48px] lg:text-[56px] text-white font-semibold leading-[1.1] tracking-[-0.01em]">
+            <motion.h2 variants={reveal} className="font-serif text-[28px] md:text-[48px] lg:text-[56px] text-white font-medium leading-[1.1] tracking-[-0.01em]">
               {getContent(content, "cta_heading", "Childhood deserves stories woven into every thread.")}
             </motion.h2>
             <motion.p variants={reveal} className="text-white/55 text-[14px] mt-6 max-w-xs mx-auto leading-relaxed">

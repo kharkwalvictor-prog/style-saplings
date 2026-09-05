@@ -35,7 +35,7 @@ const Contact = () => {
           <div className="grid md:grid-cols-5 gap-8">
             {/* Left — info card */}
             <motion.div {...fade} transition={{ duration: 0.5 }} className="md:col-span-2 rounded-2xl p-8 text-white" style={{ backgroundColor: '#1E3320' }}>
-              <h2 className="font-serif text-xl font-semibold mb-8">Contact Details</h2>
+              <h2 className="font-serif text-xl font-medium mb-8">Contact Details</h2>
 
               <div className="space-y-6">
                 <div className="flex items-start gap-3">
@@ -81,7 +81,7 @@ const Contact = () => {
 
             {/* Right — form card */}
             <motion.div {...fade} transition={{ duration: 0.5, delay: 0.1 }} className="md:col-span-3 rounded-2xl p-8 border border-border/50">
-              <h2 className="font-serif text-xl font-semibold mb-6">Send a Message</h2>
+              <h2 className="font-serif text-xl font-medium mb-6">Send a Message</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                   type="text" placeholder="Full Name" required value={form.name}

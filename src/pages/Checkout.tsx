@@ -42,7 +42,7 @@ const loadRazorpayScript = (): Promise<boolean> =>
     document.body.appendChild(script);
   });
 
-const inputClass = "w-full border rounded-2xl px-4 py-3 text-[16px] bg-background focus:outline-none focus:ring-1 focus:ring-ring";
+const inputClass = "w-full border border-border/60 rounded-2xl px-4 py-3 text-[16px] bg-background focus:outline-none focus:ring-1 focus:ring-[#4A6B45]/40 focus:border-[#4A6B45]/50 transition-all placeholder:text-muted-foreground/50";
 
 interface DiscountState {
   id: string;
@@ -426,7 +426,7 @@ const Checkout = () => {
           <div className="lg:col-span-2 space-y-6">
             {/* Contact */}
             <div className="space-y-4">
-              <h2 className="font-serif text-xl font-semibold">Contact Details</h2>
+              <h2 className="text-[10px] uppercase tracking-[0.28em] text-muted-foreground pt-2">Contact Details</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input type="text" placeholder="Full Name *" value={form.name} onChange={e => update("name", e.target.value)} className={inputClass} required />
                 <input type="tel" placeholder="Phone Number *" value={form.phone} onChange={e => update("phone", e.target.value)} className={inputClass} required />
@@ -436,7 +436,7 @@ const Checkout = () => {
 
             {/* Shipping */}
             <div className="space-y-4">
-              <h2 className="font-serif text-xl font-semibold">Shipping Address</h2>
+              <h2 className="text-[10px] uppercase tracking-[0.28em] text-muted-foreground pt-2">Shipping Address</h2>
               <textarea placeholder="Full Address *" value={form.address} onChange={e => update("address", e.target.value)}
                 className={`${inputClass} resize-none h-20`} required />
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -482,15 +482,15 @@ const Checkout = () => {
 
             {/* Payment Method */}
             <div className="space-y-4">
-              <h2 className="font-serif text-xl font-semibold">Payment Method</h2>
+              <h2 className="text-[10px] uppercase tracking-[0.28em] text-muted-foreground pt-2">Payment Method</h2>
               <div className="space-y-2">
-                <label className="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer hover:border-primary transition-colors min-h-[44px]">
-                  <input type="radio" name="payment" value="razorpay" checked={form.paymentMethod === "razorpay"} onChange={() => update("paymentMethod", "razorpay")} className="accent-primary w-5 h-5" />
-                  <div><p className="text-sm font-medium">Razorpay (UPI / Card / Netbanking)</p><p className="text-xs text-muted-foreground">Pay securely online</p></div>
+                <label className={`flex items-center gap-3 border rounded-2xl p-4 cursor-pointer transition-all min-h-[44px] ${form.paymentMethod === "razorpay" ? "border-[#4A6B45]/60 bg-[#4A6B45]/5" : "border-border/60 hover:border-foreground/20"}`}>
+                  <input type="radio" name="payment" value="razorpay" checked={form.paymentMethod === "razorpay"} onChange={() => update("paymentMethod", "razorpay")} className="accent-[#4A6B45] w-5 h-5" />
+                  <div><p className="text-[14px] font-medium">UPI · Card · Netbanking</p><p className="text-[12px] text-muted-foreground">Pay securely via Razorpay</p></div>
                 </label>
-                <label className="flex items-center gap-3 border rounded-2xl p-4 cursor-pointer hover:border-primary transition-colors min-h-[44px]">
-                  <input type="radio" name="payment" value="cod" checked={form.paymentMethod === "cod"} onChange={() => update("paymentMethod", "cod")} className="accent-primary w-5 h-5" />
-                  <div><p className="text-sm font-medium">Cash on Delivery</p><p className="text-xs text-muted-foreground">Pay when you receive your order</p></div>
+                <label className={`flex items-center gap-3 border rounded-2xl p-4 cursor-pointer transition-all min-h-[44px] ${form.paymentMethod === "cod" ? "border-[#4A6B45]/60 bg-[#4A6B45]/5" : "border-border/60 hover:border-foreground/20"}`}>
+                  <input type="radio" name="payment" value="cod" checked={form.paymentMethod === "cod"} onChange={() => update("paymentMethod", "cod")} className="accent-[#4A6B45] w-5 h-5" />
+                  <div><p className="text-[14px] font-medium">Cash on Delivery</p><p className="text-[12px] text-muted-foreground">Pay when you receive your order</p></div>
                 </label>
               </div>
             </div>
@@ -499,7 +499,7 @@ const Checkout = () => {
           {/* Order Summary */}
           <div className="lg:col-span-1">
             <div className="border rounded-2xl p-6 sticky top-24 shadow-sm">
-              <h2 className="font-serif text-xl font-semibold mb-4">Order Summary</h2>
+              <h2 className="font-serif text-xl font-medium mb-4">Order Summary</h2>
               <div className="space-y-3 mb-4">
                 {items.map(item => (
                   <div key={`${item.product.id}-${item.size}`} className="flex justify-between text-sm">
@@ -528,7 +528,7 @@ const Checkout = () => {
                   </div>
                 ) : (
                   <Collapsible open={promoOpen} onOpenChange={setPromoOpen}>
-                    <CollapsibleTrigger className="flex items-center gap-2 text-sm text-primary hover:underline cursor-pointer">
+                    <CollapsibleTrigger className="flex items-center gap-2 text-sm text-[#4A6B45] hover:underline cursor-pointer">
                       <Tag className="h-3.5 w-3.5" />
                       Have a promo code?
                     </CollapsibleTrigger>

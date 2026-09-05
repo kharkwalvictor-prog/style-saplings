@@ -252,7 +252,7 @@ const Shop = () => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ type: "spring", damping: 30, stiffness: 120 }}
               >
-                <h1 className="font-serif text-3xl md:text-5xl font-semibold text-white leading-tight [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]">
+                <h1 className="font-serif text-3xl md:text-5xl font-medium text-white leading-tight [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]">
                   {heroTitle}
                 </h1>
                 <p className="text-white/80 text-[15px] mt-2 max-w-md leading-relaxed [text-shadow:_0_1px_10px_rgba(0,0,0,0.3)]">

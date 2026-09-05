@@ -102,7 +102,7 @@ const Cart = () => {
 
           <div className="lg:col-span-1">
             <div className="border rounded-2xl p-6 sticky top-24 shadow-sm">
-              <h2 className="font-serif text-xl font-semibold mb-4">Order Summary</h2>
+              <h2 className="font-serif text-xl font-medium mb-4">Order Summary</h2>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
@@ -113,7 +113,7 @@ const Cart = () => {
                   <span className={freeShipping ? "text-secondary" : ""}>{freeShipping ? "Free" : "₹99"}</span>
                 </div>
               </div>
-              <div className="border-t my-4 pt-4 flex justify-between font-serif text-lg font-semibold">
+              <div className="border-t my-4 pt-4 flex justify-between font-serif text-lg font-medium">
                 <span>Total</span>
                 <span>₹{(totalAmount + (freeShipping ? 0 : 99)).toLocaleString("en-IN")}</span>
               </div>

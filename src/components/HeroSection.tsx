@@ -91,7 +91,7 @@ const HeroSection = () => {
         >
           <Link
             to="/shop"
-            className="inline-flex items-center gap-2.5 bg-white text-[#1A0E08] px-8 py-3.5 rounded-full text-[12px] font-semibold tracking-wide hover:bg-[#E8C9A0] transition-colors duration-300 min-h-[44px]"
+            className="inline-flex items-center gap-2.5 bg-white text-[#1A0E08] px-8 py-3.5 rounded-full text-[12px] font-medium tracking-wide hover:bg-[#E8C9A0] transition-colors duration-300 min-h-[44px]"
           >
             Shop Collection
             <ArrowRight className="h-3.5 w-3.5" />
