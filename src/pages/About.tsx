@@ -157,7 +157,7 @@ const About = () => {
               </motion.span>
               <motion.h2
                 variants={reveal}
-                className="font-serif text-[28px] md:text-[36px] font-medium leading-[1.15] tracking-[-0.01em] mb-7"
+                className="font-serif text-[28px] md:text-[36px] font-medium leading-[1.15] tracking-[-0.01em] mb-7 text-[#1E3320]"
               >
                 {getContent(content, "about_origin_heading", "The Search That Started Everything")}
               </motion.h2>
@@ -195,7 +195,7 @@ const About = () => {
             </motion.span>
             <motion.h2
               variants={reveal}
-              className="font-serif text-[26px] md:text-[38px] font-medium leading-[1.1] tracking-[-0.01em]"
+              className="font-serif text-[26px] md:text-[38px] font-medium leading-[1.1] tracking-[-0.01em] text-[#1E3320]"
             >
               {getContent(content, "about_crafts_heading", "The Crafts We Celebrate")}
             </motion.h2>
@@ -257,7 +257,7 @@ const About = () => {
                 variants={reveal}
                 className="text-center md:text-left"
               >
-                <p className="font-serif text-[40px] md:text-[48px] font-medium text-foreground leading-none tracking-[-0.02em]">
+                <p className="font-serif text-[40px] md:text-[48px] font-medium text-[#1E3320] leading-none tracking-[-0.02em]">
                   {stat.value}
                 </p>
                 <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground mt-2">
@@ -294,7 +294,7 @@ const About = () => {
               {getContent(content, "about_founder_quote", "Style Saplings began with a simple wish — to dress our children in the same beautiful handcrafted traditions that have defined Indian culture for generations.")}
             </motion.p>
             <motion.div variants={reveal}>
-              <div className="w-8 h-px bg-border mx-auto mb-4" />
+              <div className="w-8 h-px bg-[#C06A4F] mx-auto mb-4" />
               <p className="text-[13px] font-medium text-foreground">Victor Kharkwal</p>
               <p className="text-[12px] text-muted-foreground mt-1">Founder, Style Saplings</p>
             </motion.div>

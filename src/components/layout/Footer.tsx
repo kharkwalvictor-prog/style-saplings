@@ -26,7 +26,7 @@ const Footer = () => {
             <p className="font-serif italic text-[17px] md:text-[20px] text-muted-foreground mb-6 leading-relaxed">
               {getContent(content, "footer_newsletter_tagline", "Inspired by India's regional artistry, designed for little celebrations.")}
             </p>
-            <h3 className="font-serif text-[28px] md:text-[34px] font-medium leading-[1.12] mb-3 text-foreground">
+            <h3 className="font-serif text-[28px] md:text-[34px] font-medium leading-[1.12] mb-3 text-[#1E3320]">
               {getContent(content, "footer_newsletter_heading", "Stay close to the craft.")}
             </h3>
             <p className="text-[15px] text-muted-foreground mb-8">

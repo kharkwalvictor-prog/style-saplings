@@ -10,7 +10,6 @@ import { useProducts } from "@/hooks/useProducts";
 import { ArrowRight, Star } from "lucide-react";
 import { useSiteContent, getContent } from "@/hooks/useSiteContent";
 import { Skeleton } from "@/components/ui/skeleton";
-import heroImg from "@/assets/hero.jpg";
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
@@ -77,7 +76,7 @@ function ImageTile({
 }
 
 const Index = () => {
-  const { data: products = [], isLoading } = useProducts();
+  const { data: products = [], isLoading, isError } = useProducts();
   const { data: content } = useSiteContent();
 
   // Dynamic images with local asset fallbacks
@@ -165,7 +164,7 @@ const Index = () => {
           <motion.span variants={reveal} className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground block mb-8">
             The Style Saplings Promise
           </motion.span>
-          <motion.h2 variants={reveal} className="font-serif text-[32px] sm:text-[44px] md:text-[58px] font-medium leading-[1.08] tracking-[-0.025em] text-foreground">
+          <motion.h2 variants={reveal} className="font-serif text-[32px] sm:text-[44px] md:text-[58px] font-medium leading-[1.08] tracking-[-0.025em] text-[#1E3320]">
             India's living craft traditions,<br className="hidden md:block" /> scaled for little shoulders.
           </motion.h2>
           <motion.div variants={reveal} className="w-10 h-px bg-[#C06A4F] mx-auto mt-10 mb-8" />
@@ -202,7 +201,7 @@ const Index = () => {
               <motion.p variants={reveal} className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-3">
                 Ready to Wear
               </motion.p>
-              <motion.h2 variants={reveal} className="font-serif text-[28px] md:text-[42px] font-medium tracking-[-0.02em] leading-[1.1]">
+              <motion.h2 variants={reveal} className="font-serif text-[28px] md:text-[42px] font-medium tracking-[-0.02em] leading-[1.1] text-[#1E3320]">
                 {getContent(content, "featured_heading", "Crafted for celebrations")}
               </motion.h2>
             </div>
@@ -226,6 +225,14 @@ const Index = () => {
                   <Skeleton className="h-3 w-1/3" />
                 </div>
               ))}
+            </div>
+          ) : isError ? (
+            <div className="py-20 text-center">
+              <p className="font-serif italic text-muted-foreground text-[15px] mb-2">Couldn't load products right now.</p>
+              <p className="text-[13px] text-muted-foreground mb-6">Please check your connection and try again.</p>
+              <Link to="/shop" className="inline-flex items-center gap-2 text-[13px] font-medium text-foreground border-b border-foreground/20 pb-0.5 hover:border-foreground/60 transition-colors group">
+                Browse the shop <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+              </Link>
             </div>
           ) : (
             <motion.div
@@ -263,9 +270,9 @@ const Index = () => {
       ══════════════════════════════════════ */}
       <section className="relative h-[60vh] md:h-[75vh] min-h-[380px] overflow-hidden">
         <img
-          src={heroImg}
+          src={craftImg3}
           alt="Handcrafted Indian heritage"
-          className="w-full h-full object-cover object-[center_20%]"
+          className="w-full h-full object-cover object-center"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent" />
@@ -316,7 +323,7 @@ const Index = () => {
             <motion.p variants={reveal} className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-3">
               What parents say
             </motion.p>
-            <motion.h2 variants={reveal} className="font-serif text-[28px] md:text-[42px] font-medium tracking-[-0.02em]">
+            <motion.h2 variants={reveal} className="font-serif text-[28px] md:text-[42px] font-medium tracking-[-0.02em] text-[#1E3320]">
               Loved across India
             </motion.h2>
           </motion.div>

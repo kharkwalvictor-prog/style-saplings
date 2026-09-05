@@ -113,7 +113,7 @@ const Blog = () => {
                       />
                     </div>
                     <span className="text-[10px] uppercase tracking-[0.22em] text-[#4A6B45] font-medium">{post.category}</span>
-                    <h2 className="font-serif text-[20px] md:text-[22px] font-medium mt-2 mb-3 leading-snug group-hover:text-[#4A6B45] transition-colors">{post.title}</h2>
+                    <h2 className="font-serif text-[20px] md:text-[22px] font-medium mt-2 mb-3 leading-snug text-[#1E3320] group-hover:text-[#4A6B45] transition-colors">{post.title}</h2>
                     <p className="text-[14px] text-muted-foreground leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
                     <div className="flex items-center justify-between">
                       <span className="text-[11px] text-muted-foreground">

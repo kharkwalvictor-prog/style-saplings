@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hero Mockup — Style Saplings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #111; }
+
+    .label {
+      background: #E8C9A0;
+      color: #1E3320;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .sub-label {
+      background: #1E3320;
+      color: rgba(232,201,160,0.7);
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 8px 24px;
+      text-align: center;
+    }
+
+    /* ══════════════════════════════════════════
+       OPTION C — Centered Cinematic
+       Full-bleed · warm scrim · centered serif
+    ══════════════════════════════════════════ */
+    .hero-c {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-c img.bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+    }
+    /* Warm dark scrim — not cold green */
+    .hero-c .scrim {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, rgba(15,8,4,0.38) 0%, rgba(15,8,4,0.62) 100%);
+    }
+    .hero-c .scrim-bottom {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(12,6,3,0.7) 0%, transparent 50%);
+    }
+    .hero-c .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 760px;
+    }
+    .hero-c .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 10px;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: #E8C9A0;
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+    .hero-c .eyebrow::before,
+    .hero-c .eyebrow::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: rgba(232,201,160,0.5);
+    }
+    .hero-c h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.06;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+    .hero-c h1 em {
+      font-style: italic;
+      color: #E8C9A0;
+      font-weight: 300;
+    }
+    .hero-c p {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+      margin-bottom: 40px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: 0.01em;
+    }
+    .hero-c .ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-c .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      color: #1A0E08;
+      padding: 15px 36px;
+      border-radius: 0;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 0.3s;
+    }
+    .hero-c .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+      padding-bottom: 2px;
+    }
+    /* Floating bottom bar */
+    .hero-c .bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-c .bottom-bar .crafts {
+      display: flex;
+      gap: 24px;
+    }
+    .hero-c .bottom-bar .craft {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+    .hero-c .bottom-bar .scroll {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .hero-c .bottom-bar .line {
+      width: 36px;
+      height: 1px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ══════════════════════════════════════════
+       OPTION D — Vertical Stack / Editorial
+       Image top 65% · text panel bottom 35%
+       Warm cream background · no dark scrim
+    ══════════════════════════════════════════ */
+    .hero-d {
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .hero-d .image-wrap {
+      flex: 0 0 62%;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-d .image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 10%;
+    }
+    /* Light top vignette only */
+    .hero-d .image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(250,246,240,0.15) 0%, transparent 30%);
+    }
+    .hero-d .text-panel {
+      flex: 1;
+      background: #FAF6F0;
+      display: flex;
+      align-items: center;
+      padding: 0 48px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .hero-d .text-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 32px;
+    }
+    .hero-d .text-left { flex: 1; }
+    .hero-d .eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: #C06A4F;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .hero-d h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 500;
+      color: #1E3320;
+      line-height: 1.12;
+    }
+    .hero-d h1 em {
+      font-style: italic;
+      color: #4A6B45;
+    }
+    .hero-d .divider {
+      width: 1px;
+      height: 64px;
+      background: rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+    .hero-d .text-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .hero-d p {
+      font-size: 13px;
+      color: #7A6E66;
+      line-height: 1.75;
+      max-width: 280px;
+    }
+    .hero-d .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #1E3320;
+      color: #FAF6F0;
+      padding: 12px 26px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .hero-d .craft-row {
+      position: absolute;
+      top: 24px;
+      left: 48px;
+      display: flex;
+      gap: 18px;
+    }
+    .hero-d .craft-row span {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+    }
+
+    /* ══════════════════════════════════
+       MOBILE PREVIEW WRAPPER
+    ══════════════════════════════════ */
+    .mobile-frame-row {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      padding: 48px 32px;
+      background: #1a1a1a;
+    }
+    .mobile-frame {
+      width: 390px;
+      height: 844px;
+      border: 3px solid #333;
+      border-radius: 48px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .mobile-label {
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 16px;
+    }
+    .mobile-wrap { flex: 1; max-width: 480px; }
+
+    /* Mobile hero C */
+    .hero-c-mobile {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-c-mobile img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 10%;
+    }
+    .hero-c-mobile .scrim {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(15,8,4,0.3) 0%, rgba(15,8,4,0.6) 100%);
+    }
+    .hero-c-mobile .scrim-b {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(12,6,3,0.72) 0%, transparent 55%);
+    }
+    .hero-c-mobile .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 28px;
+    }
+    .hero-c-mobile .eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: #E8C9A0;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .hero-c-mobile .eyebrow::before,
+    .hero-c-mobile .eyebrow::after {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: rgba(232,201,160,0.4);
+      display: block;
+    }
+    .hero-c-mobile h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.06;
+      margin-bottom: 16px;
+    }
+    .hero-c-mobile h1 em { font-style: italic; color: #E8C9A0; font-weight: 300; }
+    .hero-c-mobile p {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .hero-c-mobile .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: #1A0E08;
+      padding: 14px 32px;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    /* Mobile hero D */
+    .hero-d-mobile {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-d-mobile .img-wrap {
+      flex: 0 0 58%;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-d-mobile .img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 10%;
+    }
+    .hero-d-mobile .text-panel {
+      flex: 1;
+      background: #FAF6F0;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+    }
+    .hero-d-mobile .eyebrow {
+      font-size: 8px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: #C06A4F;
+      font-weight: 500;
+    }
+    .hero-d-mobile h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #1E3320;
+      line-height: 1.1;
+    }
+    .hero-d-mobile h1 em { font-style: italic; color: #4A6B45; }
+    .hero-d-mobile p {
+      font-size: 12px;
+      color: #7A6E66;
+      line-height: 1.65;
+    }
+    .hero-d-mobile .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #1E3320;
+      color: #FAF6F0;
+      padding: 12px 22px;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-decoration: none;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ OPTION C DESKTOP ═══ -->
+  <div class="label">Option C — Centered Cinematic · Full-bleed · Warm scrim · Square CTA</div>
+  <div class="sub-label">Inspired by Kalium Fashion / Mojuri — image-forward, centered hierarchy, no clutter</div>
+
+  <section class="hero-c">
+    <img class="bg" src="src/assets/hero.jpg" alt="" />
+    <div class="scrim"></div>
+    <div class="scrim-bottom"></div>
+
+    <div class="content">
+      <p class="eyebrow">Handcrafted in India</p>
+      <h1>Rooted in Tradition,<br><em>Styled for Today</em></h1>
+      <p>Chikankari, Bandhani & Kashmiri ethnic wear — naturally beautiful, lovingly crafted for ages 2–5.</p>
+      <div class="ctas">
+        <a href="#" class="btn-primary">
+          Shop Collection
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="btn-secondary">Our Story</a>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="crafts">
+        <span class="craft">Chikankari</span>
+        <span class="craft">Bandhani</span>
+        <span class="craft">Firan</span>
+      </div>
+      <div class="scroll">
+        <div class="line"></div>
+        Scroll
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ OPTION D DESKTOP ═══ -->
+  <div class="label">Option D — Editorial Stack · Full image top · Cream text panel bottom</div>
+  <div class="sub-label">Image breathes fully · No overlay · Reads like a premium catalogue page · Clean on mobile</div>
+
+  <section class="hero-d" style="position:relative;">
+    <div class="craft-row" style="position:absolute;top:24px;left:48px;z-index:10;display:flex;gap:18px;">
+      <span style="font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.5);">Chikankari</span>
+      <span style="font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.5);">Bandhani</span>
+      <span style="font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.5);">Firan</span>
+    </div>
+    <div class="image-wrap">
+      <img src="src/assets/hero.jpg" alt="" />
+    </div>
+    <div class="text-panel">
+      <div class="text-inner">
+        <div class="text-left">
+          <p class="eyebrow">Handcrafted in India · Ages 2–5</p>
+          <h1>Rooted in Tradition,<br><em>Styled for Today</em></h1>
+        </div>
+        <div class="divider"></div>
+        <div class="text-right">
+          <p>Chikankari, Bandhani & Kashmiri ethnic wear — naturally beautiful, lovingly crafted for your little ones.</p>
+          <a href="#" class="btn-primary">
+            Shop Collection
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MOBILE PREVIEWS ═══ -->
+  <div class="label" style="background:#1a1a1a;color:#666;">Mobile Preview — iPhone 14 Pro (390×844)</div>
+
+  <div class="mobile-frame-row">
+    <div>
+      <p class="mobile-label">Option C · Mobile</p>
+      <div class="mobile-frame">
+        <div class="hero-c-mobile">
+          <img src="src/assets/hero.jpg" alt="" />
+          <div class="scrim"></div>
+          <div class="scrim-b"></div>
+          <div class="content">
+            <p class="eyebrow">Handcrafted in India</p>
+            <h1>Rooted in<br>Tradition,<br><em>Styled for Today</em></h1>
+            <p>Chikankari, Bandhani & Kashmiri ethnic wear for ages 2–5.</p>
+            <a href="#" class="btn">Shop Collection →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="mobile-label">Option D · Mobile</p>
+      <div class="mobile-frame">
+        <div class="hero-d-mobile">
+          <div class="img-wrap">
+            <img src="src/assets/hero.jpg" alt="" />
+          </div>
+          <div class="text-panel">
+            <p class="eyebrow">Handcrafted in India · Ages 2–5</p>
+            <h1>Rooted in Tradition,<br><em>Styled for Today</em></h1>
+            <p>Chikankari, Bandhani & Kashmiri ethnic wear — naturally beautiful, lovingly crafted.</p>
+            <a href="#" class="btn">Shop Collection →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
