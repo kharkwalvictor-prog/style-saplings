@@ -118,12 +118,16 @@ const Index = () => {
       {/* ══════════════════════════════════════
           2. SHOP BY CRAFT — 4 tiles, immediately after hero
       ══════════════════════════════════════ */}
-      <section className="pt-10 pb-10 md:pt-12 md:pb-12 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container px-5 md:px-8">
-          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-            className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground mb-6 md:mb-7">
-            Shop by Craft
-          </motion.p>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-8 md:mb-10">
+            <motion.p variants={reveal} className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground mb-3">
+              Shop by Craft
+            </motion.p>
+            <motion.h2 variants={reveal} className="font-serif text-[26px] md:text-[38px] font-semibold tracking-[-0.01em] leading-tight">
+              Rooted in India's living traditions
+            </motion.h2>
+          </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={stagger}
             className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {crafts.map((c) => (
@@ -137,7 +141,7 @@ const Index = () => {
           3. EDITORIAL PAIR — 2 wide images, overlaid text.
           AD's "Hands Free, Hearts Full" equivalent.
       ══════════════════════════════════════ */}
-      <section className="pt-10 pb-10 md:pt-12 md:pb-0 bg-background">
+      <section className="py-0 md:pb-16 bg-background">
         <div className="container px-5 md:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={stagger}
             className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
@@ -182,7 +186,7 @@ const Index = () => {
           AD's "Ready to Ship" equivalent.
           Heading left-aligned, products scroll right.
       ══════════════════════════════════════ */}
-      <section className="pt-12 pb-12 md:pt-16 md:pb-16 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container px-5 md:px-8 mb-7 md:mb-9">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
             className="flex items-end justify-between">
@@ -285,7 +289,7 @@ const Index = () => {
       {/* ══════════════════════════════════════
           8. TESTIMONIALS — Infinite marquee
       ══════════════════════════════════════ */}
-      <section className="pt-12 pb-12 md:pt-16 md:pb-16 bg-background overflow-hidden">
+      <section className="py-16 md:py-24 bg-background overflow-hidden">
         <div className="container px-5 md:px-8 mb-8 md:mb-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.p variants={reveal} className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground mb-3">

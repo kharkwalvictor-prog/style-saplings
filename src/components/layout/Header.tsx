@@ -13,7 +13,7 @@ import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
 import product4 from "@/assets/product-4.jpg";
 
-const logoUrl = "/assets/logo-header.png";
+const logoUrl = "/assets/logo-dark.svg";
 
 const craftFallback: Record<string, string> = { Chikankari: product1, Bandhani: product2, Firan: product3, Festive: product4 };
 

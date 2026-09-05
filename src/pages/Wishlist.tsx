@@ -11,7 +11,7 @@ import { useWishlist } from "@/context/WishlistContext";
 import { useProducts } from "@/hooks/useProducts";
 import { useCart } from "@/context/CartContext";
 import { supabase } from "@/integrations/supabase/client";
-import { Heart, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useSEO } from "@/hooks/useSEO";
 
@@ -38,12 +38,19 @@ const Wishlist = () => {
           </div>
         ) : wishlistedProducts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <Heart className="h-16 w-16 text-sale/40 mb-6" />
-            <h2 className="font-serif text-2xl font-semibold mb-2">Your wishlist is empty</h2>
-            <p className="text-muted-foreground mb-6">Save items you love while you browse</p>
-            <Button variant="hero" asChild>
-              <Link to="/shop">Explore Collection →</Link>
-            </Button>
+            <p className="font-serif italic text-muted-foreground text-[15px] mb-2">Nothing saved yet.</p>
+            <h2 className="font-serif text-[1.8rem] md:text-[2.2rem] font-medium text-foreground mb-4 leading-snug">
+              Find something you love.
+            </h2>
+            <p className="text-muted-foreground text-[14px] leading-relaxed mb-8 max-w-xs">
+              Browse our handcrafted Chikankari, Bandhani & Firan pieces — and tap the heart to save your favourites.
+            </p>
+            <Link
+              to="/shop"
+              className="inline-flex items-center gap-2 bg-[#1E3320] text-white rounded-full px-8 py-3.5 text-[13px] font-medium tracking-wide hover:bg-[#2a4a2e] transition-colors min-h-[44px]"
+            >
+              Explore the Collection
+            </Link>
           </div>
         ) : (
           <>

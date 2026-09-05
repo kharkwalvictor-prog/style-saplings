@@ -63,52 +63,65 @@ const Blog = () => {
         </section>
       )}
 
-      {/* Category pills + grid */}
-      <section className="py-12 md:py-24 bg-background">
+      {/* Category tabs + grid */}
+      <section className="py-12 md:py-20 bg-background">
         <div className="container px-5 md:px-8">
-          <div className="flex overflow-x-auto no-scrollbar md:flex-wrap md:justify-center gap-2 mb-10 -mx-1 px-1 pb-2">
+          {/* Tab filter — text underline style, matching Shop page */}
+          <nav className="flex items-center gap-1 overflow-x-auto no-scrollbar border-b border-border/40 mb-10 -mx-1 px-1">
             {categories.map(c => (
               <button
                 key={c}
                 onClick={() => setActiveCategory(c)}
-                className={`px-5 py-2 text-sm font-medium rounded-full border transition-colors whitespace-nowrap min-h-[44px] ${
+                className={`relative whitespace-nowrap px-3 py-3 text-[13px] transition-colors min-h-[44px] ${
                   activeCategory === c
-                    ? "text-white border-transparent"
-                    : "bg-white border-primary text-primary hover:bg-primary/5"
+                    ? "text-[#4A6B45] font-medium"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
-                style={activeCategory === c ? { backgroundColor: "#4A6741", borderColor: "#4A6741" } : undefined}
               >
                 {c}
+                {activeCategory === c && (
+                  <motion.span
+                    layoutId="blog-tab-underline"
+                    className="absolute bottom-0 left-3 right-3 h-px bg-[#4A6B45]"
+                    transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                  />
+                )}
               </button>
             ))}
-          </div>
+          </nav>
 
           {gridPosts.length === 0 ? (
-            <p className="text-center text-muted-foreground py-10">No articles in this category yet.</p>
+            <div className="text-center py-20">
+              <p className="font-serif italic text-muted-foreground text-[17px]">No articles in this category yet.</p>
+            </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
               {gridPosts.map((post, i) => (
                 <motion.article
                   key={post.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08, duration: 0.4 }}
-                  className="rounded-2xl overflow-hidden border border-border/50 group"
+                  className="group"
                 >
-                  <div className="aspect-[16/10] overflow-hidden bg-muted">
-                    <img src={post.cover_image || fallbackImages[i % fallbackImages.length]} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-                  </div>
-                  <div className="p-6">
-                    <span className="text-[11px] uppercase tracking-[0.18em] text-[#4A6B45] font-medium">{post.category}</span>
-                    <h2 className="font-serif text-xl font-semibold mt-2 mb-3 leading-snug">{post.title}</h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{post.excerpt}</p>
+                  <Link to={`/blog/${post.slug}`} className="block">
+                    <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-muted mb-5">
+                      <img
+                        src={post.cover_image || fallbackImages[i % fallbackImages.length]}
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      />
+                    </div>
+                    <span className="text-[10px] uppercase tracking-[0.22em] text-[#4A6B45] font-medium">{post.category}</span>
+                    <h2 className="font-serif text-[20px] md:text-[22px] font-medium mt-2 mb-3 leading-snug group-hover:text-[#4A6B45] transition-colors">{post.title}</h2>
+                    <p className="text-[14px] text-muted-foreground leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-[11px] text-muted-foreground">
                         {post.published_at ? new Date(post.published_at).toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "numeric" }) : ""}
                       </span>
-                      <Link to={`/blog/${post.slug}`} className="text-[12px] font-medium text-[#4A6B45] hover:underline underline-offset-4">Read More →</Link>
+                      <span className="text-[12px] font-medium text-[#4A6B45] group-hover:underline underline-offset-4">Read →</span>
                     </div>
-                  </div>
+                  </Link>
                 </motion.article>
               ))}
             </div>

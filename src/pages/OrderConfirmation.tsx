@@ -3,9 +3,8 @@ import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import PageBanner from "@/components/PageBanner";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Package, MapPin, CreditCard } from "lucide-react";
+import { Package, MapPin, CreditCard } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface OrderData {
@@ -65,18 +64,36 @@ const OrderConfirmation = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <PageBanner label="Thank You" title="Order Confirmed" />
-      <div className="container px-4 py-16 md:py-24 max-w-2xl mx-auto">
-        <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", damping: 15, stiffness: 100 }}>
-          <div className="text-center mb-10">
-            <CheckCircle className="h-16 w-16 text-secondary mx-auto mb-6" strokeWidth={1.5} />
-            <h1 className="font-serif text-3xl md:text-4xl font-semibold mb-3">
-              Thank you{order?.customer_name ? `, ${order.customer_name}` : ""}! 🎉
-            </h1>
-            <p className="text-muted-foreground mb-1">Your order has been placed successfully.</p>
-            <p className="text-sm font-medium">Order ID: <span className="text-primary">{orderId}</span></p>
-          </div>
 
+      {/* Brand hero moment — warm, editorial */}
+      <section className="relative bg-[#1E3320] py-16 md:py-24 overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0id2hpdGUiLz48L3N2Zz4=')] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(192,106,79,0.1)_0%,transparent_70%)]" />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="relative z-10 text-center px-6"
+        >
+          <div className="w-10 h-10 rounded-full border border-[#C06A4F]/50 flex items-center justify-center mx-auto mb-5">
+            <div className="w-3 h-3 rounded-full bg-[#C06A4F]" />
+          </div>
+          <span className="text-[10px] tracking-[0.4em] uppercase font-medium text-[#E8C9A0]/70 mb-4 block">Order Confirmed</span>
+          <h1 className="font-serif text-[2rem] md:text-[3rem] font-medium text-white leading-[1.1]">
+            Thank you{order?.customer_name ? `, ${order.customer_name}` : ""}
+          </h1>
+          <div className="w-10 h-px bg-[#C06A4F] mx-auto mt-5 mb-4" />
+          <p className="text-white/60 text-[14px] max-w-xs mx-auto leading-relaxed">
+            Your handcrafted piece is on its way. A little art, a little heritage — now yours.
+          </p>
+          <p className="text-[#E8C9A0]/80 text-[13px] mt-3 font-medium tracking-wide">
+            Order ID: {orderId}
+          </p>
+        </motion.div>
+      </section>
+
+      <div className="container px-4 py-14 md:py-20 max-w-2xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }}>
           {order && (
             <div className="space-y-6">
               {/* Items */}
