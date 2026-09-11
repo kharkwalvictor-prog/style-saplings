@@ -3,7 +3,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useAdminRealtime } from "@/hooks/useAdminRealtime";
 import { useAllReviews } from "@/hooks/useReviews";
 import { Button } from "@/components/ui/button";
-import { Loader2, LogOut, LayoutDashboard, ShoppingCart, Users, Package, RotateCcw, Megaphone, CircleDot, Receipt, Settings, FileText, Tag } from "lucide-react";
+import { Loader2, LogOut, LayoutDashboard, ShoppingCart, Users, Package, RotateCcw, Megaphone, CircleDot, Receipt, Settings, FileText, Tag, Eye } from "lucide-react";
 import AdminLogin from "./AdminLogin";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import AdminOrders from "@/components/admin/AdminOrders";
@@ -16,8 +16,9 @@ import AdminGSTReport from "@/components/admin/AdminGSTReport";
 import AdminSettings from "@/components/admin/AdminSettings";
 import AdminContent from "@/components/admin/AdminContent";
 import AdminCategories from "@/components/admin/AdminCategories";
+import AdminPreview from "@/components/admin/AdminPreview";
 
-type Tab = "dashboard" | "orders" | "customers" | "inventory" | "refunds" | "marketing" | "gst" | "blog" | "content" | "categories" | "settings";
+type Tab = "dashboard" | "orders" | "customers" | "inventory" | "refunds" | "marketing" | "gst" | "blog" | "content" | "categories" | "settings" | "preview";
 
 const sidebarTabs = [
   { key: "dashboard" as Tab, label: "Dashboard", icon: LayoutDashboard, mobileIcon: "📊" },
@@ -41,6 +42,7 @@ const mobileTabs = [
   { key: "blog" as Tab, label: "Blog", mobileIcon: "📝" },
   { key: "content" as Tab, label: "Content", mobileIcon: "📄" },
   { key: "marketing" as Tab, label: "Marketing", mobileIcon: "📣" },
+  { key: "preview" as Tab, label: "Preview", mobileIcon: "👁️" },
 ];
 
 const Admin = () => {
@@ -105,12 +107,18 @@ const Admin = () => {
                 }`}>
                 <Settings className="h-4 w-4 shrink-0" /> Settings
               </button>
+              <button onClick={() => setTab("preview")}
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm rounded-lg transition-colors ${
+                  tab === "preview" ? "bg-primary text-primary-foreground" : "hover:bg-accent text-muted-foreground hover:text-foreground"
+                }`}>
+                <Eye className="h-4 w-4 shrink-0" /> Preview
+              </button>
             </div>
           </nav>
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-20 md:pb-6">
+        <main className={`flex-1 overflow-y-auto pb-20 md:pb-6 ${tab === "preview" ? "p-4 md:p-6 flex flex-col" : "p-4 md:p-6"}`}>
           {tab === "dashboard" && <AdminDashboard onNavigate={(t: string) => setTab(t as Tab)} />}
           {tab === "orders" && <AdminOrders />}
           {tab === "customers" && <AdminCustomers />}
@@ -122,6 +130,7 @@ const Admin = () => {
           {tab === "content" && <AdminContent />}
           {tab === "categories" && <AdminCategories />}
           {tab === "settings" && <AdminSettings />}
+          {tab === "preview" && <AdminPreview />}
         </main>
       </div>
 
