@@ -4,9 +4,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero.jpg";
 import heroMobile from "@/assets/product-4.jpg";
+import { useSiteContent, getContent } from "@/hooks/useSiteContent";
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const { data: content } = useSiteContent();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -23,7 +25,7 @@ const HeroSection = () => {
       {/* ── Background image — desktop ── */}
       <motion.div className="absolute inset-0 hidden md:block" style={{ y: imageY }}>
         <img
-          src={heroImage}
+          src={getContent(content, "hero_image", "") || heroImage}
           alt="Children in handcrafted Indian ethnic wear"
           className="w-full h-[115%] object-cover object-[center_15%]"
         />
@@ -32,7 +34,7 @@ const HeroSection = () => {
       {/* ── Background image — mobile ── */}
       <div className="absolute inset-0 block md:hidden">
         <img
-          src={heroMobile}
+          src={getContent(content, "hero_image", "") || heroMobile}
           alt="Handcrafted Indian ethnic wear for children"
           className="w-full h-full object-cover object-center"
         />
@@ -67,9 +69,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.38 }}
           className="font-serif text-[2.6rem] sm:text-[3.4rem] md:text-[4.2rem] lg:text-[5rem] font-normal text-white leading-[1.06] mb-6 tracking-[-0.01em]"
         >
-          Rooted in Tradition,
-          <br />
-          <em className="italic text-[#E8C9A0] font-light">Styled for Today</em>
+          {getContent(content, "hero_headline", "Rooted in Tradition, Styled for Today")}
         </motion.h1>
 
         {/* Subline */}
@@ -79,7 +79,7 @@ const HeroSection = () => {
           transition={{ duration: 0.7, delay: 0.58 }}
           className="text-white/55 text-[14px] md:text-[15px] font-light leading-relaxed mb-10 max-w-sm md:max-w-md"
         >
-          Chikankari, Bandhani & Kashmiri ethnic wear — naturally beautiful, lovingly crafted for ages 2–5.
+          {getContent(content, "hero_subtitle", "Chikankari, Bandhani & Kashmiri ethnic wear — naturally beautiful, lovingly crafted for ages 2–5.")}
         </motion.p>
 
         {/* CTAs */}
@@ -93,14 +93,14 @@ const HeroSection = () => {
             to="/shop"
             className="inline-flex items-center gap-2.5 bg-white text-[#1A0E08] px-8 py-3.5 rounded-full text-[12px] font-medium tracking-wide hover:bg-[#E8C9A0] transition-colors duration-300 min-h-[44px]"
           >
-            Shop Collection
+            {getContent(content, "hero_cta_primary", "Shop Collection")}
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
           <Link
             to="/about"
             className="text-[12px] tracking-wide text-white/65 hover:text-white transition-colors border-b border-white/25 hover:border-white/50 pb-px min-h-[44px] flex items-center"
           >
-            Our Story
+            {getContent(content, "hero_cta_secondary", "Our Story")}
           </Link>
         </motion.div>
       </motion.div>

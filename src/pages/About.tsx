@@ -153,25 +153,25 @@ const About = () => {
                 variants={reveal}
                 className="text-[13px] uppercase tracking-[0.2em] text-[#4A6B45] font-medium block mb-5"
               >
-                {getContent(content, "about_origin_label", "How Style Saplings Began")}
+                {getContent(content, "about_story_label", "How Style Saplings Began")}
               </motion.span>
               <motion.h2
                 variants={reveal}
                 className="font-serif text-[28px] md:text-[36px] font-medium leading-[1.15] tracking-[-0.01em] mb-7 text-[#1E3320]"
               >
-                {getContent(content, "about_origin_heading", "The Search That Started Everything")}
+                {getContent(content, "about_story_heading", "The Search That Started Everything")}
               </motion.h2>
               <motion.p
                 variants={reveal}
                 className="text-[16px] text-muted-foreground leading-[1.8] mb-5"
               >
-                {getContent(content, "about_origin_para1", "When our daughter was two, we wanted to dress her in something that felt truly Indian — not a costume, but real. Something handcrafted, something that carried the warmth of our culture. What we found was either low-quality fast fashion with Indian prints slapped on, or formal occasion wear too stiff for a toddler to move in.")}
+                {getContent(content, "about_story_p1", "When our daughter was two, we wanted to dress her in something that felt truly Indian — not a costume, but real. Something handcrafted, something that carried the warmth of our culture. What we found was either low-quality fast fashion with Indian prints slapped on, or formal occasion wear too stiff for a toddler to move in.")}
               </motion.p>
               <motion.p
                 variants={reveal}
                 className="text-[16px] text-muted-foreground leading-[1.8]"
               >
-                {getContent(content, "about_origin_para2", "So we went directly to the artisans. We visited workshops in Lucknow, spent time in Rajasthan understanding Bandhani, and sourced from craftspeople who've passed their skills down through generations. Style Saplings was born from that search — a brand built on the belief that Indian children deserve to wear their heritage, comfortably and beautifully, every single day.")}
+                {getContent(content, "about_story_p2", "So we went directly to the artisans. We visited workshops in Lucknow, spent time in Rajasthan understanding Bandhani, and sourced from craftspeople who've passed their skills down through generations. Style Saplings was born from that search — a brand built on the belief that Indian children deserve to wear their heritage, comfortably and beautifully, every single day.")}
               </motion.p>
             </motion.div>
           </div>
@@ -291,12 +291,12 @@ const About = () => {
               variants={reveal}
               className="font-serif italic text-[18px] md:text-[22px] leading-[1.7] text-foreground/80 mb-8 -mt-4"
             >
-              {getContent(content, "about_founder_quote", "Style Saplings began with a simple wish — to dress our children in the same beautiful handcrafted traditions that have defined Indian culture for generations.")}
+              {getContent(content, "about_quote", "Style Saplings began with a simple wish — to dress our children in the same beautiful handcrafted traditions that have defined Indian culture for generations.")}
             </motion.p>
             <motion.div variants={reveal}>
               <div className="w-8 h-px bg-[#C06A4F] mx-auto mb-4" />
-              <p className="text-[13px] font-medium text-foreground">Victor Kharkwal</p>
-              <p className="text-[12px] text-muted-foreground mt-1">Founder, Style Saplings</p>
+              <p className="text-[13px] font-medium text-foreground">{getContent(content, "about_quote_author", "Victor Kharkwal")}</p>
+              <p className="text-[12px] text-muted-foreground mt-1">{getContent(content, "about_quote_title", "Founder, Style Saplings")}</p>
             </motion.div>
           </motion.div>
         </div>

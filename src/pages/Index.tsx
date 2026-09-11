@@ -162,15 +162,14 @@ const Index = () => {
           className="max-w-[820px] mx-auto px-5 md:px-8 text-center"
         >
           <motion.span variants={reveal} className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground block mb-8">
-            The Style Saplings Promise
+            {getContent(content, "brand_promise_label", "The Style Saplings Promise")}
           </motion.span>
           <motion.h2 variants={reveal} className="font-serif text-[32px] sm:text-[44px] md:text-[58px] font-medium leading-[1.08] tracking-[-0.025em] text-[#1E3320]">
-            India's living craft traditions,<br className="hidden md:block" /> scaled for little shoulders.
+            {getContent(content, "brand_promise_heading", "India's living craft traditions, scaled for little shoulders.")}
           </motion.h2>
           <motion.div variants={reveal} className="w-10 h-px bg-[#C06A4F] mx-auto mt-10 mb-8" />
           <motion.p variants={reveal} className="text-[16px] md:text-[18px] text-muted-foreground leading-[1.85] max-w-[520px] mx-auto">
-            Every piece is handcrafted by artisans across Lucknow, Rajasthan, and Kashmir —
-            using techniques passed down through generations.
+            {getContent(content, "brand_promise_body", "Every piece is handcrafted by artisans across Lucknow, Rajasthan, and Kashmir — using techniques passed down through generations.")}
           </motion.p>
           <motion.div variants={reveal} className="mt-10">
             <Link
@@ -199,7 +198,7 @@ const Index = () => {
           >
             <div>
               <motion.p variants={reveal} className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-3">
-                Ready to Wear
+                {getContent(content, "featured_label", "Ready to Wear")}
               </motion.p>
               <motion.h2 variants={reveal} className="font-serif text-[28px] md:text-[42px] font-medium tracking-[-0.02em] leading-[1.1] text-[#1E3320]">
                 {getContent(content, "featured_heading", "Crafted for celebrations")}
@@ -286,20 +285,20 @@ const Index = () => {
               className="max-w-[560px]"
             >
               <motion.p variants={reveal} className="text-white/55 text-[10px] uppercase tracking-[0.32em] mb-6">
-                The Heritage
+                {getContent(content, "heritage_label", "The Heritage")}
               </motion.p>
               <motion.h2 variants={reveal} className="font-serif text-[32px] sm:text-[40px] md:text-[54px] text-white font-medium leading-[1.08] tracking-[-0.02em]">
-                Every piece carries 400 years of tradition.
+                {getContent(content, "heritage_heading", "Every piece carries 400 years of tradition.")}
               </motion.h2>
               <motion.p variants={reveal} className="text-white/60 text-[15px] mt-6 mb-10 max-w-[380px] leading-[1.8]">
-                Hand-embroidered by master artisans from Lucknow, Rajasthan, and Kashmir.
+                {getContent(content, "heritage_body", "Hand-embroidered by master artisans from Lucknow, Rajasthan, and Kashmir.")}
               </motion.p>
               <motion.div variants={reveal}>
                 <Link
                   to="/about"
                   className="inline-flex items-center gap-2.5 border border-white/25 rounded-full px-8 py-3.5 text-white text-[13px] font-medium hover:bg-white/10 transition-all group min-h-[44px]"
                 >
-                  Discover the Craft
+                  {getContent(content, "heritage_button", "Discover the Craft")}
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </motion.div>
@@ -371,7 +370,7 @@ const Index = () => {
             </motion.p>
             <motion.div variants={reveal}>
               <Link to="/shop" className="inline-flex items-center gap-2 mt-9 border border-white/20 rounded-full px-8 py-3.5 text-white text-[13px] font-medium tracking-wide hover:bg-white/10 transition-all group min-h-[44px]">
-                {getContent(content, "cta_button_text", "Explore the Collection")}
+                {getContent(content, "cta_button", "Explore the Collection")}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </Link>
             </motion.div>
