@@ -74,11 +74,31 @@ const AdminSettings = () => {
       setStoreLive(liveData?.value === "true");
     } catch { /* ignore */ }
 
-    const savedShipping = localStorage.getItem("ss_shipping_config");
-    if (savedShipping) setShipping(JSON.parse(savedShipping));
-
-    const savedContact = localStorage.getItem("ss_contact_config");
-    if (savedContact) setContact(JSON.parse(savedContact));
+    try {
+      const { data: scData } = await supabase
+        .from("site_content")
+        .select("key, value")
+        .in("key", [
+          "shipping_free_above", "shipping_flat_rate", "shipping_estimated_days",
+          "contact_email", "contact_phone", "contact_address", "contact_instagram", "contact_whatsapp",
+        ]);
+      if (scData) {
+        const map: Record<string, string> = {};
+        scData.forEach((r: { key: string; value: string }) => { map[r.key] = r.value; });
+        setShipping(p => ({
+          freeAbove: map.shipping_free_above ?? p.freeAbove,
+          flatRate: map.shipping_flat_rate ?? p.flatRate,
+          estimatedDays: map.shipping_estimated_days ?? p.estimatedDays,
+        }));
+        setContact(p => ({
+          email: map.contact_email ?? p.email,
+          phone: map.contact_phone ?? p.phone,
+          address: map.contact_address ?? p.address,
+          instagram: map.contact_instagram ?? p.instagram,
+          whatsapp: map.contact_whatsapp ?? p.whatsapp,
+        }));
+      }
+    } catch { /* ignore */ }
 
     setLoading(false);
   };
@@ -126,9 +146,21 @@ const AdminSettings = () => {
         if (data) gstRowId.current = data.id;
       }
 
-      // Save shipping & contact to localStorage
-      localStorage.setItem("ss_shipping_config", JSON.stringify(shipping));
-      localStorage.setItem("ss_contact_config", JSON.stringify(contact));
+      // Save shipping & contact to site_content
+      const scUpserts = [
+        { key: "shipping_free_above", value: shipping.freeAbove },
+        { key: "shipping_flat_rate", value: shipping.flatRate },
+        { key: "shipping_estimated_days", value: shipping.estimatedDays },
+        { key: "contact_email", value: contact.email },
+        { key: "contact_phone", value: contact.phone },
+        { key: "contact_address", value: contact.address },
+        { key: "contact_instagram", value: contact.instagram },
+        { key: "contact_whatsapp", value: contact.whatsapp },
+      ];
+      const { error: scError } = await supabase
+        .from("site_content")
+        .upsert(scUpserts, { onConflict: "key" });
+      if (scError) throw scError;
 
       toast.success("Settings saved successfully");
     } catch (err: any) {

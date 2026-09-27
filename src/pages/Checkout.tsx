@@ -1,6 +1,5 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -9,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useCart } from "@/context/CartContext";
 import { supabase } from "@/integrations/supabase/client";
+import { useSiteContent } from "@/hooks/useSiteContent";
 import { toast } from "sonner";
 import { CheckCircle, Tag, X, Loader2 } from "lucide-react";
 import {
@@ -56,6 +56,9 @@ const Checkout = () => {
   const { items, totalAmount, clearCart } = useCart();
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
+  const { data: siteContent } = useSiteContent();
+  const shippingFreeAbove = parseInt(siteContent?.shipping_free_above ?? "999", 10);
+  const shippingFlatRate = parseInt(siteContent?.shipping_flat_rate ?? "99", 10);
 
   const [form, setForm] = useState({
     name: "", phone: "", email: "",
@@ -77,8 +80,8 @@ const Checkout = () => {
   const gstinValid = gstin.length > 0 && validateGSTIN(gstin);
 
   // Shipping calculation (discount type 'shipping' sets shipping to 0)
-  const baseShipping = totalAmount >= 999 ? 0 : 99;
-  const freeShipping = totalAmount >= 999 || discount?.discount_type === "shipping";
+  const baseShipping = totalAmount >= shippingFreeAbove ? 0 : shippingFlatRate;
+  const freeShipping = totalAmount >= shippingFreeAbove || discount?.discount_type === "shipping";
   const shipping = freeShipping ? 0 : baseShipping;
 
   // Calculate discount amount
@@ -325,6 +328,7 @@ const Checkout = () => {
           await supabase.from("orders").update({
             payment_status: "paid",
             razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
           }).eq("order_number", orderNumber);
           await incrementUsageCount();
           supabase.functions.invoke("send-order-confirmation", { body: { order_id: insertedOrder.id } }).catch(console.error);
@@ -371,16 +375,7 @@ const Checkout = () => {
   };
 
   // ── STORE LIVE FLAG — controlled from Admin → Settings ──
-  // Must be declared before any early returns to satisfy Rules of Hooks.
-  const { data: siteContent } = useQuery({
-    queryKey: ["site-content-store-live"],
-    queryFn: async () => {
-      const { data } = await supabase.from("site_content").select("value").eq("key", "store_live").maybeSingle();
-      return data?.value === "true";
-    },
-    staleTime: 30 * 1000,
-  });
-  const STORE_LIVE = siteContent ?? false;
+  const STORE_LIVE = siteContent?.store_live === "true";
 
   if (items.length === 0) {
     navigate("/cart");

@@ -170,6 +170,27 @@ const RefundDrawer = ({ refund, onClose }: { refund: any; onClose: () => void })
     if (!refund) return;
     setSaving(true);
     try {
+      // If marking as processed and order was paid online, initiate Razorpay refund
+      if (status === "processed" && refund.status !== "processed" && order?.payment_method === "razorpay") {
+        if (!refundAmount) {
+          toast.error("Enter refund amount before processing");
+          setSaving(false);
+          return;
+        }
+        const { data: rzpData, error: rzpError } = await supabase.functions.invoke("process-razorpay-refund", {
+          body: { refund_request_id: refund.id, amount_rupees: parseFloat(refundAmount) },
+        });
+        if (rzpError || (!rzpData?.success && rzpData?.error)) {
+          toast.error(rzpData?.error || "Razorpay refund failed — check Razorpay dashboard");
+          setSaving(false);
+          return;
+        }
+        if (rzpData?.message) {
+          // COD or no payment_id — just a note
+          toast.info(rzpData.message);
+        }
+      }
+
       const update: any = {
         status,
         admin_notes: adminNotes || null,
