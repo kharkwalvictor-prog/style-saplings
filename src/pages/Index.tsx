@@ -33,14 +33,6 @@ const stagger = {
 
 /* ── Data (built inside component using dynamic images) ── */
 
-const testimonials = [
-  { quote: "The embroidery is so delicate, the cotton incredibly soft. My daughter wore it all day and didn't want to take it off.", name: "Priya S.", location: "Mumbai" },
-  { quote: "Finally — ethnic wear my son actually wants to wear. Comfortable enough for play, beautiful enough for Diwali.", name: "Ananya P.", location: "Bangalore" },
-  { quote: "Three orders in. Each piece feels like an heirloom. The craftsmanship is unmatched at this price.", name: "Deepika R.", location: "Delhi" },
-  { quote: "I ordered the Chikankari set for my niece's birthday. She refused to wear anything else for a week.", name: "Meera K.", location: "Pune" },
-  { quote: "The fabric is breathable even in Chennai's heat. My son stayed comfortable all through the wedding.", name: "Kavita T.", location: "Chennai" },
-  { quote: "Ordered the Bandhani kurta set on a whim. The quality blew me away — looks far more expensive than it is.", name: "Sneha M.", location: "Hyderabad" },
-];
 
 
 /* ── Shared tile component for craft + spotlight grids ── */
@@ -335,21 +327,27 @@ const Index = () => {
             variants={stagger}
             className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16"
           >
-            {testimonials.slice(0, 3).map((t) => (
-              <motion.div key={t.name} variants={reveal}>
-                <div className="flex gap-0.5 mb-5">
-                  {Array.from({ length: 5 }).map((_, j) => (
-                    <Star key={j} className="h-3 w-3 text-amber-400" fill="currentColor" />
-                  ))}
-                </div>
-                <p className="font-serif italic text-[17px] md:text-[18px] leading-[1.85] text-foreground/75 mb-6">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div className="w-6 h-px bg-[#C06A4F] mb-4" />
-                <p className="text-[13px] font-medium text-foreground">{t.name}</p>
-                <p className="text-[11px] text-muted-foreground mt-0.5 uppercase tracking-[0.12em]">{t.location}</p>
-              </motion.div>
-            ))}
+            {[1, 2, 3].map((n) => {
+              const quote = getContent(content, `testimonial_${n}_quote`, "");
+              const name = getContent(content, `testimonial_${n}_name`, "");
+              const location = getContent(content, `testimonial_${n}_location`, "");
+              if (!quote || !name) return null;
+              return (
+                <motion.div key={n} variants={reveal}>
+                  <div className="flex gap-0.5 mb-5">
+                    {Array.from({ length: 5 }).map((_, j) => (
+                      <Star key={j} className="h-3 w-3 text-amber-400" fill="currentColor" />
+                    ))}
+                  </div>
+                  <p className="font-serif italic text-[17px] md:text-[18px] leading-[1.85] text-foreground/75 mb-6">
+                    &ldquo;{quote}&rdquo;
+                  </p>
+                  <div className="w-6 h-px bg-[#C06A4F] mb-4" />
+                  <p className="text-[13px] font-medium text-foreground">{name}</p>
+                  {location && <p className="text-[11px] text-muted-foreground mt-0.5 uppercase tracking-[0.12em]">{location}</p>}
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
